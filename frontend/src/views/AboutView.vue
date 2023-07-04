@@ -1,5 +1,6 @@
 <template>
-  <GoogleLogin :callback="callback" prompt auto-login/>
+  <p>about</p>
+  <!-- <GoogleLogin :callback="callback" prompt auto-login/> -->
 </template>
 
 <script setup>

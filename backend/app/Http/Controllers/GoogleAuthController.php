@@ -19,7 +19,7 @@ class GoogleAuthController extends Controller
                     'lastname' => $googleUser['family_name'],
                     'email' => $googleUser['email'],
                     'profile_picture' => $googleUser['picture'],
-                    'google_id' => $googleUser['id'],
+                    'google_id' => $googleUser['sub'],
                 ]);
                 Auth::login($newUser);
                 $token = $newUser->createToken('token-name', ['post', 'get', 'update', 'delete'])->plainTextToken;
