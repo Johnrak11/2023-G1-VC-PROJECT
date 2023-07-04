@@ -1,5 +1,11 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <GoogleLogin :callback="callback" prompt auto-login/>
 </template>
+
+<script setup>
+// const callback = (response) => {
+//   // This callback will be triggered when the user selects or login to
+//   // his Google account from the popup
+//   console.log("Handle the response", response)
+// }
+</script>

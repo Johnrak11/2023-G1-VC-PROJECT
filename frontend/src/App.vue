@@ -1,11 +1,23 @@
 <template>
-  <nav>
+  <GoogleLogin :callback="callback" prompt auto-login />
+  <p>{{ usersdata }}</p>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
-  <router-view/>
+  <router-view/> -->
 </template>
 
+<script setup>
+import { decodeCredential } from "vue3-google-login"
+
+const callback = (response) => {
+  // console.log(response)
+  let user = decodeCredential(response.credential)
+  console.log(user)
+
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
