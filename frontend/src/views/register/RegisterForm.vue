@@ -1,6 +1,6 @@
 <template>
   <div class="bigContainer mt-16">
-    <div class="cardContainer bg-red mx-auto mt-16"></div>
+    <div class="cardContainer bg-red mx-auto"></div>
     <div class="registerContainer d-flex">
       <div class="SwitchRegisterComponentFrom">
         <switchBannerForm>
@@ -10,6 +10,7 @@
         </switchBannerForm>
       </div>
       <div class="registerBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
+        <h1 class="ml-5">Register</h1>
         <v-btn color="red" class="p-5 mt-5 ml-5">
           <v-img :width="25" aspect-ratio="16/9" cover :src="imageGoogle" class="mr-3"></v-img>
           Register with google</v-btn>
@@ -35,8 +36,9 @@ import switchBannerForm from '../../components/switchPath/switchLoginComponent.v
 
 <style>
 .cardContainer {
-  width: 90%;
-  height: 50vh;
+  margin-top: 10%;
+  width:90%;
+  height: 60vh;
 }
 
 .v-btn,
@@ -52,20 +54,20 @@ hr {
 .registerBody {
   width: 44%;
   box-shadow: 5px 5px 10px rgb(86, 86, 86);
-  margin-top: 2%;
+  margin-top: 3%;
   position: relative;
   left: 10%;
 }
 
 .registerContainer {
   position: relative;
-  margin-top: -30%;
+  margin-top: -39%;
   left: 3%;
 }
 
 .SwitchRegisterComponentFrom {
   position: relative;
   left: 6%;
-  margin-top: 12%;
+  margin-top: 17%;
 }
 </style>
