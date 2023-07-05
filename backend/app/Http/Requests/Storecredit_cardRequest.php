@@ -22,7 +22,11 @@ class Storecredit_cardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|email|unique:users|max:255',
+            'profile_picture' => 'nullable|url',
+            'google_id' => 'required|string|max:255',
         ];
     }
 }
