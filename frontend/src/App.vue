@@ -1,34 +1,35 @@
 <template>
   <!-- prompt auto-login -->
-  <p v-if="state.isloading === false">loading......</p>
-  <GoogleLogin :callback="callback" />
-  <button @click="logout">logout</button>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view></router-view>
+  <div>
+    <p v-if="state.isloading === false">loading......</p>
+    <GoogleLogin :callback="callback" />
+    <button @click="logout">logout</button>
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+    <router-view></router-view>
+  </div>
 </template>
 
 
 <script setup>
-import { decodeCredential } from "vue3-google-login"
+import { decodeCredential } from "vue3-google-login";
 // import { googleLogout } from "vue3-google-login";
-import { reactive } from 'vue';
+import { reactive } from "vue";
 import axios from "axios";
 
-const HTTP_REQUEST = 'http://localhost:8000/api/auth/google';
+const HTTP_REQUEST = "http://localhost:8000/api/auth/google";
 
 const state = reactive({
-  isloading: true
+  isloading: true,
 });
 
 async function googleAuth(user) {
-
   try {
     const response = await axios.post(HTTP_REQUEST, user);
     console.log(response.data);
-    state.isloading = true
+    state.isloading = true;
   } catch (error) {
     console.error(error);
   }
@@ -36,14 +37,13 @@ async function googleAuth(user) {
 
 function callback(response) {
   // console.log(response)
-  state.isloading = false
-  let user = decodeCredential(response.credential)
-  console.log(user)
-  googleAuth(user)
-
+  state.isloading = false;
+  let user = decodeCredential(response.credential);
+  console.log(user);
+  googleAuth(user);
 }
 function logout() {
-  state.isloading = true
+  state.isloading = true;
 }
 </script>
 <style>
@@ -54,9 +54,5 @@ function logout() {
   text-align: center;
   color: #2c3e50;
 }
+</style>
 
-  data: () => ({
-    //
-  }),
-}
-</script>
