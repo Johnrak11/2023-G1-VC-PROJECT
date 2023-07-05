@@ -18,7 +18,7 @@
             <div class="loginSwitchRegister">
                 <switchBannerForm>
                     <h1 class="white--text">Don't you have an account?</h1>
-                    <span class="mt-5 white--text">Please, register an account</span>
+                    <span class="mt-5 white--text">Please, register to get an account</span>
                     <router-link to="/login"><v-btn class="w-50 mt-5">Register</v-btn></router-link>
                 </switchBannerForm>
             </div>
