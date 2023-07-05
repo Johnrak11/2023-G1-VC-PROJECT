@@ -7,9 +7,15 @@
     <v-nav-bar-right class="d-flex right justify-space-between">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <li class="rounded">Home</li>
-          <li class="rounded">Explor</li>
-          <li class="rounded">MyTicket</li>
+          <router-link to="/">
+            <li class="rounded">Home</li>
+          </router-link>
+          <router-link to="/explor">
+            <li class="rounded">Explor</li>
+          </router-link>
+          <router-link to="/myticket">
+            <li class="rounded">MyTicket</li>
+          </router-link>
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile">
@@ -22,11 +28,10 @@
         <v-badge content="2" color="error" class="mt-2 mr-5">
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
-        <img
+        <router-link to="/register"><v-btn color="blue" width="5">Login</v-btn></router-link>
+        <!-- <img
           src="https://o.remove.bg/downloads/01e3f24e-5f37-469d-b513-1535078501c9/v937-aew-165-klhcwecm-removebg-preview.png"
-          width="40"
-          height="40"
-        />
+          width="40" height="40" /> -->
       </v-right-content>
     </v-nav-bar-right>
   </v-layout>
@@ -39,12 +44,14 @@
   background: white;
   position: fixed;
   top: 0;
-  width: 100%; 
+  width: 100%;
 }
+
 ul {
   list-style: none;
 }
-select{
+
+select {
   cursor: pointer;
   padding-left: 10px;
   padding-right: 10px;
@@ -55,25 +62,31 @@ select{
   display: flex;
   justify-content: space-between;
 }
+
 .bg-color {
   /* background-color: white; */
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 10px;
 }
+
 .left {
   flex: 1;
 }
+
 .right {
   flex: 1;
 }
+
 li {
   margin-left: 30%;
   padding: 5px 10px 5px 10px;
 }
+
 .profile {
   margin-right: 10%;
 }
-li:hover{
+
+li:hover {
   background-color: red;
   padding: 5px 10px 5px 10px;
   color: white;
