@@ -3,7 +3,11 @@
     <div class="cardContainer bg-red mx-auto mt-16"></div>
     <div class="registerContainer d-flex">
       <div class="SwitchRegisterComponentFrom">
-        <SwitchRegisterComponentFrom />
+        <switchBannerForm>
+          <h1 class="white--text">Don't you have an account?</h1>
+          <span class="mt-5 white--text">Please, create register to get an account</span>
+          <router-link to="/login"><v-btn class="w-50 mt-5">Register</v-btn></router-link>
+        </switchBannerForm>
       </div>
       <div class="registerBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
         <v-btn color="red" class="p-5 mt-5 ml-5">
@@ -14,7 +18,6 @@
           Or
           <hr class="hr mt-3" />
         </div>
-        <!-- <SwitchRegisterComponentFrom /> -->
         <RegisterComponentForm />
         <ButtonComponentForm />
       </div>
@@ -27,7 +30,7 @@
 import imageGoogle from "../../assets/google.png";
 import RegisterComponentForm from "../../components/forms/RegisterComponentForm.vue";
 import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
-import SwitchRegisterComponentFrom from "../../components/switchRegister/SwitchRegisterComponentFrom.vue";
+import switchBannerForm from '../../components/switchPath/switchLoginComponent.vue';
 </script>
 
 <style>

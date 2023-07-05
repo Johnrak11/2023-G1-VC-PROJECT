@@ -24,5 +24,5 @@ Route::prefix('auth')->group(function () {
     Route::post('/google',  [GoogleAuthController::class, 'googleLogin']);
 });
 
-Route::post('/registers',([AuthController::class, 'register']));
-Route::post('/login',([AuthController::class,'login']));
+Route::post('/registers', ([AuthController::class, 'register']));
+Route::post('/login', ([AuthController::class, 'login']));
