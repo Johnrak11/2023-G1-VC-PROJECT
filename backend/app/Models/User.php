@@ -57,4 +57,8 @@ class User extends Authenticatable
     
         return $register;
     }
+    public static function logins($request){
+        $login = $request->only(['email', 'password']);
+        return $login;
+    }
 }
