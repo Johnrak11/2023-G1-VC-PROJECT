@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import RegisterForm from '../views/RegisterForm.vue'
+// import RegisterForm from '../views/RegisterForm.vue'
+import autoComplete from '../components/forms/autoComplete.vue'
 
 const routes = [
   {
     path: '/',
     name: 'register',
-    component: RegisterForm
+    component: autoComplete
   },
 ]
 
