@@ -2,18 +2,23 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-class Storecredit_cardRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
-
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,11 +27,8 @@ class Storecredit_cardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => 'required|email|unique:users|max:255',
-            'profile_picture' => 'nullable|url',
-            'google_id' => 'required|string|max:255',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password'=> ['required'],
         ];
     }
 }
