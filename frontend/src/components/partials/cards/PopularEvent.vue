@@ -45,7 +45,6 @@ export default {
 </script>
 <style scoped>
     .card{
-        /* background-color: rgb(198, 196, 196); */
         width: 22%;
         
     }
