@@ -5,6 +5,7 @@
   <list-card></list-card>
   <popular-event></popular-event>
   <card-rate></card-rate>
+  <footer-view></footer-view>
 </template>
 <script>
 import { createVuetify } from 'vuetify'
