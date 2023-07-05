@@ -4,10 +4,6 @@
     <p v-if="state.isloading === false">loading......</p>
     <GoogleLogin :callback="callback" />
     <button @click="logout">logout</button>
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
     <router-view></router-view>
   </div>
 </template>
