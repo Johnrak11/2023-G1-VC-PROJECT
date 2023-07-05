@@ -25,3 +25,4 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::post('/registers',([AuthController::class, 'register']));
+Route::post('/login',([AuthController::class,'login']));

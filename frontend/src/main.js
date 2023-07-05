@@ -17,3 +17,4 @@ app.use(vue3GoogleLogin, {
 app.use(router)
 app.use(vuetify)
 app.mount('#app')
+
