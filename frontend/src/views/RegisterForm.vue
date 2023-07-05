@@ -1,11 +1,12 @@
 <template>
   <div class="bigContainer mt-16">
-    <div class="cardContainer bg-red mx-auto mt-16"></div>
+    <div class="cardContainer bg-red mx-auto"></div>
     <div class="registerContainer d-flex">
       <div class="SwitchRegisterComponentFrom">
         <SwitchRegisterComponentFrom />
       </div>
       <div class="registerBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
+        <h1 class="ml-5">Register</h1>
         <v-btn color="red" class="p-5 mt-5 ml-5">
           <v-img
             :width="25"
@@ -21,7 +22,6 @@
           Or
           <hr class="hr mt-3" />
         </div>
-        <!-- <SwitchRegisterComponentFrom /> -->
         <RegisterComponentForm />
         <ButtonComponentForm />
       </div>
@@ -39,8 +39,9 @@ import SwitchRegisterComponentFrom from "../components/switchRegister/SwitchRegi
 
 <style>
 .cardContainer {
-  width: 90%;
-  height: 50vh;
+  margin-top: 10%;
+  width:90%;
+  height: 60vh;
 }
 .v-btn,
 .v-text-field {
@@ -54,19 +55,19 @@ hr {
 .registerBody {
   width: 44%;
   box-shadow: 5px 5px 10px rgb(86, 86, 86);
-  margin-top: 2%;
+  margin-top: 3%;
   position: relative;
   left: 10%;
 }
 
 .registerContainer {
   position: relative;
-  margin-top: -30%;
+  margin-top: -39%;
   left: 3%;
 }
 .SwitchRegisterComponentFrom{
   position: relative;
   left: 6%;
-  margin-top: 12%;
+  margin-top: 17%;
 }
 </style>
