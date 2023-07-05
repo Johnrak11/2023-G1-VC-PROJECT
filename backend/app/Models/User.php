@@ -18,9 +18,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'firstname',
+        'lastname',
+        'profile_picture',
+        'phone_number',
+        'google_id',
     ];
 
     /**
@@ -42,4 +46,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public static function registers( $request) {
+        $register = User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+    
+        return $register;
+    }
 }
