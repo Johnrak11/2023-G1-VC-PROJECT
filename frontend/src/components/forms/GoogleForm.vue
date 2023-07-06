@@ -1,0 +1,91 @@
+<template>
+    <GoogleLogin :callback="callback" class="custom-google-login-button" style="display: flex;margin: auto;" />
+    <div class="loading_overly" v-if="isLoading">
+        <Loading :active='isLoading' :is-full-page="true" :loader='bars' />
+    </div>
+</template>
+  
+<script setup>
+import { userStore } from '../../stores/user.js'
+import Loading from 'vue-loading-overlay';
+import { decodeCredential } from "vue3-google-login";
+import { ref } from "vue";
+import axios from "axios";
+
+const HTTP_REQUEST = 'http://localhost:8000/api/auth/google';
+const user = userStore()
+import { addressStore } from '../../stores/address.js';
+let address = addressStore();
+let isAddressReady = ref(false);
+let isLoading = ref(false);
+
+// ---- implement with backend-------
+async function googleAuth(googleUser) {
+    let newUser = {
+        'firstname': googleUser.given_name,
+        'lastname': googleUser.family_name,
+        'email': googleUser.email,
+        'profile_picture': googleUser.picture,
+        'address': address.address,
+        'google_id': googleUser.sub,
+    };
+    try {
+        const response = await axios.post(HTTP_REQUEST, newUser);
+        user.user = response.data.user
+        user.token = response.data.token
+        user.storeTokenInCookie()
+        isLoading.value = false;
+
+    } catch (error) {
+        console.error(error);
+        isLoading.value = false;
+    }
+}
+
+async function callback(response) {
+    isLoading.value = true;
+    address.locaterButtonPressed();
+    await getAddress();
+    userProcess(response);
+}
+
+async function getAddress() {
+    await new Promise((resolve) => {
+        const intervalId = setInterval(() => {
+            if (address.address) {
+                clearInterval(intervalId);
+                isAddressReady.value = true;
+                resolve();
+            }
+        }, 100);
+    });
+}
+
+function userProcess(response) {
+    let googleUser = decodeCredential(response.credential);
+    if (isAddressReady.value) {
+        googleAuth(googleUser);
+    } else {
+        setTimeout(() => {
+            userProcess(response);
+        }, 100);
+    }
+}
+
+</script>
+
+<style>
+.loading_overly {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(196, 194, 194);
+    opacity: 0.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+  

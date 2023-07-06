@@ -10,10 +10,10 @@
           <router-link to="/">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/explor">
+          <router-link to="/">
             <li class="rounded">Explor</li>
           </router-link>
-          <router-link to="/myticket">
+          <router-link to="/">
             <li class="rounded">MyTicket</li>
           </router-link>
         </ul>

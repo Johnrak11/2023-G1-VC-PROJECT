@@ -5,8 +5,10 @@ import router from "./routes/router";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
-
+import { createPinia } from "pinia";
 // --- components-----
+
+
 
 import NavigationBar from "./components/partials/nav/NavigationBar.vue";
 import SearchEvent from "./components/partials/base-search/SearchEvent.vue";
@@ -17,7 +19,7 @@ import CardRate from "./components/partials/cards/CardRate.vue";
 import FooterView from "./components/partials/footer/FooterView.vue";
 
 loadFonts();
-
+const pinia = createPinia()
 const app = createApp(App);
 const CLIENT_ID =
   "789674566579-4bjsq9dlf9gknuq2omokd04bd2ioi96l.apps.googleusercontent.com";
@@ -25,6 +27,7 @@ const CLIENT_ID =
 app.use(vue3GoogleLogin, {
   clientId: CLIENT_ID,
 });
+app.use(pinia);
 app.use(router);
 app.use(vuetify);
 

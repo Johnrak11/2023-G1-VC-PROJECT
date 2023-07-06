@@ -12,7 +12,6 @@ const routes = [
   {
     path: "/register",
     name: "register",
-    props: true,
     component: RegisterForm,
   },
   {

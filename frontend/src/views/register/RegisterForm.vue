@@ -11,9 +11,7 @@
       </div>
       <div class="registerBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
         <h1 class="ml-5">Register</h1>
-        <v-btn color="red" class="p-5 mt-5 ml-5">
-          <v-img :width="25" aspect-ratio="16/9" cover :src="imageGoogle" class="mr-3"></v-img>
-          Register with google</v-btn>
+        <googleFrom></googleFrom>
         <div class="line d-flex mt-5">
           <hr class="hr mt-3 ml-5" />
           Or
@@ -28,7 +26,8 @@
 </template>
 
 <script setup>
-import imageGoogle from "../../assets/google.png";
+import googleFrom from '../../components/forms/GoogleForm.vue'
+// import imageGoogle from "../../assets/google.png";
 import RegisterComponentForm from "../../components/forms/RegisterComponentForm.vue";
 import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
 import switchBannerForm from '../../components/switchPath/switchLoginComponent.vue';
@@ -37,7 +36,7 @@ import switchBannerForm from '../../components/switchPath/switchLoginComponent.v
 <style>
 .cardContainer {
   margin-top: 10%;
-  width:90%;
+  width: 90%;
   height: 60vh;
 }
 

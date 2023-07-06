@@ -1,74 +1,38 @@
 <template>
+
   <div class="registerForm">
     <v-form @submit.prevent="submitHandler" ref="form" class="w-100">
       <v-card-text>
         <div class="name">
-          <v-text-field
-            class="w-90 ml-5"
-            v-model="firstName"
-            :rules="firstNameRules"
-            type="firstName"
-            label="FirstName"
-            placeholder="firstName"
-          ></v-text-field>
-          <v-text-field
-            class="w-90 ml-5"
-            v-model="lastName"
-            :rules="lastNameRules"
-            type="lastName"
-            label="Last Name"
-            placeholder="lastName"
-          ></v-text-field>
+          <v-text-field class="w-90 ml-5" v-model="firstName" :rules="firstNameRules" type="firstName" label="FirstName"
+            placeholder="firstName"></v-text-field>
+          <v-text-field class="w-90 ml-5" v-model="lastName" :rules="lastNameRules" type="lastName" label="Last Name"
+            placeholder="lastName"></v-text-field>
         </div>
-        <v-text-field
-          class="w-90 ml-5"
-          v-model="email"
-          :rules="emailRules"
-          type="email"
-          label="Email"
-          placeholder="email"
-        >
+        <v-text-field class="w-90 ml-5" v-model="email" :rules="emailRules" type="email" label="Email"
+          placeholder="email">
         </v-text-field>
         <div class="password">
-          <v-text-field
-            class="w-90 ml-5"
-            v-model="password"
-            :rules="passwordRules"
-            :type="passwordShow ? 'text' : 'password'"
-            label="Password"
-            placeholder="password"
-            :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="passwordShow = !passwordShow"    
-          >
+          <v-text-field class="w-90 ml-5" v-model="password" :rules="passwordRules"
+            :type="passwordShow ? 'text' : 'password'" label="Password" placeholder="password"
+            :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'" @click:append="passwordShow = !passwordShow">
           </v-text-field>
-          <v-text-field
-            class="w-90 ml-5"
-            v-model="confirmpassword"
-            :rules="confirmPasswordRules"
-            :type="confirmPasswordShow ? 'text' : 'password'"
-            label="Confirm Password"
-            placeholder="confirmpassword"
-            
-          >
+          <v-text-field class="w-90 ml-5" v-model="confirmpassword" :rules="confirmPasswordRules"
+            :type="confirmPasswordShow ? 'text' : 'password'" label="Confirm Password" placeholder="confirmpassword">
           </v-text-field>
         </div>
-        <v-text-field
-          class="w-90 ml-5"
-          v-model="phoneNumber"
-          :rules="phoneNumberRules"
-          type="phoneNumber"
-          label="Phone Number"
-          placeholder="phoneNumber"
-        >
+        <v-text-field class="w-90 ml-5" v-model="phoneNumber" :rules="phoneNumberRules" type="phoneNumber"
+          label="Phone Number" placeholder="phoneNumber">
         </v-text-field>
+        <autoCompleteAddress></autoCompleteAddress>
       </v-card-text>
     </v-form>
   </div>
 </template>
 
 <script setup>
-  
-  
+
+import autoCompleteAddress from './autoComplete.vue'
 // ===AI references===
 import { ref } from "vue";
 const passwordShow = ref(false);
@@ -120,6 +84,7 @@ function submitHandler() {
   display: flex;
   width: 95%;
 }
+
 .blue-text {
   color: blue;
 }
