@@ -17,7 +17,7 @@ class StoreRegisterRequest extends FormRequest
     }
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 200));
     }
     /**
      * Get the validation rules that apply to the request.
