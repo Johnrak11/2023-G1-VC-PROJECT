@@ -15,7 +15,26 @@ class EventController extends Controller
     {
         //
     }
-
+    public function getEventsNotDeadline(){
+        $events = event::all();
+        $eventUnDeadline = [];
+        $todayDate = date('Y-m-d');
+        foreach ($events as $event){
+            if ($event['date'<=$todayDate]){
+                $eventUnDeadline[] = $event;
+            }
+        };
+        if($eventUnDeadline!=null){
+            return response()->json([
+                'Status'=>'Success'. (true),
+                'Message'=>'There are all events that have not deadline yet.', 
+                'Data'=>$eventUnDeadline
+            ],200);
+        }
+        return response()->json([
+            'Status'=>'Success (true)',
+            'Message'=>'There are no event that has not deadline.'],200);
+    }
     /**
      * Show the form for creating a new resource.
      */
