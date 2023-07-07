@@ -5,6 +5,7 @@ export const addressStore = defineStore("address", {
   state: () => ({
     address: "",
     loading: false,
+    isDenied : false,
   }),
   getters: {},
   actions: {
@@ -18,6 +19,7 @@ export const addressStore = defineStore("address", {
             );
           },
           (error) => {
+            this.isDenied = true;
             console.log(error.message);
             this.isConfirmed("warning", "Please turn on the location");
           }

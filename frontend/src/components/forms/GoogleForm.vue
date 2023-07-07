@@ -15,32 +15,13 @@ import axios from "axios";
 const HTTP_REQUEST = 'http://localhost:8000/api/auth/google';
 const user = userStore()
 import { addressStore } from '../../stores/address.js';
+import router from '@/routes/router.js';
 let address = addressStore();
 let isAddressReady = ref(false);
 let isLoading = ref(false);
 
 // ---- implement with backend-------
-async function googleAuth(googleUser) {
-    let newUser = {
-        'firstname': googleUser.given_name,
-        'lastname': googleUser.family_name,
-        'email': googleUser.email,
-        'profile_picture': googleUser.picture,
-        'address': address.address,
-        'google_id': googleUser.sub,
-    };
-    try {
-        const response = await axios.post(HTTP_REQUEST, newUser);
-        user.user = response.data.user
-        user.token = response.data.token
-        user.storeTokenInCookie()
-        isLoading.value = false;
 
-    } catch (error) {
-        console.error(error);
-        isLoading.value = false;
-    }
-}
 
 async function callback(response) {
     isLoading.value = true;
@@ -56,6 +37,8 @@ async function getAddress() {
                 clearInterval(intervalId);
                 isAddressReady.value = true;
                 resolve();
+            } else if (address.isDenied) {
+                isLoading.value = false
             }
         }, 100);
     });
@@ -69,6 +52,28 @@ function userProcess(response) {
         setTimeout(() => {
             userProcess(response);
         }, 100);
+    }
+}
+
+async function googleAuth(googleUser) {
+    let newUser = {
+        'firstname': googleUser.given_name,
+        'lastname': googleUser.family_name,
+        'email': googleUser.email,
+        'profile_picture': googleUser.picture,
+        'address': address.address,
+        'google_id': googleUser.sub,
+    };
+    try {
+        const response = await axios.post(HTTP_REQUEST, newUser);
+        user.user = response.data.user
+        user.token = response.data.token
+        user.storeTokenInCookie()
+        isLoading.value = false;
+        router.push('/')
+    } catch (error) {
+        console.error(error);
+        isLoading.value = false;
     }
 }
 
