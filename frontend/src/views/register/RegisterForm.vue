@@ -6,7 +6,7 @@
         <switchBannerForm>
           <h1 class="white--text">Don't you have an account?</h1>
           <span class="mt-5 white--text">Please, create register to get an account</span>
-          <router-link to="/login"><v-btn class="w-50 mt-5">Register</v-btn></router-link>
+          <router-link to="/login"><v-btn class="w-50 mt-5">Login</v-btn></router-link>
         </switchBannerForm>
       </div>
       <div class="registerBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
@@ -18,7 +18,7 @@
           <hr class="hr mt-3" />
         </div>
         <RegisterComponentForm />
-        <ButtonComponentForm />
+        <!-- <ButtonComponentForm /> -->
       </div>
 
     </div>
@@ -29,7 +29,7 @@
 import googleFrom from '../../components/forms/GoogleForm.vue'
 // import imageGoogle from "../../assets/google.png";
 import RegisterComponentForm from "../../components/forms/RegisterComponentForm.vue";
-import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
+// import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
 import switchBannerForm from '../../components/switchPath/switchLoginComponent.vue';
 </script>
 
@@ -37,7 +37,8 @@ import switchBannerForm from '../../components/switchPath/switchLoginComponent.v
 .cardContainer {
   margin-top: 10%;
   width: 90%;
-  height: 60vh;
+  height: 50vh;
+  margin-top: 8%;
 }
 
 .v-btn,
@@ -49,13 +50,13 @@ hr {
   width: 43%;
   border: 1px solid black;
 }
-
 .registerBody {
   width: 44%;
   box-shadow: 5px 5px 10px rgb(86, 86, 86);
   margin-top: 3%;
   position: relative;
   left: 10%;
+  margin-top: -2%;
 }
 
 .registerContainer {
@@ -69,4 +70,5 @@ hr {
   left: 6%;
   margin-top: 17%;
 }
+
 </style>
