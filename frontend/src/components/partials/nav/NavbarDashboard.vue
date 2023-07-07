@@ -6,7 +6,8 @@
     </div><br>
     <ul>
         <router-link to="/dashboard/dashboards" class="d-flex icon mt-2 pa-2">
-            <img src="https://cdn0.iconfinder.com/data/icons/octicons/1024/dashboard-512.png" alt="" width="40">
+            <!-- <img src="https://cdn0.iconfinder.com/data/icons/octicons/1024/dashboard-512.png" alt="" width="40"> -->
+            <v-icon icon="fa:fas fa-tachometer-alt"></v-icon>
             <p class="ml-5 mt-1">Dashboard</p>
         </router-link>
         <router-link to="/events" class="d-flex icon pa-2">
