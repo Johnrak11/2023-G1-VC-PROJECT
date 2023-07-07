@@ -1,10 +1,7 @@
 
 <template>
     <div class="mt-6 ml-16 mr-16">
-        <div class="ml-16">
-            <h1>Upcoming Events</h1>
-            <p>You can chooses to display feature</p>
-        </div>
+        <slot></slot>
         <div class="ml-4 mr-8 d-flex justify-space-evenly flex-wrap">
             <div class="card pa-3 rounded bg-grey-lighten-2 mt-10" v-for="n in 4" :key="n">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlL1F7iU9vtdCKg_4sckNgDcbQ_GrDsbKgxw&usqp=CAU" alt="">
@@ -53,6 +50,6 @@ export default {
         border-radius: 10px;
     }
     #booking{
-        margin-left: 75%;
+        margin-left: 70%;
     }
 </style>

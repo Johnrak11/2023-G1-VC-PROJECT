@@ -15,6 +15,7 @@ import ListCard from "./components/partials/cards/ListCard.vue";
 import PopularEvent from "./components/partials/cards/PopularEvent.vue";
 import CardRate from "./components/partials/cards/CardRate.vue";
 import FooterView from "./components/partials/footer/FooterView.vue";
+import PaginationView from "./components/partials/pagination/PaginationView.vue";
 
 loadFonts();
 
@@ -35,5 +36,6 @@ app.component("list-card", ListCard);
 app.component("popular-event", PopularEvent);
 app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
+app.component("pagination-view", PaginationView);
 
 app.mount("#app");
