@@ -7,12 +7,13 @@
   <card-rate></card-rate>
   <footer-view></footer-view>
 </template>
-<script>
+<script setup>
 import { createVuetify } from 'vuetify'
 import { aliases, fa } from 'vuetify/iconsets/fa'
 import { mdi } from 'vuetify/iconsets/mdi'
 
-export default createVuetify({
+
+createVuetify({
   icons: {
     defaultSet: 'fa',
     aliases,
@@ -23,3 +24,4 @@ export default createVuetify({
   },
 })
 </script>
+
