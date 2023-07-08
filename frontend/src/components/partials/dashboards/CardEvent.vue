@@ -1,5 +1,5 @@
 <template>
-    <div class=" bg-white pa-5 mt-4 mr-10">
+    <v-card class=" bg-white pa-5 mt-4 mr-10 overflow-y-auto" :elevation="2">
         <div class="d-flex justify-space-between">
             <div class="d-flex">
                 <img src="https://liftedasia.com/assets/content_images/vannda-660x440.jpg" alt="" width="150">
@@ -12,14 +12,14 @@
         <hr style="width: 100%;"><br>
         <div class="d-flex justify-space-around">
             <div class="d-flex">
-                <img src="https://o.remove.bg/downloads/13f78d28-0d73-4fdf-9e52-c192e7c58969/146-1466755_nearby-transparent-background-address-icon-hd-png-download-removebg-preview.png" alt="" width="30">
+                <img src="https://o.remove.bg/downloads/caf45f2c-3ab0-466e-a1ef-6895e3961237/146-1466755_nearby-transparent-background-address-icon-hd-png-download-removebg-preview.png" alt="" width="30">
                 <div class="text ml-4">
                     <span class="text-grey-lighten-1">Status</span>
                     <p>Publish</p>
                 </div>
             </div>
             <div class="d-flex">
-                <img src="https://o.remove.bg/downloads/5ed7a2ef-5797-4b94-b580-8b62ea07bd9f/calendar-date-date-notes-business-office-event-icon-template-black-color-editable-calendar-date-symbol-flat-illustration-for-graphic-and-web-design-free-vector-removebg-preview.png" alt="" width="30">
+                <img src="https://o.remove.bg/downloads/0216fc4f-576b-4a01-9077-fc680c4af57c/kisspng-computer-icons-portable-network-graphics-clip-art-dates-icon-png-vector-clipart-psd-peoplepng-co-5cf4e95ec23669.6065993915595543987955-removebg-preview.png" alt="" width="30">
                 <div class="text ml-4">
                     <span class="text-grey-lighten-1">Start on</span>
                     <p>30 June,2023 7:30AM</p>
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </v-card>
 </template>
 <style scoped>
 .text{

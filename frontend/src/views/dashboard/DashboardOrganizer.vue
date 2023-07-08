@@ -1,21 +1,21 @@
 <template>
-  <v-layout class="rounded rounded-md">
-    <v-navigation-drawer>
-      <v-list>
-        <!-- <v-list-item title="Navigation drawer"></v-list-item> -->
-        <NavbarDashboard/>
-    </v-list>
-    </v-navigation-drawer>
-    <v-app-bar title="Dashboard Management System"></v-app-bar>
-    <v-main
-      class="bg-grey-lighten-2 ml-10"
-      style="min-height: 100vh"
-    >
-      <CardDashboard/>
-    </v-main>
-  </v-layout>
+  <v-card>
+    <v-layout>
+      <v-main class="bg-grey-lighten-2">
+        <CardDashboard />
+        <ContainLeftDashboard />
+      </v-main>
+    </v-layout>
+  </v-card>
 </template>
+
 <script setup>
-import NavbarDashboard from '../../components/partials/nav/NavbarDashboard.vue'
-import CardDashboard from '../../components/partials/dashboards/CardDashboard.vue'
+import ContainLeftDashboard from "./ContainLeftDashboard.vue";
+import CardDashboard from "../../components/partials/dashboards/CardDashboard.vue";
 </script>
+<style scoped>
+.border {
+  border: 1px solid black;
+}
+
+</style>
