@@ -18,26 +18,38 @@ class AuthController extends Controller
     {
         //
     }
-    public function register(StoreRegisterRequest $request){
+    public function register(StoreRegisterRequest $request)
+    {
+        // return $request;
         $register = User::registers($request);
-        $token = $register->createToken('API Token',['select','create','delete','update'])->plainTextToken;
-        return response()->json(['massage'=> 'Register successful','user'=>$register,'token'=>$token],200);
+        $token = $register->createToken('API Token', ['select', 'create', 'delete', 'update'])->plainTextToken;
+        return response()->json(['success' => true, 'massage' => 'Register successful', 'user' => $register, 'token' => $token], 200);
     }
 
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
         $credentials = User::logins($request);
+        $userExist = User::where('email', $credentials['email'])->first();
+        if ($userExist === null) {
+            return response()->json([
+                'success' => false,
+                'message' => ["email" => "Email doesn't exist"]
+            ], 200);
+        }
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $token = $user->createToken('API Token',['select','create','delete','update'])->plainTextToken;
+            $token = $user->createToken('API Token', ['select', 'create', 'delete', 'update'])->plainTextToken;
             return response()->json([
-                'Massage'=> 'login successful',
+                'success' => true,
+                'message' => 'login successfully',
                 'user' => $user,
                 'token' => $token
             ]);
         }
         return response()->json([
-            'message' => 'Invalid credentials'
-        ], 401);
+            'success' => false,
+            'message' => ['password' => 'Incorrect password']
+        ], 200);
     }
     /**
      * Store a newly created resource in storage.

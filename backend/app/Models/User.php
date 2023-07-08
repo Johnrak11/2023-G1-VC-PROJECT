@@ -26,6 +26,7 @@ class User extends Authenticatable
         'phone_number',
         'google_id',
         'address',
+        'role'
     ];
 
     /**
@@ -47,18 +48,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public static function registers( $request) {
+
+    public static function registers($request)
+    {
         $register = User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'address' =>  $request->address
         ]);
-    
+
         return $register;
     }
-    public static function logins($request){
+    public static function logins($request)
+    {
         $login = $request->only(['email', 'password']);
         return $login;
     }
