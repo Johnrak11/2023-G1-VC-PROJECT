@@ -1,5 +1,5 @@
 <template>
-
+  <messageAlert></messageAlert>
   <div class="registerForm">
     <v-form @submit.prevent="submitForm" ref="form" class="w-100">
       <v-card-text>
@@ -9,31 +9,33 @@
           <v-text-field class="w-90 ml-5" v-model="lastname" :rules="lastNameRules" type="lastName" label="Last Name"
             placeholder="lastName"></v-text-field>
         </div>
-        <v-text-field class="w-90 ml-5" v-model="email" :rules="emailRules" type="email" label="Email"
-          placeholder="email">
-        </v-text-field>
+        <v-text-field class="w-90 ml-5" v-model="email" :rules="emailRules" type="email" label="Email" placeholder="email"
+          @keydown="backEmailError = ''"></v-text-field>
+        <small v-if="backEmailError" class="error-message">{{ backEmailError }}</small>
         <v-text-field class="w-90 ml-5" v-model="password" :rules="passwordRules"
           :type="passwordShow ? 'text' : 'password'" label="Password" placeholder="password"
-          :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'" @click:append="passwordShow = !passwordShow">
-        </v-text-field>
-        <v-text-field class="w-90 ml-5" v-model="phone_number" type="phoneNumber" label="Phone Number"
-          :rules="phoneNumberRule" placeholder="phoneNumber">
-        </v-text-field>
+          :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="passwordShow = !passwordShow"></v-text-field>
+        <v-text-field class="w-90 ml-5" v-model="phoneNumber" type="phoneNumber" label="Phone Number"
+          :rules="phoneNumberRule" placeholder="phoneNumber"></v-text-field>
         <autoCompleteAddress></autoCompleteAddress>
       </v-card-text>
+      <ButtonComponentForm :isLoading="isLoading" />
     </v-form>
-    <ButtonComponentForm @click="submitForm" />
   </div>
 </template>
 
 <script setup>
-
+import { addressStore } from '../../stores/address.js';
+let address = addressStore();
 import autoCompleteAddress from './autoComplete.vue'
-// ===AI references===
 import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
-// ===AI references===
 import axios from "axios";
 import { ref } from "vue";
+import router from '@/routes/router.js';
+import { userStore } from '../../stores/user.js'
+
+const isLoading = ref(false)
 const passwordShow = ref(false);
 const password = ref("");
 const passwordRules = [
@@ -44,63 +46,131 @@ const passwordRules = [
     "Password must contain at least one special character",
 ];
 const email = ref("");
-const emailRules = [
-  (v) => !!v || "email is required",
+const emailRules = ref([
+  (v) => !!v || "Email is required",
   (v) => /.+@.+\..+/.test(v) || "Email must be valid",
-];
+]);
+
 const firstname = ref("");
-let firstNameRules = [(v) => !!v || "First Name is required"];
+const firstNameRules = ref([(v) => !!v || "First Name is required"]);
+
 const lastname = ref("");
-const lastNameRules = [(v) => !!v || "Last Name is required"];
-const phone_number = ref("");
-const phoneNumberRule = [(v) => !!v || "Phone number is required"];
-// validate form register with backend
-const HTTP_REQUEST = "http://localhost:8000/api/registers";
+const lastNameRules = ref([(v) => !!v || "Last Name is required"]);
+
+const phoneNumber = ref("");
+const phoneNumberRule = [
+  (v) => !!v || "Phone number is required",
+  (v) => /^\d{1,12}$/.test(v) || "Phone number must be less than 12 digits",
+];
+import { axiosStore } from '../../stores/axiosHandle.js';
+const httpRequest = axiosStore();
+const backEmailError = ref('')
+const user = userStore()
 async function submitForm() {
-  if (firstname.value === "" ) {
-    firstNameRules.values = "First Name is required"
+  backEmailError.value = '';
+  const isFormValid = validateForm();
+  if (!isFormValid) {
+    return;
+  }
+  isLoading.value = true
+  await axios
+    .post(httpRequest.api + '/registers', {
+      firstname: firstname.value,
+      lastname: lastname.value,
+      email: email.value,
+      password: password.value,
+      phone_number: phoneNumber.value,
+      address: address.address
+    })
+    .then((response) => {
+      let handleResponse = response.data;
+      console.log(handleResponse);
+      isLoading.value = false
+      if (!handleResponse.success) {
+        handleError(handleResponse.message);
+      } else {
+        user.user = response.data.user
+        user.token = response.data.token
+        user.storeTokenInCookie()
+        console.log(user.user)
+        router.push('/')
+        // resetForm()
+      }
+    })
+    .catch((error) => console.log(error));
+}
 
-  } 
-  else if (lastname.value === "" ) {
-    firstNameRules.values = "Last Name is required"
-
-  } 
-  else if (phone_number.value === "" ) {
-    firstNameRules.values = "Phone number is required"
-
-  } 
-  else if (email.value === "" ) {
-    firstNameRules.values = "Email is required"
-
-  } 
-  else if (password.value === "" ) {
-    firstNameRules.values = "Password is required"
-
-  } 
-  else {
-    await axios
-      .post(HTTP_REQUEST, {
-        firstname: firstname.value,
-        lastname: lastname.value,
-        email: email.value,
-        password: password.value,
-        phone_number: phone_number.value,
-      })
-      .then((response) => {
-        console.log(response);
-        firstname.value = "";
-        lastname.value = "";
-        email.value = "";
-        password.value = "";
-        phone_number.value = "";
-      })
-      .catch((error) => console.log(error));
+function handleError(message) {
+  if (message.email) {
+    backEmailError.value = message.email[0]
   }
 }
+
+function validateForm() {
+  let isValid = true;
+  if (!firstname.value) {
+    firstNameRules.value = [(v) => !!v || "First Name is required"];
+    isValid = false;
+  }
+
+  if (!lastname.value) {
+    lastNameRules.value = [(v) => !!v || "Last Name is required"];
+    isValid = false;
+  }
+
+  if (!phoneNumber.value) {
+    phoneNumberRule.value = [(v) => !!v || "Phone number is required"];
+    isValid = false;
+  }
+
+  if (!email.value) {
+    emailRules.value = [(v) => !!v || "Email is required"];
+    isValid = false;
+  }
+
+  if (!password.value) {
+    passwordRules.value = [(v) => !!v || "Password is required"];
+    isValid = false;
+  }
+  if (!validateEmail(email.value)) {
+    isValid = false;
+  }
+  if (!validatePassword(password.value)) {
+    isValid = false;
+  }
+  if (phoneNumber.value.length > 12) {
+    isValid = false;
+  }
+  return isValid;
+}
+
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function validatePassword(password) {
+  if (!(password && password.length >= 8)) {
+    return false;
+  }
+  if (!/[^a-zA-Z0-9]/.test(password)) {
+    return false
+  }
+  return true; // Password is valid
+}
+// function resetForm() {
+//   firstname.value = "";
+//   lastname.value = "";
+//   email.value = "";
+//   password.value = "";
+//   phoneNumber.value = "";
+//   // Reset other form fields if needed
+// }
+
 </script>
 
 
-<style scroped>
+<style scoped>
 .name {
   display: flex;
   width: 95%;
@@ -109,5 +179,12 @@ async function submitForm() {
 .blue-text {
   color: blue;
 }
-</style>
 
+.error-message {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  margin-top: -20px;
+  margin-left: 35px;
+}
+</style>

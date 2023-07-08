@@ -19,7 +19,7 @@
                 <switchBannerForm>
                     <h1 class="white--text">Don't you have an account?</h1>
                     <span class="mt-5 white--text">Please, register to get an account</span>
-                    <router-link to="/login"><v-btn class="w-50 mt-5">Register</v-btn></router-link>
+                    <router-link to="/register"><v-btn class="w-50 mt-5">Register</v-btn></router-link>
                 </switchBannerForm>
             </div>
         </div>
@@ -42,7 +42,7 @@ const buttonSubmit = buttonComponent;
     height: 60vh;
     position: relative;
     margin-top: 8%;
-   
+
 
 }
 

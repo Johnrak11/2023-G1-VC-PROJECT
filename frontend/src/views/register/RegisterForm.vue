@@ -9,7 +9,7 @@
           <router-link to="/login"><v-btn class="w-50 mt-5">Login</v-btn></router-link>
         </switchBannerForm>
       </div>
-      <div class="registerBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
+      <div class="registerBody bg-white pt-2 pb-2 pl-2 pr-2 d-flex flex-column mt-16">
         <h1 class="ml-5">Register</h1>
         <googleFrom></googleFrom>
         <div class="line d-flex mt-5">
@@ -50,6 +50,7 @@ hr {
   width: 43%;
   border: 1px solid black;
 }
+
 .registerBody {
   width: 44%;
   box-shadow: 5px 5px 10px rgb(86, 86, 86);
@@ -70,5 +71,4 @@ hr {
   left: 6%;
   margin-top: 17%;
 }
-
 </style>
