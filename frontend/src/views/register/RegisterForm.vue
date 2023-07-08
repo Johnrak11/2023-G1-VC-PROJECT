@@ -29,7 +29,7 @@
 <script setup>
 import imageGoogle from "../../assets/google.png";
 import RegisterComponentForm from "../../components/forms/RegisterComponentForm.vue";
-import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
+import ButtonComponentForm from "../../components/buttons/ButtonComponentForm.vue";
 import switchBannerForm from '../../components/switchPath/switchLoginComponent.vue';
 </script>
 

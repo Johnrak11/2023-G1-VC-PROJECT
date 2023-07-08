@@ -1,5 +1,8 @@
 <template>
-  <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
+  <v-layout
+    class="nav-bar d-flex justify-space-between w-100 bg-color"
+    :elevation="7"
+  >
     <v-nav-bar-left class="ml-12 d-flex left">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-app-bar-title class="mt-3">LOCAL EVENT</v-app-bar-title>
@@ -10,8 +13,8 @@
           <router-link to="/">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/explor">
-            <li class="rounded">Explor</li>
+          <router-link to="/explore">
+            <li class="rounded">Explore</li>
           </router-link>
           <router-link to="/myticket">
             <li class="rounded">MyTicket</li>
@@ -28,7 +31,7 @@
         <v-badge content="2" color="error" class="mt-2 mr-5">
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
-        <router-link to="/register"><v-btn color="blue" width="5">Login</v-btn></router-link>
+        <router-link to="/login"><v-btn color="blue" width="5">Login</v-btn></router-link>
         <!-- <img
           src="https://o.remove.bg/downloads/01e3f24e-5f37-469d-b513-1535078501c9/v937-aew-165-klhcwecm-removebg-preview.png"
           width="40" height="40" /> -->
@@ -56,7 +59,6 @@ select {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 
 .justify-space-between {
   display: flex;

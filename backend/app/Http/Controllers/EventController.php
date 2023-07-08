@@ -20,20 +20,20 @@ class EventController extends Controller
         $eventUnDeadline = [];
         $todayDate = date('Y-m-d');
         foreach ($events as $event){
-            if ($event['date'<=$todayDate]){
+            if ($event['date']>=$todayDate){
                 $eventUnDeadline[] = $event;
             }
         };
         if($eventUnDeadline!=null){
             return response()->json([
-                'Status'=>'Success'. (true),
-                'Message'=>'There are all events that have not deadline yet.', 
-                'Data'=>$eventUnDeadline
+                'status'=>'Success'. (true),
+                'message'=>'There are all events that have not deadline yet.', 
+                'data'=>$eventUnDeadline
             ],200);
         }
         return response()->json([
-            'Status'=>'Success (true)',
-            'Message'=>'There are no event that has not deadline.'],200);
+            'satus'=>'Success (true)',
+            'message'=>'There are no event that has not deadline.'],200);
     }
     /**
      * Show the form for creating a new resource.

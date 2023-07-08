@@ -1,9 +1,6 @@
 <template>
     <div class="search-input">
-        <div class="mt-16">
-            <h1 class="text-center text-h2">Connection the world</h1>
-            <p class="text-center">Easy to search, you just enter the keyword</p>
-        </div>
+       <slot></slot>
         <div class="w-90 search mt-16">
             <input class="bg-grey-lighten-2 pa-3 w-25" type="text" placeholder="Enter more">
             <select class="p-16 w-25 pa-3 bg-grey-lighten-2">
