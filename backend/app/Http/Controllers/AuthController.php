@@ -22,8 +22,8 @@ class AuthController extends Controller
     public function register(StoreRegisterRequest $request)
     {
         $register = User::registers($request);
-        $token = $register->createToken("API Token", ['select', 'create', 'delete', 'update'])->plainTextToken;
-        return response()->json(['massage' => 'Register successful', 'user' => $register, 'token' => $token], 200);
+        $token = $register->createToken('API Token',['select','create','delete','update'])->plainTextToken;
+        return response()->json(['message'=> 'Register successful','user'=>$register,'token'=>$token],200);
     }
 
     public function login(LoginRequest $request)
