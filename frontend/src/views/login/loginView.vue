@@ -1,19 +1,16 @@
 <template>
-    <div class="bigContainer mt-16 h-100">
+    <div class="bigContainer mt-16 h-100 ">
         <div class="cardContainer bg-red mx-auto" :class="`elevation-${isHovering ? 30 : 10}`"></div>
-        <div class="loginContainer d-flex">
+        <div class="loginContainer d-flex animate__animated animate__fadeInLeft">
             <div class="loginBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
                 <h1 class="ml-5">Login</h1>
-                <v-btn color="red" class="mt-5 ml-5">
-                    <v-img :width="25" aspect-ratio="16/9" cover :src=imageGoogle class="mr-5"></v-img>
-                    <span>Login with google</span></v-btn>
+                <googleFrom></googleFrom>
                 <div class="line d-flex mt-5">
                     <hr class="hr mt-3 ml-5">
                     Or
                     <hr class="hr mt-3">
                 </div>
                 <loginForm />
-                <buttonSubmit />
             </div>
             <div class="loginSwitchRegister">
                 <switchBannerForm>
@@ -27,13 +24,11 @@
 </template>
 
 <script setup>
-import google from '../../assets/loginForm/Google__G__Logo.svg.png';
+import googleFrom from '../../components/forms/GoogleForm.vue'
+// import googleImage from '../../assets/loginForm/Google__G__Logo.svg.png';
 import loginFormComponent from '../../components/forms/loginFormComponent.vue';
-import buttonComponent from '../../components/buttons/buttonComponent.vue';
 import switchBannerForm from '../../components/switchPath/switchLoginComponent.vue';
-const imageGoogle = google
 const loginForm = loginFormComponent;
-const buttonSubmit = buttonComponent;
 </script>
 
 <style>

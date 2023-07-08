@@ -1,6 +1,8 @@
 <template>
   <v-card-action class="card d-flex justify-end">
-    <v-btn type="submit" color="red" :loading="isLoading">Register</v-btn>
+    <v-btn type="submit" color="red" :loading="isLoading">
+      <slot></slot>
+    </v-btn>
   </v-card-action>
 </template>
 

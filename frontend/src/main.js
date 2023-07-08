@@ -1,4 +1,5 @@
 // ----- library----
+import 'animate.css';
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./routes/router";
@@ -6,6 +7,7 @@ import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
 import { createPinia } from "pinia";
+
 // --- components-----
 
 

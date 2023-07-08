@@ -1,6 +1,5 @@
 <template>
-  <messageAlert></messageAlert>
-  <div class="registerForm">
+  <div class="registerForm animate__animated" :class="invalideForm">
     <v-form @submit.prevent="submitForm" ref="form" class="w-100">
       <v-card-text>
         <div class="name">
@@ -20,7 +19,9 @@
           :rules="phoneNumberRule" placeholder="phoneNumber"></v-text-field>
         <autoCompleteAddress></autoCompleteAddress>
       </v-card-text>
-      <ButtonComponentForm :isLoading="isLoading" />
+      <ButtonComponentForm :isLoading="isLoading">
+        Register
+      </ButtonComponentForm>
     </v-form>
   </div>
 </template>
@@ -35,6 +36,7 @@ import { ref } from "vue";
 import router from '@/routes/router.js';
 import { userStore } from '../../stores/user.js'
 
+const invalideForm = ref('')
 const isLoading = ref(false)
 const passwordShow = ref(false);
 const password = ref("");
@@ -66,15 +68,18 @@ import { axiosStore } from '../../stores/axiosHandle.js';
 const httpRequest = axiosStore();
 const backEmailError = ref('')
 const user = userStore()
+
 async function submitForm() {
+  invalideForm.value = ''
   backEmailError.value = '';
   const isFormValid = validateForm();
   if (!isFormValid) {
+    invalideForm.value = 'animate__shakeX'
     return;
   }
   isLoading.value = true
   await axios
-    .post(httpRequest.api + '/registers', {
+    .post(httpRequest.api + '/auth/registers', {
       firstname: firstname.value,
       lastname: lastname.value,
       email: email.value,
@@ -84,7 +89,6 @@ async function submitForm() {
     })
     .then((response) => {
       let handleResponse = response.data;
-      console.log(handleResponse);
       isLoading.value = false
       if (!handleResponse.success) {
         handleError(handleResponse.message);
@@ -94,7 +98,6 @@ async function submitForm() {
         user.storeTokenInCookie()
         console.log(user.user)
         router.push('/')
-        // resetForm()
       }
     })
     .catch((error) => console.log(error));
@@ -104,6 +107,7 @@ function handleError(message) {
   if (message.email) {
     backEmailError.value = message.email[0]
   }
+  invalideForm.value = 'animate__shakeX'
 }
 
 function validateForm() {
@@ -156,16 +160,8 @@ function validatePassword(password) {
   if (!/[^a-zA-Z0-9]/.test(password)) {
     return false
   }
-  return true; // Password is valid
+  return true;
 }
-// function resetForm() {
-//   firstname.value = "";
-//   lastname.value = "";
-//   email.value = "";
-//   password.value = "";
-//   phoneNumber.value = "";
-//   // Reset other form fields if needed
-// }
 
 </script>
 

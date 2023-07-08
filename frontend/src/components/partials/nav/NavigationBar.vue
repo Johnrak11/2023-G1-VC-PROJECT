@@ -28,16 +28,36 @@
         <v-badge content="2" color="error" class="mt-2 mr-5">
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
-        <router-link to="/register"><v-btn color="blue" width="5">Login</v-btn></router-link>
-        <!-- <img
-          src="https://o.remove.bg/downloads/01e3f24e-5f37-469d-b513-1535078501c9/v937-aew-165-klhcwecm-removebg-preview.png"
-          width="40" height="40" /> -->
+
+        <router-link v-if="!token" to="/login"><v-btn color="blue" width="5">Login</v-btn></router-link>
+        <v-menu v-else>
+          <template v-slot:activator="{ props }">
+            <v-btn icon="$vuetify" v-bind="props"></v-btn>
+          </template>
+          <v-list>
+            <v-list-item v-for="(item, index) in items" :key="index" :value="index">
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-right-content>
     </v-nav-bar-right>
   </v-layout>
 </template>
 
+<script setup>
+import { ref } from "vue";
+const items = ref([
+  { title: "Profile" },
+  { title: "History" },
+  { title: "Ticket" },
+  { title: "Dashboard" },
+]);
+import { userStore } from '../../../stores/user.js'
+const user = userStore()
+const token = user.getCookie('token')
 
+</script>
 <style scoped>
 .nav-bar {
   overflow: hidden;
@@ -56,7 +76,6 @@ select {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 
 .justify-space-between {
   display: flex;

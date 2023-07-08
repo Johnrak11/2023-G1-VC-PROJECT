@@ -24,10 +24,17 @@ let isLoading = ref(false);
 
 
 async function callback(response) {
+    const currentRoute = router.currentRoute.value.path
     isLoading.value = true;
-    address.locaterButtonPressed();
-    await getAddress();
-    userProcess(response);
+    if (currentRoute === '/login') {
+        isAddressReady.value = true
+        userProcess(response);
+
+    } else {
+        address.locaterButtonPressed();
+        await getAddress();
+        userProcess(response);
+    }
 }
 
 async function getAddress() {
@@ -71,6 +78,8 @@ async function googleAuth(googleUser) {
         user.storeTokenInCookie()
         isLoading.value = false;
         router.push('/')
+        console.log(user.token)
+        console.log(user.user)
     } catch (error) {
         console.error(error);
         isLoading.value = false;
