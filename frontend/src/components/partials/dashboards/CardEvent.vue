@@ -12,14 +12,14 @@
         <hr style="width: 100%;"><br>
         <div class="d-flex justify-space-around">
             <div class="d-flex">
-                <img src="https://o.remove.bg/downloads/caf45f2c-3ab0-466e-a1ef-6895e3961237/146-1466755_nearby-transparent-background-address-icon-hd-png-download-removebg-preview.png" alt="" width="30">
+                <img src="https://cdn-icons-png.flaticon.com/512/3082/3082383.png" alt="" width="30">
                 <div class="text ml-4">
                     <span class="text-grey-lighten-1">Status</span>
                     <p>Publish</p>
                 </div>
             </div>
             <div class="d-flex">
-                <img src="https://o.remove.bg/downloads/0216fc4f-576b-4a01-9077-fc680c4af57c/kisspng-computer-icons-portable-network-graphics-clip-art-dates-icon-png-vector-clipart-psd-peoplepng-co-5cf4e95ec23669.6065993915595543987955-removebg-preview.png" alt="" width="30">
+                <img src="https://cdn-icons-png.flaticon.com/512/3564/3564808.png" alt="" width="30">
                 <div class="text ml-4">
                     <span class="text-grey-lighten-1">Start on</span>
                     <p>30 June,2023 7:30AM</p>
