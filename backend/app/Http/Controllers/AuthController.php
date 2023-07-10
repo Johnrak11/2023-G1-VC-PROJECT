@@ -54,8 +54,21 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-        return response()->json(['success' => true,'message' => 'Logged out successfully'],200);
+        try {
+            $request->user()->tokens()->delete();
+            return response()->json(['success' => true, 'message' => 'Logged out successfully'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => 'Failed to logout. Please try again.'], 401);
+        }
+    }
+
+    public function getUserInfo(Request $request)
+    {
+        $user = Auth::user();
+        return response()->json([
+            'success' => true,
+            'user' => $user
+        ], 200);
     }
     /**
      * Store a newly created resource in storage.

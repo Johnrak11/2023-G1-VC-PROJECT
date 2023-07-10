@@ -10,8 +10,6 @@ import { createPinia } from "pinia";
 
 // --- components-----
 
-
-
 import NavigationBar from "./components/partials/nav/NavigationBar.vue";
 import SearchEvent from "./components/partials/base-search/SearchEvent.vue";
 import CategoryButton from "./components/partials/category/CategoryButton.vue";

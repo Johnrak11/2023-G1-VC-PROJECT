@@ -21,7 +21,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/logout', ([AuthController::class, 'logout']));
+    Route::prefix('/auth')->group(function () {
+        //logout
+        Route::post('/logout', function (Request $request) {
+            if (!$request->bearerToken()) {
+                return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
+            }
+            return (new AuthController())->logout($request);
+        });
+        Route::get('/user', function (Request $request) {
+            if (!$request->bearerToken()) {
+                return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
+            }
+            return (new AuthController())->getUserInfo($request);
+        }); 
+    });
 });
 
 // ----- authentication group----
@@ -30,6 +44,4 @@ Route::prefix('auth')->group(function () {
     Route::post('/registers', ([AuthController::class, 'register']));
     Route::post('/login', ([AuthController::class, 'login']));
 });
-Route::get('/event/{id}',[EventController::class, 'getEventById']);
-
-    
+Route::get('/event/{id}', [EventController::class, 'getEventById']);
