@@ -1,6 +1,6 @@
 <template>
   <img
-    class="img1"
+    class="img1 mt-10"
     src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
     alt=""
   />
@@ -107,7 +107,7 @@
                     class="card1 d-flex bg-grey-lighten-2"
                   >
                     <div class="info mt-5 ml-4">
-                      <h2>{{ card.title }}</h2>
+                      <h3>{{ card.title }}</h3>
                       <div class="d-flex mt-4">
                         <v-icon color="red"> mdi-calendar</v-icon>
                         <p class="ml-4 mt-1">{{ card.schedule }}</p>
@@ -264,7 +264,7 @@ export default {
   margin-top: -7px;
 }
 .free {
-  font-size: 20px;
+  font-size: 17px;
   width: 8%;
 }
 .card1 {
@@ -313,7 +313,7 @@ h1 {
 }
 
 .detail p {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.5;
   margin-bottom: 20px;
 }
