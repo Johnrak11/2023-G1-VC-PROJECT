@@ -1,4 +1,5 @@
 // ----- library----
+import 'animate.css';
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./routes/router";
@@ -9,6 +10,7 @@ import vue3GoogleLogin from "vue3-google-login";
 import VueSocialSharing from 'vue-social-sharing';
 
 
+import { createPinia } from "pinia";
 
 // --- components-----
 
@@ -19,9 +21,11 @@ import ListCard from "./components/partials/cards/ListCard.vue";
 import PopularEvent from "./components/partials/cards/PopularEvent.vue";
 import CardRate from "./components/partials/cards/CardRate.vue";
 import FooterView from "./components/partials/footer/FooterView.vue";
+import PaginationView from "./components/partials/pagination/PaginationView.vue";
 
+import DetailView from "./components/details/DetailComponent.vue";
 loadFonts();
-
+const pinia = createPinia()
 const app = createApp(App);
 const CLIENT_ID =
   "789674566579-4bjsq9dlf9gknuq2omokd04bd2ioi96l.apps.googleusercontent.com";
@@ -29,10 +33,12 @@ const CLIENT_ID =
 app.use(vue3GoogleLogin, {
   clientId: CLIENT_ID,
 });
+app.use(pinia);
 app.use(router);
 app.use(vuetify);
 app.use(VueSocialSharing);
 
+app.use(pinia);
 
 app.component("navigation-bar", NavigationBar);
 app.component("search-view", SearchEvent);
@@ -41,5 +47,7 @@ app.component("list-card", ListCard);
 app.component("popular-event", PopularEvent);
 app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
+app.component("pagination-view", PaginationView);
+app.component("detail-page", DetailView);
 
 app.mount("#app");

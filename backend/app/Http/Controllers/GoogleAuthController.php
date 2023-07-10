@@ -15,11 +15,12 @@ class GoogleAuthController extends Controller
             $user = User::where('email', $googleUser['email'])->first();
             if ($user === null) {
                 $newUser = User::create([
-                    'firstname' => $googleUser['given_name'],
-                    'lastname' => $googleUser['family_name'],
+                    'firstname' => $googleUser['firstname'],
+                    'lastname' => $googleUser['lastname'],
                     'email' => $googleUser['email'],
-                    'profile_picture' => $googleUser['picture'],
-                    'google_id' => $googleUser['sub'],
+                    'profile_picture' => $googleUser['profile_picture'],
+                    'address' => $googleUser['address'],
+                    'google_id' => $googleUser['google_id'],
                 ]);
                 Auth::login($newUser);
                 $token = $newUser->createToken('token-name', ['post', 'get', 'update', 'delete'])->plainTextToken;
@@ -42,8 +43,8 @@ class GoogleAuthController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
-                'message' => 'something wrong',
-            ], 503);
+                'message' => $th->message,
+            ], 200);
         }
     }
 }

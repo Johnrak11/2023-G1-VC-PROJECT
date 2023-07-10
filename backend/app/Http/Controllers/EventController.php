@@ -15,7 +15,26 @@ class EventController extends Controller
     {
         //
     }
-
+    public function getEventsNotDeadline(){
+        $events = event::all();
+        $eventUnDeadline = [];
+        $todayDate = date('Y-m-d');
+        foreach ($events as $event){
+            if ($event['date']>=$todayDate){
+                $eventUnDeadline[] = $event;
+            }
+        };
+        if($eventUnDeadline!=null){
+            return response()->json([
+                'status'=>'Success'. (true),
+                'message'=>'There are all events that have not deadline yet.', 
+                'data'=>$eventUnDeadline
+            ],200);
+        }
+        return response()->json([
+            'satus'=>'Success (true)',
+            'message'=>'There are no event that has not deadline.'],200);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -39,7 +58,15 @@ class EventController extends Controller
     {
         //
     }
-
+    public function getEventById($id) {
+        $event_detail = event::find($id);
+        if (isset($event_detail)) {
+            return response()->json(['status'=> 'success','data' => $event_detail],200);
+        }
+        else {
+            return response()->json(['status'=> false,'data' => 'Id'.' '. $id. ' does not exist'],404);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      */

@@ -17,7 +17,7 @@ class StoreRegisterRequest extends FormRequest
     }
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 200));
     }
     /**
      * Get the validation rules that apply to the request.
@@ -29,9 +29,10 @@ class StoreRegisterRequest extends FormRequest
         return [
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required','string', 'max:12'],
+            'phone_number' => ['required', 'string', 'max:12'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'=> ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8'],
+            'address' => ['required', 'string'],
         ];
     }
 }

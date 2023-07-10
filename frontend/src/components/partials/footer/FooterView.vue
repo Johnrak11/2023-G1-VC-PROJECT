@@ -75,7 +75,7 @@
         </div>
       </div>
       <hr>
-      <div class="d-flex justify-center mt-8 ">
+      <div class="d-flex justify-center mt-9 ">
         © 2022, Barren. All rights reserved. Powered by Gambolthemes
       </div>
     </div>
@@ -102,7 +102,12 @@ export default {};
 .img2 {
   margin-top: -5px;
 }
+hr {
+  margin-left: -40px;
+  width: 200%;
+  border-block-end-color: #eef0f1;
 
+}
 .footer ul li {
   cursor: pointer;
   margin-bottom: 10px;
