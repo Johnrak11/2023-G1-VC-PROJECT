@@ -28,7 +28,7 @@
                         <v-icon>mdi-map</v-icon>
                         <p class="ml-5">Eon 2 sensok city</p>
                     </div><br>
-                    <button class="bg-red pa-1 rounded d-flex align-end" id="booking">Booking</button>
+                    <router-link to="/booking"><button class="bg-red pa-1 rounded d-flex align-end" id="booking">Booking</button></router-link>
                 </div>
             </div>
         </div>
