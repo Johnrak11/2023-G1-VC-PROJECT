@@ -89,12 +89,12 @@
           </div>
         </div>
         <div class="col-md-6 d-flex mt-8">
-          <div class="d-flex flex-column">
-            <div class="agenda d-flex bg-red justify-space-between pa-4">
-              <h2 class="mt-1">AGENDA</h2>
-              <p class="mt-1">Today</p>
+          <div class="agenda-page d-flex flex-column">
+            <div class="agenda d-flex bg-red justify-space-between pa-1">
+              <h2 class="mt-1 ml-3">AGENDA</h2>
+              <p class="mt-1 mr-3">Today</p>
             </div>
-            <div style="display: flex; height: 395px">
+            <div style="display: flex; height: 160px">
               <v-virtual-scroll
                 :items="groupedItems"
                 :item-height="300"
@@ -250,10 +250,11 @@ export default {
 <style scoped>
 .container {
   margin-top: -15%;
+  margin-bottom: 30px;
 }
 
 .detail {
-  margin-left: 7%;
+  margin-left: 2%;
   max-width: 1300px;
   padding: 70px;
 }
@@ -268,7 +269,7 @@ export default {
 }
 .card1 {
   border: 1px solid rgb(225, 216, 216);
-  width: 70vh;
+  width: 100%;
 }
 
 .img1 {
@@ -291,8 +292,11 @@ p {
 .agenda {
   border-radius: 7px 7px 2px 2px;
 }
+.agenda-page{
+  width: 60%;
+}
 .organizer {
-  width: 100%;
+  width: 60%;
   border-radius: 7px;
 }
 .email,
@@ -303,13 +307,13 @@ p {
   color: red;
 }
 h1 {
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
 .detail p {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.5;
   margin-bottom: 20px;
 }
