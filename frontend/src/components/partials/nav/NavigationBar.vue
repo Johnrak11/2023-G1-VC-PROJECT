@@ -19,6 +19,9 @@
           <router-link to="/">
             <li class="rounded">MyTicket</li>
           </router-link>
+          <router-link to="/dashboard">
+            <li class="rounded">Dashborad</li>
+          </router-link>
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile">
