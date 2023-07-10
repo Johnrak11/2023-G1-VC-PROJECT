@@ -1,19 +1,18 @@
 <template>
   <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
     <v-nav-bar-left class="ml-12 d-flex left">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-app-bar-title class="mt-3">LOCAL EVENT</v-app-bar-title>
+      <img src="https://o.remove.bg/downloads/bdee697c-856f-4229-b8ec-2c1239fff0cd/logo-removebg-preview.png" alt="" width="200">
     </v-nav-bar-left>
     <v-nav-bar-right class="d-flex right justify-space-between">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <router-link to="/">
+          <router-link to="/" class="link">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/explor">
+          <router-link to="/explor" class="link">
             <li class="rounded">Explor</li>
           </router-link>
-          <router-link to="/myticket">
+          <router-link to="/myticket" class="link">
             <li class="rounded">MyTicket</li>
           </router-link>
         </ul>
@@ -78,8 +77,8 @@ select {
 }
 
 li {
-  margin-left: 30%;
-  padding: 5px 10px 5px 10px;
+  /* margin-left: 10%; */
+  padding: 5px 20px 5px 20px;
 }
 
 .profile {
@@ -88,8 +87,12 @@ li {
 
 li:hover {
   background-color: red;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 20px 5px 20px;
   color: white;
   cursor: pointer;
+}
+.link{
+  text-decoration: none;
+  color: black;
 }
 </style>

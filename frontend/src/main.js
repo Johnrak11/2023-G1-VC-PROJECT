@@ -5,6 +5,10 @@ import router from "./routes/router";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
+// import shareIt from 'vue-share-it';
+import VueSocialSharing from 'vue-social-sharing';
+
+
 
 // --- components-----
 
@@ -27,6 +31,8 @@ app.use(vue3GoogleLogin, {
 });
 app.use(router);
 app.use(vuetify);
+app.use(VueSocialSharing);
+
 
 app.component("navigation-bar", NavigationBar);
 app.component("search-view", SearchEvent);
