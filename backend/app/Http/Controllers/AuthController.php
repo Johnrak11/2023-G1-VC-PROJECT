@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthController extends Controller
 {
     /**
@@ -50,6 +51,11 @@ class AuthController extends Controller
             'success' => false,
             'message' => ['password' => 'Incorrect password']
         ], 200);
+    }
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json(['success' => true,'message' => 'Logged out successfully'],200);
     }
     /**
      * Store a newly created resource in storage.

@@ -14,6 +14,7 @@
     "core-js": "^3.8.3",
     "lodash": "^4.17.21",
     "pinia": "^2.1.4",
+    "rm": "^0.1.8",
     "roboto-fontface": "*",
     "sweetalert2": "^11.7.12",
     "vee-validate": "^4.10.5",
