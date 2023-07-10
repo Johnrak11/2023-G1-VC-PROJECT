@@ -38,6 +38,9 @@
             <v-list-item v-for="(item, index) in items" :key="index" :value="index">
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
+            <v-list-item value="logout">
+              <v-list-item-title>Sing out</v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </v-right-content>
@@ -48,10 +51,10 @@
 <script setup>
 import { ref } from "vue";
 const items = ref([
-  { title: "Profile" },
-  { title: "History" },
-  { title: "Ticket" },
-  { title: "Dashboard" },
+  { title: "Profile", link: '/profile' },
+  { title: "History", link: '/profile' },
+  { title: "Ticket", link: '/profile' },
+  { title: "Dashboard", link: '/dashboard' },
 ]);
 import { userStore } from '../../../stores/user.js'
 const user = userStore()

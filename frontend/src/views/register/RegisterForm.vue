@@ -1,7 +1,7 @@
 <template>
   <div class="bigContainer mt-16">
     <div class="cardContainer bg-red mx-auto"></div>
-    <div class="registerContainer d-flex animate__animated pt-10 animate__fadeInRight">
+    <div class="registerContainer d-flex animate__animated pt-2 animate__fadeInRight">
       <div class="SwitchRegisterComponentFrom">
         <switchBannerForm>
           <h1 class="white--text">Don't you have an account?</h1>

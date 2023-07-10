@@ -1,7 +1,7 @@
 <template>
     <div class="bigContainer mt-16 h-100 ">
         <div class="cardContainer bg-red mx-auto" :class="`elevation-${isHovering ? 30 : 10}`"></div>
-        <div class="loginContainer d-flex animate__animated animate__fadeInLeft  mt-7">
+        <div class="loginContainer d-flex animate__animated animate__fadeInLeft  mt-2">
             <div class="loginBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
                 <h1 class="ml-5">Login</h1>
                 <googleFrom></googleFrom>
