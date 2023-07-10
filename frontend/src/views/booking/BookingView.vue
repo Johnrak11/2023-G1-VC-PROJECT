@@ -9,8 +9,5 @@
 import bookingInfo from "../../components/forms/bookingInfo.vue";
 </script>
 <style scoped>
-    img{
-        height: 75vh;
-    }
     
 </style>

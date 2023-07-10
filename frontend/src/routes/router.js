@@ -3,6 +3,7 @@ import RegisterForm from "../views/register/RegisterForm.vue";
 import HomePage from "../views/home/HomeView.vue";
 import LoginForm from "../views/login/loginView.vue";
 import BookingView from "../views/booking/BookingView.vue";
+import paymentDialugue from "../components/forms/paymentForm.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/booking",
     name: "booking",
     component: BookingView
+  },
+  {
+    path: "/payment",
+    name: "payment",
+    component: paymentDialugue
   }
 ];
 const router = createRouter({
