@@ -20,11 +20,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('/auth')->group(function () {
+        //logout
+        Route::post('/logout', function (Request $request) {
+            if (!$request->bearerToken()) {
+                return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
+            }
+            return (new AuthController())->logout($request);
+        });
+        Route::get('/user', function (Request $request) {
+            if (!$request->bearerToken()) {
+                return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
+            }
+            return (new AuthController())->getUserInfo($request);
+        }); 
+    });
+});
+
 // ----- authentication group----
 Route::prefix('auth')->group(function () {
     Route::post('/google',  [GoogleAuthController::class, 'googleLogin']);
+    Route::post('/registers', ([AuthController::class, 'register']));
+    Route::post('/login', ([AuthController::class, 'login']));
 });
-
-Route::post('/registers', ([AuthController::class, 'register']));
-Route::post('/login', ([AuthController::class, 'login']));
 Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
+Route::get('/event/{id}', [EventController::class, 'getEventById']);

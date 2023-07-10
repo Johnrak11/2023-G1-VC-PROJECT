@@ -13,10 +13,10 @@
           <router-link to="/">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/explore">
-            <li class="rounded">Explore</li>
+          <router-link to="/">
+            <li class="rounded">Explor</li>
           </router-link>
-          <router-link to="/myticket">
+          <router-link to="/">
             <li class="rounded">MyTicket</li>
           </router-link>
         </ul>
@@ -31,16 +31,56 @@
         <v-badge content="2" color="error" class="mt-2 mr-5">
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
-        <router-link to="/login"><v-btn color="blue" width="5">Login</v-btn></router-link>
-        <!-- <img
-          src="https://o.remove.bg/downloads/01e3f24e-5f37-469d-b513-1535078501c9/v937-aew-165-klhcwecm-removebg-preview.png"
-          width="40" height="40" /> -->
+
+        <router-link v-if="!user.token" to="/login"
+          ><v-btn color="blue" width="5">Login</v-btn></router-link
+        >
+        <v-menu v-else>
+          <template v-slot:activator="{ props }">
+            <v-avatar
+              v-if="user.user.profile_picture"
+              v-bind="props"
+              value="Avatar"
+            >
+              <v-img alt="Avatar" :src="user.user.profile_picture"></v-img>
+            </v-avatar>
+            <v-avatar color="grey" v-else v-bind="props">
+              <v-icon icon="mdi-account-circle"></v-icon>
+            </v-avatar>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="index"
+              :value="index"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item value="logout" @click="user.logout(httpRequest.api)">
+              <v-list-item-title>Sing out</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-right-content>
     </v-nav-bar-right>
   </v-layout>
 </template>
 
+<script setup>
+import { ref } from "vue";
+const items = ref([
+  { title: "Profile", link: "/profile" },
+  { title: "History", link: "/profile" },
+  { title: "Ticket", link: "/profile" },
+  { title: "Dashboard", link: "/dashboard" },
+]);
 
+import { userStore } from "../../../stores/user.js";
+const user = userStore();
+user.getTokenInCookie("token");
+import { axiosStore } from "../../../stores/axiosHandle.js";
+const httpRequest = axiosStore();
+</script>
 <style scoped>
 .nav-bar {
   overflow: hidden;

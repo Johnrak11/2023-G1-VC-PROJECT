@@ -1,51 +1,18 @@
 <template>
   <router-view></router-view>
 </template>
-<!-- <template>
-  <navigation-bar></navigation-bar> -->
-  
-  <!-- prompt auto-login -->
-  <!-- <p v-if="state.isloading === false">loading......</p>
-    <GoogleLogin :callback="callback" /> -->
-  <!-- <button @click="logout">logout</button> -->
-  <!-- <router-view></router-view> -->
-<!-- </template> -->
-<!-- <script setup>
 
-import { decodeCredential } from "vue3-google-login";
-// import { googleLogout } from "vue3-google-login";
-import { reactive } from "vue";
-import axios from "axios";
-
-const HTTP_REQUEST = "http://localhost:8000/api/auth/google";
-
-const state = reactive({
-  isloading: true,
-});
-
-async function googleAuth(user) {
-  try {
-    const response = await axios.post(HTTP_REQUEST, user);
-    console.log(response.data);
-    state.isloading = true;
-  } catch (error) {
-    console.error(error);
-  }
+<script setup>
+import { axiosStore } from "./stores/axiosHandle.js";
+const httpRequest = axiosStore();
+import { userStore } from "./stores/user.js";
+const user = userStore();
+user.httpRequest = httpRequest.api
+const userToken = user.getTokenInCookie("token");
+if (userToken) {
+  user.getUserInfor();
 }
-
-function callback(response) {
-  // console.log(response)
-  state.isloading = false;
-  let user = decodeCredential(response.credential);
-  console.log(user);
-  googleAuth(user);
-}
-function logout() {
-  state.isloading = true;
-}
-
-</script> -->
-
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

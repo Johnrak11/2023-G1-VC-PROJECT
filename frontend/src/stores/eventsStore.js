@@ -15,7 +15,8 @@ const eventStores = defineStore("event", {
         .get("http://127.0.0.1:8000/api/eventsNotDeadline")
         .then((response) => {
           this.events=response.data.data;
-        });
+          console.log(response.data)
+        }).catch(error => console.log(error));
         return this.events;
     },
   },

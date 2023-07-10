@@ -3,6 +3,7 @@ import RegisterForm from "../views/register/RegisterForm.vue";
 import HomePage from "../views/home/HomeView.vue";
 import LoginForm from "../views/login/loginView.vue";
 import ExplorePage from "../views/explore/explorePageView.vue";
+import DetailPage from "../views/detail/DetailView.vue";
 
 const routes = [
   {
@@ -13,7 +14,6 @@ const routes = [
   {
     path: "/register",
     name: "register",
-    props: true,
     component: RegisterForm,
   },
   {
@@ -25,6 +25,11 @@ const routes = [
     path: "/explore",
     name: "explore",
     component: ExplorePage,
+  },
+  {
+    path: "/detail",
+    name: "detail",
+    component: DetailPage,
   },
 ];
 const router = createRouter({

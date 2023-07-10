@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\event_detail;
 use App\Http\Requests\Storeevent_detailRequest;
 use App\Http\Requests\Updateevent_detailRequest;
+use App\Models\event;
 
 class EventDetailController extends Controller
 {
@@ -39,7 +40,7 @@ class EventDetailController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */

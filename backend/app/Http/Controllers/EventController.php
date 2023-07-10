@@ -58,7 +58,15 @@ class EventController extends Controller
     {
         //
     }
-
+    public function getEventById($id) {
+        $event_detail = event::find($id);
+        if (isset($event_detail)) {
+            return response()->json(['status'=> 'success','data' => $event_detail],200);
+        }
+        else {
+            return response()->json(['status'=> false,'data' => 'Id'.' '. $id. ' does not exist'],404);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      */
