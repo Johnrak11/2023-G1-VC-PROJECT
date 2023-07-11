@@ -28,19 +28,19 @@
                         <v-icon>mdi-map</v-icon>
                         <p class="ml-5">Eon 2 sensok city</p>
                     </div><br>
-                    <router-link to="/booking"><button class="bg-red pa-1 rounded d-flex align-end" id="booking">Booking</button></router-link>
+                    <router-link :to="{ name: 'booking', params: { id: 1 } }">><button class="bg-red pa-1 rounded d-flex align-end" id="booking">Booking</button></router-link>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-export default {
-  name: 'App',
-  data: () => ({
-    liked: false,
-  }),
-};
+// export default {
+//   name: 'App',
+//   data: () => ({
+//     liked: false,
+//   }),
+// };
 </script>
 
 <style scoped>

@@ -32,6 +32,18 @@
 <script setup>
 import bookingBg from "../../../assets/booking/booking.jpg";
 import paymentForm from "../../forms/paymentForm.vue";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+
+const eventId = ref(null);
+onMounted(() => {
+    getDataEvent();
+  });
+async function getDataEvent(){
+     eventId.value = route.params.id;
+    console.log(eventId.value);
+}
 </script>
 
 <style>

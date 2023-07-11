@@ -22,7 +22,7 @@ const routes = [
     component: LoginForm,
   },
   {
-    path: "/booking",
+    path: "/booking/:id",
     name: "booking",
     component: BookingView
   },
