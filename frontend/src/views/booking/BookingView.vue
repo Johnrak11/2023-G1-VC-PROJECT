@@ -6,7 +6,7 @@
     </div>
 </template>
 <script setup>
-import bookingInfo from "../../components/forms/bookingInfo.vue";
+import bookingInfo from "../../components/partials/pay/bookingInfo.vue";
 </script>
 <style scoped>
     
