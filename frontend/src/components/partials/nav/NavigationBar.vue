@@ -3,8 +3,8 @@
     class="nav-bar d-flex justify-space-between w-100 bg-color"
     :elevation="7"
   >
-    <v-nav-bar-left class="ml-12 d-flex left">
-      <img src="https://o.remove.bg/downloads/bdee697c-856f-4229-b8ec-2c1239fff0cd/logo-removebg-preview.png" alt="" width="200">
+    <v-nav-bar-left class=" d-flex left">
+      <v-img src="../../../assets/logo.png" alt=""   style="margin-left: -20%; height: 50px; object-fit: cover;"/>
     </v-nav-bar-left>
     <v-nav-bar-right class="d-flex right justify-space-between">
       <v-left-content class="ml-16">
@@ -12,19 +12,18 @@
           <router-link to="/" class="link">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/">
-            <li class="rounded">Explor</li>
+          <router-link to="/"  class="link">
+            <li class="rounded">Explore</li>
           </router-link>
-          <router-link to="/">
+          <router-link to="/"  class="link">
             <li class="rounded">MyTicket</li>
           </router-link>
-          <router-link to="/dashboard">
+          <router-link to="/dashboard"  class="link">
             <li class="rounded">Dashborad</li>
           </router-link>
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile">
-        <!-- <button class="mr-6" :elevation="7" color="primary">ED</button> -->
         <select class="mr-5">
           <option value="">ED/KH</option>
           <option value="">English</option>
@@ -115,6 +114,10 @@ select {
 
 .left {
   flex: 1;
+}
+.left v-img {
+  width: 10%;
+
 }
 
 .right {

@@ -50,4 +50,6 @@ app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
 app.component("detail-page", DetailView);
 
+
+
 app.mount("#app");

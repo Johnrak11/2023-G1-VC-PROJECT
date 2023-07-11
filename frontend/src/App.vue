@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+
 import { axiosStore } from "./stores/axiosHandle.js";
 const httpRequest = axiosStore();
 import { userStore } from "./stores/user.js";
@@ -20,4 +21,5 @@ if (userToken) {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
 </style>
