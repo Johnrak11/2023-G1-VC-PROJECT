@@ -3,7 +3,7 @@
     
     <div class="mt-6 ml-16 mr-16">
         <slot></slot>
-        <div class="ml-4 mr-8 d-flex justify-space-evenly flex-wrap">
+        <div class="ml-10 mr-8 d-flex flex-wrap">
             <cardTemplate v-for="event of events.events" :key="event.id" :event="event"></cardTemplate>
         </div>
         <!-- </router-link> -->
@@ -20,10 +20,9 @@ onMounted(() => {
     events.getDataAxios()
 })
 </script>
-
 <style scoped>
-    .card{
-        width: 22%;
+    /* .card{
+        width: 17%;
         
     }
     img{
@@ -31,6 +30,6 @@ onMounted(() => {
         border-radius: 10px;
     }
     #booking{
-        margin-left: 70%;
-    }
+        margin-left: 70%; */
+    /* } */
 </style>

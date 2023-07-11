@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                 return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
             }
             return (new AuthController())->getUserInfo($request);
-        }); 
+        });
     });
 });
 
@@ -50,3 +50,9 @@ Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline'
 Route::get('/event/{id}', [EventController::class, 'getEventById']);
 Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
 Route::get('/event/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
+
+
+//-------search for events------------
+Route::prefix('/events')->group(function () {
+    Route::get('/search', ([EventController::class, 'searchEvent']));    
+}); 

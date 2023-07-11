@@ -3,26 +3,27 @@
     class="nav-bar d-flex justify-space-between w-100 bg-color"
     :elevation="7"
   >
-    <v-nav-bar-left class="ml-12 d-flex left">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-app-bar-title class="mt-3">LOCAL EVENT</v-app-bar-title>
+    <v-nav-bar-left class=" d-flex left">
+      <v-img src="../../../assets/logo.png" alt=""   style="margin-left: -20%; height: 50px; object-fit: cover;"/>
     </v-nav-bar-left>
     <v-nav-bar-right class="d-flex right justify-space-between">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <router-link to="/">
+          <router-link to="/" class="link">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/">
-            <li class="rounded">Explor</li>
+          <router-link to="/"  class="link">
+            <li class="rounded">Explore</li>
           </router-link>
-          <router-link to="/">
+          <router-link to="/"  class="link">
             <li class="rounded">MyTicket</li>
+          </router-link>
+          <router-link to="/dashboard"  class="link">
+            <li class="rounded">Dashborad</li>
           </router-link>
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile">
-        <!-- <button class="mr-6" :elevation="7" color="primary">ED</button> -->
         <select class="mr-5">
           <option value="">ED/KH</option>
           <option value="">English</option>
@@ -114,14 +115,18 @@ select {
 .left {
   flex: 1;
 }
+.left v-img {
+  width: 10%;
+
+}
 
 .right {
   flex: 1;
 }
 
 li {
-  margin-left: 30%;
-  padding: 5px 10px 5px 10px;
+  /* margin-left: 10%; */
+  padding: 5px 20px 5px 20px;
 }
 
 .profile {
@@ -130,8 +135,12 @@ li {
 
 li:hover {
   background-color: red;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 20px 5px 20px;
   color: white;
   cursor: pointer;
+}
+.link{
+  text-decoration: none;
+  color: black;
 }
 </style>

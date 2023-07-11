@@ -29,4 +29,7 @@ li:hover{
     color: white;
     cursor: pointer;
 }
+.category{
+    margin-top: 25%;
+}
 </style>

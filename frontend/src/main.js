@@ -6,6 +6,10 @@ import router from "./routes/router";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
+// import shareIt from 'vue-share-it';
+import VueSocialSharing from 'vue-social-sharing';
+
+
 import { createPinia } from "pinia";
 
 // --- components-----
@@ -31,6 +35,8 @@ app.use(vue3GoogleLogin, {
 app.use(pinia);
 app.use(router);
 app.use(vuetify);
+app.use(VueSocialSharing);
+
 app.use(pinia);
 
 app.component("navigation-bar", NavigationBar);
@@ -41,5 +47,7 @@ app.component("popular-event", PopularEvent);
 app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
+
+
 
 app.mount("#app");

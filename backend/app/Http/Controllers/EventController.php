@@ -7,6 +7,7 @@ use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
 use App\Http\Resources\OrganizerResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
@@ -99,5 +100,31 @@ class EventController extends Controller
         $event = Event::find($eventId);
         $organizer = User::find($event->organizer_id);
         return new OrganizerResource ($organizer);
+    }
+    
+    public function searchEvent(Request $request)
+    {
+        $eventList = Event::query();
+
+        if ($request->filled('name')) {
+            $eventList->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('category_id')) {
+            $categoryId = $request->input('category_id');
+            $eventList->where('category_id', $categoryId);
+        }
+
+        if ($request->filled('date')) {
+            $eventList->whereDate('date', $request->input('date'));
+        }
+
+        $events = $eventList->get();
+
+        if ($events->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $events], 200);
     }
 }
