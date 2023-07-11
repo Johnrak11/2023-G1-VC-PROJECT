@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="icon-right">
-              <div class="d-flex ">
+              <div class="d-flex">
                 <v-icon class="mr-2" icon="mdi-ticket" size="30"></v-icon>
                 <p class="mt-1 ml-2">300</p>
               </div>
@@ -55,7 +55,7 @@
               </div>
               <div class="d-flex">
                 <v-icon>mdi-map</v-icon>
-                <p class="ml-4 mt-1" v-if="event">{{event.location}}</p>
+                <p class="ml-4 mt-1" v-if="event">{{ event.location }}</p>
               </div>
               <br />
             </div>
@@ -82,36 +82,36 @@
 </template>
 <script>
 // import defineStore from '../../stores/eventsStore.js'
-import axios from 'axios';
-import agendaComponent from './AgendaComponent.vue';
-import listCardDetail from './ListCardDetail.vue';
+import axios from "axios";
+import agendaComponent from "./AgendaComponent.vue";
+import listCardDetail from "./ListCardDetail.vue";
 export default {
   components: {
     agendaComponent: agendaComponent,
-    listCard: listCardDetail
+    listCard: listCardDetail,
   },
   data: () => ({
     liked: false,
-    event: null
+    event: null,
   }),
-  
+
   mounted() {
     this.fetchEvent(); // fetch event data when the component is mounted
   },
   methods: {
     async fetchEvent() {
-      const eventId = this.$route.params.id; 
-      console.log(eventId)
-       await axios.get(`http://127.0.0.1:8000/api/event/${eventId}`)
-        .then(response => {
-          console.log(this.event = response.data.data); // store the event data in the event property
+      const eventId = this.$route.params.id;
+      console.log(eventId);
+      await axios
+        .get(`http://127.0.0.1:8000/api/event/${eventId}`)
+        .then((response) => {
+          console.log((this.event = response.data.data)); // store the event data in the event property
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
   },
-  
 };
 </script>
 <style scoped>
@@ -131,12 +131,12 @@ export default {
   width: 8%;
 }
 
-.img1, .img{
+.img1,
+.img {
   width: 100%;
   height: 45vh;
   object-fit: cover;
 }
-
 
 h1 {
   font-size: 35px;
@@ -149,6 +149,4 @@ h1 {
   line-height: 1.5;
   margin-bottom: 20px;
 }
-
-
 </style>

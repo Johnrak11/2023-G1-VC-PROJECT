@@ -3,8 +3,7 @@ import RegisterForm from "../views/register/RegisterForm.vue";
 import HomePage from "../views/home/HomeView.vue";
 import LoginForm from "../views/login/loginView.vue";
 import DetailPage from "../views/detail/DetailView.vue"
-import ExplorePage from "../views/explore/explorePageView.vue";
-import DetailPage from "../views/detail/DetailView.vue";
+// import ExplorePage from "../views/explore/explorePageView.vue";
 // import ContainLeftDashboard from "../views/dashboard/ContainLeftDashboard.vue";
 import DashboardOrganizer from "../views/dashboard/DashboardOrganizer.vue"
 // import CardDashboard from "../components/partials/dashboards/CardDashboard.vue"
