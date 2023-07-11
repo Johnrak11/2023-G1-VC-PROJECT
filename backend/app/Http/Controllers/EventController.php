@@ -26,14 +26,17 @@ class EventController extends Controller
         };
         if($eventUnDeadline!=null){
             return response()->json([
-                'status'=>'Success'. (true),
+                'status'=>'Success',
                 'message'=>'There are all events that have not deadline yet.', 
                 'data'=>$eventUnDeadline
             ],200);
         }
-        return response()->json([
-            'satus'=>'Success (true)',
-            'message'=>'There are no event that has not deadline.'],200);
+        if ($eventUnDeadline==null){
+            return response()->json([
+                'satus'=>'Success',
+                'message'=>'There are no event that has not deadline.'],200);
+        }
+        return response()->json(['status'=>false, 'data'=>'Can not fine event']);
     }
     /**
      * Show the form for creating a new resource.

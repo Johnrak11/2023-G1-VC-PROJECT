@@ -15,8 +15,11 @@ class EventFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    
     public function definition(): array
     {
+        $organizer = User::inRandomOrder()->first();
+        $category = Category::inRandomOrder()->first();
         return [
             'name' => $this->faker->unique()->sentence(),
             'description' => $this->faker->paragraph(),
@@ -25,8 +28,8 @@ class EventFactory extends Factory
             'location' => $this->faker->sentence(),
             'image' => $this->faker->image(),
             'venue' => $this->faker->sentence(),
-            'organizer_id' => $this->faker->numberBetween(1,10),
-            'category_id' => $this->faker->numberBetween(1,10),
+            'organizer_id' => $organizer->id,
+            'category_id' => $category->id,
             
         ];
     }
