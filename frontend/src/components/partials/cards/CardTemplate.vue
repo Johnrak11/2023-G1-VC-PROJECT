@@ -107,7 +107,7 @@
       </div>
       <div
         class="caard d-flex flex-column justify-space-between"
-        style="height: 15vh; margin-top: -6%"
+        style="height: 18vh; margin-top: -6%"
       >
         <div class="top">
           <h4 style="font-size: 15px">{{ eventInfor.name }}</h4>
@@ -155,7 +155,7 @@ function ClickShare(id) {
 <style scoped>
 .card {
   width: 18%;
-  height: 42vh;
+  height: 44vh;
   cursor: pointer;
 }
 
