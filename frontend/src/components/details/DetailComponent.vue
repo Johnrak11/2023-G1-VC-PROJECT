@@ -94,9 +94,13 @@ export default {
     liked: false,
     event: null,
   }),
-
   mounted() {
     this.fetchEvent(); // fetch event data when the component is mounted
+  },
+  provide() {
+    return {
+      event:this.event
+    }
   },
   methods: {
     async fetchEvent() {
@@ -127,7 +131,7 @@ export default {
 }
 
 .free {
-  font-size: 17px;
+  font-size: 20px;
   width: 8%;
 }
 
@@ -146,7 +150,7 @@ h1 {
 }
 
 .detail p {
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.5;
   margin-bottom: 20px;
 }
