@@ -29,9 +29,15 @@
           <option value="">English</option>
           <option value="">ខ្មែរ</option>
         </select>
-        <v-badge content="2" color="error" class="mt-2 mr-5">
-          <v-icon>mdi-bell-outline</v-icon>
-        </v-badge>
+        <v-menu v-model="state.menu" :close-on-content-click="false" location="end">
+          <template v-slot:activator="{ props }">
+            <v-badge content="2" color="error" class="mt-2 mr-5 notification" v-bind="props">
+              <v-icon>mdi-bell-outline</v-icon>
+            </v-badge>
+          </template>
+          <NotificationComponent/>
+        </v-menu>
+
 
         <router-link v-if="!user.token" to="/login"
           ><v-btn color="blue" width="5">Login</v-btn></router-link
@@ -68,6 +74,7 @@
 </template>
 
 <script setup>
+import NotificationComponent from '../../notification/NotificationComponent.vue'
 import { ref } from "vue";
 const items = ref([
   { title: "Profile", link: "/profile" },
@@ -81,6 +88,15 @@ const user = userStore();
 user.getTokenInCookie("token");
 import { axiosStore } from "../../../stores/axiosHandle.js";
 const httpRequest = axiosStore();
+
+import { reactive } from 'vue'
+
+const state = reactive({
+  fav: true,
+  menu: false,
+  message: false,
+  hints: true,
+})
 </script>
 <style scoped>
 .nav-bar {
@@ -142,5 +158,11 @@ li:hover {
 .link{
   text-decoration: none;
   color: black;
+}
+.notification{
+  cursor: pointer;
+}
+.notification:hover{
+  color: red;
 }
 </style>
