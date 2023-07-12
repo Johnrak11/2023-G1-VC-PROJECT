@@ -30,7 +30,7 @@
 import { addressStore } from '../../stores/address.js';
 let address = addressStore();
 import autoCompleteAddress from './autoComplete.vue'
-import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
+import ButtonComponentForm from "../buttons/ButtonComponentForm.vue";
 import axios from "axios";
 import { ref } from "vue";
 import router from '@/routes/router.js';

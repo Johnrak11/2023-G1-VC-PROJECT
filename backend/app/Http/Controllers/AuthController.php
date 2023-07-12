@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthController extends Controller
 {
     /**
@@ -49,6 +50,24 @@ class AuthController extends Controller
         return response()->json([
             'success' => false,
             'message' => ['password' => 'Incorrect password']
+        ], 200);
+    }
+    public function logout(Request $request)
+    {
+        try {
+            $request->user()->tokens()->delete();
+            return response()->json(['success' => true, 'message' => 'Logged out successfully'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => 'Failed to logout. Please try again.'], 401);
+        }
+    }
+
+    public function getUserInfo(Request $request)
+    {
+        $user = Auth::user();
+        return response()->json([
+            'success' => true,
+            'user' => $user
         ], 200);
     }
     /**

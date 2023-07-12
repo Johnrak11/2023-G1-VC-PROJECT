@@ -23,7 +23,7 @@
 import axios from "axios";
 import router from '@/routes/router.js';
 import { userStore } from '../../stores/user.js'
-import ButtonComponentForm from "../../components/bottons/ButtonComponentForm.vue";
+import ButtonComponentForm from "../buttons/ButtonComponentForm.vue";
 import { axiosStore } from '../../stores/axiosHandle.js';
 import { ref } from 'vue'
 

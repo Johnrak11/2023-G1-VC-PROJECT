@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name',);
             $table->integer('cvv');
-            $table->integer('number');
+            $table->decimal('number', 16, 0);
             $table->string('type', 100);
+            $table->date('expiration');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

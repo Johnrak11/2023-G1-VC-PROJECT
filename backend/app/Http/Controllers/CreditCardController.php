@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCreditCardRequest;
 use App\Models\credit_card;
-use App\Http\Requests\Storecredit_cardRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Updatecredit_cardRequest;
 
 class CreditCardController extends Controller
@@ -27,9 +29,17 @@ class CreditCardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storecredit_cardRequest $request)
+    public function store(StoreCreditCardRequest $request)
     {
-        //
+        $creditCard = credit_card::create([
+            'name' => $request->input('name'),
+            'cvv' => $request->input('cvv'),
+            'number' => $request->input('number'),
+            'type' => $request->input('type'),
+            'expiration' => $request->input('expiration'),
+            'user_id' => $request->input('user_id')
+        ]);
+        return response()->json(['status' => 'success', 'data' => $creditCard], 200);
     }
 
     /**

@@ -1,5 +1,5 @@
 <template>
-    <div class="switchLogin text-md-center">
+    <div class="switchLogin text-md-center d-flex flex-column">
         <slot></slot>
     </div>
 </template>

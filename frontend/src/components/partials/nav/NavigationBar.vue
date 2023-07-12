@@ -1,5 +1,8 @@
 <template>
-  <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
+  <v-layout
+    class="nav-bar d-flex justify-space-between w-100 bg-color"
+    :elevation="7"
+  >
     <v-nav-bar-left class="ml-12 d-flex left">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-app-bar-title class="mt-3">LOCAL EVENT</v-app-bar-title>
@@ -16,6 +19,9 @@
           <router-link to="/">
             <li class="rounded">MyTicket</li>
           </router-link>
+          <router-link to="/dashboard">
+            <li class="rounded">Dashborad</li>
+          </router-link>
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile">
@@ -29,14 +35,32 @@
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
 
-        <router-link v-if="!token" to="/login"><v-btn color="blue" width="5">Login</v-btn></router-link>
+        <router-link v-if="!user.token" to="/login"
+          ><v-btn color="blue" width="5">Login</v-btn></router-link
+        >
         <v-menu v-else>
           <template v-slot:activator="{ props }">
-            <v-btn icon="$vuetify" v-bind="props"></v-btn>
+            <v-avatar
+              v-if="user.user.profile_picture"
+              v-bind="props"
+              value="Avatar"
+            >
+              <v-img alt="Avatar" :src="user.user.profile_picture"></v-img>
+            </v-avatar>
+            <v-avatar color="grey" v-else v-bind="props">
+              <v-icon icon="mdi-account-circle"></v-icon>
+            </v-avatar>
           </template>
           <v-list>
-            <v-list-item v-for="(item, index) in items" :key="index" :value="index">
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="index"
+              :value="index"
+            >
               <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item value="logout" @click="user.logout(httpRequest.api)">
+              <v-list-item-title>Sing out</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -48,15 +72,17 @@
 <script setup>
 import { ref } from "vue";
 const items = ref([
-  { title: "Profile" },
-  { title: "History" },
-  { title: "Ticket" },
-  { title: "Dashboard" },
+  { title: "Profile", link: "/profile" },
+  { title: "History", link: "/profile" },
+  { title: "Ticket", link: "/profile" },
+  { title: "Dashboard", link: "/dashboard" },
 ]);
-import { userStore } from '../../../stores/user.js'
-const user = userStore()
-const token = user.getCookie('token')
 
+import { userStore } from "../../../stores/user.js";
+const user = userStore();
+user.getTokenInCookie("token");
+import { axiosStore } from "../../../stores/axiosHandle.js";
+const httpRequest = axiosStore();
 </script>
 <style scoped>
 .nav-bar {

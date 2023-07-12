@@ -1,31 +1,29 @@
 <template>
-    <div class="container w-100">
+    <div class="container w-100 mt-10">
         <img :src=bookingBg alt="" class="w-50">
-        <div class="booking-info bg-white w-50 pb-10 pt-10">
-            <div class="event-name d-flex justify-space-between w-90 ml-10 mr-10">
-                <h3>Event</h3>
-                <span>Education</span>
-            </div>
-            <div class="event-name d-flex justify-space-between w-90 ml-10 mr-10 mt-8">
-                <h3>Date</h3>
-                <span>2023-07-11</span>
-            </div>
-            <div class="event-name d-flex justify-space-between w-90 ml-10 mr-10 mt-8">
-                <h3>Location</h3>
-                <span>AEON</span>
-            </div>
-            <div class="total-ticket d-flex justify-space-between w-90 ml-10 mr-10 mt-8">
-                <h3>Total Ticket</h3>
-                <span>1</span>
-            </div>
-            <div class="total d-flex justify-space-between w-90 ml-10 mr-10 mt-8">
-                <h3>Total</h3>
-                <span>$5</span>
-            </div>
-            <!-- <v-btn color="red" class="mt-8 ml-8">Payment</v-btn> -->
+        <v-table class="w-50 pb-10 pt-10">
+            <tbody>
+                <tr>
+                    <td>EVENT</td>
+                    <td>{{ event.name }}</td>
+                </tr>
+                <tr>
+                    <td>DATE</td>
+                    <td>{{ event.date }}</td>
+                </tr>
+                <tr>
+                    <td>LOCATION</td>
+                    <td>{{ event.location }}</td>
+                </tr>
+                <tr>
+                    <td>PRICE</td>
+                    <td>{{ "$"+event.price}}</td>
+                </tr>
+            </tbody>
+        </v-table>
+        <div class="div w-50 mb-10">
             <payment-form class="mt-8"></payment-form>
         </div>
-        
     </div>
 </template>
 
@@ -34,24 +32,32 @@ import bookingBg from "../../../assets/booking/booking.jpg";
 import paymentForm from "../../forms/paymentForm.vue";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-const route = useRoute();
+import axios from "axios";
+import { axiosStore } from '@/stores/axiosHandle.js'
 
+const route = useRoute();
 const eventId = ref(null);
+const httpRequest = axiosStore();
+const event = ref({});
+
 onMounted(() => {
     getDataEvent();
-  });
-async function getDataEvent(){
-     eventId.value = route.params.id;
-    console.log(eventId.value);
+});
+async function getDataEvent() {
+    eventId.value = route.params.id;
+    console.log(route.params.id);
+    axios.get(httpRequest.api + '/eventsNotDeadline').then(response => event.value = response.data.data[eventId.value - 1]);
 }
 </script>
 
 <style>
-.booking-info {
-    box-shadow: 5px 5px 10px gray;
+.v-table {
     margin-left: 25%;
+    box-shadow: 5px 5px 10px gray;
 }
-
+.div{
+    margin-left: 29%;
+}
 img {
     margin-left: 25%;
     margin-top: 5%;

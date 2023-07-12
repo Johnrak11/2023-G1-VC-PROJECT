@@ -1,7 +1,7 @@
 <template>
   <div class="bigContainer mt-16">
     <div class="cardContainer bg-red mx-auto"></div>
-    <div class="registerContainer d-flex  animate__animated  animate__fadeInRight">
+    <div class="registerContainer d-flex animate__animated pt-2 animate__fadeInRight">
       <div class="SwitchRegisterComponentFrom">
         <switchBannerForm>
           <h1 class="white--text">Don't you have an account?</h1>
@@ -9,7 +9,7 @@
           <router-link to="/login"><v-btn class="w-50 mt-5">Login</v-btn></router-link>
         </switchBannerForm>
       </div>
-      <div class="registerBody bg-white pt-2 pb-2 pl-2 pr-2 d-flex flex-column mt-16">
+      <div class="registerBody bg-white pt-2 pb-2 pl-2 pr-2 d-flex flex-column mt-15">
         <h1 class="ml-5">Register</h1>
         <googleFrom></googleFrom>
         <div class="line d-flex mt-5">

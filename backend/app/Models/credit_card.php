@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class credit_card extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'cvv',
+        'number', 
+        'type', 
+        'expiration', 
+        'user_id'];
 }
