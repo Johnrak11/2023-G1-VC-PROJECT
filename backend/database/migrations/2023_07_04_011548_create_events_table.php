@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('description', 250);
             $table->date('date');
+            $table->string('time');
             $table->string('location');
             $table->string('image');
             $table->string('venue');

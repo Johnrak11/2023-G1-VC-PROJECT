@@ -1,25 +1,29 @@
 <template>
-  <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
-    <v-nav-bar-left class="ml-12 d-flex left">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-app-bar-title class="mt-3">LOCAL EVENT</v-app-bar-title>
+  <v-layout
+    class="nav-bar d-flex justify-space-between w-100 bg-color"
+    :elevation="7"
+  >
+    <v-nav-bar-left class=" d-flex left">
+      <v-img src="../../../assets/logo.png" alt=""   style="margin-left: -20%; height: 50px; object-fit: cover;"/>
     </v-nav-bar-left>
     <v-nav-bar-right class="d-flex right justify-space-between">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <router-link to="/">
+          <router-link to="/" class="link">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/explor">
-            <li class="rounded">Explor</li>
+          <router-link to="/"  class="link">
+            <li class="rounded">Explore</li>
           </router-link>
-          <router-link to="/myticket">
+          <router-link to="/"  class="link">
             <li class="rounded">MyTicket</li>
+          </router-link>
+          <router-link to="/dashboard"  class="link">
+            <li class="rounded">Dashborad</li>
           </router-link>
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile">
-        <!-- <button class="mr-6" :elevation="7" color="primary">ED</button> -->
         <select class="mr-5">
           <option value="">ED/KH</option>
           <option value="">English</option>
@@ -28,16 +32,56 @@
         <v-badge content="2" color="error" class="mt-2 mr-5">
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
-        <router-link to="/register"><v-btn color="blue" width="5">Login</v-btn></router-link>
-        <!-- <img
-          src="https://o.remove.bg/downloads/01e3f24e-5f37-469d-b513-1535078501c9/v937-aew-165-klhcwecm-removebg-preview.png"
-          width="40" height="40" /> -->
+
+        <router-link v-if="!user.token" to="/login"
+          ><v-btn color="blue" width="5">Login</v-btn></router-link
+        >
+        <v-menu v-else>
+          <template v-slot:activator="{ props }">
+            <v-avatar
+              v-if="user.user.profile_picture"
+              v-bind="props"
+              value="Avatar"
+            >
+              <v-img alt="Avatar" :src="user.user.profile_picture"></v-img>
+            </v-avatar>
+            <v-avatar color="grey" v-else v-bind="props">
+              <v-icon icon="mdi-account-circle"></v-icon>
+            </v-avatar>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="index"
+              :value="index"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item value="logout" @click="user.logout(httpRequest.api)">
+              <v-list-item-title>Sing out</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-right-content>
     </v-nav-bar-right>
   </v-layout>
 </template>
 
+<script setup>
+import { ref } from "vue";
+const items = ref([
+  { title: "Profile", link: "/profile" },
+  { title: "History", link: "/profile" },
+  { title: "Ticket", link: "/profile" },
+  { title: "Dashboard", link: "/dashboard" },
+]);
 
+import { userStore } from "../../../stores/user.js";
+const user = userStore();
+user.getTokenInCookie("token");
+import { axiosStore } from "../../../stores/axiosHandle.js";
+const httpRequest = axiosStore();
+</script>
 <style scoped>
 .nav-bar {
   overflow: hidden;
@@ -57,7 +101,6 @@ select {
   padding-right: 10px;
 }
 
-
 .justify-space-between {
   display: flex;
   justify-content: space-between;
@@ -72,14 +115,18 @@ select {
 .left {
   flex: 1;
 }
+.left v-img {
+  width: 10%;
+
+}
 
 .right {
   flex: 1;
 }
 
 li {
-  margin-left: 30%;
-  padding: 5px 10px 5px 10px;
+  /* margin-left: 10%; */
+  padding: 5px 20px 5px 20px;
 }
 
 .profile {
@@ -88,8 +135,12 @@ li {
 
 li:hover {
   background-color: red;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 20px 5px 20px;
   color: white;
   cursor: pointer;
+}
+.link{
+  text-decoration: none;
+  color: black;
 }
 </style>

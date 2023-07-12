@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -21,15 +23,38 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/logout', ([AuthController::class, 'logout']));
+    Route::prefix('/auth')->group(function () {
+        //logout
+        Route::post('/logout', function (Request $request) {
+            if (!$request->bearerToken()) {
+                return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
+            }
+            return (new AuthController())->logout($request);
+        });
+        Route::get('/user', function (Request $request) {
+            if (!$request->bearerToken()) {
+                return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
+            }
+            return (new AuthController())->getUserInfo($request);
+        });
+    });
 });
 
 // ----- authentication group----
 Route::prefix('auth')->group(function () {
     Route::post('/google',  [GoogleAuthController::class, 'googleLogin']);
+    Route::post('/registers', ([AuthController::class, 'register']));
+    Route::post('/login', ([AuthController::class, 'login']));
 });
-Route::get('/event/{id}',[EventController::class, 'getEventById']);
+Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
 
-Route::post('/registers', ([AuthController::class, 'register']));
-Route::post('/login', ([AuthController::class, 'login']));
-    
+Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
+
+
+
+//-------search for events------------
+Route::prefix('/events')->group(function () {
+    Route::get('/{id}', [EventController::class, 'getEventById']);
+    Route::get('/search', ([EventController::class, 'searchEvent'])); 
+    Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);   
+}); 
