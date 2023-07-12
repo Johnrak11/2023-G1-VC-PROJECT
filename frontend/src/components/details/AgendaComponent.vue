@@ -73,7 +73,7 @@ const fetchOrganizer = async () => {
       const route = useRoute();
       const organizerId = route.params.id;
       
-      await axios.get(httpRequest.api + `/event/organizer/${organizerId}`).then(response =>{
+      await axios.get(httpRequest.api + `/events/organizer/${organizerId}`).then(response =>{
         console.log(response.data)
         organizer.value = response.data.data
       }).catch(error => console.log(error))

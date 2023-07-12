@@ -11,7 +11,6 @@
 </template>
 <script setup>
 import cardTemplate from './CardTemplate.vue'
-
 import { onMounted } from 'vue'
 import eventStores from '@/stores/eventsStore.js'
 

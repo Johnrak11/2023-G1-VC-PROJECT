@@ -47,12 +47,14 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', ([AuthController::class, 'login']));
 });
 Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
-Route::get('/event/{id}', [EventController::class, 'getEventById']);
+
 Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
-Route::get('/event/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
+
 
 
 //-------search for events------------
 Route::prefix('/events')->group(function () {
-    Route::get('/search', ([EventController::class, 'searchEvent']));    
+    Route::get('/{id}', [EventController::class, 'getEventById']);
+    Route::get('/search', ([EventController::class, 'searchEvent'])); 
+    Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);   
 }); 
