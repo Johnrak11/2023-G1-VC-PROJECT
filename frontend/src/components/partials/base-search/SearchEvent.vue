@@ -7,9 +7,9 @@
       width="100%"
     />
   </div>
-  <div class="search-input">
+  <div class="search-input" style="margin-top: -45%;">
     <slot></slot>
-    <div class="w-90 search mt-16">
+    <div class="w-90 search ">
       <input
         v-model="searchName"
         class="bg-grey-lighten-2 pa-3 w-25"
