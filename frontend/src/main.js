@@ -22,6 +22,7 @@ import PopularEvent from "./components/partials/cards/PopularEvent.vue";
 import CardRate from "./components/partials/cards/CardRate.vue";
 import FooterView from "./components/partials/footer/FooterView.vue";
 import PaginationView from "./components/partials/pagination/PaginationView.vue";
+import BannerView from "./components/partials/banner/BannerComponent.vue"
 
 loadFonts();
 const pinia = createPinia()
@@ -47,6 +48,8 @@ app.component("popular-event", PopularEvent);
 app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
+// app.component("detail-page", DetailView);
+app.component("banner-view", BannerView);
 
 
 

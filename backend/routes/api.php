@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -49,13 +48,12 @@ Route::prefix('auth')->group(function () {
 
 Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
 
-
-
 //-------search for events------------
 Route::prefix('/events')->group(function () {
     Route::get('/{id}', [EventController::class, 'getEventById']);
-    Route::get('/search', ([EventController::class, 'searchEvent'])); 
     Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);   
     Route::get('/', ([EventController::class, 'getEventsNotDeadline']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
+    Route::get('/search', ([EventController::class, 'searchEvent']));    
 }); 
+Route::get('/categories',[CategoryController::class,'getAllCategory']);

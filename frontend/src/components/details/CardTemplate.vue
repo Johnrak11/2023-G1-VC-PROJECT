@@ -147,6 +147,8 @@ const liked = ref(false);
 function ClickShare(id) {
   console.log(id);
 }
+eventStore.httpRequest = httpRequest.api;
+console.log(eventStore.httpRequest)
 eventStore.getDataCategoryAxios(2, 1);
 console.log('befe')
 console.log(eventStore.reletedEvent)

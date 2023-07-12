@@ -9,6 +9,7 @@ import DashboardOrganizer from "../views/dashboard/DashboardOrganizer.vue"
 // import CardDashboard from "../components/partials/dashboards/CardDashboard.vue"
 // import DashboardEvent from "../components/partials/dashboards/ListCard.vue"
 import DashboardEvent from "../views/dashboard/DashboardEvent.vue";
+import NotificationView from "../views/notifications/NotificationView.vue"
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: "/events",
     name: "events",
     component: DashboardEvent,
+  },
+  {
+    path: "/notifications",
+    name: "notifications",
+    component: NotificationView,
   },
 ];
 const router = createRouter({

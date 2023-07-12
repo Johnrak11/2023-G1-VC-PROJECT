@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\category;
 use App\Http\Requests\StorecategoryRequest;
 use App\Http\Requests\UpdatecategoryRequest;
+use App\Models\Categories;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,10 @@ class CategoryController extends Controller
     {
         //
     }
-
+    public function getAllCategory() {
+        $category = Categories::all();
+        return response()->json(['message'=> true, 'data'=>$category]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -35,7 +39,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(category $category)
+    public function show()
     {
         //
     }
@@ -43,7 +47,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit()
     {
         //
     }
@@ -51,7 +55,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatecategoryRequest $request, category $category)
+    public function update(UpdatecategoryRequest $request)
     {
         //
     }
@@ -59,7 +63,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy()
     {
         //
     }

@@ -8,11 +8,7 @@
     <div class="detail">
       <div class="row bg-white d-flex pa-6 flex-column">
         <div id="row1" class="col-md-6">
-          <img v-if="event"
-            class="img"
-            :src="event.image"
-            alt="Image"
-          />
+          <img v-if="event" class="img" :src="event.image" alt="Image" />
           <div class="d-flex mt-2 justify-space-between">
             <div class="icon-left d-flex">
               <div class="d-flex">
@@ -85,6 +81,8 @@
 import axios from "axios";
 import agendaComponent from "./AgendaComponent.vue";
 import listCardDetail from "./ListCardDetail.vue";
+import { axiosStore } from "@/stores/axiosHandle";
+const httpRequest = axiosStore.api;
 export default {
   components: {
     agendaComponent: agendaComponent,
@@ -99,15 +97,16 @@ export default {
   },
   provide() {
     return {
-      event:this.event
-    }
+      event: this.event,
+    };
   },
+
   methods: {
     async fetchEvent() {
       const eventId = this.$route.params.id;
       console.log(eventId);
       await axios
-        .get(`http://127.0.0.1:8000/api/events/${eventId}`)
+        .get(httpRequest + `/events/${eventId}`)
         .then((response) => {
           console.log((this.event = response.data.data)); // store the event data in the event property
         })
@@ -125,7 +124,7 @@ export default {
 }
 
 .detail {
-  margin-left: 2%;
+  margin-left: 6%;
   max-width: 1300px;
   padding: 70px;
 }
@@ -134,7 +133,6 @@ export default {
   font-size: 20px;
   width: 8%;
 }
-
 
 .img1,
 .img {

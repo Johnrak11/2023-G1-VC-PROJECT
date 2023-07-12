@@ -1,11 +1,7 @@
 <template>
   <navigation-bar></navigation-bar>
-  <search-view>
-    <div class="mt-16">
-      <h1 class="text-center text-h2">Connection the world</h1>
-      <p class="text-center">Easy to search, you just enter the keyword</p>
-    </div>
-  </search-view>
+  <banner-view></banner-view>
+  <search-view></search-view>
   <category-view></category-view>
   <list-card>
     <div class="ml-16">
