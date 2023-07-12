@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submit" class="w-100 d-flex flex-column aling-center justify-center border rounded pa-10"
+    <form @submit.prevent="submitHandler" class="w-100 d-flex flex-column aling-center justify-center border rounded pa-10"
         elevation="24">
         <v-input prepend-icon="mdi-information">
             Details
@@ -8,131 +8,156 @@
             <h3>Give your event a name.*</h3>
             <v-label>See how your name appears on the event page and a list of all places where your event name will be
                 used.</v-label>
-            <v-text-field v-model="name.value.value" :counter="10" :error-messages="name.errorMessage.value" label="Name"
+            <v-text-field v-model="eventCreate.eventName" :counter="10" :rules="eventNameRules" label="Name"
                 style="width:100%;" variant="outlined"></v-text-field>
-            <v-divider></v-divider>
         </div>
         <div class="input-container">
             <h3>Choose a category for your event.*</h3>
             <v-label>Choosing relevant categories helps to improve the discoverability of your event.</v-label>
-            <v-select clearable label="Select" :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-                variant="outlined" style="width:100%;"></v-select>
-            <v-divider></v-divider>
+            <v-select v-model="eventCreate.eventCategories" :rules="categoriesRules" clearable label="Select"
+                :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']" variant="outlined"
+                style="width:100%;"></v-select>
         </div>
         <div class="input-container">
             <h3>When is your event?*</h3>
-            <v-label>Tell your attendees when your event starts so they can get ready to attend.</v-label>
-            <Datepicker v-model="picked" class="date-container"></Datepicker>
+            <VueDatePicker class="custom-datepicke" v-model="minDate" :start-time="startTime" :max-date="maxDate"
+                :min-date="minDate" ignore-time-validation placeholder="Select Date">
+            </VueDatePicker>
         </div>
         <div class="input-container mt-5">
             <h3>Add an image to your event banner.</h3>
             <v-label>Upload colorful and vibrant images as the banner for your event! See how beautiful images help your
                 event details page</v-label>
-
             <div class="image-container">
                 <div class="image-wrapper">
-                    <img :src="imagePreview" :alt="image ? 'Selected Image' : 'Default Image'" class="rounded" />
+                    <img :src="eventCreate.imagePreview" :alt="image ? 'Selected Image' : 'Default Image'"
+                        class="rounded" />
                 </div>
             </div>
 
-            <v-file-input class="mt-15" v-model="image" accept="image/png, image/jpeg, image/bmp"
-                placeholder="Pick an image" prepend-icon="mdi-camera" @change="selectImage"
-                @click:clear="clearImagePreview()" label="Image"></v-file-input>
+            <v-file-input v-model="eventCreate.eventCategories" :rules="imageRules" class="mt-15"
+                accept="image/png, image/jpeg, image/bmp" placeholder="Pick an image" prepend-icon="mdi-camera"
+                @change="selectImage" @click:clear="eventCreate.fireDeleteImage()" label="Image"></v-file-input>
         </div>
         <div class="input-container">
             <h3>Please describe your event.</h3>
             <v-label>Write a few words below to describe your event and provide any extra information such as schedules,
                 <br>
                 itinerary or any special instructions required to attend your event.</v-label>
-            <v-textarea v-model="title" variant="outlined" counter label="Description" maxlength="120" single-line
-                style="width:100%;"></v-textarea>
-            <v-divider></v-divider>
+            <v-textarea v-model="eventCreate.eventDescription" :rules="descriptionRules" variant="outlined" counter
+                label="Description" maxlength="120" single-line style="width:100%;"></v-textarea>
         </div>
         <div class="input-container">
             <h3>Where is your event taking place? *</h3>
             <v-label>Add a venue to your event to tell your attendees where to join the event.</v-label>
-            <v-text-field v-model="name.value.value" :counter="10" :error-messages="name.errorMessage.value" label="Address"
+            <v-text-field v-model="eventCreate.eventAddress" :counter="10" :rules="addressRules" label="Address"
                 variant="outlined" style="width:100%;"></v-text-field>
-            <v-text-field v-model="name.value.value" :counter="10" :error-messages="name.errorMessage.value" label="Venue"
+            <v-text-field v-model="eventCreate.eventVenue" :counter="10" :rules="venueRules" label="Venue"
                 variant="outlined" style="width:100%;"></v-text-field>
-            <v-divider></v-divider>
         </div>
+        <v-btn type="submit">submit</v-btn>
     </form>
+    <div v-if="isFormValid">Hello!</div>
+    <v-dialog v-model="eventCreate.isLoadingDialog" :scrim="false" persistent width="auto">
+        <v-card color="white">
+            <v-card-text>
+                Image uploading...
+                <v-progress-linear indeterminate color="red" class="mb-0"></v-progress-linear>
+            </v-card-text>
+        </v-card>
+    </v-dialog>
 </template>
 <script setup>
 
-// ------- datepicker and csss-----
-import Datepicker from 'vue3-datepicker'
-import { ref } from 'vue'
+import eventCreateStores from '@/stores/eventCreate.js'
+const eventCreate = eventCreateStores()
+import { ref, defineExpose } from 'vue'
 
-import { useField, useForm } from 'vee-validate'
+const minDate = new Date()
+minDate.setDate(minDate.getDate() + 6)
+const maxDate = new Date()
+maxDate.setMonth(maxDate.getMonth() + 1)
 
 const image = ref("");
-const imagePreview = ref("https://fastly.picsum.photos/id/11/500/300.jpg?hmac=X_37MM-ameg7HWL6TKJT2h_5_rGle7IGN_CUdEDxsAQ");
-const picked = ref(new Date())
-
-
 const selectImage = (event) => {
     const file = event.target.files[0];
     if (!file) return;
-    const readData = (file) =>
-        new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.readAsDataURL(file);
-        });
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (allowedTypes.includes(file.type)) {
+        const readData = (file) =>
+            new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.readAsDataURL(file);
+            });
+        const loadImagePreview = async () => {
+            await readData(file);
+        };
 
-    const loadImagePreview = async () => {
-        const data = await readData(file);
-        imagePreview.value = data;
-    };
-
-    loadImagePreview();
+        loadImagePreview();
+        eventCreate.fireUploadImage(file)
+    } else {
+        console.log('please select only image')
+    }
 };
 
-const clearImagePreview = () => {
-    imagePreview.value = "";
-};
-
-
-const { handleSubmit } = useForm({
-    validationSchema: {
-        name(value) {
-            if (value?.length >= 2) return true
-
-            return 'Name needs to be at least 2 characters.'
-        },
-        phone(value) {
-            if (value?.length > 9 && /[0-9-]+/.test(value)) return true
-
-            return 'Phone number needs to be at least 9 digits.'
-        },
-        email(value) {
-            if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
-
-            return 'Must be a valid e-mail.'
-        },
-        select(value) {
-            if (value) return true
-
-            return 'Select an item.'
-        },
-        checkbox(value) {
-            if (value === '1') return true
-
-            return 'Must be checked.'
-        },
-    },
+defineExpose({
+    submitHandler
 })
-const name = useField('name')
-// const address = useField('address')
-// const venue = useField('venue')
-// const description = useField('description')
+
+const eventNameRules = [
+    v => !!v || 'Name is required',
+];
+const categoriesRules = [
+    v => !!v || 'categories is required',
+];
+const imageRules = [
+    v => !!v || 'Poster is required',
+];
+const descriptionRules = [
+    v => !!v || 'description is required',
+];
+const addressRules = [
+    v => !!v || 'Address is required',
+];
+const venueRules = [
+    v => !!v || 'Venue is required',
+];
 
 
-const submit = handleSubmit(values => {
-    alert(JSON.stringify(values, null, 2))
-})
+async function submitHandler() {
+    const isFormValid = validateForm();
+    console.log(isFormValid)
+    if (!isFormValid) {
+        return;
+    }
+}
+
+function validateForm() {
+    let isValid = true;
+    if (!eventCreate.eventName) {
+        eventNameRules.value = [(v) => !!v || "Email is required"];
+        isValid = false;
+    }
+    if (!eventCreate.eventCategories) {
+        categoriesRules.value = [(v) => !!v || "Categories must be seleted"];
+        isValid = false;
+    }
+    if (!eventCreate.eventDescription) {
+        descriptionRules.value = [(v) => !!v || "Description is required"];
+        isValid = false;
+    }
+    if (!eventCreate.eventAddress) {
+        addressRules.value = [(v) => !!v || "Address is required"];
+        isValid = false;
+    }
+    if (!eventCreate.eventVenue) {
+        venueRules.value = [(v) => !!v || "Venue is required"];
+        isValid = false;
+    }
+    return isValid;
+}
+
 </script>
 
 <style>
@@ -141,7 +166,6 @@ form {
 }
 
 .input-container {
-    /* background-color : rgb(207, 207, 207); */
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -172,11 +196,16 @@ form {
     border-radius: 8px;
 }
 
-.date-container{
+/* .date-container {
     width: 100%;
     color: rgb(91, 91, 91);
     padding: 14px;
     border: 1px solid rgb(116, 116, 116);
     border-radius: 5px;
+} */
+
+.custom-datepicker .vdp-input {
+    background-color: rgb(190, 104, 104);
+    border: none;
 }
 </style>

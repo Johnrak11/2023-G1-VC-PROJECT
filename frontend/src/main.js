@@ -7,7 +7,8 @@ import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
 import { createPinia } from "pinia";
-
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 
 // --- components-----
@@ -47,5 +48,5 @@ app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
 app.component("detail-page", DetailView);
-
+app.component('VueDatePicker', VueDatePicker);
 app.mount("#app");

@@ -19,6 +19,7 @@ const eventStores = defineStore("event", {
         }).catch(error => console.log(error));
         return this.events;
     },
+    
   },
 });
 export default eventStores;
