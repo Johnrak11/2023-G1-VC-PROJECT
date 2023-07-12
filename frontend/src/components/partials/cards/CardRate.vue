@@ -14,7 +14,7 @@
         <v-icon color="orange"  v-for="n in 5" :key="n"> mdi-star </v-icon>
       </div>
     </div>
-  </div><br>
+  </div>
 </template>
 <style scoped>
 .card{

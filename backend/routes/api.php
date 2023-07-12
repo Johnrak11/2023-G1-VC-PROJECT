@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -46,6 +48,8 @@ Route::prefix('auth')->group(function () {
 });
 Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
 Route::get('/event/{id}', [EventController::class, 'getEventById']);
+Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
+Route::get('/event/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
 
 
 //-------search for events------------

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\event;
+use App\Models\Event;
 use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
+use App\Http\Resources\OrganizerResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -18,7 +20,7 @@ class EventController extends Controller
     }
     public function getEventsNotDeadline()
     {
-        $events = event::all();
+        $events = Event::all();
         $eventUnDeadline = [];
         $todayDate = date('Y-m-d');
         foreach ($events as $event) {
@@ -57,13 +59,13 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(event $event)
+    public function show(Event $event)
     {
         //
     }
     public function getEventById($id)
     {
-        $event_detail = event::find($id);
+        $event_detail = Event::find($id);
         if (isset($event_detail)) {
             return response()->json(['status' => 'success', 'data' => $event_detail], 200);
         } else {
@@ -73,7 +75,7 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(event $event)
+    public function edit(Event $event)
     {
         //
     }
@@ -89,11 +91,17 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(event $event)
+    public function destroy(Event $event)
     {
         //
     }
-
+    public function getOrganizerId($eventId)
+    {
+        $event = Event::find($eventId);
+        $organizer = User::find($event->organizer_id);
+        return new OrganizerResource ($organizer);
+    }
+    
     public function searchEvent(Request $request)
     {
         $eventList = Event::query();
