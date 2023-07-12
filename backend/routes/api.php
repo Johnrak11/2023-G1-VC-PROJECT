@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Http\Request;
@@ -52,3 +53,4 @@ Route::get('/event/{id}', [EventController::class, 'getEventById']);
 Route::prefix('/events')->group(function () {
     Route::get('/search', ([EventController::class, 'searchEvent']));    
 }); 
+Route::get('/categories',[CategoryController::class,'getAllCategory']);
