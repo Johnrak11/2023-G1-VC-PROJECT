@@ -34,7 +34,7 @@
                   <div class="d-flex justify-space-evenly" style="height: 10vh">
                     <ShareNetwork
                       network="facebook"
-                      :url="httpRequest.api + '/detail/' + eventInfor.id"
+                      :url="httpRequest.local + '/detail/' + eventInfor.id"
                       :title="eventInfor.name"
                       :description="eventInfor.description"
                       quote="The hot reload is so fast it\'s near instant. - Evan You"
@@ -52,7 +52,7 @@
                     </ShareNetwork>
                     <ShareNetwork
                       network="telegram"
-                      :url="httpRequest.api + '/detail/' + eventInfor.id"
+                      :url="httpRequest.local + '/detail/' + eventInfor.id"
                       :title="eventInfor.name"
                       :description="eventInfor.description"
                       quote="The hot reload is so fast it\'s near instant. - Evan You"
@@ -66,7 +66,7 @@
                     </ShareNetwork>
                     <ShareNetwork
                       network="linkedin"
-                      :url="httpRequest.api + '/detail/' + eventInfor.id"
+                      :url="httpRequest.local + '/detail/' + eventInfor.id"
                       :title="eventInfor.name"
                       :description="eventInfor.description"
                       quote="The hot reload is so fast it\'s near instant. - Evan You"
@@ -80,7 +80,7 @@
                     </ShareNetwork>
                     <ShareNetwork
                       network="whatsapp"
-                      :url="httpRequest.api + '/detail/' + eventInfor.id"
+                      :url="httpRequest.local + '/detail/' + eventInfor.id"
                       :title="eventInfor.name"
                       :description="eventInfor.description"
                       quote="The hot reload is so fast it\'s near instant. - Evan You"

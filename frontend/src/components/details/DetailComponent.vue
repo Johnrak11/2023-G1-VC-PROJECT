@@ -85,6 +85,8 @@
 import axios from "axios";
 import agendaComponent from "./AgendaComponent.vue";
 import listCardDetail from "./ListCardDetail.vue";
+import { axiosStore } from "@/stores/axiosHandle";
+const httpRequest = axiosStore.api;
 export default {
   components: {
     agendaComponent: agendaComponent,
@@ -98,12 +100,13 @@ export default {
   mounted() {
     this.fetchEvent(); // fetch event data when the component is mounted
   },
+
   methods: {
     async fetchEvent() {
       const eventId = this.$route.params.id;
       console.log(eventId);
       await axios
-        .get(`http://127.0.0.1:8000/api/events/${eventId}`)
+        .get(httpRequest+`/events/${eventId}`)
         .then((response) => {
           console.log((this.event = response.data.data)); // store the event data in the event property
         })

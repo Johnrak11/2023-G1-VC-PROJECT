@@ -1,5 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
+import { axiosStore } from "./axiosHandle";
+const httpRequest = axiosStore.api;
 const categoryStore = defineStore('categories',{
     state: () => ({
         categories: [],
@@ -8,7 +10,7 @@ const categoryStore = defineStore('categories',{
     actions: {
         async getDataCategories() {
           await axios
-            .get("http://127.0.0.1:8000/api/categories")
+            .get(httpRequest+"/categories")
             .then((response) => {
               this.categories = response.data.data;
             })
