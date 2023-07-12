@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\agenda;
+use App\Models\Agenda;
 use App\Http\Requests\StoreagendaRequest;
 use App\Http\Requests\UpdateagendaRequest;
+use App\Http\Resources\Agenda as ResourcesAgenda;
+use Illuminate\Support\Facades\DB;
 
 class AgendaController extends Controller
 {
@@ -22,6 +24,20 @@ class AgendaController extends Controller
     public function create()
     {
         //
+    }
+    public function getAgendaByEventId($eventId)
+    {
+        $agendas = Agenda::where('event_id', $eventId)->get();
+        if (!isset($agendas)) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Agenda not found',
+            ], 200);
+        }
+        return response()->json([
+            'success' => true,
+            'agendas' => $agendas
+        ], 200);
     }
 
     /**

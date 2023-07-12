@@ -19,7 +19,10 @@ class Event extends Model
         'organizer_id',
         'category_id'
     ];
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function categories(){
         return $this->belongsTo(Categories::class);
     }

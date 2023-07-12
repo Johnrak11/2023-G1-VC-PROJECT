@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
     <img
       class="banner"
@@ -37,13 +38,48 @@
         class="w-25 bg-grey-lighten-2 date"
       />
       <button class="pa-3 bg-red" @click="eventSearch">Search</button>
+=======
+    
+    <div class="search-input">
+       <slot></slot>
+        <div class="w-90 search mt-16">
+            <input class="bg-grey-lighten-2 pa-3 w-25" type="text" placeholder="Enter more">
+            <select class="p-16 w-25 pa-3 bg-grey-lighten-2">
+                <option value="">Select category</option>
+                <option value="workshop">Workshop</option>
+                <option value="concert">Concert</option>
+                <option value="arts">Arts</option>
+            </select>
+            <input type="date" placeholder="Add time" class="w-25 bg-grey-lighten-2 date">
+            <button class="pa-3 bg-red">Search</button>
+        </div>
+>>>>>>> 407ba2e87f5f49258dac09a54ee400b6730be888
     </div>
   </div>
 </template>
+<<<<<<< HEAD
   <script setup>
 import { ref } from "vue";
 import eventStores from "@/stores/eventsStore.js";
 import { axiosStore } from "@/stores/axiosHandle.js";
+=======
+<style scoped>
+input,select{
+    /* background-color: #b1b0b0; */
+    border: 1px solid black;
+}
+button{
+    width: 10%;
+}
+.search{
+    margin-left: 10%;
+}
+/* .search-input{
+    margin-top: -40%;
+} */
+button{
+    border: 1px solid red;
+>>>>>>> 407ba2e87f5f49258dac09a54ee400b6730be888
 
 import { onMounted } from "vue";
 import categoryStore from "@/stores/categoryStore.js";

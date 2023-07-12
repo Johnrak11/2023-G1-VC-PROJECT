@@ -68,4 +68,9 @@ class User extends Authenticatable
         $login = $request->only(['email', 'password']);
         return $login;
     }
+
+    public function events(){
+    
+        return $this->hasMany(Event::class);
+    }
 }
