@@ -1,6 +1,6 @@
 <template>
   <img
-    class="img1"
+    class="img1 mt-10"
     src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
     alt=""
   />
@@ -8,9 +8,9 @@
     <div class="detail">
       <div class="row bg-white d-flex pa-6 flex-column">
         <div id="row1" class="col-md-6">
-          <img
+          <img v-if="event"
             class="img"
-            src="https://liftedasia.com/assets/content_images/vannda-660x440.jpg"
+            :src="event.image"
             alt="Image"
           />
           <div class="d-flex mt-2 justify-space-between">
@@ -103,7 +103,7 @@ export default {
       const eventId = this.$route.params.id;
       console.log(eventId);
       await axios
-        .get(`http://127.0.0.1:8000/api/event/${eventId}`)
+        .get(`http://127.0.0.1:8000/api/events/${eventId}`)
         .then((response) => {
           console.log((this.event = response.data.data)); // store the event data in the event property
         })
@@ -130,6 +130,7 @@ export default {
   font-size: 20px;
   width: 8%;
 }
+
 
 .img1,
 .img {

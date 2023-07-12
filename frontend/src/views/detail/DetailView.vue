@@ -1,4 +1,5 @@
 <template>
+  <navigation-bar></navigation-bar>
   <DetailView></DetailView>
   <footer-view></footer-view>
 </template>

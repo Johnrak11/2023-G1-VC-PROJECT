@@ -8,7 +8,6 @@
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlL1F7iU9vtdCKg_4sckNgDcbQ_GrDsbKgxw&usqp=CAU"
                   alt=""
-        
                 />
                 <div>
                   <div class="d-flex">
@@ -38,13 +37,8 @@
                     <p class="ml-5 ">Eon 2 sensok city</p>
                   </div>
                   <br />
-                  <div class="button d-flex justify-space-between">
-                    <button
-                      class="bg-blue pa-1 rounded d-flex align-end"
-                      id="detail"
-                    >
-                      Detail
-                    </button>
+                  <div class="button d-flex justify-space-end">
+                    
                     <button
                       class="bg-red pa-1 rounded d-flex align-end"
                       id="booking"
