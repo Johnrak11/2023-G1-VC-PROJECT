@@ -25,6 +25,7 @@
             <button class="bg-red pa-1 rounded d-flex align-end" id="booking">Booking</button>
         </div>
     </div>
+    
 </template>
 
 <script>

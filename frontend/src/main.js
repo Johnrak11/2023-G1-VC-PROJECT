@@ -1,5 +1,5 @@
 // ----- library----
-import 'animate.css';
+import "animate.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./routes/router";
@@ -7,6 +7,8 @@ import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
 import { createPinia } from "pinia";
+
+
 
 // --- components-----
 
@@ -20,8 +22,10 @@ import FooterView from "./components/partials/footer/FooterView.vue";
 import PaginationView from "./components/partials/pagination/PaginationView.vue";
 
 import DetailView from "./components/details/DetailComponent.vue";
+
 loadFonts();
-const pinia = createPinia()
+
+const pinia = createPinia();
 const app = createApp(App);
 const CLIENT_ID =
   "789674566579-4bjsq9dlf9gknuq2omokd04bd2ioi96l.apps.googleusercontent.com";

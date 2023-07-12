@@ -4,10 +4,8 @@ import HomePage from "../views/home/HomeView.vue";
 import LoginForm from "../views/login/loginView.vue";
 import ExplorePage from "../views/explore/explorePageView.vue";
 import DetailPage from "../views/detail/DetailView.vue";
-// import ContainLeftDashboard from "../views/dashboard/ContainLeftDashboard.vue";
-import DashboardOrganizer from "../views/dashboard/DashboardOrganizer.vue"
-// import CardDashboard from "../components/partials/dashboards/CardDashboard.vue"
-// import DashboardEvent from "../components/partials/dashboards/ListCard.vue"
+import DashboardOrganizer from "../views/dashboard/DashboardOrganizer.vue";
+import DashboardEventPreview from "../views/dashboard/DashboardEventPreview.vue";
 import DashboardEvent from "../views/dashboard/DashboardEvent.vue";
 
 const routes = [
@@ -42,10 +40,20 @@ const routes = [
     component: DashboardOrganizer,
   },
   {
-    path: "/events",
-    name: "events",
+    path: "/dashboard/event",
+    name: "event",
     component: DashboardEvent,
   },
+  {
+    path: "/dashboard/preview",
+    name: "eventPreview",
+    component: DashboardEventPreview,
+  },
+  // {
+  //   path: "/dashboard/event/create",
+  //   name: "createEvent",
+  //   component: DashboardEventPreview,
+  // },
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

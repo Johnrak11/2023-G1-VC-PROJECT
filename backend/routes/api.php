@@ -44,5 +44,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/registers', ([AuthController::class, 'register']));
     Route::post('/login', ([AuthController::class, 'login']));
 });
+
+
 Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
 Route::get('/event/{id}', [EventController::class, 'getEventById']);
