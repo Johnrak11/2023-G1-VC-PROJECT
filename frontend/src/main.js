@@ -25,6 +25,7 @@ import PaginationView from "./components/partials/pagination/PaginationView.vue"
 import BannerView from "./components/partials/banner/BannerComponent.vue"
 
 loadFonts();
+
 const pinia = createPinia()
 const app = createApp(App);
 const CLIENT_ID =
