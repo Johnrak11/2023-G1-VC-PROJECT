@@ -15,14 +15,17 @@
     <v-card min-width="500" class="pa-5 mt-5 notification" style="height: 90vh;">
         <!-- <v-divider></v-divider> -->
         <div class="list">
-            <v-list v-for="n in 10" :key="n">
+            <div style="margin-top: 20%;" class="d-flex justify-center">
+                <v-icon size="200" color="grey-lighten-2">mdi-file</v-icon>
+            </div>
+            <h1 class="text-center text-grey-lighten-1">Don't have notification!!!</h1>
+            <!-- <v-list v-for="n in 10" :key="n">
                 <div>
                     <v-list-item
                       prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
                       title="John Leider"
                       subtitle="Founder of Vuetify"
                       >
-                      <!-- <p class="mt-0 blue-darken-1">2mn ago</p> -->
                     <template v-slot:append>
                         <v-btn
                         variant="text"
@@ -33,19 +36,19 @@
                     </template>
                 </v-list-item>
                 </div>
-            </v-list>
+            </v-list> -->
         </div>
       </v-card>
 </template>
 <script setup>
-import { reactive } from 'vue'
+// import { reactive } from 'vue'
 
-const state = reactive({
-  fav: true,
-  menu: false,
-  message: false,
-  hints: true,
-})
+// const state = reactive({
+//   fav: true,
+//   menu: false,
+//   message: false,
+//   hints: true,
+// })
 </script>
 <style scoped>
 .notification::-webkit-scrollbar {
