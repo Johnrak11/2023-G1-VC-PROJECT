@@ -25,7 +25,7 @@
         </select>
         <v-menu v-model="state.menu" :close-on-content-click="false" location="end">
           <template v-slot:activator="{ props }">
-            <v-badge content="2" color="error" class="mt-2 mr-5 notification" v-bind="props">
+            <v-badge content="0" color="error" class="mt-2 mr-5 notification" v-bind="props">
               <v-icon>mdi-bell-outline</v-icon>
             </v-badge>
           </template>
