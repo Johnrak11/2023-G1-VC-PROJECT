@@ -32,7 +32,6 @@ app.use(vue3GoogleLogin, {
 app.use(pinia);
 app.use(router);
 app.use(vuetify);
-app.use(pinia);
 
 app.component("navigation-bar", NavigationBar);
 app.component("search-view", SearchEvent);

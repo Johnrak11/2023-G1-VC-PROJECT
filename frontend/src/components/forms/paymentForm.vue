@@ -13,13 +13,11 @@
                 :src="creditCardType.message"></v-text-field>
             <v-text-field v-model="expirationCard" type="date" label="Expiration" :rules="[requiredRule, expirationRule]"
               maxlength="10"></v-text-field>
-            <v-text-field v-model="cvvCard" type="number"  label="CVV" :rules="[requiredRule, cvvRule]" maxlength="4"></v-text-field>
-            <v-text-field v-model="nameCard" label="Name on Card" :rules="[requiredRule]"
-              maxlength="50"></v-text-field>
+            <v-text-field v-model="cvvCard" type="number" label="CVV" :rules="[requiredRule, cvvRule]"
+              maxlength="4"></v-text-field>
+            <v-text-field v-model="nameCard" label="Name on Card" :rules="[requiredRule]" maxlength="50"></v-text-field>
             <v-card-actions>
-              <router-link to="/"> <v-btn color="red" var.valueiant="text" @click="saveData" :disabled="!isFormValid">
-                  Pay
-                </v-btn></router-link>
+              <button-component-form @click="saveData">Pay</button-component-form>
             </v-card-actions>
           </form>
         </v-card>
@@ -37,7 +35,8 @@ import americanCard from "../../assets/credit_card/american_express.png";
 import { ref, computed } from 'vue';
 import ButtonComponentForm from '../buttons/ButtonComponentForm.vue';
 import { axiosStore } from '../../stores/axiosHandle.js';
-// import router from '@/routes/router.js';
+import router from '@/routes/router.js';
+import Swal from 'sweetalert2';
 
 const cardNumber = ref();
 const expirationCard = ref();
@@ -65,7 +64,7 @@ const creditCardType = computed(() => {
   }
   return null;
 });
-
+// ===Find type of credit card===
 function defineType(value) {
   creditCardTypeName.value = value
 }
@@ -87,12 +86,6 @@ const expirationRule = v => {
 const cvvRule = v => /^\d{3,4}$/.test(v) || 'Invalid CVC'
 const requiredRule = v => !!v || 'Field is required'
 
-const isFormValid = computed(() => {
-    return cardNumberRule(cardNumber.value) === true &&
-           expirationRule(expirationCard.value) === true &&
-           cvvRule(cvvCard.value) === true &&
-           requiredRule(nameCard.value) === true;
-  });
 // ===Save data to validate in db===
 const userId = ref(1);
 async function saveData() {
@@ -104,9 +97,30 @@ async function saveData() {
     'expiration': expirationCard.value,
     'user_id': userId.value
   }
-  await axios.post(httpRequest.api+'/booking/creditCard', creditCard).then((response) => {
-    console.log(response.data)
-  }).catch((error) => console.log(error));
+  await axios.post(httpRequest.api + '/booking/creditCard', creditCard).then((response) => {
+    console.log(response.data);
+    if (response.status === 200) {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Your ticket has been paid!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }else{
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: 'Something was wrong!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+    router.push('/');
+  }).catch((error) => {
+    console.log(error.response.data); // log the error message returned by the server
+    console.log(error);
+  });
 
 }
 </script>
