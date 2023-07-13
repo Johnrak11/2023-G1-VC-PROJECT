@@ -30,7 +30,7 @@ import BannerView from "./components/partials/banner/BannerComponent.vue"
 
 loadFonts();
 
-const pinia = createPinia();
+const pinia = createPinia()
 const app = createApp(App);
 const CLIENT_ID =
   "789674566579-4bjsq9dlf9gknuq2omokd04bd2ioi96l.apps.googleusercontent.com";
