@@ -2,10 +2,9 @@
 <template>
     <div class="mt-6 ml-16 mr-16">
         <slot></slot>
-        <div class="ml-10 mr-8 d-flex flex-wrap bg-red">
+        <div class="ml-10 mr-8 d-flex flex-wrap">
             <cardTemplate v-for="event of events.events" :key="event.id" :event="event"></cardTemplate>
         </div>
-        <!-- </router-link> -->
     </div>
 </template>
 <script setup>
