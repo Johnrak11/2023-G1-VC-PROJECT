@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                 return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
             }
             return (new AuthController())->getUserInfo($request);
-        }); 
+        });
     });
 });
 
@@ -48,3 +49,10 @@ Route::prefix('auth')->group(function () {
 
 Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
 Route::get('/event/{id}', [EventController::class, 'getEventById']);
+
+
+//-------search for events------------
+Route::prefix('/events')->group(function () {
+    Route::get('/search', ([EventController::class, 'searchEvent']));    
+}); 
+Route::get('/categories',[CategoryController::class,'getAllCategory']);

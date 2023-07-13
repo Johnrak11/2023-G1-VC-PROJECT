@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 export const axiosStore = defineStore("axios", {
   state: () => ({
-    api: 'http://localhost:8000/api',
+    api: 'http://127.0.0.1:8000/api',
+    local: 'http://127.0.0.1:8080',
   }),
 });
