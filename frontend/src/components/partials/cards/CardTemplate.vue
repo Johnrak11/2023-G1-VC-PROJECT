@@ -76,7 +76,7 @@
             </v-col>
           </div>
         </div>
-        <div class="caard d-flex flex-column justify-space-between" style="height: 17vh; margin-top: -6%">
+        <div class="caard d-flex flex-column justify-space-between" style="margin-top: -10%">
           <div class="top">
             <router-link :to="`/detail/${eventInfor.id}`">
               <h4 style="font-size: 15px">{{ eventInfor.name }}</h4>
@@ -126,8 +126,8 @@ function ClickShare(id) {
 
 <style scoped>
 .card {
-  width: 18%;
-  height: 50vh;
+  width: 22%;
+  height: 40vh;
 }
 
 a {
