@@ -1,6 +1,6 @@
 <template>
   <v-card class="card rounded bg-grey-lighten-2 mt-5 ml-5">
-    <router-link :to="{ name: 'detail', params: { id: event.id } }">
+    <router-link :to="{ name: 'detail', params: { id: eventInfor.id } }">
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlL1F7iU9vtdCKg_4sckNgDcbQ_GrDsbKgxw&usqp=CAU"
         alt=""
@@ -114,7 +114,7 @@
         style="height: 15vh; margin-top: -6%"
       >
         <div class="top">
-          <router-link :to="{ name: 'detail', params: { id: event.id } }">
+          <router-link :to="{ name: 'detail', params: { id: eventInfor.id } }">
             <h4 style="font-size: 15px">{{ eventInfor.name }}</h4>
             <div class="d-flex">
               <div class="d-flex">

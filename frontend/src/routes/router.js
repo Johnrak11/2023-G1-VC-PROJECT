@@ -32,7 +32,6 @@ const routes = [
     path: "/detail/:id",
     name: "detail",
     component: DetailPage,
-    props: true
   },
   
   {
