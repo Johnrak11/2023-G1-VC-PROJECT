@@ -102,7 +102,7 @@ export default {
 }
 
 .detail {
-  margin-left: 6%;
+  margin-left: 22px;
   max-width: 1300px;
   padding: 70px;
 }
