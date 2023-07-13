@@ -1,6 +1,11 @@
 <template>
-    <v-hover v-slot="{ isHovering, props }" v-for="ticket of tickets.tickets" :key="ticket" class="ticket-card" style="width: 100%;">
-
+    <div>
+        <div class="d-flex mt-10" style="margin-left: 15%;" >
+            <img src="https://o.remove.bg/downloads/4ee5f78b-85ba-4566-a6a2-fca7bc21679d/download-removebg-preview.png" alt="">
+        </div>
+        <h2 class="text-center text-grey-lighten-1">You don't have ticket yet, please booking an event!!!</h2>
+    </div>
+    <!-- <v-hover v-slot="{ isHovering, props }" v-for="ticket of tickets.tickets" :key="ticket" class="ticket-card" style="width: 100%;">
         <div 
         v-bind="props"
         :class="`elevation-${isHovering ? 24 : 6}`"
@@ -26,7 +31,7 @@
                 <h1 class="mt-5" style="margin-right: -40%;">{{ ticket.event.price }}</h1>
             </div>
         </div>
-    </v-hover>
+    </v-hover> -->
 </template>
 <script setup>
 import TicketStore from '@/stores/ticketStore'
