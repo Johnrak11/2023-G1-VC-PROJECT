@@ -1,10 +1,11 @@
-import axios from "axios";
 import { defineStore } from "pinia";
-const eventStores = defineStore("event", {
+import baseAPI from "./axiosHandle.js";
+
+export const eventStores = defineStore("event", {
   state: () => ({
     events: [],
     reletedEvent: [],
-    httpRequest: "",
+    localHttp: "http://172.16.0.143:8080",
   }),
   gatters: {
     showEvents() {
@@ -13,33 +14,36 @@ const eventStores = defineStore("event", {
   },
   actions: {
     async getDataAxios() {
-      await axios
-        .get(this.httpRequest + "/events/")
+      await baseAPI
+        .get("/events/")
         .then((response) => {
           this.events = response.data.data;
-          console.log(response.data)
-        }).catch(error => console.log(error));
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
       return this.events;
     },
 
     async getDataCategoryAxios(categoryId, eventId) {
-      await axios
-        .get(this.httpRequest + `/events/category/${categoryId}/${eventId}`)
+      await baseAPI
+        .get(`/events/category/${categoryId}/${eventId}`)
         .then((response) => {
-          this.reletedEvent = response.data.data
-          console.log('Event', this.reletedEvent)
-        }).catch(error => console.log(error));
+          this.reletedEvent = response.data.data;
+          console.log("Event", this.reletedEvent);
+        })
+        .catch((error) => console.log(error));
     },
 
     async searchEvents(name, date, category) {
-      await axios.get(
-        this.httpRequest +
-        `/events/search?name=${name}&date=${date}&category_id=${category}`
-      ).then(response => {
-        this.events = response.data.data
-        console.log(this.events)
-      }).catch(error => console.log(error))
+      await baseAPI
+        .get(
+          `/search/customer/events?name=${name}&date=${date}&category_id=${category}`
+        )
+        .then((response) => {
+          this.events = response.data.data;
+          console.log(this.events);
+        })
+        .catch((error) => console.log(error));
     },
   },
 });
-export default eventStores;

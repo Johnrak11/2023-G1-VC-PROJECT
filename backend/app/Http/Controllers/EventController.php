@@ -122,7 +122,7 @@ class EventController extends Controller
         return new OrganizerResource($organizer);
     }
 
-    public function searchEvent(Request $request)
+    public function searchEventsNotDeadline(Request $request)
     {
         $eventList = Event::query();
 
@@ -144,7 +144,6 @@ class EventController extends Controller
         if ($events->isEmpty()) {
             return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
         }
-
         return response()->json(['success' => true, 'data' => $events], 200);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
@@ -46,14 +47,19 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', ([AuthController::class, 'login']));
 });
 
-Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
 
 //-------search for events------------
 Route::prefix('/events')->group(function () {
     Route::get('/{id}', [EventController::class, 'getEventById']);
-    Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);   
+    Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
     Route::get('/', ([EventController::class, 'getEventsNotDeadline']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
-    Route::get('/search', ([EventController::class, 'searchEvent']));    
-}); 
-Route::get('/categories',[CategoryController::class,'getAllCategory']);
+    Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
+});
+Route::prefix('/search')->group(function () {
+    Route::prefix('/customer')->group(function () {
+        Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
+    });
+});
+
+Route::get('/categories', [CategoryController::class, 'getAllCategory']);

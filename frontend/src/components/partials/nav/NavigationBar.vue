@@ -1,10 +1,7 @@
 <template>
-  <v-layout
-    class="nav-bar d-flex justify-space-between w-100 bg-color"
-    :elevation="7"
-  >
+  <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
     <v-nav-bar-left class=" d-flex left">
-      <v-img src="../../../assets/logo.png" alt=""   style="margin-left: -20%; height: 50px; object-fit: cover;"/>
+      <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover;" />
     </v-nav-bar-left>
     <v-nav-bar-right class="d-flex right justify-space-between">
       <v-left-content class="ml-16">
@@ -12,13 +9,13 @@
           <router-link to="/" class="link">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/"  class="link">
+          <router-link to="/" class="link">
             <li class="rounded">Explore</li>
           </router-link>
-          <router-link to="/"  class="link">
+          <router-link to="/" class="link">
             <li class="rounded">MyTicket</li>
           </router-link>
-          <router-link to="/dashboard"  class="link">
+          <router-link to="/dashboard" class="link">
             <li class="rounded">Dashborad</li>
           </router-link>
         </ul>
@@ -35,20 +32,13 @@
               <v-icon>mdi-bell-outline</v-icon>
             </v-badge>
           </template>
-          <NotificationComponent/>
+          <NotificationComponent />
         </v-menu>
 
-
-        <router-link v-if="!user.token" to="/login"
-          ><v-btn color="blue" width="5">Login</v-btn></router-link
-        >
+        <router-link v-if="!user.token" to="/login"><v-btn color="red" width="5">Login</v-btn></router-link>
         <v-menu v-else>
           <template v-slot:activator="{ props }">
-            <v-avatar
-              v-if="user.user.profile_picture"
-              v-bind="props"
-              value="Avatar"
-            >
+            <v-avatar v-if="user.user.profile_picture" v-bind="props" value="Avatar">
               <v-img alt="Avatar" :src="user.user.profile_picture"></v-img>
             </v-avatar>
             <v-avatar color="grey" v-else v-bind="props">
@@ -56,14 +46,10 @@
             </v-avatar>
           </template>
           <v-list>
-            <v-list-item
-              v-for="(item, index) in items"
-              :key="index"
-              :value="index"
-            >
+            <v-list-item v-for="(item, index) in items" :key="index" :value="index">
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
-            <v-list-item value="logout" @click="user.logout(httpRequest.api)">
+            <v-list-item value="logout" @click="user.logout()">
               <v-list-item-title>Sing out</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -82,13 +68,8 @@ const items = ref([
   { title: "Ticket", link: "/profile" },
   { title: "Dashboard", link: "/dashboard" },
 ]);
-
 import { userStore } from "../../../stores/user.js";
 const user = userStore();
-user.getTokenInCookie("token");
-import { axiosStore } from "../../../stores/axiosHandle.js";
-const httpRequest = axiosStore();
-
 import { reactive } from 'vue'
 
 const state = reactive({
@@ -131,6 +112,7 @@ select {
 .left {
   flex: 1;
 }
+
 .left v-img {
   width: 10%;
 
@@ -155,14 +137,17 @@ li:hover {
   color: white;
   cursor: pointer;
 }
-.link{
+
+.link {
   text-decoration: none;
   color: black;
 }
-.notification{
+
+.notification {
   cursor: pointer;
 }
-.notification:hover{
+
+.notification:hover {
   color: red;
 }
 </style>
