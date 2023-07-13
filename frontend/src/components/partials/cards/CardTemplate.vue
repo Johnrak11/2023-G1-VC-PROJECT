@@ -1,6 +1,6 @@
 <template>
-  <v-hover v-slot="{ isHovering, props }">
-    <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" max-width="350" v-bind="props"
+  <v-hover v-slot="{ isHovering, props }" class="card">
+    <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
       class="card  bg-grey-lighten-2 mt-5 ml-5 hover">
       <router-link :to="`/detail/${eventInfor.id}`">
         <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
@@ -90,7 +90,7 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn color="red" class="ml-3">
+        <v-btn color="white" class="ml-3 bg-red mb-5">
           Booking
         </v-btn>
       </v-card-actions>
@@ -115,11 +115,9 @@ function ClickShare(id) {
 </script>
 
 <style scoped>
-/* .card {
+.card {
   width: 23%;
-  height: 55vh;
-  padding-bottom: 10px;
-} */
+}
 
 a {
   text-decoration: none;
