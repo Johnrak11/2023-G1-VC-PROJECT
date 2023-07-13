@@ -76,7 +76,7 @@ const discountItemsModel = ref('Percent(%)')
 
 <style>
 form {
-    border: 1px solid black;
+    /* border : 1px solid black; */
     padding: 20px;
 }
 

@@ -1,8 +1,11 @@
-import axios from "axios";
 import { defineStore } from "pinia";
-const eventStores = defineStore("event", {
+import baseAPI from "./axiosHandle.js";
+
+export const eventStores = defineStore("event", {
   state: () => ({
     events: [],
+    reletedEvent: [],
+    localHttp: "http://172.16.0.143:8080",
   }),
   gatters: {
     showEvents() {
@@ -11,15 +14,45 @@ const eventStores = defineStore("event", {
   },
   actions: {
     async getDataAxios() {
-      await axios
-        .get("http://127.0.0.1:8000/api/eventsNotDeadline")
+      await baseAPI
+        .get("/events/")
         .then((response) => {
-          this.events=response.data.data;
-          console.log(response.data)
-        }).catch(error => console.log(error));
-        return this.events;
+          this.events = response.data.data;
+        })
+        .catch((error) => console.log(error));
+      return this.events;
+    },
+
+    async getDataCategoryAxios(categoryId, eventId) {
+      await baseAPI
+        .get(`/events/category/${categoryId}/${eventId}`)
+        .then((response) => {
+          this.reletedEvent = response.data.data;
+        })
+        .catch((error) => console.log(error));
+    },
+
+    async searchEvents(name, date, category) {
+      await baseAPI
+        .get(
+          `/search/customer/events?name=${name}&date=${date}&category_id=${category}`
+        )
+        .then((response) => {
+          this.events = response.data.data;
+        })
+        .catch((error) => console.log(error));
+    },
+    async getEventPrice(eventId) {
+      await baseAPI
+        .get(
+          `eventDetail/${eventId}`
+        )
+        .then((response) => {
+          this.events = response.data.data;
+          console.log(this.events);
+        })
+        .catch((error) => console.log(error));
     },
     
   },
 });
-export default eventStores;

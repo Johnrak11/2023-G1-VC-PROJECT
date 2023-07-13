@@ -6,19 +6,23 @@
 </template>
   
 <script setup>
+import baseAPI from '@/stores/axiosHandle.js';
+import { cookieStore } from '@/stores/cookies.js'
+const { setCookie } = cookieStore()
+
 import { userStore } from '../../stores/user.js'
 import Loading from 'vue-loading-overlay';
 import { decodeCredential } from "vue3-google-login";
 import { ref } from "vue";
-import axios from "axios";
 
-const HTTP_REQUEST = 'http://localhost:8000/api/auth/google';
 const user = userStore()
 import { addressStore } from '../../stores/address.js';
 import router from '@/routes/router.js';
 let address = addressStore();
 let isAddressReady = ref(false);
 let isLoading = ref(false);
+
+
 
 // ---- implement with backend-------
 
@@ -72,10 +76,10 @@ async function googleAuth(googleUser) {
         'google_id': googleUser.sub,
     };
     try {
-        const response = await axios.post(HTTP_REQUEST, newUser);
+        const response = await baseAPI.post('/auth/google', newUser);
         user.user = response.data.user
         user.token = response.data.token
-        user.storeTokenInCookie()
+        setCookie('token', user.token)
         isLoading.value = false;
         router.push('/')
         console.log(user.token)

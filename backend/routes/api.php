@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Http\Request;
@@ -34,7 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                 return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
             }
             return (new AuthController())->getUserInfo($request);
-        }); 
+        });
     });
 });
 
@@ -46,5 +48,22 @@ Route::prefix('auth')->group(function () {
 });
 
 
-Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
-Route::get('/event/{id}', [EventController::class, 'getEventById']);
+// Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
+// Route::get('/event/{id}', [EventController::class, 'getEventById']);
+
+
+//-------search for events------------
+Route::prefix('/events')->group(function () {
+    Route::get('/{id}', [EventController::class, 'getEventById']);
+    Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
+    Route::get('/', ([EventController::class, 'getEventsNotDeadline']));
+    Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
+    Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
+});
+Route::prefix('/search')->group(function () {
+    Route::prefix('/customer')->group(function () {
+        Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
+    });
+});
+
+Route::get('/categories', [CategoryController::class, 'getAllCategory']);
