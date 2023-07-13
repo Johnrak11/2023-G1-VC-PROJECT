@@ -80,14 +80,14 @@
           <div class="top">
             <router-link :to="`/detail/${eventInfor.id}`">
               <h4 style="font-size: 15px">{{ eventInfor.name }}</h4>
-              <div class="d-flex">
+              <div>
                 <div class="d-flex">
                   <v-icon size="17"> mdi-calendar</v-icon>
                   <p class="ml-1 mt-0" style="font-size: 12px">
                     {{ eventInfor.date }}
                   </p>
                 </div>
-                <div class="d-flex ml-5">
+                <div class="d-flex" style="margin-top: -8%;">
                   <v-icon size="17">mdi-map-marker</v-icon>
                   <p style="font-size: 12px" class="ml-1 mt-0">
                     {{ eventInfor.venue }}
