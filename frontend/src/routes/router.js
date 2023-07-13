@@ -28,12 +28,6 @@ const routes = [
     name: "login",
     component: LoginForm,
   },
-  // {
-  //   path: "/detail/:id",
-  //   name: "detail",
-  //   component: DetailPage,
-  //   props: true,
-  // },
   {
     path: "/detail/:id",
     name: "detail",
