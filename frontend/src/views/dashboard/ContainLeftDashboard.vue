@@ -8,12 +8,15 @@
     <hr class="w-100" />
     <v-divider class="border"></v-divider>
 
-    <v-list density="compact" >
+    <v-list density="compact">
       <router-link to="/dashboard" class="nav">
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
       </router-link>
-      <router-link to="/events" class="nav">
+      <router-link to="/dashboard/event" class="nav">
         <v-list-item prepend-icon="mdi-calendar" title="Event" value="event"></v-list-item>
+      </router-link>
+      <router-link to="/dashboard/preview" class="nav">
+        <v-list-item prepend-icon="mdi-calendar" title="Preview" value="preview"></v-list-item>
       </router-link>
       <v-list-item prepend-icon="mdi-help" title="Report" value="report"></v-list-item>
       <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
@@ -38,8 +41,8 @@ export default {
   }
 };
 </script>
-.<style scoped>
-.nav{
+<style scoped>
+.nav {
   text-decoration: none;
   color: black;
 }

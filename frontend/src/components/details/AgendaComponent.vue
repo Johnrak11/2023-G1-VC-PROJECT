@@ -2,21 +2,13 @@
   <div class="col-md-6 d-flex mt-8">
     <div class="agenda-page d-flex flex-column">
       <div class="agenda d-flex bg-red justify-space-between pa-1">
-        <h2 class="mt-1 ml-3">AGENDA</h2>
+        <h2 class="mt-1 ml-3">{{ 'AGENDA' }}</h2>
         <p class="mt-1 mr-3">Today</p>
       </div>
       <div style="display: flex; height: 160px">
-        <v-virtual-scroll
-          :items="groupedItems"
-          :item-height="300"
-          class="scrollbar"
-        >
+        <v-virtual-scroll :items="groupedItems" :item-height="300" class="scrollbar">
           <template v-slot:default="{ item }">
-            <div
-              v-for="(card, index) in item"
-              :key="index"
-              class="card1 d-flex bg-grey-lighten-2"
-            >
+            <div v-for="(card, index) in item" :key="index" class="card1 d-flex bg-grey-lighten-2">
               <div class="info mt-5 ml-4">
                 <h2>{{ card.title }}</h2>
                 <div class="d-flex mt-4">
@@ -33,7 +25,7 @@
     <div class="organizer bg-grey-lighten-2 pa-3 ml-10">
       <div class="ml-5">
         <h2 class="mb-9">Organizer</h2>
-        <p>Name: {{ organizer.firstname + ' '+ organizer.firstname }} </p>
+        <p>Name: {{ organizer.firstname + ' ' + organizer.firstname }} </p>
         <p class="email">Email: {{ organizer.email }}</p>
         <p class="phone">Phone: {{ organizer.phone_number }}</p>
       </div>
@@ -44,10 +36,10 @@
 
 <script setup>
 import { useRoute } from "vue-router";
-import { axiosStore } from "../../stores/axiosHandle.js";
-const httpRequest = axiosStore();
 import { ref, computed, onMounted } from "vue";
-import axios from "axios";
+
+import baseAPI from "@/stores/axiosHandle.js";
+
 const items = ref([]);
 const organizer = ref({});
 
@@ -60,23 +52,20 @@ const groupedItems = computed(() => {
   return result;
 });
 
-const  fetchAgenda = async () =>  {
+const fetchAgenda = async () => {
   const route = useRoute();
   const eventId = route.params.id;
-  // console.log(eventId);
-  // console.log(httpRequest.api);
-  await axios.get(httpRequest.api + `/agenda/${eventId}`).then(response =>{
+  await baseAPI.get(`events/agenda/${eventId}`).then(response => {
     items.value = response.data.agendas
   }).catch(error => console.log(error))
 };
 const fetchOrganizer = async () => {
-      const route = useRoute();
-      const organizerId = route.params.id;
-      
-      await axios.get(httpRequest.api + `/events/organizer/${organizerId}`).then(response =>{
-        console.log(response.data)
-        organizer.value = response.data.data
-      }).catch(error => console.log(error))
+  const route = useRoute();
+  const organizerId = route.params.id;
+
+  await baseAPI.get(`/events/organizer/${organizerId}`).then(response => {
+    organizer.value = response.data.data
+  }).catch(error => console.log(error))
 }
 onMounted(() => {
   fetchAgenda();
@@ -90,16 +79,20 @@ p {
   line-height: 1.5;
   margin-bottom: 20px;
 }
+
 .agenda {
   border-radius: 7px 7px 2px 2px;
 }
+
 .agenda-page {
   width: 60%;
 }
+
 .card1 {
   border: 1px solid rgb(225, 216, 216);
   width: 100%;
 }
+
 .info,
 p {
   margin-top: -10px;
@@ -109,13 +102,16 @@ p {
   width: 60%;
   border-radius: 7px;
 }
+
 .organizer h2 {
   color: red;
 }
+
 .email,
 .phone {
   margin-top: -20px;
 }
+
 .scrollbar::-webkit-scrollbar {
   display: none;
 }

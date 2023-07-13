@@ -1,5 +1,5 @@
 // ----- library----
-import 'animate.css';
+import "animate.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./routes/router";
@@ -11,6 +11,8 @@ import VueSocialSharing from 'vue-social-sharing';
 
 
 import { createPinia } from "pinia";
+
+
 
 // --- components-----
 
@@ -25,6 +27,7 @@ import PaginationView from "./components/partials/pagination/PaginationView.vue"
 import BannerView from "./components/partials/banner/BannerComponent.vue"
 
 loadFonts();
+
 const pinia = createPinia()
 const app = createApp(App);
 const CLIENT_ID =
@@ -48,7 +51,6 @@ app.component("popular-event", PopularEvent);
 app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
-// app.component("detail-page", DetailView);
 app.component("banner-view", BannerView);
 
 

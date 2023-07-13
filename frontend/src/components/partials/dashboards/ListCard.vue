@@ -10,20 +10,10 @@
       <br />
       <div class="d-flex justify-md-end">
         <div class="w-50">
-          <v-text-field
-            variant="solo"
-            label="Search templates"
-            append-inner-icon="mdi-magnify"
-            single-line
-            hide-details
-            class="w-50"
-          ></v-text-field>
+          <v-text-field variant="solo" label="Search templates" append-inner-icon="mdi-magnify" single-line hide-details
+            class="w-50"></v-text-field>
         </div>
-        <div class="w-50 d-flex justify-md-end mt-3">
-          <v-btn class="mr-5 rounded" style="width: 30%">All Events</v-btn>
-          <v-btn class="mr-5 rounded" style="width: 30%">Online Events</v-btn>
-          <v-btn class="rounded" style="width: 30%">Venue Events</v-btn>
-        </div>
+        <slot></slot>
       </div>
     </v-card>
     <div class="ml-8 mb-5">
@@ -40,6 +30,7 @@ button {
   padding: 0px 15px 0px 15px;
   cursor: pointer;
 }
+
 button:hover {
   background-color: red;
   color: white;

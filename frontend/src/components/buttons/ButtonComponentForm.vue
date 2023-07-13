@@ -16,7 +16,7 @@ const props = defineProps({
   }
 });
 
-console.log(props.isLoading);
+console.log(props.isLoading)
 </script>
 
 <style scoped>

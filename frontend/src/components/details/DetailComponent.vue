@@ -1,27 +1,15 @@
 <template>
-  <img
-    class="img1 mt-10"
-    src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
-    alt=""
-  />
+  <img class="img1 mt-10" src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
+    alt="" />
   <div class="container d-flex flex-column">
     <div class="detail">
       <div class="row bg-white d-flex pa-6 flex-column">
         <div id="row1" class="col-md-6">
-          <img v-if="event"
-            class="img"
-            :src="event.image"
-            alt="Image"
-          />
+          <img v-if="event" class="img" :src="event.image" alt="Image" />
           <div class="d-flex mt-2 justify-space-between">
             <div class="icon-left d-flex">
               <div class="d-flex">
-                <v-icon
-                  class="mt-1"
-                  :color="liked ? 'grey' : 'red'"
-                  @click="liked = !liked"
-                  >mdi-heart</v-icon
-                >
+                <v-icon class="mt-1" :color="liked ? 'grey' : 'red'" @click="liked = !liked">mdi-heart</v-icon>
                 <p class="mt-1 ml-2">100</p>
               </div>
               <div class="d-flex ml-10">
@@ -62,12 +50,7 @@
             <div class="map">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.678901234567!2d-122.4324!3d37.7897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDU4JzU0LjQiTiAxMjLCsDM1JzQ5LjIiVw!5e0!3m2!1sen!2sus!4v1625706808123!5m2!1sen!2sus"
-                width="455"
-                height="200"
-                style="border: 0"
-                allowfullscreen=""
-                loading="lazy"
-              ></iframe>
+                width="455" height="200" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
             </div>
           </div>
           <div class="button mt-6">
@@ -77,39 +60,37 @@
         <agendaComponent></agendaComponent>
       </div>
     </div>
-    <listCard></listCard>
+    <listCard v-if="event" :event="event"></listCard>
   </div>
 </template>
 <script>
-// import defineStore from '../../stores/eventsStore.js'
-import axios from "axios";
 import agendaComponent from "./AgendaComponent.vue";
 import listCardDetail from "./ListCardDetail.vue";
+import baseAPI from "@/stores/axiosHandle.js";
+
 export default {
   components: {
-    agendaComponent: agendaComponent,
+    agendaComponent,
     listCard: listCardDetail,
   },
-  data: () => ({
-    liked: false,
-    event: null,
-  }),
-
-  mounted() {
-    this.fetchEvent(); // fetch event data when the component is mounted
+  data() {
+    return {
+      liked: false,
+      event: null,
+    };
+  },
+  async mounted() {
+    await this.fetchEvent();
   },
   methods: {
     async fetchEvent() {
       const eventId = this.$route.params.id;
-      console.log(eventId);
-      await axios
-        .get(`http://127.0.0.1:8000/api/events/${eventId}`)
-        .then((response) => {
-          console.log((this.event = response.data.data)); // store the event data in the event property
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const response = await baseAPI.get(`/events/${eventId}`);
+        this.event = response.data.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
@@ -130,7 +111,6 @@ export default {
   font-size: 20px;
   width: 8%;
 }
-
 
 .img1,
 .img {

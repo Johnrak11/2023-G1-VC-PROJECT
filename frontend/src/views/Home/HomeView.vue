@@ -36,7 +36,7 @@ createVuetify({
 });
 </script>
 <style scoped>
-  body{
+body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 </style>
