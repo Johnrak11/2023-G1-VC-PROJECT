@@ -16,7 +16,7 @@
           <router-link to="/">
             <li class="rounded">Explor</li>
           </router-link>
-          <router-link to="/">
+          <router-link to="/tickets">
             <li class="rounded">MyTicket</li>
           </router-link>
           <router-link to="/dashboard">
