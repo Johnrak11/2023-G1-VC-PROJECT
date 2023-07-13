@@ -1,15 +1,7 @@
 <template>
-   <v-hover
-        v-slot="{ isHovering, props }"
-        open-delay="200"
-      >
-    <v-card class="card rounded bg-grey-lighten-2 mt-5 ml-5" 
-      :elevation="isHovering ? 20 : 2"
-      :class="{ 'on-hover': isHovering }"
-      height="350"
-      max-width="350"
-      v-bind="props"
-    >
+  <v-hover v-slot="{ isHovering, props }" open-delay="200">
+    <v-card class="card rounded bg-grey-lighten-2 mt-5 ml-5" :elevation="isHovering ? 20 : 2"
+      :class="{ 'on-hover': isHovering }" height="350" max-width="350" v-bind="props">
       <router-link :to="`/detail/${eventInfor.id}`">
         <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlL1F7iU9vtdCKg_4sckNgDcbQ_GrDsbKgxw&usqp=CAU"
           alt="" />
@@ -103,7 +95,7 @@
           </div>
         </div>
       </div>
-      
+
     </v-card>
   </v-hover>
 </template>

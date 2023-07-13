@@ -11,7 +11,7 @@
 <script setup>
 import cardTemplate from './CardTemplate.vue'
 import { onMounted } from 'vue'
-import {eventStores} from '@/stores/eventsStore.js'
+import { eventStores } from '@/stores/eventsStore.js'
 
 const events = eventStores()
 onMounted(() => {
@@ -19,7 +19,7 @@ onMounted(() => {
 })
 </script>
 <style scoped>
-    /* .card{
+/* .card{
         width: 17%;
         
     }
@@ -29,5 +29,5 @@ onMounted(() => {
     }
     #booking{
         margin-left: 70%; */
-    /* } */
+/* } */
 </style>

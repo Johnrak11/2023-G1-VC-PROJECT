@@ -7,18 +7,10 @@
 
       <v-card min-width="300">
         <v-list>
-          <v-list-item
-            prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
-            title="John Leider"
-            subtitle="Founder of Vuetify"
-          >
+          <v-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg" title="John Leider"
+            subtitle="Founder of Vuetify">
             <template v-slot:append>
-              <v-btn
-                variant="text"
-                :class="fav ? 'text-red' : ''"
-                icon="mdi-heart"
-                @click="fav = !fav"
-              ></v-btn>
+              <v-btn variant="text" :class="fav ? 'text-red' : ''" icon="mdi-heart" @click="fav = !fav"></v-btn>
             </template>
           </v-list-item>
         </v-list>
@@ -27,21 +19,11 @@
 
         <v-list>
           <v-list-item>
-            <v-switch
-              v-model="message"
-              color="purple"
-              label="Enable messages"
-              hide-details
-            ></v-switch>
+            <v-switch v-model="message" color="purple" label="Enable messages" hide-details></v-switch>
           </v-list-item>
 
           <v-list-item>
-            <v-switch
-              v-model="hints"
-              color="purple"
-              label="Enable hints"
-              hide-details
-            ></v-switch>
+            <v-switch v-model="hints" color="purple" label="Enable hints" hide-details></v-switch>
           </v-list-item>
         </v-list>
 
@@ -57,7 +39,7 @@
     </v-menu>
   </div>
 </template>
-  <script>
+<script>
 export default {
   data: () => ({
     fav: true,
