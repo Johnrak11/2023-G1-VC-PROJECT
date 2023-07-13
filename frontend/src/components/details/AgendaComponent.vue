@@ -2,7 +2,7 @@
   <div class="col-md-6 d-flex mt-8">
     <div class="agenda-page d-flex flex-column">
       <div class="agenda d-flex bg-red justify-space-between pa-1">
-        <h2 class="mt-1 ml-3">{{ 'AGENDA'}}</h2>
+        <h2 class="mt-1 ml-3">{{ 'AGENDA' }}</h2>
         <p class="mt-1 mr-3">Today</p>
       </div>
       <div style="display: flex; height: 160px">
@@ -37,7 +37,9 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { ref, computed, onMounted } from "vue";
+
 import baseAPI from "@/stores/axiosHandle.js";
+
 const items = ref([]);
 const organizer = ref({});
 
@@ -53,7 +55,6 @@ const groupedItems = computed(() => {
 const fetchAgenda = async () => {
   const route = useRoute();
   const eventId = route.params.id;
-  console.log(eventId)
   await baseAPI.get(`events/agenda/${eventId}`).then(response => {
     items.value = response.data.agendas
   }).catch(error => console.log(error))
@@ -63,7 +64,6 @@ const fetchOrganizer = async () => {
   const organizerId = route.params.id;
 
   await baseAPI.get(`/events/organizer/${organizerId}`).then(response => {
-    console.log(response.data)
     organizer.value = response.data.data
   }).catch(error => console.log(error))
 }

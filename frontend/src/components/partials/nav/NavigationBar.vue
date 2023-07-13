@@ -9,14 +9,11 @@
           <router-link to="/" class="link">
             <li class="rounded">Home</li>
           </router-link>
-          <router-link to="/" class="link">
+          <router-link to="/explor" class="link">
             <li class="rounded">Explore</li>
           </router-link>
           <router-link to="/" class="link">
             <li class="rounded">MyTicket</li>
-          </router-link>
-          <router-link to="/dashboard" class="link">
-            <li class="rounded">Dashborad</li>
           </router-link>
         </ul>
       </v-left-content>
@@ -47,7 +44,9 @@
           </template>
           <v-list>
             <v-list-item v-for="(item, index) in items" :key="index" :value="index">
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <router-link :to="item.link">
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </router-link>
             </v-list-item>
             <v-list-item value="logout" @click="user.logout()">
               <v-list-item-title>Sing out</v-list-item-title>

@@ -18,7 +18,6 @@ export const eventStores = defineStore("event", {
         .get("/events/")
         .then((response) => {
           this.events = response.data.data;
-          console.log(response.data);
         })
         .catch((error) => console.log(error));
       return this.events;
@@ -29,7 +28,6 @@ export const eventStores = defineStore("event", {
         .get(`/events/category/${categoryId}/${eventId}`)
         .then((response) => {
           this.reletedEvent = response.data.data;
-          console.log("Event", this.reletedEvent);
         })
         .catch((error) => console.log(error));
     },
@@ -41,7 +39,6 @@ export const eventStores = defineStore("event", {
         )
         .then((response) => {
           this.events = response.data.data;
-          console.log(this.events);
         })
         .catch((error) => console.log(error));
     },

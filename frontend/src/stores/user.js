@@ -9,14 +9,12 @@ export const userStore = defineStore("user", {
   }),
   actions: {
     async getUserInfor() {
-      console.log("hello");
       await baseAPI
         .get("/auth/user")
         .then((response) => {
           const loginHandle = response.data;
           if (loginHandle.success) {
             this.user = loginHandle.user;
-            console.log(this.user);
           }
         })
         .catch((error) => console.log(error));

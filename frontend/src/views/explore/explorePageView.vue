@@ -1,16 +1,15 @@
 <template>
   <navigation-bar></navigation-bar>
-  <search-view>
-    <div class="mt-16">
-      <h1 class="text-center text-h3">Dicover Events For All Things You Love</h1>
-    </div>
-  </search-view>
+  <banner-view></banner-view>
+  <search-view></search-view>
   <category-view></category-view>
-  <list-card></list-card>
-  <list-card></list-card>
+  <list-card>
+    <div class="ml-16">
+      <h1>Upcoming Events</h1>
+      <p>You can chooses to display feature</p>
+    </div>
+  </list-card><br>
   <pagination-view></pagination-view>
-
- 
   <footer-view></footer-view>
 </template>
 <script>
