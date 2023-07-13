@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -51,3 +52,5 @@ Route::get('/event/{id}', [EventController::class, 'getEventById']);
 Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
 });
+
+Route::get('/tickets',[TicketController::class, 'getAllTicket']);
