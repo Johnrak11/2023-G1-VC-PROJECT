@@ -141,7 +141,6 @@ img {
   display: flex;
   margin: auto;
   padding: 10px;
-  /* border-radius: 50%; */
   margin-left: -1%;
 }
 

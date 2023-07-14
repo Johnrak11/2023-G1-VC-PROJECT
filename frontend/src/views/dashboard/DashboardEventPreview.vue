@@ -3,12 +3,12 @@
         <v-layout>
             <v-main class="bg-grey-lighten-2">
                 <ListCard>
-                    <div class="w-50 d-flex justify-md-end mt-3">
+                    <div class="w-50 d-flex justify-end mt-3">
                         <createEventDailog> Create </createEventDailog>
                     </div>
                 </ListCard>
                 <ContainLeftDashboard />
-                <createEventDailog></createEventDailog>
+                <!-- <createEventDailog></createEventDailog> -->
             </v-main>
         </v-layout>
     </v-card>
@@ -22,7 +22,7 @@ import createEventDailog from "../../components/events/CreateEventDailog.vue";
 </script>
 
 <style scoped>
-.border {
+/* .border {
     border: 1px solid black;
-}
+} */
 </style>
