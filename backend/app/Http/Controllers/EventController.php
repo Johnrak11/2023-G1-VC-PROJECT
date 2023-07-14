@@ -20,24 +20,28 @@ class EventController extends Controller
     {
         //
     }
-    public function getEventsNotDeadline()
+
+    public function getEvents(Request $request)
     {
+        $perPage = $request->input('perPage', 12); // Number of items per page
         $todayDate = date('Y-m-d');
-        $eventUnDeadline = Event::where('date', '>=', $todayDate)->get();
-        $todayDate = date('Y-m-d');
-        if ($eventUnDeadline != null) {
-            return EventResource::collection($eventUnDeadline)
-                ->additional([
-                    'status' => true,
-                    'message' => 'There are all events that have not deadline yet.',
-                    'data' => $eventUnDeadline
-                ], 200);
+        $eventUnDeadline = Event::where('date', '>=', $todayDate)->paginate($perPage);
+
+        if ($eventUnDeadline->isEmpty()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'There are no events that have not reached the deadline yet.',
+                'data' => []
+            ], 200);
         }
         return response()->json([
-            'satus' => true,
-            'message' => 'There are no event that has not deadline.'
+            'status' => true,
+            'message' => 'There are events that have not reached the deadline yet.',
+            'data' => $eventUnDeadline
         ], 200);
     }
+
+
     public function getEventsByCategory($categoryId, $eventId)
     {
         $todayDate = date('Y-m-d');
