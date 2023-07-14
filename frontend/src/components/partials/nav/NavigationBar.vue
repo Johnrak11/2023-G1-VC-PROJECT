@@ -49,7 +49,7 @@
               </router-link>
             </v-list-item>
             <v-list-item value="logout" @click="user.logout()">
-              <v-list-item-title>Sing out</v-list-item-title>
+              <v-list-item-title>logout</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -100,6 +100,11 @@ select {
 .justify-space-between {
   display: flex;
   justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 .bg-color {
