@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -63,3 +64,4 @@ Route::prefix('/search')->group(function () {
 });
 
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
+Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);

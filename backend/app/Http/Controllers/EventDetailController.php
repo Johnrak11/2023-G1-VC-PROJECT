@@ -6,6 +6,7 @@ use App\Models\event_detail;
 use App\Http\Requests\Storeevent_detailRequest;
 use App\Http\Requests\Updateevent_detailRequest;
 use App\Models\event;
+use App\Models\EventDetail;
 
 class EventDetailController extends Controller
 {
@@ -36,15 +37,20 @@ class EventDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(event_detail $event_detail)
+    public function show()
     {
         //
+    }
+    public function getEventDetail($eventId)
+    {
+        $eventDetail = EventDetail::where('eventId', '>=', $eventId)->first();
+        return $eventDetail;
     }
     
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(event_detail $event_detail)
+    public function edit()
     {
         //
     }
@@ -60,7 +66,7 @@ class EventDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(event_detail $event_detail)
+    public function destroy( $event_detail)
     {
         //
     }
