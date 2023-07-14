@@ -7,10 +7,10 @@ import {
 } from "firebase/storage";
 import { defineStore } from "pinia";
 
-const eventCreateStores = defineStore("eventCreate", {
+export const eventCreateStores = defineStore("eventCreate", {
   state: () => ({
     eventName: "",
-    eventCategories: '',
+    eventCategories: "",
     eventDate: "",
     eventPoster: "",
     eventDescription: "",
@@ -68,5 +68,3 @@ const eventCreateStores = defineStore("eventCreate", {
     },
   },
 });
-
-export default eventCreateStores;

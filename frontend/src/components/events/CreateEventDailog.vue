@@ -49,7 +49,7 @@
 import detailCreate from './DetailEventCretae.vue'
 import ticketCreate from './TicketEventCretae.vue'
 import { ref } from 'vue';
-const dialog = ref(true)
+const dialog = ref(false)
 const tab = ref('one')
 const isNext = ref(true)
 const nextValue = ref('one')

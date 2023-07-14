@@ -69,7 +69,7 @@
 </template>
 <script setup>
 
-import eventCreateStores from '@/stores/eventCreate.js'
+import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
 import { ref, defineExpose } from 'vue'
 
