@@ -34,7 +34,6 @@
      <br />
      <v-card class="bg-white pa-5 mr-10 rounded ml-8" :elevation="5">
        <p>1st April,2022 - 30th April, 2022</p>
-       <br />
        <div class="d-flex justify-space-between">
          <RevenueCard />
          <OrderCard />
@@ -88,7 +87,7 @@ button:hover{
     color: white;
 }
 .button{
-    width: 30%;
+    width: 35%;
 }
 .dashboard-container {
   height: 100vh;
