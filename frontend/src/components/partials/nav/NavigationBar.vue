@@ -49,7 +49,7 @@
               </router-link>
             </v-list-item>
             <v-list-item value="logout" @click="user.logout()">
-              <v-list-item-title>Sing out</v-list-item-title>
+              <v-list-item-title>Sign out</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
