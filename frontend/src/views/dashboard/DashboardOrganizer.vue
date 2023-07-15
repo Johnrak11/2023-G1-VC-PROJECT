@@ -17,5 +17,4 @@ import CardDashboard from "../../components/partials/dashboards/CardDashboard.vu
 .border {
   border: 1px solid black;
 }
-
 </style>

@@ -107,7 +107,7 @@ async function saveData() {
         showConfirmButton: false,
         timer: 1500
       })
-    }else{
+    } else {
       Swal.fire({
         position: 'top-center',
         icon: 'error',

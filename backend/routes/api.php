@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CreditCardController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\TicketController;
@@ -36,7 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                 return response()->json(['success' => false, 'error' => 'Unauthorized'], 401);
             }
             return (new AuthController())->getUserInfo($request);
-        }); 
+        });
     });
 });
 
@@ -46,11 +47,26 @@ Route::prefix('auth')->group(function () {
     Route::post('/registers', ([AuthController::class, 'register']));
     Route::post('/login', ([AuthController::class, 'login']));
 });
-Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
-Route::get('/event/{id}', [EventController::class, 'getEventById']);
 
 Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
 });
 
-Route::get('/tickets',[TicketController::class, 'getAllTicket']);
+Route::get('/tickets', [TicketController::class, 'getAllTicket']);
+
+//-------search for events------------
+Route::prefix('/events')->group(function () {
+    Route::get('/{id}', [EventController::class, 'getEventById']);
+    Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
+    Route::get('/', ([EventController::class, 'getEvents']));
+    Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
+    Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
+});
+Route::prefix('/search')->group(function () {
+    Route::prefix('/customer')->group(function () {
+        Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
+    });
+});
+
+// Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
+Route::get('/categories', [CategoryController::class, 'getAllCategory']);

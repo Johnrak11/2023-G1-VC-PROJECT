@@ -3,12 +3,13 @@
 </template>
 
 <script setup>
-import { axiosStore } from "./stores/axiosHandle.js";
-const httpRequest = axiosStore();
 import { userStore } from "./stores/user.js";
+import { cookieStore } from "./stores/cookies.js";
+
+const { getCookie } = cookieStore()
 const user = userStore();
-user.httpRequest = httpRequest.api
-const userToken = user.getTokenInCookie("token");
+const userToken = getCookie("token");
+user.token = userToken
 if (userToken) {
   user.getUserInfor();
 }

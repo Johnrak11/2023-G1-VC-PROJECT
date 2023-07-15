@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\category;
+
+use App\Models\Categories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class EventFactory extends Factory
     public function definition(): array
     {
         $organizer = User::inRandomOrder()->first();
-        $category = Category::inRandomOrder()->first();
+        $category = Categories::inRandomOrder()->first();
         return [
             'name' => $this->faker->unique()->sentence(),
             'description' => $this->faker->paragraph(),

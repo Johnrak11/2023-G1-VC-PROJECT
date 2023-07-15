@@ -50,7 +50,7 @@ async function getDataEvent() {
 }
 </script>
 
-<style>
+<style scoped>
 .v-table {
     margin-left: 25%;
     box-shadow: 5px 5px 10px gray;

@@ -18,11 +18,13 @@
 .logout {
   width: 50%;
 }
+
 select {
   cursor: pointer;
   padding-left: 10px;
   padding-right: 10px;
 }
+
 .navbar {
   overflow: hidden;
   position: fixed;
