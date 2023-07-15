@@ -8,7 +8,7 @@
       <select class="mr-5">
         <option value="">ED/KH</option>
         <option value="">English</option>
-        <option value="">ខ្មែរ</option>
+        <option  value="">ខ្មែរ</option>
       </select>
     </div>
   </v-card>

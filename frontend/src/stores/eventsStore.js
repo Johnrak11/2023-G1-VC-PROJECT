@@ -1,12 +1,11 @@
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle.js";
-import axios from "axios";
 export const eventStores = defineStore("event", {
   state: () => ({
     events: [],
     reletedEvent: [],
     localHttp: "http://172.16.0.143:8080",
-    pagination: { currentPage: 1, lastPage: 5, links: [] },
+    pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
   }),
   gatters: {
     showEvents() {
@@ -28,10 +27,23 @@ export const eventStores = defineStore("event", {
         .catch((error) => console.log(error));
       return this.events;
     },
-    async getPaginationData() {
-      let linkPage = this.pagination.links[this.pagination.currentPage].url;
-      await axios
-        .get(linkPage)
+
+    async getPaginationData(pageNumber) {
+      if (history.pushState) {
+        var newurl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?page=" +
+          pageNumber;
+        this.pagination.currentPage;
+        window.history.pushState({ path: newurl }, "", newurl);
+      }
+      var element = document.getElementById("nav-scroll");
+      element.scrollIntoView({ behavior: "smooth" });
+      await baseAPI
+        .get(`/events?page=${pageNumber}`)
         .then((response) => {
           let responeseData = response.data.data;
           console.log(responeseData);
