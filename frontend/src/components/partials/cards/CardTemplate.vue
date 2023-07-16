@@ -90,7 +90,7 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn color="white" class="ml-3 bg-red mb-5">
+        <v-btn color="white" class="ml-3 bg-red mb-5" @click.prevent="booking">
           Booking
         </v-btn>
       </v-card-actions>
@@ -99,6 +99,7 @@
 </template>
 
 <script setup>
+import router from "@/routes/router";
 import { eventStores } from "@/stores/eventsStore";
 import { defineProps, ref } from "vue";
 const props = defineProps({
@@ -112,6 +113,12 @@ const liked = ref(false);
 function ClickShare(id) {
   console.log(id);
 }
+
+function booking(){
+  router.push('/booking/'+eventInfor.value.id);
+  // console.log(eventInfor.value.id);
+}
+
 
 </script>
 

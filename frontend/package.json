@@ -21,7 +21,7 @@
     "pinia": "^2.1.4",
     "rm": "^0.1.8",
     "roboto-fontface": "*",
-    "sweetalert2": "^11.7.12",
+    "sweetalert2": "^11.7.16",
     "vee-validate": "^4.10.5",
     "vue": "^3.2.13",
     "vue-autocomplete": "^0.0.2",

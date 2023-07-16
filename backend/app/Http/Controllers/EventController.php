@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
+use App\Http\Resources\EventBookingResource;
 use App\Http\Resources\EventCategoryResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\OrganizerResource;
@@ -89,9 +90,9 @@ class EventController extends Controller
     }
     public function getEventById($id)
     {
-        $event_detail = Event::find($id);
-        if (isset($event_detail)) {
-            return response()->json(['status' => 'success', 'data' => $event_detail], 200);
+        $eventDetail = Event::find($id);
+        if (isset($eventDetail)) {
+            return response()->json(['status' => 'success', 'data' => $eventDetail], 200);
         } else {
             return response()->json(['status' => false, 'data' => 'Id' . ' ' . $id . ' does not exist'], 404);
         }
@@ -99,9 +100,16 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event)
+    public function booking($id)
     {
         //
+        $eventBooking = Event::find($id);
+        return new EventBookingResource($eventBooking);
+        // if (isset($eventBooking)) {
+        //     return response()->json(['status' => 'success', 'data' => $eventBooking], 200);
+        // } else {
+        //     return response()->json(['status' => false, 'data' => 'Id' . ' ' . $id . ' does not exist'], 404);
+        // }
     }
 
     /**
