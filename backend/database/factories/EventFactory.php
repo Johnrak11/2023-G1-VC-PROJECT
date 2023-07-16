@@ -29,7 +29,6 @@ class EventFactory extends Factory
             'location' => $this->faker->sentence(),
             'image' => $this->faker->image(),
             'venue' => $this->faker->sentence(),
-            'price'=> $this->faker->numberBetween(2,20),
             'organizer_id' => $organizer->id,
             'category_id' => $category->id,
             

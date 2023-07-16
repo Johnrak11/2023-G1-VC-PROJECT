@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <v-row justify="center">
-      <button-component-form @click="dialog = !dialog" class="mr-16">Payment</button-component-form>
+      <button-component-form @click="dialog = !dialog">Payment</button-component-form>
       <v-dialog v-model="dialog" width="40%">
         <v-card>
           <v-card-title>
@@ -26,16 +26,14 @@
   </div>
 </template>
 <script setup>
-
-import axios from 'axios';
 import visaCard from "../../assets/credit_card/visa.png";
 import masterCard from "../../assets/credit_card/mastercard.png";
 import discover from "../../assets/credit_card/discover.png";
 import americanCard from "../../assets/credit_card/american_express.png";
 import { ref, computed } from 'vue';
 import ButtonComponentForm from '../buttons/ButtonComponentForm.vue';
-import { axiosStore } from '../../stores/axiosHandle.js';
-import router from '@/routes/router.js';
+import baseAPI from "@/stores/axiosHandle.js";
+import router from "@/routes/router.js";
 import Swal from 'sweetalert2';
 
 const cardNumber = ref();
@@ -44,7 +42,7 @@ const cvvCard = ref();
 const nameCard = ref();
 const dialog = ref(false);
 const creditCardTypeName = ref('');
-const httpRequest = axiosStore();
+// const httpRequest = axiosStore();
 
 const creditCardTypes = [
   { type: 'visa', pattern: /^4[0-9]{12}(?:[0-9]{3})?$/, message: visaCard },
@@ -97,8 +95,7 @@ async function saveData() {
     'expiration': expirationCard.value,
     'user_id': userId.value
   }
-  await axios.post(httpRequest.api + '/booking/creditCard', creditCard).then((response) => {
-    console.log(response.data);
+  await baseAPI.post('/booking/creditCard', creditCard).then((response) => {
     if (response.status === 200) {
       Swal.fire({
         position: 'top-center',
@@ -119,7 +116,6 @@ async function saveData() {
     router.push('/');
   }).catch((error) => {
     console.log(error.response.data); // log the error message returned by the server
-    console.log(error);
   });
 
 }

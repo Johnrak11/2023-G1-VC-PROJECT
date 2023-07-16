@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('location');
             $table->string('image');
             $table->string('venue');
-            $table->integer('price');
             $table->unsignedBigInteger('organizer_id');
             $table->foreign('organizer_id')
                 ->references('id')

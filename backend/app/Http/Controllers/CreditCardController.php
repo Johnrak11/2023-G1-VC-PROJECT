@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCreditCardRequest;
-use App\Models\credit_card;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Credit_card;
 use App\Http\Requests\Updatecredit_cardRequest;
 
 class CreditCardController extends Controller
@@ -31,7 +29,7 @@ class CreditCardController extends Controller
      */
     public function store(StoreCreditCardRequest $request)
     {
-        $creditCard = credit_card::create([
+        $creditCard = Credit_card::create([
             'name' => $request->input('name'),
             'cvv' => $request->input('cvv'),
             'number' => $request->input('number'),

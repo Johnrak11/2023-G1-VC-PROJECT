@@ -40,6 +40,7 @@ const routes = [
     path: "/booking/:id",
     name: "booking",
     component: BookingView,
+    props:true,
   },
   {
     path: "/payment",

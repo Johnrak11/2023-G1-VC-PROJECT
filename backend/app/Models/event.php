@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Event extends Model
 {
@@ -17,7 +18,6 @@ class Event extends Model
         'location',
         'image',
         'venue',
-        'price',
         'organizer_id',
         'category_id'
     ];
@@ -32,5 +32,9 @@ class Event extends Model
     public function categories()
     {
         return $this->belongsTo(Categories::class);
+    }
+    public function details()
+    {
+        return $this->hasMany(Event_detail::class);
     }
 }
