@@ -48,7 +48,7 @@ Route::prefix('auth')->group(function () {
 });
 
 
-// Route::get('/eventsNotDeadline', [EventController::class, 'getEventsNotDeadline']);
+// Route::get('/eventsNotDeadline', [EventController::class, 'getEvents']);
 // Route::get('/event/{id}', [EventController::class, 'getEventById']);
 
 
@@ -56,7 +56,7 @@ Route::prefix('auth')->group(function () {
 Route::prefix('/events')->group(function () {
     Route::get('/{id}', [EventController::class, 'getEventById']);
     Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
-    Route::get('/', ([EventController::class, 'getEventsNotDeadline']));
+    Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
 });
@@ -66,4 +66,5 @@ Route::prefix('/search')->group(function () {
     });
 });
 
+// Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);

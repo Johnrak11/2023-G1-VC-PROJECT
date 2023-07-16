@@ -11,7 +11,8 @@ import VueSocialSharing from 'vue-social-sharing';
 
 
 import { createPinia } from "pinia";
-
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 
 // --- components-----
@@ -52,6 +53,7 @@ app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
 app.component("banner-view", BannerView);
+app.component("VueDatePicker", VueDatePicker);
 
 
 

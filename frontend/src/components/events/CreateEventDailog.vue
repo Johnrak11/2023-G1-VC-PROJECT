@@ -24,7 +24,7 @@
                         <v-card-text class="d-flex justify-center">
                             <v-window v-model="tab" class="all-form-container rounded">
                                 <v-window-item value="one">
-                                    <detailCreate></detailCreate>
+                                    <detailCreate ref="detailHandleSubmit"></detailCreate>
                                 </v-window-item>
                                 <v-window-item value="two">
                                     <ticketCreate></ticketCreate>
@@ -35,7 +35,7 @@
                             <v-tabs v-model="tab" class="d-flex justify-center aling-center">
                                 <v-tab v-show="!isNext" @click="isNext = !isNext" value="one" width="10%"><v-btn
                                         class="bg-red">Preview</v-btn></v-tab>
-                                <v-tab v-show="isNext" @click="isNext = !isNext" value="two" width="10%"><v-btn
+                                <v-tab v-show="isNext" @click="checkDetail" :value="nextValue" width="10%"><v-btn
                                         class="bg-red">Next</v-btn></v-tab>
                             </v-tabs>
                         </div>
@@ -49,9 +49,16 @@
 import detailCreate from './DetailEventCretae.vue'
 import ticketCreate from './TicketEventCretae.vue'
 import { ref } from 'vue';
-const dialog = ref(true)
+const dialog = ref(false)
 const tab = ref('one')
 const isNext = ref(true)
+const nextValue = ref('one')
+const detailHandleSubmit = ref()
+
+function checkDetail(){
+    console.log(detailHandleSubmit.value.submitHandler())
+}
+
 </script>
 
 <style>

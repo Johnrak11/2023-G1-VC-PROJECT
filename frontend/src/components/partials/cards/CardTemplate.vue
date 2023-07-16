@@ -1,6 +1,6 @@
 <template>
   <v-hover v-slot="{ isHovering, props }" class="card">
-    <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
+    <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props" width="22%"
       class="card  bg-grey-lighten-2 mt-5 ml-5 hover">
       <router-link :to="`/detail/${eventInfor.id}`">
         <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
