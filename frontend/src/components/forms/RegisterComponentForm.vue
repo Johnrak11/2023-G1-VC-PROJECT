@@ -39,11 +39,15 @@
 </template>
 
 <script setup>
-import { addressStore } from '../../stores/address.js';
-let address = addressStore();
 import autoCompleteAddress from './autoComplete.vue'
 import ButtonComponentForm from "../buttons/ButtonComponentForm.vue";
-import axios from "axios";
+import baseAPI from '@/stores/axiosHandle.js';
+import { addressStore } from '../../stores/address.js';
+let address = addressStore();
+
+import { cookieStore } from '@/stores/cookies.js'
+const { setCookie } = cookieStore()
+
 import { ref } from "vue";
 import router from '@/routes/router.js';
 import { userStore } from '../../stores/user.js'
@@ -76,8 +80,6 @@ const phoneNumberRule = [
   (v) => !!v || "Phone number is required",
   (v) => /^\d{1,12}$/.test(v) || "Phone number must be less than 12 digits",
 ];
-import { axiosStore } from '../../stores/axiosHandle.js';
-const httpRequest = axiosStore();
 const backEmailError = ref('')
 const user = userStore()
 
@@ -90,8 +92,8 @@ async function submitForm() {
     return;
   }
   isLoading.value = true
-  await axios
-    .post(httpRequest.api + '/auth/registers', {
+  await baseAPI
+    .post('/auth/registers', {
       firstname: firstname.value,
       lastname: lastname.value,
       email: email.value,
@@ -107,7 +109,7 @@ async function submitForm() {
       } else {
         user.user = response.data.user
         user.token = response.data.token
-        user.storeTokenInCookie()
+        setCookie('token', user.token)
         console.log(user.user)
         router.push('/')
       }

@@ -1,6 +1,5 @@
 
 <template>
-    
     <div class="mt-6 ml-16 mr-16">
         <slot></slot>
         <div class="ml-4 mr-8 d-flex justify-space-evenly flex-wrap">
@@ -13,26 +12,26 @@
 import cardTemplate from './CardTemplate.vue'
 
 import { onMounted } from 'vue'
-import eventStores from '@/stores/eventsStore.js'
-import {axiosStore} from '@/stores/axiosHandle.js'
-const httpRequest = axiosStore() 
+import { eventStores } from '@/stores/eventsStore.js'
 const events = eventStores()
-events.httpRequest = httpRequest.api
+
 onMounted(() => {
     events.getDataAxios()
 })
 </script>
 
 <style scoped>
-    .card{
-        width: 22%;
-        
-    }
-    img{
-        width: 100%;
-        border-radius: 10px;
-    }
-    #booking{
-        margin-left: 70%;
-    }
+.card {
+    width: 22%;
+
+}
+
+img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#booking {
+    margin-left: 70%;
+}
 </style>

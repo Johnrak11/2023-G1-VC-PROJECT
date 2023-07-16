@@ -5,7 +5,7 @@ export const addressStore = defineStore("address", {
   state: () => ({
     address: "",
     loading: false,
-    isDenied : false,
+    isDenied: false,
   }),
   getters: {},
   actions: {

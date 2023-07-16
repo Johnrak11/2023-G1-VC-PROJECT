@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-15">
+    <div style="margin-top: 20%;">
         <ul class="d-flex justify-space-evenly">
             <li>All</li>
             <li>Workshop</li>
@@ -29,4 +29,5 @@ li:hover{
     color: white;
     cursor: pointer;
 }
+
 </style>

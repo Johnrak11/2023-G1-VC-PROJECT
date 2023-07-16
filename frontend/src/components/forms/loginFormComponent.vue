@@ -45,13 +45,13 @@
     </div>
 </template>
 <script setup>
-import axios from "axios";
 import router from '@/routes/router.js';
 import { userStore } from '../../stores/user.js'
 import ButtonComponentForm from "../buttons/ButtonComponentForm.vue";
-import { axiosStore } from '../../stores/axiosHandle.js';
 import { ref } from 'vue'
-
+import baseAPI from "@/stores/axiosHandle.js";
+import { cookieStore } from '@/stores/cookies.js'
+const { setCookie } = cookieStore()
 const invalideForm = ref('')
 
 const  visible = ref(false);
@@ -68,7 +68,6 @@ const emailRules = [
 ];
 const isLoading = ref(false)
 
-const httpRequest = axiosStore();
 const user = userStore()
 const backEmailError = ref('')
 const backPasswordError = ref('')
@@ -80,8 +79,8 @@ async function submitHandler() {
         return;
     }
     isLoading.value = true
-    await axios
-        .post(httpRequest.api + '/auth/login', {
+    await baseAPI
+        .post('/auth/login', {
             email: email.value,
             password: password.value,
         })
@@ -93,7 +92,7 @@ async function submitHandler() {
             } else {
                 user.user = response.data.user
                 user.token = response.data.token
-                user.storeTokenInCookie()
+                setCookie('token', user.token)
                 console.log(user.user)
                 router.push('/')
             }
@@ -106,7 +105,6 @@ function handleError(message) {
     if (message.email) {
         backEmailError.value = message.email
     }
-
     if (message.password) {
         backPasswordError.value = message.password
     }
