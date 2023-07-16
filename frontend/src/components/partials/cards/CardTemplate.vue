@@ -66,21 +66,21 @@
       </div>
 
       <v-card-text>
-        <div class="caard" style="margin-top: -15%;">
+        <div class="" style="margin-top: -15%;">
           <div class="top">
             <router-link :to="`/detail/${eventInfor.id}`">
               <div>
                 <!-- <p>{{ eventInfor.description }}</p> -->
                 <div class="d-flex mt-2">
                   <!-- <v-icon size="17"> mdi-calendar</v-icon> -->
-                  <p class="ml-1 mt-0" style="font-size: 15px">Date:
+                  <p class="ml-1 mt-2 mb-2" style="font-size: 15px">Date:
                     {{ eventInfor.date }}
                   </p>
                 </div>
                 <div class="d-flex" style="margin-top: -5%;">
                   <!-- <v-icon size="17">mdi-map-marker</v-icon> -->
-                  <p style="font-size: 15px" class="ml-1 mt-0">Venue:
-                    {{ eventInfor.venue }}
+                  <p style="font-size: 15px" class="ml-1 mt-1">Venue:
+                    {{ eventCreate.truncateDescription(eventInfor.venue,20)}}
                   </p>
                 </div>
               </div>
@@ -88,7 +88,6 @@
           </div>
         </div>
       </v-card-text>
-
       <v-card-actions>
         <v-btn color="white" class="ml-3 bg-red mb-5" @click.prevent="booking">
           Booking
@@ -108,14 +107,17 @@ const props = defineProps({
 const events = eventStores()
 const eventInfor = ref(props.event);
 
+import { eventCreateStores } from '@/stores/eventCreate.js'
+const eventCreate = eventCreateStores()
+
 const liked = ref(false);
 
 function ClickShare(id) {
   console.log(id);
 }
 
-function booking(){
-  router.push('/booking/'+eventInfor.value.id);
+function booking() {
+  router.push('/booking/' + eventInfor.value.id);
   // console.log(eventInfor.value.id);
 }
 
@@ -124,6 +126,7 @@ function booking(){
 
 <style scoped>
 .card {
+  background-color: red;
   width: 23%;
 }
 

@@ -122,5 +122,14 @@ export const eventCreateStores = defineStore("eventCreate", {
       const formattedTime = `${hours}:${minutes}:${seconds}`;
       return [formattedDate, formattedTime];
     },
+
+    truncateDescription(description,textLength) {
+      const maxLength = textLength; // Maximum characters to display
+      if (description.length <= maxLength) {
+        return description;
+      } else {
+        return description.substring(0, maxLength) + "...";
+      }
+    },
   },
 });
