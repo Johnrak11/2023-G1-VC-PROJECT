@@ -6,6 +6,7 @@ use App\Models\ticket;
 use App\Http\Requests\StoreticketRequest;
 use App\Http\Requests\UpdateticketRequest;
 use App\Http\Resources\TicketResource;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Event;
 use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
 
@@ -72,9 +73,10 @@ class TicketController extends Controller
     {
         //
     }
-    public function searchTicket($request) {
-        $tickets = Ticket::all();
-        $name = Ticket::where('name', 'LIKE', '%'.$tickets.'%')->get();
-        return TicketResource::collection($name);
+    public function searchTicket( $request) {
+        $tickets = $request->input('ticket_code');
+        $name = TicketResource::collection($tickets);
+        return $name;
+
     }
 }
