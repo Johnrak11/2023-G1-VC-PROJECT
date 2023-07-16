@@ -1,22 +1,34 @@
 <template>
-  <div class="registerForm animate__animated" :class="invalideForm">
+  <div class="registerForm animate__animated mt-10" :class="invalideForm">
     <v-form @submit.prevent="submitForm" ref="form" class="w-100">
       <v-card-text>
         <div class="name">
-          <v-text-field class="w-90 ml-5" v-model="firstname" :rules="firstNameRules" type="firstName" label="FirstName"
-            placeholder="firstName"></v-text-field>
-          <v-text-field class="w-90 ml-5" v-model="lastname" :rules="lastNameRules" type="lastName" label="Last Name"
-            placeholder="lastName"></v-text-field>
+          <!-- <v-text-field class="w-90 ml-5" v-model="firstname" :rules="firstNameRules" type="firstName" label="FirstName"
+            placeholder="firstName"></v-text-field> -->
+          <v-text-field density="compact" placeholder="First Name" variant="outlined" class="w-90 ml-5"
+            v-model="firstname" :rules="firstNameRules" type="firstName" label="FirstName"></v-text-field>
+          <!-- <v-text-field class="w-90 ml-5" v-model="lastname" :rules="lastNameRules" type="lastName" label="Last Name"
+            placeholder="lastName"></v-text-field> -->
+          <v-text-field density="compact" placeholder="Last Name" variant="outlined" class="w-90 ml-5" v-model="lastname"
+            :rules="lastNameRules" type="lastName" label="Last Name"></v-text-field>
         </div>
-        <v-text-field class="w-90 ml-5" v-model="email" :rules="emailRules" type="email" label="Email" placeholder="email"
-          @keydown="backEmailError = ''"></v-text-field>
+        <!-- <v-text-field class="w-90 ml-5" v-model="email" :rules="emailRules" type="email" label="Email" placeholder="email"
+          @keydown="backEmailError = ''"></v-text-field> -->
+        <v-text-field density="compact" variant="outlined" class="w-90 ml-5" v-model="email" :rules="emailRules"
+          type="email" label="Email" placeholder="email" @keydown="backEmailError = ''"></v-text-field>
         <small v-if="backEmailError" class="error-message">{{ backEmailError }}</small>
-        <v-text-field class="w-90 ml-5" v-model="password" :rules="passwordRules"
+        <!-- <v-text-field class="w-90 ml-5" v-model="password" :rules="passwordRules"
           :type="passwordShow ? 'text' : 'password'" label="Password" placeholder="password"
           :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="passwordShow = !passwordShow"></v-text-field>
-        <v-text-field class="w-90 ml-5" v-model="phoneNumber" type="phoneNumber" label="Phone Number"
-          :rules="phoneNumberRule" placeholder="phoneNumber"></v-text-field>
+          @click:append="passwordShow = !passwordShow"></v-text-field> -->
+        <v-text-field :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'"
+          density="compact" placeholder="Enter your password" variant="outlined" @click:append-inner="visible = !visible"
+          @keydown="backPasswordError = ''" class="w-90 ml-5" v-model="password" :rules="passwordRules"
+          label="Password"></v-text-field>
+        <!-- <v-text-field class="w-90 ml-5" v-model="phoneNumber" type="phoneNumber" label="Phone Number"
+          :rules="phoneNumberRule" placeholder="phoneNumber"></v-text-field> -->
+        <v-text-field density="compact" variant="outlined" class="w-90 ml-5" v-model="phoneNumber" type="phoneNumber"
+          label="Phone Number" :rules="phoneNumberRule" placeholder="phoneNumber"></v-text-field>
         <autoCompleteAddress></autoCompleteAddress>
       </v-card-text>
       <ButtonComponentForm :isLoading="isLoading">
@@ -38,7 +50,7 @@ import { userStore } from '../../stores/user.js'
 
 const invalideForm = ref('')
 const isLoading = ref(false)
-const passwordShow = ref(false);
+const visible = ref(false);
 const password = ref("");
 const passwordRules = [
   (v) => !!v || "Password is required",
