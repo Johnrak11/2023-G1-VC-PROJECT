@@ -10,12 +10,12 @@
 
 <script setup>
 import { defineProps } from 'vue';
-
+import cardTemplate from './CardReletedTemplate.vue';
 
 const props = defineProps({
   event: Object
 });
-import CardTemplate from './CardReletedTemplate.vue';
+
 </script>
 
 

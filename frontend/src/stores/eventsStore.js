@@ -81,8 +81,20 @@ export const eventStores = defineStore("event", {
         .then((response) => {
           this.events = response.data.data;
           console.log(this.events);
+          // console.log(this.events);
         })
         .catch((error) => console.log(error));
     },
+    // async getEventPrice(eventId) {
+    //   await baseAPI
+    //     .get(
+    //       `eventDetail/${eventId}`
+    //     )
+    //     .then((response) => {
+    //       this.eventDetail = response.data.data;
+    //       console.log("EventDetail", response.data);
+    //     })
+    //     .catch((error) => console.log(error));
+    // },
   },
 });

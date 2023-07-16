@@ -1,6 +1,9 @@
 <template>
-  <img class="img1 mt-10" src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
-    alt="" />
+  <img
+    class="img1 mt-10"
+    src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
+    alt=""
+  />
   <div class="container d-flex flex-column">
     <div class="detail">
       <div class="row bg-white d-flex pa-6 flex-column">
@@ -9,7 +12,12 @@
           <div class="d-flex mt-2 justify-space-between">
             <div class="icon-left d-flex">
               <div class="d-flex">
-                <v-icon class="mt-1" :color="liked ? 'grey' : 'red'" @click="liked = !liked">mdi-heart</v-icon>
+                <v-icon
+                  class="mt-1"
+                  :color="liked ? 'grey' : 'red'"
+                  @click="liked = !liked"
+                  >mdi-heart</v-icon
+                >
                 <p class="mt-1 ml-2">100</p>
               </div>
               <div class="d-flex ml-10">
@@ -45,15 +53,24 @@
                 <v-icon>mdi-map</v-icon>
                 <p class="ml-4 mt-1" v-if="event">{{ event.location }}</p>
               </div>
+              <div class="d-flex">
+                <v-icon>mdi-map</v-icon>
+                <p class="ml-4 mt-1"></p>
+              </div>
               <br />
             </div>
             <div class="map">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.678901234567!2d-122.4324!3d37.7897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDU4JzU0LjQiTiAxMjLCsDM1JzQ5LjIiVw!5e0!3m2!1sen!2sus!4v1625706808123!5m2!1sen!2sus"
-                width="455" height="200" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+                width="455"
+                height="200"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+              ></iframe>
             </div>
           </div>
-          <div class="button mt-6">
+          <div class="d-flex justify-end button mt-6">
             <button class="free bg-red pa-1 rounded">Free</button>
           </div>
         </div>
@@ -67,7 +84,7 @@
 import agendaComponent from "./AgendaComponent.vue";
 import listCardDetail from "./ListCardDetail.vue";
 import baseAPI from "@/stores/axiosHandle.js";
-
+// import eventStores from "@/stores/eventsStore.js";
 export default {
   components: {
     agendaComponent,
@@ -81,6 +98,7 @@ export default {
   },
   async mounted() {
     await this.fetchEvent();
+    // await this.fetchEventDetail();
   },
   methods: {
     async fetchEvent() {
@@ -92,6 +110,17 @@ export default {
         console.log(error);
       }
     },
+    // async fetchEventDetail() {
+    //   const eventId = this.$route.params.id;
+    //   try {
+    //     const response = await baseAPI.get(`eventDetail/${eventId}`);
+    //     this.eventDetail = response.data.data;
+    //     console.log(this.eventDetail);
+    //     // console.log('Hello');
+    //   } catch(error) {
+    //     console.log(error);
+    //   }
+    // },
   },
 };
 </script>

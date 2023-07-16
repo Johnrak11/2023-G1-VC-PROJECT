@@ -1,4 +1,3 @@
-
 <template>
     <div class="mt-6 ml-16 mr-16" id="nav-scroll">
         <slot></slot>

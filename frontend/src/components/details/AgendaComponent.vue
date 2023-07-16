@@ -73,7 +73,7 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 p {
   font-size: 18px;
   line-height: 1.5;
