@@ -43,8 +43,13 @@ class EventDetailController extends Controller
     }
     public function getEventDetail($eventId)
     {
-        $eventDetail = EventDetail::where('eventId', '>=', $eventId)->first();
-        return $eventDetail;
+        $eventDetail = EventDetail::where('event_id', '>=', $eventId)->first();
+        if (isset($eventDetail)) {
+            return response()->json(['status' => 'success', 'data' => $eventDetail], 200);
+        } else {
+            return response()->json(['status' => false, 'data' => 'Id does not exist'], 404);
+        }
+        // return $eventDetail;
     }
     
     /**
