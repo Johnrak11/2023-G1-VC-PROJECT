@@ -35,7 +35,7 @@
                     <ShareNetwork network="telegram" :url="events.localHttp + '/detail/' + eventInfor.id"
                       :title="eventInfor.name" :description="eventInfor.description"
                       quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
-                      class="social-share">
+                      class="social-share" id="my-iframe" allow-same-origin>
                       <v-icon left class="ml-2 color-icon" size="50">mdi-telegram</v-icon>
                       <p class="text-black mt-2">Telegram</p>
                     </ShareNetwork>
@@ -112,6 +112,7 @@ const liked = ref(false);
 function ClickShare(id) {
   console.log(id);
 }
+
 </script>
 
 <style scoped>
