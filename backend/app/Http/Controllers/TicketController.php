@@ -72,4 +72,9 @@ class TicketController extends Controller
     {
         //
     }
+    public function searchTicket($request) {
+        $tickets = Ticket::all();
+        $name = Ticket::where('name', 'LIKE', '%'.$tickets.'%')->get();
+        return TicketResource::collection($name);
+    }
 }

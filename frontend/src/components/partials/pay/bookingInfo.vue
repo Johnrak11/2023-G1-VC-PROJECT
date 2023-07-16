@@ -55,6 +55,7 @@ async function fetchEvent() {
 }
 </script>
   
+
 <style scoped>
 .v-table {
   /* margin-left: 2%; */

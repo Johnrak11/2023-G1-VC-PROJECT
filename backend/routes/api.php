@@ -53,7 +53,7 @@ Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
 });
 
-Route::get('/tickets', [TicketController::class, 'getAllTicket']);
+// Route::get('/tickets', [TicketController::class, 'getAllTicket']);
 
 //-------search for events------------
 Route::prefix('/events')->group(function () {
@@ -75,3 +75,5 @@ Route::prefix('/search')->group(function () {
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
+Route::get('/tickets',[TicketController::class, 'getAllTicket']);
+Route::get('/tickets/search',[TicketController::class, 'searchTicket']);
