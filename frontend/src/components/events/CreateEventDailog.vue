@@ -37,6 +37,8 @@
                                         class="bg-red">Preview</v-btn></v-tab>
                                 <v-tab v-show="isNext" @click="checkDetail" :value="nextValue" width="10%"><v-btn
                                         class="bg-red">Next</v-btn></v-tab>
+                                <!-- <v-tab v-show="isNext" :value="nextValue" width="10%"><v-btn
+                                        class="bg-red">Next</v-btn></v-tab> -->
                             </v-tabs>
                         </div>
                     </v-card>
@@ -49,15 +51,25 @@
 import detailCreate from './DetailEventCretae.vue'
 import ticketCreate from './TicketEventCretae.vue'
 import { ref } from 'vue';
-const dialog = ref(false)
+const dialog = ref(true)
 const tab = ref('one')
 const isNext = ref(true)
 const nextValue = ref('one')
 const detailHandleSubmit = ref()
 
-function checkDetail(){
-    console.log(detailHandleSubmit.value.submitHandler())
+function checkDetail() {
+    detailHandleSubmit.value.submitHandler()
+        .then(result => {
+            if (result) {
+                tab.value = 'two'
+                isNext.value = false
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 }
+
 
 </script>
 

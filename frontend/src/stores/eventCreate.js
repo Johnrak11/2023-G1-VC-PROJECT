@@ -16,10 +16,10 @@ export const eventCreateStores = defineStore("eventCreate", {
     eventDescription: "",
     eventAddress: "",
     eventVenue: "",
-    ticketPrice: "",
-    ticketAvailable: 0,
-    ticketRestriction: 0,
-    ticketDescription: "",
+
+    ticket: {},
+    discount: {},
+    agendas: [],
     imagePath: "",
     isLoadingDialog: false,
     imagePreview: "https://placehold.co/600x400/png",
@@ -65,6 +65,62 @@ export const eventCreateStores = defineStore("eventCreate", {
       } catch (error) {
         console.error("Error deleting image:", error);
       }
+    },
+    formatDate(date) {
+      const options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      };
+
+      const formattedDate = new Date(date).toLocaleString("en-US", options);
+      return formattedDate.replace(",", "");
+    },
+
+    datebaseFormatDate(inputDate) {
+      const date = new Date(inputDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const seconds = String(date.getSeconds()).padStart(2, "0");
+      const formattedDate = `${year}-${month}-${day}`;
+      const formattedTime = `${hours}:${minutes}:${seconds}`;
+      return `${formattedDate} ${formattedTime}`;
+    },
+
+    createEvent() {
+      let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
+      console.log(dateTimeFormat);
+      let newEvent = {
+        name: this.eventName,
+        description: this.eventDescription,
+        date: dateTimeFormat[0],
+        time: dateTimeFormat[1],
+        location: this.eventAddress,
+        image: this.eventPoster,
+        category_id: this.eventCategories,
+      };
+      console.log(newEvent);
+      console.log(this.ticket);
+      console.log(this.discount);
+      console.log(this.agendas);
+    },
+
+    convertDateTimeFormat(inputDate) {
+      const date = new Date(inputDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const seconds = String(date.getSeconds()).padStart(2, "0");
+      const formattedDate = `${year}-${month}-${day}`;
+      const formattedTime = `${hours}:${minutes}:${seconds}`;
+      return [formattedDate, formattedTime];
     },
   },
 });
