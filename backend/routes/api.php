@@ -54,3 +54,4 @@ Route::prefix('/booking')->group(function () {
 });
 
 Route::get('/tickets',[TicketController::class, 'getAllTicket']);
+Route::get('/tickets/search',[TicketController::class, 'searchTicket']);
