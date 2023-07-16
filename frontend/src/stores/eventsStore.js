@@ -29,7 +29,7 @@ export const eventStores = defineStore("event", {
         .get(`/events/category/${categoryId}/${eventId}`)
         .then((response) => {
           this.reletedEvent = response.data.data;
-          console.log("Event", this.reletedEvent);
+          // console.log("Event", this.reletedEvent);
         })
         .catch((error) => console.log(error));
     },
@@ -41,20 +41,20 @@ export const eventStores = defineStore("event", {
         )
         .then((response) => {
           this.events = response.data.data;
-          console.log(this.events);
+          // console.log(this.events);
         })
         .catch((error) => console.log(error));
     },
-    async getEventPrice(eventId) {
-      await baseAPI
-        .get(
-          `eventDetail/${eventId}`
-        )
-        .then((response) => {
-          this.events = response.data.data;
-          console.log(this.events);
-        })
-        .catch((error) => console.log(error));
-    },
+    // async getEventPrice(eventId) {
+    //   await baseAPI
+    //     .get(
+    //       `eventDetail/${eventId}`
+    //     )
+    //     .then((response) => {
+    //       this.eventDetail = response.data.data;
+    //       console.log("EventDetail", response.data);
+    //     })
+    //     .catch((error) => console.log(error));
+    // },
   },
 });

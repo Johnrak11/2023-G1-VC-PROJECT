@@ -53,7 +53,7 @@ const groupedItems = computed(() => {
 const fetchAgenda = async () => {
   const route = useRoute();
   const eventId = route.params.id;
-  console.log(eventId)
+  // console.log(eventId)
   await baseAPI.get(`events/agenda/${eventId}`).then(response => {
     items.value = response.data.agendas
   }).catch(error => console.log(error))
@@ -63,7 +63,7 @@ const fetchOrganizer = async () => {
   const organizerId = route.params.id;
 
   await baseAPI.get(`/events/organizer/${organizerId}`).then(response => {
-    console.log(response.data)
+    // console.log(response.data)
     organizer.value = response.data.data
   }).catch(error => console.log(error))
 }
@@ -73,7 +73,7 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 p {
   font-size: 18px;
   line-height: 1.5;
