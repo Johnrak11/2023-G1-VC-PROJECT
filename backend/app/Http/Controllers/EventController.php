@@ -9,8 +9,14 @@ use App\Http\Resources\EventBookingResource;
 use App\Http\Resources\EventCategoryResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\OrganizerResource;
+use App\Models\Agenda;
+use App\Models\Discount;
+use App\Models\Event_detail;
 use App\Models\User;
+use DateTime;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -76,18 +82,107 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreeventRequest $request)
+    public function store(Request $request)
     {
-        //
+        $eventRules = [
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i:s'],
+            'location' => ['required', 'string'],
+            'longitude' => ['required', 'numeric'],
+            'latitude' => ['required', 'numeric'],
+            'image' => ['required'],
+            'venue' => ['required', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
+        ];
+        $eventRequest = $request['event'];
+        $eventRequest['organizer_id'] =  Auth::user()->id;
+        $validator = Validator::make($eventRequest, $eventRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $newEvent = Event::create($eventRequest);
+        if ($request['ticket']) {
+            $eventDetailRequest = $request['ticket'];
+            $eventDetailRequest['event_id'] = $newEvent['id'];
+            $newEventDetail = $this->eventDetailStore($eventDetailRequest);
+
+            if ($request['discount']) {
+                $discountRequest = $request['discount'];
+                $discountRequest['event_detail_id'] = $newEventDetail['id'];
+                $this->discountStore($discountRequest);
+            }
+        }
+        if (is_array($request['agendas']) && !empty($request['agendas'])) {
+            $newAgendas = [];
+            foreach ($request['agendas'] as $agendaRequest) {
+                $agendaRequest['event_id'] = $newEvent['id'];
+                $date = DateTime::createFromFormat("m/d/Y h:i A", $agendaRequest['date']);
+                if ($date) {
+                    $formattedDate = $date->format('Y-m-d H:i:s');
+                    $agendaRequest['date'] = $formattedDate;
+                    $newAgenda = $this->agendaStore($agendaRequest);
+                    array_push($newAgendas, $newAgenda);
+                } else {
+                    return 'agenda date incorrect';
+                }
+            }
+        }
+        return response()->json(['success' => true, 'message' => 'Event created successfully'], 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function eventDetailStore($request)
     {
-        //
+        $eventDetailRules = [
+            'available_ticket' => ['required', 'integer', 'min:0'],
+            'description' => ['required', 'string'],
+            'price' => ['required'],
+            'event_id' => ['required', 'exists:events,id'],
+        ];
+        $validator = Validator::make($request, $eventDetailRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $newEventDetail = Event_detail::create($validator->validated());
+        return $newEventDetail;
     }
+
+    public function discountStore($request)
+    {
+        $discountRules = [
+            'end_date' =>  ['required', 'date_format:Y-m-d H:i:s'],
+            'percent' => ['required', 'integer'],
+            'event_detail_id' => ['required', 'exists:event_details,id'],
+        ];
+        $validator = Validator::make($request, $discountRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $newDiscount = Discount::create($validator->validated());
+        return $newDiscount;
+    }
+
+    public function agendaStore($request)
+    {
+        $agendaRules = [
+            'date' => ['required', 'date_format:Y-m-d H:i:s'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'event_id' => ['required', 'exists:events,id'],
+        ];
+        $validator = Validator::make($request, $agendaRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $newAgenda = Agenda::create($validator->validated());
+        return $newAgenda;
+    }
+
+
     public function getEventById($id)
     {
         $eventDetail = Event::find($id);

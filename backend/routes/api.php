@@ -41,6 +41,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
+    Route::prefix('/events')->group(function () {
+        Route::post('/', [EventController::class, 'store']);
+    });
 });
 
 // ----- authentication group----

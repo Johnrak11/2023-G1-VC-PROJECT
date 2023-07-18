@@ -16,10 +16,13 @@ class Event extends Model
         'date',
         'time',
         'location',
+        'longitude',
+        'latitude',
         'image',
         'venue',
         'organizer_id',
-        'category_id'
+        'category_id',
+        'isPublic'
     ];
     public function tickets(): HasMany
     {

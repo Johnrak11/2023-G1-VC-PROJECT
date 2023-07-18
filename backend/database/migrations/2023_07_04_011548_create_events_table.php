@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('description', 250);
             $table->date('date');
             $table->string('time');
-            $table->string('location');
+            $table->string('location')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->string('image');
             $table->string('venue');
+            $table->boolean('isPublic')->default(0);
             $table->unsignedBigInteger('organizer_id');
             $table->foreign('organizer_id')
                 ->references('id')
