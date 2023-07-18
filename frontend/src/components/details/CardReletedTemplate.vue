@@ -8,7 +8,7 @@
             class="card bg-grey-lighten-2 ml-5 hover " :color="isSelected ? 'red' : 'grey-lighten-1'" @click="toggle">
             <router-link :to="`/detail/${event.id}`">
               <v-img class="align-end text-white" height="50%" max-width="100vh"
-                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
+                :src="event.image" cover>
                 <v-card-title>{{ event.name }}</v-card-title>
               </v-img>
             </router-link>

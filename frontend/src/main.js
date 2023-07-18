@@ -9,7 +9,6 @@ import vue3GoogleLogin from "vue3-google-login";
 // import shareIt from 'vue-share-it';
 import VueSocialSharing from 'vue-social-sharing';
 
-
 import { createPinia } from "pinia";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'

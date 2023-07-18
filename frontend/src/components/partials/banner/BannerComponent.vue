@@ -6,7 +6,7 @@
       >
     </div>
     <div style="margin-top: -30%;" class="text-white">
-      <h1 class="text-center text-h2 text--bold" style="font-weight: bold;">Connection the world</h1>
+      <h1 class="text-center text-h2 text--bold animate__animated animate__fadeInDown" style="font-weight: bold;">Connection the world</h1>
       <p class="text-center text--bold" style="font-weight: bold;">Easy to search, you just enter the keyword</p>
     </div>
   </template>

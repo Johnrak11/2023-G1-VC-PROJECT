@@ -3,7 +3,7 @@
     <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props" width="22%"
       class="card  bg-grey-lighten-2 mt-5 ml-5 hover">
       <router-link :to="`/detail/${eventInfor.id}`">
-        <v-img class="align-end text-white" height="200" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
+        <v-img class="align-end text-white" height="200" :src="eventInfor.image" cover>
           <v-card-title>{{ eventInfor.name }}</v-card-title>
         </v-img>
       </router-link>
@@ -80,7 +80,7 @@
                 <div class="d-flex" style="margin-top: -5%;">
                   <!-- <v-icon size="17">mdi-map-marker</v-icon> -->
                   <p style="font-size: 15px" class="ml-1 mt-1">Venue:
-                    {{ eventCreate.truncateDescription(eventInfor.venue,20)}}
+                    {{ eventCreate.truncateDescription(eventInfor.venue, 20) }}
                   </p>
                 </div>
               </div>
