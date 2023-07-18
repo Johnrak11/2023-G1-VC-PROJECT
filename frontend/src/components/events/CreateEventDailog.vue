@@ -8,13 +8,13 @@
             </template>
             <v-card>
                 <v-toolbar dark color="red">
-                    <v-btn  icon dark @click="dialog = false">
+                    <v-btn icon dark @click="dialog = false">
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
                     <v-toolbar-title>Create Event</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn v-if="!isNext" variant="text" @click="dialog = false">
+                        <v-btn v-if="!isNext" @click="submitEvent" variant="text">
                             Save
                         </v-btn>
                     </v-toolbar-items>
@@ -27,7 +27,7 @@
                                     <detailCreate ref="detailHandleSubmit"></detailCreate>
                                 </v-window-item>
                                 <v-window-item value="two">
-                                    <ticketCreate></ticketCreate>
+                                    <ticketCreate ref="eventHandleSubmit"></ticketCreate>
                                 </v-window-item>
                             </v-window>
                         </v-card-text>
@@ -51,11 +51,12 @@
 import detailCreate from './DetailEventCretae.vue'
 import ticketCreate from './TicketEventCretae.vue'
 import { ref } from 'vue';
-const dialog = ref(false)
+const dialog = ref(true)
 const tab = ref('one')
 const isNext = ref(true)
 const nextValue = ref('one')
 const detailHandleSubmit = ref()
+const eventHandleSubmit = ref()
 
 function checkDetail() {
     detailHandleSubmit.value.submitHandler()
@@ -68,6 +69,18 @@ function checkDetail() {
         .catch(error => {
             console.log(error);
         });
+}
+
+function submitEvent() {
+    eventHandleSubmit.value.ticketSubmit()
+        // .then(result => {
+        //     if (result) {
+        //         console.log('submit')
+        //     }
+        // })
+        // .catch(error => {
+        //     console.log(error);
+        // });
 }
 
 

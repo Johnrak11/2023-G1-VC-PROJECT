@@ -6,6 +6,8 @@ export const addressStore = defineStore("address", {
     address: "",
     loading: false,
     isDenied: false,
+    latitude: null,
+    longitude: null,
   }),
   getters: {},
   actions: {
@@ -13,6 +15,8 @@ export const addressStore = defineStore("address", {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
             this.getAddress(
               position.coords.latitude,
               position.coords.longitude
@@ -36,7 +40,6 @@ export const addressStore = defineStore("address", {
         .get(apiUrl)
         .then((response) => {
           this.address = response.data.features[0].properties.formatted;
-          console.log(this.address);
           this.loading = false;
         })
         .catch((error) => console.log(error));

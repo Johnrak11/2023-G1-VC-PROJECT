@@ -22,11 +22,6 @@
                 <v-text-field type="number" variant="outlined" v-model="ticketAvailable" :rules="ticketAvailableRules"
                     placeholder="Number of available" append-inner-icon="mdi-ticket"></v-text-field>
             </div>
-            <div class="input">
-                <h3>Ticket per customer*</h3>
-                <v-text-field type="number" variant="outlined" v-model="restriction" :rules="restrictionRules"
-                    placeholder="Ticket restriction" append-inner-icon="mdi-ticket"></v-text-field>
-            </div>
         </div>
 
         <div class="switch-container">
@@ -89,16 +84,13 @@
                 </tr>
             </thead>
             <tbody class="table-color">
-                <tr v-for="item in agendas" :key="item.agendaTitle">
-                    <td>{{ item.agendaDate }}</td>
-                    <td>{{ item.agendaTitle }}</td>
-                    <td class="description-column">{{ eventCreate.truncateDescription(item.agendaDescription,40) }} </td>
+                <tr v-for="item in agendas" :key="item.title">
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.title }}</td>
+                    <td class="description-column">{{ eventCreate.truncateDescription(item.description, 40) }} </td>
                 </tr>
             </tbody>
         </v-table>
-        <v-btn class="me-4" @click="ticketSubmit">
-            submit
-        </v-btn>
     </form>
     <v-dialog v-model="isHasAgenda" width="auto">
         <v-sheet width="600px" class="mx-auto">
@@ -127,9 +119,10 @@
 
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineExpose } from "vue";
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
+
 
 const modelDiscount = ref(false)
 const modelFree = ref(false)
@@ -137,14 +130,14 @@ const discountItems = ref([])
 const discountItemsModel = ref('Percent(%)')
 const isHasAgenda = ref(false)
 
-const price = ref('')
-const priceRules = ref([(v) => !!v || "Price is required"]);
+const price = ref('');
+const priceRules = ref([
+    (v) => !!v || 'Price is required',
+    (v) => v > 0 || 'Price must be more than 0.01',
+]);
 
 const ticketAvailable = ref('');
 const ticketAvailableRules = ref([(v) => !!v || "You must enter the number of available tickets."]);
-
-const restriction = ref('');
-const restrictionRules = ref([(v) => !!v || "You must enter the ticket restriction.'"]);
 
 const discount = ref('');
 const discountRules = ref([(v) => !!v || "You must enter the discount amount."]);
@@ -171,7 +164,6 @@ function ticketSubmit() {
 
     let newTicket = {
         'available_ticket': ticketAvailable.value,
-        'restriction': restriction.value,
         'description': ticketDescription.value,
         'price': ticketPrice
     }
@@ -201,12 +193,12 @@ function validateForm() {
         priceRules.value = [(v) => !!v || "Price is required"]
         return false
     }
-    if (!ticketAvailable.value) {
-        ticketAvailableRules.value = [(v) => !!v || "You must enter the number of available tickets."]
+    if (modelFree.value && price.value > 0.01) {
+        priceRules.value = [(v) => !!v || "Price is required"]
         return false
     }
-    if (!restriction.value) {
-        restrictionRules.value = [(v) => !!v || "You must enter the ticket restriction."]
+    if (!ticketAvailable.value) {
+        ticketAvailableRules.value = [(v) => !!v || "You must enter the number of available tickets."]
         return false
     }
     if (!discount.value && !modelDiscount.value) {
@@ -247,17 +239,22 @@ const format = (date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-
     return `Selected date is ${day}/${month}/${year}`;
 }
 const agendaSubmit = handleSubmit(values => {
-    let newAgenda = values
-    newAgenda['agendaDate'] = eventCreate.formatDate(agendaDate.value)
+    let newAgenda = {
+        'title': values.agendaTitle,
+        'description': values.agendaDescription
+    }
+    newAgenda['date'] = eventCreate.formatDate(agendaDate.value)
     agendas.value.push(newAgenda)
     handleReset()
     isHasAgenda.value = false
 })
 
+defineExpose({
+    ticketSubmit
+});
 </script>
 
 <style>
