@@ -113,11 +113,11 @@ async function saveData() {
         timer: 1500
       })
     }
+    createTicket();
     router.push('/');
   }).catch((error) => {
     console.log(error.response.data); // log the error message returned by the server
   });
-
 }
 </script>
 <style scoped>

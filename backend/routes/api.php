@@ -77,3 +77,4 @@ Route::prefix('/search')->group(function () {
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
 Route::get('/tickets',[TicketController::class, 'getAllTicket']);
 Route::get('/tickets/search',[TicketController::class, 'searchTicket']);
+Route::post('/tickets', [TicketController::class, 'createTicket']);

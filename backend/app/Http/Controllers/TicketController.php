@@ -28,11 +28,22 @@ class TicketController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
-
+    // public function createTicket(StoreticketRequest $request)
+    // {
+    //     $ticket = Ticket::create([
+    //         'ticket_code' => $request->input('ticket_code'),
+    //         'booking_date' => $request->input('booking_date'),
+    //         'is_check_in' => $request->input('is_check_in'),
+    //         'user_id' => $request->input('user_id'),
+    //         'event_id' => $request->input('event_id')
+    //     ]);
+    
+    //     if ($ticket) {
+    //         return response()->json(['status' => 'success', 'data' => $ticket], 200);
+    //     }
+    
+    //     return response()->json(['status' => false]);
+    // }
     /**
      * Store a newly created resource in storage.
      */
