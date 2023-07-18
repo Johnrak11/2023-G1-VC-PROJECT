@@ -12,7 +12,7 @@
           <router-link to="/explor" class="link">
             <v-btn id="li-nav" :class="{ 'active': isActive('/explor') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
-          <router-link to="/ticket" class="link">
+          <router-link to="/tickets" class="link">
             <v-btn id="li-nav" :class="{ 'active': isActive('/ticket') }" class="rounded" variant="text">MyTicket</v-btn>
           </router-link>
         </ul>
@@ -120,7 +120,6 @@ a {
 
 .bg-color {
   /* background-color: white; */
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 10px;
 }
 

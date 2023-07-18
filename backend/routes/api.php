@@ -3,8 +3,11 @@
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -47,10 +50,11 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', ([AuthController::class, 'login']));
 });
 
+Route::prefix('/booking')->group(function () {
+    Route::post('/creditCard', [CreditCardController::class, 'store']);
+});
 
-// Route::get('/eventsNotDeadline', [EventController::class, 'getEvents']);
-// Route::get('/event/{id}', [EventController::class, 'getEventById']);
-
+// Route::get('/tickets', [TicketController::class, 'getAllTicket']);
 
 //-------search for events------------
 Route::prefix('/events')->group(function () {
@@ -59,6 +63,10 @@ Route::prefix('/events')->group(function () {
     Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
+
+    Route::prefix('/booking')->group(function () {
+        Route::get('/{eventId}', [EventController::class, 'booking']);
+    });
 });
 Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
@@ -68,3 +76,6 @@ Route::prefix('/search')->group(function () {
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
+Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
+Route::get('/tickets', [TicketController::class, 'getAllTicket']);
+Route::get('/tickets/search', [TicketController::class, 'searchTicket']);

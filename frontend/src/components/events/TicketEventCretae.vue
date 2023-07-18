@@ -92,7 +92,7 @@
                 <tr v-for="item in agendas" :key="item.agendaTitle">
                     <td>{{ item.agendaDate }}</td>
                     <td>{{ item.agendaTitle }}</td>
-                    <td class="description-column">{{ truncateDescription(item.agendaDescription) }} </td>
+                    <td class="description-column">{{ eventCreate.truncateDescription(item.agendaDescription,40) }} </td>
                 </tr>
             </tbody>
         </v-table>
@@ -223,14 +223,7 @@ function validateForm() {
 
 // ------ agenda validate -------
 const agendas = ref([])
-function truncateDescription(description) {
-    const maxLength = 40; // Maximum characters to display
-    if (description.length <= maxLength) {
-        return description;
-    } else {
-        return description.substring(0, maxLength) + '...';
-    }
-}
+
 import { useField, useForm } from 'vee-validate'
 const { handleSubmit, handleReset } = useForm({
     validationSchema: {

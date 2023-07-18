@@ -2,7 +2,7 @@
     <v-row justify="center">
         <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
             <template v-slot:activator="{ props }">
-                <v-btn color="primary" dark v-bind="props" style="width: 30%">
+                <v-btn color="red" dark v-bind="props" style="width: 30%">
                     <slot></slot>
                 </v-btn>
             </template>
@@ -51,7 +51,7 @@
 import detailCreate from './DetailEventCretae.vue'
 import ticketCreate from './TicketEventCretae.vue'
 import { ref } from 'vue';
-const dialog = ref(true)
+const dialog = ref(false)
 const tab = ref('one')
 const isNext = ref(true)
 const nextValue = ref('one')

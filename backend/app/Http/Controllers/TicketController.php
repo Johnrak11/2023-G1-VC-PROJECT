@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\ticket;
 use App\Http\Requests\StoreticketRequest;
 use App\Http\Requests\UpdateticketRequest;
+use App\Http\Resources\TicketResource;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
 
 class TicketController extends Controller
 {
@@ -15,7 +19,13 @@ class TicketController extends Controller
     {
         //
     }
+    public function getAllTicket() {
+        $ticket = Ticket::all();
+        $ticket = TicketResource::collection($ticket);
+        // $ticket = Event::where('name', )->get();
 
+        return response()->json(['message' => true, 'data' => $ticket],201);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -62,5 +72,11 @@ class TicketController extends Controller
     public function destroy(ticket $ticket)
     {
         //
+    }
+    public function searchTicket( $request) {
+        $tickets = $request->input('ticket_code');
+        $name = TicketResource::collection($tickets);
+        return $name;
+
     }
 }

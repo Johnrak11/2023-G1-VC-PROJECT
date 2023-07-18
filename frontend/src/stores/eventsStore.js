@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle.js";
 export const eventStores = defineStore("event", {
   state: () => ({
+    isLoader : true,
     events: [],
     reletedEvent: [],
     localHttp: "http://172.16.0.143:8080",
@@ -14,6 +15,7 @@ export const eventStores = defineStore("event", {
   },
   actions: {
     async getDataAxios() {
+      this.isLoader = true
       await baseAPI
         .get("/events")
         .then((response) => {
@@ -23,6 +25,7 @@ export const eventStores = defineStore("event", {
           this.pagination.currentPage = responeseData.current_page;
           this.pagination.lastPage = responeseData.last_page;
           this.pagination.links = responeseData.links;
+          // this.isLoader = false
         })
         .catch((error) => console.log(error));
       return this.events;
@@ -81,8 +84,20 @@ export const eventStores = defineStore("event", {
         .then((response) => {
           this.events = response.data.data;
           console.log(this.events);
+          // console.log(this.events);
         })
         .catch((error) => console.log(error));
     },
+    // async getEventPrice(eventId) {
+    //   await baseAPI
+    //     .get(
+    //       `eventDetail/${eventId}`
+    //     )
+    //     .then((response) => {
+    //       this.eventDetail = response.data.data;
+    //       console.log("EventDetail", response.data);
+    //     })
+    //     .catch((error) => console.log(error));
+    // },
   },
 });

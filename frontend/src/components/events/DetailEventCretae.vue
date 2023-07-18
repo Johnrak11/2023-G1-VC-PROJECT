@@ -132,7 +132,6 @@ const venueRules = [
 async function submitHandler() {
     const isFormValid = validateForm();
     if (!isFormValid) {
-        console.log('khos hx')
         return false;
     } else {
         eventCreate.eventName = eventName.value

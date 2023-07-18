@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import RegisterForm from "../views/register/RegisterForm.vue";
 import HomePage from "../views/home/HomeView.vue";
 import LoginForm from "../views/login/loginView.vue";
+import BookingView from "../views/booking/BookingView.vue";
+import paymentDialugue from "../components/forms/paymentForm.vue";
 import ExplorePage from "../views/explore/explorePageView.vue";
 
 import DashboardOrganizer from "../views/dashboard/DashboardOrganizer.vue";
@@ -9,6 +11,7 @@ import DashboardEventPreview from "../views/dashboard/DashboardEventPreview.vue"
 import DetailPage from "../views/detail/DetailView.vue";
 
 import DashboardEvent from "../views/dashboard/DashboardEvent.vue";
+import TicketView from "../views/ticket/TicketView.vue";
 import NotificationView from "../views/notifications/NotificationView.vue";
 
 const routes = [
@@ -34,6 +37,22 @@ const routes = [
     component: LoginForm,
   },
   {
+    path: "/booking/:id",
+    name: "booking",
+    component: BookingView,
+    props:true,
+  },
+  {
+    path: "/payment",
+    name: "payment",
+    component: paymentDialugue,
+  },
+  {
+    path: "/explore",
+    name: "explore",
+    component: ExplorePage,
+  },
+  {
     path: "/detail/:id",
     name: "detail",
     component: DetailPage,
@@ -49,6 +68,11 @@ const routes = [
     path: "/dashboard/event",
     name: "event",
     component: DashboardEvent,
+  },
+  {
+    path: "/tickets",
+    name: "tickets",
+    component: TicketView,
   },
   {
     path: "/dashboard/preview",

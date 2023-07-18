@@ -5,17 +5,23 @@
         <div class="ml-4 mr-8 d-flex flex-wrap">
             <cardTemplate v-for="event in events" :key="event.id" :event="event"></cardTemplate>
         </div>
-        <button class="bg-red explore mt-5">Explore</button>
+        <router-link to="/explor">
+            <button class="bg-red explore mt-5">Explore</button>
+        </router-link>
     </div><br>
 </template>
 <script setup>
 import cardTemplate from './CardTemplate.vue';
 </script>
 <style scoped>
-    .explore{
-        display: flex;
-        justify-content: center;
-        margin: auto;
-        padding: 5px 50px 5px 50px;
-    }
+.explore {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 5px 50px 5px 50px;
+}
+
+a {
+    text-decoration: none;
+}
 </style>
