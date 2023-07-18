@@ -9,40 +9,39 @@
         <v-hover v-slot="{ isHovering, props }" v-for="ticket of tickets.tickets" :key="ticket" style="width: 100%;">
             <div 
             v-bind="props"
-            :class="`elevation-${isHovering ? 24 : 6}`"
-            class="pa-3 mt-5 d-flex rounded-lg bg-white"
-            style="border-left: 5px solid red; height: 18vh; cursor: pointer;"
+            :class="`elevation-${isHovering }`"
+            class="pa-3 mt-5 d-flex rounded-lg bg-grey-lighten-3 justify-space-between"
+            style="border-left: 5px solid red; height: 13vh; cursor: pointer;"
             >
-                <div class="d-flex w-75">
+                <div class="d-flex ">
                     <div>
-                        <img class="rounded-xl" src="https://wheninphnompenh.com/wp-content/uploads/2023/05/DSC_0078-1024x1024.jpg" width="100" alt="">
+                        <img class="rounded-xl" src="https://wheninphnompenh.com/wp-content/uploads/2023/05/DSC_0078-1024x1024.jpg" width="70" alt="">
                     </div>
-                    <div class=" ml-9">
-                        <h3>{{ ticket.event.name }}</h3>
-                        <p>{{ ticket.event.location }}</p>
-                        <p>{{ ticket.event.venue }}</p>
+                    <div class="ml-5">
+                        <h3>{{ ticket.event.name }}</h3><br>
                         <p>{{ ticket.event.date }} {{ ticket.event.time }}</p>
                     </div>
                 </div>
-                <div class="d-flex w-25 justify-space-between" style="margin-left: -15%;">
-                    <div class="mt-5">
-                        <p>Ticket Number: {{ticket.ticket_code}}</p>
+                <div class="mt-5">
+                    <p><span class="bold">Location:</span> {{ ticket.event.location }}</p>
+                    <p>Venue: {{ ticket.event.venue }}</p>
+                </div>
+                <div class="d-flex ">
+                    <div class="mt-8">
+                        <!-- <p>Ticket Number: {{ticket.ticket_code}}</p> -->
                         <p>Booking date: {{ ticket.booking_date }}</p>
                     </div>
-                    <h1 class="mt-5" style="margin-right: -40%;">{{ ticket.event.price }}</h1>
                 </div>
+                <h1 class="mt-3 mr-10" >{{ ticket.ticket_code }}</h1>
             </div>
         </v-hover>
     </div>
 </template>
 <script setup>
 import TicketStore from '@/stores/ticketStore'
-// import eventStores from "@/stores/eventsStore.js";
-// import { axiosStore } from "@/stores/axiosHandle.js";
 import { onMounted } from "vue";
 const tickets = TicketStore();
-onMounted(() => {
-    tickets.getDataTickets();
-  console.log(tickets);
+onMounted(async () => {
+  await tickets.getDataTickets(2); 
 });
 </script>

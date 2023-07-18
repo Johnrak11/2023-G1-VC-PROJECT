@@ -1,9 +1,9 @@
 <template>
-  <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
-    <v-nav-bar-left class=" d-flex left">
+  <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color">
+    
+<v-nav-bar-left class=" d-flex left">
       <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover;" />
-    </v-nav-bar-left>
-    <v-nav-bar-right class="d-flex right justify-space-between">
+    </v-nav-bar-left>    <v-nav-bar-right class="d-flex right justify-space-between">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
           <router-link to="/" class="link">
@@ -85,6 +85,7 @@ const state = reactive({
   position: fixed;
   top: 0;
   width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 ul {
