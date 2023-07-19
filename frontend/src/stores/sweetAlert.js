@@ -13,5 +13,21 @@ export const sweetAlert = defineStore("alert", {
         timer: 1000,
       });
     },
+
+    publicAlert(eventId) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to delete this post!",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Public",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log(eventId);
+        }
+      });
+    },
   },
 });

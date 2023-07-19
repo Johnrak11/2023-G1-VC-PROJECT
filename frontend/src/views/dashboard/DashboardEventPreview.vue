@@ -8,7 +8,6 @@
                     </div>
                 </ListCard>
                 <ContainLeftDashboard />
-                <!-- <createEventDailog></createEventDailog> -->
             </v-main>
         </v-layout>
     </v-card>
@@ -16,7 +15,7 @@
 
 <script setup>
 import ContainLeftDashboard from "./ContainLeftDashboard.vue";
-import ListCard from "../../components/partials/dashboards/ListCard.vue";
+import ListCard from "../../components/partials/dashboards/ListCardPreview.vue";
 import createEventDailog from "../../components/events/CreateEventDailog.vue";
 
 </script>

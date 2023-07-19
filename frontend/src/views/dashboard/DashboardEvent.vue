@@ -16,7 +16,7 @@
 </template>
 <script setup>
 import ContainLeftDashboard from "./ContainLeftDashboard.vue";
-import ListCard from "../../components/partials/dashboards/ListCard.vue";
+import ListCard from "../../components/partials/dashboards/ListCardPreview.vue";
 </script>
 <style scoped>
 .border {
