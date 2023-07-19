@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle";
-
+import { sweetAlert } from "./sweetAlert.js";
 export const eventPreviewStores = defineStore("eventPreview", {
   state: () => ({
     eventsPreviews: [],
@@ -21,6 +21,21 @@ export const eventPreviewStores = defineStore("eventPreview", {
         })
         .catch((error) => console.log(error));
       return this.eventsPreviews;
+    },
+
+    async postPreviewEvent(eventId, isPublic) {
+      const { isConfirmed } = sweetAlert();
+      await baseAPI
+        .put(`/events/previews/${eventId}/${isPublic}`)
+        .then((response) => {
+          let responeseData = response.data;
+          this.getPreviewEvent();
+          isConfirmed("success", responeseData.message);
+        })
+        .catch((error) => {
+          let errorResponse = error.response.data;
+          isConfirmed("error", errorResponse.message);
+        });
     },
   },
 });

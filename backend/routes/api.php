@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+
     Route::prefix('/auth')->group(function () {
         //logout
         Route::post('/logout', function (Request $request) {
@@ -43,6 +44,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::prefix('/events')->group(function () {
         Route::post('/', [EventController::class, 'store']);
+
+        Route::prefix('/previews')->group(function () {
+            Route::get('/', [EventController::class, 'getPreviewEvents']);
+            Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
+        });
     });
 });
 

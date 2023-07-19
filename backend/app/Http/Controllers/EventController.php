@@ -23,10 +23,53 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getPreviewEvents(Request $request)
     {
-        //
+        $perPage = $request->input('perPage', 12); // Number of items per page
+        $organizerId = Auth::user()->id;
+        $previewEvents = Event::where('organizer_id', $organizerId)
+            ->where('is_public', 0)
+            ->orderBy('date', 'asc')
+            ->paginate($perPage);
+
+        if ($previewEvents->isEmpty()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'There are no event previews yet.',
+                'data' => []
+            ], 200);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Get preview successfully',
+            'data' => $previewEvents
+        ], 200);
     }
+
+    public function postPreviewEvent($id, $isPublic)
+    {
+        $organizerId = Auth::user()->id;
+        $eventPreview = Event::where('organizer_id', $organizerId)
+            ->where('id', $id)
+            ->first();
+
+        if (!$eventPreview) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Something wrong.. this event is not define',
+            ], 404);
+        }
+        $eventPreview->is_public = $isPublic;
+        $eventPreview->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Event has been posted successfully',
+        ], 200);
+    }
+
+
 
     public function getEvents(Request $request)
     {
