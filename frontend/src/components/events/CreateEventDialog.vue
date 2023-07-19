@@ -14,7 +14,7 @@
                     <v-toolbar-title>Create Event</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn v-if="!isNext" @click="submitEvent" variant="text">
+                        <v-btn v-if="!isNext" @click="submitEvent" variant="text" :loading="eventCreate.isCreate">
                             Save
                         </v-btn>
                     </v-toolbar-items>
@@ -32,25 +32,41 @@
                             </v-window>
                         </v-card-text>
                         <div class="tab-container mb-5">
-                            <v-tabs v-model="tab" class="d-flex justify-center aling-center">
-                                <v-tab v-show="!isNext" @click="isNext = !isNext" value="one" width="10%"><v-btn
-                                        class="bg-red">Preview</v-btn></v-tab>
-                                <v-tab v-show="isNext" @click="checkDetail" :value="nextValue" width="10%"><v-btn
-                                        class="bg-red">Next</v-btn></v-tab>
-                                <!-- <v-tab v-show="isNext" :value="nextValue" width="10%"><v-btn
-                                        class="bg-red">Next</v-btn></v-tab> -->
+                            <v-tabs v-model="tab" class="d-flex justify-center">
+                                <v-tab v-show="!isNext" @click="isNext = !isNext" value="one" width="10%">
+                                    <v-btn class="bg-red">Preview</v-btn>
+                                </v-tab>
+                                <v-tab v-show="isNext" @click="checkDetail" :value="nextValue" width="10%">
+                                    <v-btn class="bg-red">Next</v-btn>
+                                </v-tab>
                             </v-tabs>
                         </div>
                     </v-card>
                 </v-list>
             </v-card>
         </v-dialog>
+
+        <v-dialog v-model="isAlert" persistent width="500px">
+            <v-card>
+                <v-alert density="compact" type="error" title="Please fill all required fields"
+                    text="Make sure to fill in all the mandatory information before proceeding."></v-alert>
+                <v-card-actions class="bg-white">
+                    <v-btn variant="text" @click="isAlert = false" width="100%">
+                        Agree
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-row>
 </template>
 <script setup>
-import detailCreate from './DetailEventCretae.vue'
-import ticketCreate from './TicketEventCretae.vue'
+import detailCreate from './DetailEventCreate.vue'
+import ticketCreate from './TicketEventCreate.vue'
 import { ref } from 'vue';
+import { eventCreateStores } from '@/stores/eventCreate.js'
+const eventCreate = eventCreateStores()
+
+
 const dialog = ref(false)
 const tab = ref('one')
 const isNext = ref(true)
@@ -58,29 +74,44 @@ const nextValue = ref('one')
 const detailHandleSubmit = ref()
 const eventHandleSubmit = ref()
 
+const isAlert = ref(false)
+
 function checkDetail() {
     detailHandleSubmit.value.submitHandler()
         .then(result => {
+            console.log(result)
             if (result) {
                 tab.value = 'two'
                 isNext.value = false
+            } else {
+                isAlert.value = true
+                delayedFunction(2000)
             }
         })
         .catch(error => {
             console.log(error);
         });
 }
+function delayedFunction(delay) {
+    setTimeout(() => {
+        isAlert.value = false
+    }, delay);
+}
 
 function submitEvent() {
     eventHandleSubmit.value.ticketSubmit()
-    // .then(result => {
-    //     if (result) {
-    //         console.log('submit')
-    //     }
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+        .then(result => {
+            if (result) {
+                eventCreate.createEvent()
+                dialog.value = false
+            } else {
+                isAlert.value = true
+                delayedFunction(2000)
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 }
 
 

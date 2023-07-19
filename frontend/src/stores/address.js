@@ -8,6 +8,7 @@ export const addressStore = defineStore("address", {
     isDenied: false,
     latitude: null,
     longitude: null,
+    isFresh : false
   }),
   getters: {},
   actions: {
@@ -15,6 +16,7 @@ export const addressStore = defineStore("address", {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
+            this.isFresh = false
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
             this.getAddress(

@@ -1,8 +1,5 @@
 <template>
     <div class="d-flex">
-        <navigation-bar></navigation-bar>
-        <!-- <div style="margin-right: 50%;">
-        </div> -->
         <v-card style="width: 20%; margin-top: 5%;">
             <v-list-item prepend-icon="mdi-home-city" title="Tickets" value="ticket" class="hover"></v-list-item>
             <v-list-item prepend-icon="mdi-home-city" title="History" value="history" class="hover"></v-list-item>

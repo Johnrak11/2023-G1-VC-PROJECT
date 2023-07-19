@@ -33,6 +33,7 @@ export const sweetAlert = defineStore("alert", {
     },
 
     isConfirmed(icon, message) {
+      console.log(message)
       const Toast = Swal.mixin({
         toast: true,
         position: "top",

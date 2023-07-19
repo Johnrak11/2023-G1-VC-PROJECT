@@ -22,6 +22,7 @@ const getLatLng = (event) => {
     const { lat, lng } = event.latlng;
     addressStorage.latitude = lat
     addressStorage.longitude = lng
+    addressStorage.isFresh = true
     console.log([addressStorage.latitude, addressStorage.longitude])
 };
 

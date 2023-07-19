@@ -79,8 +79,8 @@
         <div class="rounded map-container">
             <OpenStreetMap></OpenStreetMap>
             <div class="d-flex btn-map-submit">
-                <v-btn variant="outlined" class=" bg-red" width="10%" :loading="addressStorage.loading"
-                    @click="addressStorage.locaterButtonPressed()">
+                <v-btn v-if="addressStorage.isFresh" variant="outlined" class=" bg-red" width="10%"
+                    :loading="addressStorage.loading" @click="addressStorage.locaterButtonPressed()">
                     Refresh
                 </v-btn>
                 <v-btn :loading="addressStorage.loading" @click="seletedLocation" variant=" outlined" class="bg-red"
@@ -97,6 +97,7 @@ import OpenStreetMap from '@/components/maps/SelectMap.vue'
 
 import { addressStore } from '../../stores/address.js'
 let addressStorage = addressStore()
+
 
 import { eventCreateStores } from '@/stores/eventCreate.js'
 import { categoryStore } from '@/stores/categoryStore.js'
@@ -157,7 +158,6 @@ const venueRules = [
 
 async function submitHandler() {
     const isFormValid = validateForm();
-    console.log(isFormValid)
     if (!isFormValid) {
         return false;
     } else {
@@ -270,6 +270,7 @@ form {
 
 .btn-map-submit {
     margin-top: 2px;
-    justify-content: space-between;
+    gap: 10px;
+    justify-content: flex-end;
 }
 </style>

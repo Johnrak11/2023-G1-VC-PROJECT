@@ -73,7 +73,7 @@ class EventController extends Controller
 
     public function getEvents(Request $request)
     {
-        $perPage = $request->input('perPage', 12); // Number of items per page
+        $perPage = $request->input('perPage', 16); // Number of items per page
         $todayDate = date('Y-m-d');
         $eventUnDeadline = Event::where('date', '>=', $todayDate)->where('is_public', 1)->paginate($perPage);
 

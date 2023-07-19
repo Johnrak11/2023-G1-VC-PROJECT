@@ -27,6 +27,7 @@ export const eventCreateStores = defineStore("eventCreate", {
     isLoadingDialog: false,
     imagePreview: "https://placehold.co/600x400/png",
     isSubmit: false,
+    isCreate: false,
   }),
   getters: {},
   actions: {
@@ -96,8 +97,8 @@ export const eventCreateStores = defineStore("eventCreate", {
     },
 
     async createEvent() {
+      this.isCreate = true;
       let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
-      console.log(dateTimeFormat);
       let newEvent = {
         name: this.eventName,
         description: this.eventDescription,
@@ -120,13 +121,16 @@ export const eventCreateStores = defineStore("eventCreate", {
       console.log(this.ticket);
       console.log(this.discount);
       console.log(this.agendas);
-      // Send the POST request to create the event
       await baseAPI
         .post("/events", createRequest)
         .then((response) => {
           console.log(response.data);
+          this.isCreate = false;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          this.isCreate = false;
+        });
     },
 
     convertDateTimeFormat(inputDate) {

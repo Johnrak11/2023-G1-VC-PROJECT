@@ -21,8 +21,8 @@ const routes = [
     component: HomePage,
   },
   {
-    path: "/explor",
-    name: "explor",
+    path: "/explore",
+    name: "explore",
     component: ExplorePage,
   },
   {
@@ -40,17 +40,12 @@ const routes = [
     path: "/booking/:id",
     name: "booking",
     component: BookingView,
-    props:true,
+    props: true,
   },
   {
     path: "/payment",
     name: "payment",
     component: paymentDialugue,
-  },
-  {
-    path: "/explore",
-    name: "explore",
-    component: ExplorePage,
   },
   {
     path: "/detail/:id",
@@ -79,11 +74,6 @@ const routes = [
     name: "eventPreview",
     component: DashboardEventPreview,
   },
-  // {
-  //   path: "/dashboard/event/create",
-  //   name: "createEvent",
-  //   component: DashboardEventPreview,
-  // },
   {
     path: "/notifications",
     name: "notifications",

@@ -25,8 +25,8 @@
         </div>
 
         <div class="switch-container">
-            <v-switch v-model="modelDiscount" hide-details inset :label="`I don't want to offer early bird discount`"
-                color="red"></v-switch>
+            <v-switch v-model="modelDiscount" :disabled="modelFree" hide-details inset
+                :label="`I don't want to offer early bird discount`" color="red"></v-switch>
         </div>
         <div class="input-row-container">
             <div class="input">
@@ -81,13 +81,17 @@
                     <th class="text-left table-color">
                         Description
                     </th>
+                    <th class="text-left table-color">
+                        Action
+                    </th>
                 </tr>
             </thead>
             <tbody class="table-color">
-                <tr v-for="item in agendas" :key="item.title">
+                <tr v-for="(item, i) of agendas" :key="i">
                     <td>{{ item.date }}</td>
                     <td>{{ item.title }}</td>
                     <td class="description-column">{{ eventCreate.truncateDescription(item.description, 40) }} </td>
+                    <td><v-icon color="red" @click="deleteAgenda(i)" class="delete" size="24">mdi-delete</v-icon></td>
                 </tr>
             </tbody>
         </v-table>
@@ -119,7 +123,7 @@
 
 
 <script setup>
-import { ref, defineExpose } from "vue";
+import { ref, defineExpose, watch } from "vue";
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
 
@@ -130,6 +134,12 @@ const discountItems = ref([])
 const discountItemsModel = ref('Percent(%)')
 const isHasAgenda = ref(false)
 
+watch(modelFree, async (newValue) => {
+    if (modelFree.value) {
+        modelDiscount.value = newValue;
+    }
+})
+
 const price = ref('');
 const priceRules = ref([
     (v) => !!v || 'Price is required',
@@ -137,7 +147,10 @@ const priceRules = ref([
 ]);
 
 const ticketAvailable = ref('');
-const ticketAvailableRules = ref([(v) => !!v || "You must enter the number of available tickets."]);
+const ticketAvailableRules = ref([
+    (v) => !!v || "You must enter the number of available tickets.",
+    (v) => v > 1 || 'Available tickets must be more than 1',
+]);
 
 const discount = ref('');
 const discountRules = ref([(v) => !!v || "You must enter the discount amount."]);
@@ -150,12 +163,11 @@ const ticketDescriptionRules = ref([(v) => !!v || "You must enter the ticket des
 (v) => (v && v.length >= 5) || "Ticket description must be at least 5 characters"]
 );
 
-
-function ticketSubmit() {
+async function ticketSubmit() {
     const isFormValid = validateForm();
     console.log(isFormValid)
     if (!isFormValid) {
-        return;
+        return false;
     }
     let ticketPrice = 'free'
     if (!modelFree.value) {
@@ -183,8 +195,7 @@ function ticketSubmit() {
     else {
         eventCreate.agendas = []
     }
-    eventCreate.createEvent()
-
+    return true;
 }
 
 function validateForm() {
@@ -193,12 +204,16 @@ function validateForm() {
         priceRules.value = [(v) => !!v || "Price is required"]
         return false
     }
-    if (modelFree.value && price.value > 0.01) {
-        priceRules.value = [(v) => !!v || "Price is required"]
+    if (!modelFree.value && Number(price.value) < 0.01) {
+        priceRules.value = [(v) => v > 0 || 'Price must be more than 0.01']
         return false
     }
     if (!ticketAvailable.value) {
         ticketAvailableRules.value = [(v) => !!v || "You must enter the number of available tickets."]
+        return false
+    }
+    if (ticketAvailable.value && Number(ticketAvailable.value) <= 1) {
+        ticketAvailableRules.value = [(v) => v > 0 || 'Available tickets must be more than 1']
         return false
     }
     if (!discount.value && !modelDiscount.value) {
@@ -251,6 +266,10 @@ const agendaSubmit = handleSubmit(values => {
     handleReset()
     isHasAgenda.value = false
 })
+
+function deleteAgenda(index) {
+    agendas.value.splice(index, 1)
+}
 
 defineExpose({
     ticketSubmit
@@ -314,5 +333,9 @@ form {
 
 .table-color {
     background-color: rgb(235, 235, 235);
+}
+
+.delete {
+    cursor: pointer;
 }
 </style>
