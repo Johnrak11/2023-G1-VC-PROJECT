@@ -9,7 +9,7 @@ export const ticketStore = defineStore("tickets", {
     
     async getDataTickets() {
       await baseAPI
-        .get("/tickets")
+        .get("/ticket")
         .then((response) => {
           this.tickets = response.data.data;
         })

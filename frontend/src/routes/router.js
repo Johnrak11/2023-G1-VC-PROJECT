@@ -13,6 +13,7 @@ import DetailPage from "../views/detail/DetailView.vue";
 import DashboardEvent from "../views/dashboard/DashboardEvent.vue";
 import TicketView from "../views/ticket/TicketView.vue";
 import NotificationView from "../views/notifications/NotificationView.vue";
+import Attendee from "@/views/attendee/attendeeView.vue";
 
 const routes = [
   {
@@ -88,6 +89,12 @@ const routes = [
     path: "/notifications",
     name: "notifications",
     component: NotificationView,
+  },
+  {
+    path: "/attendeesOfEvent/:eventId",
+    name: "attendees",
+    component: Attendee,
+    props: true,
   },
 ];
 const router = createRouter({

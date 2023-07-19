@@ -79,3 +79,4 @@ Route::get('/categories', [CategoryController::class, 'getAllCategory']);
 Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
 Route::get('/tickets', [TicketController::class, 'getAllTicket']);
 Route::get('/tickets/search', [TicketController::class, 'searchTicket']);
+Route::get('/ticket/{eventId}', [TicketController::class, 'getOwnerOfTicket']);
