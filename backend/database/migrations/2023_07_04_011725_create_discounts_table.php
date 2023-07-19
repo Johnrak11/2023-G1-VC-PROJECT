@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             $table->integer('percent');
-            $table->date('end_date');
+            $table->datetime('end_date');
             $table->unsignedBigInteger('event_detail_id');
             $table->foreign('event_detail_id')
                 ->references('id')

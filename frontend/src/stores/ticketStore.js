@@ -4,7 +4,7 @@ import baseAPI from "./axiosHandle.js";
 const ticketStore = defineStore('tickets',{
     state: () => ({
         tickets: [],
-        // httpRequest: ''
+        httpRequest: ''
     }),
     actions: {
         async getDataTickets() {

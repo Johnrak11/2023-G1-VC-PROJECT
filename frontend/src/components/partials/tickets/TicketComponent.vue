@@ -1,5 +1,4 @@
 <template>
-    <!-- <div>{{ tickets.tickets.length}}</div> -->
     <div v-if="tickets.tickets.length > 0">
         <v-hover v-slot="{ isHovering, props }" v-for="ticket of tickets.tickets" :key="ticket.id" style="width: 100%;">
             <div 
@@ -42,9 +41,9 @@
 </template>
 
 <script setup>
-import TicketStore from '@/stores/ticketStore'
+import ticketStore from '@/stores/ticketStore'
 import { onMounted } from "vue";
-const tickets = TicketStore();
+const tickets = ticketStore();
 onMounted(() => {
   tickets.getDataTickets(); 
 });

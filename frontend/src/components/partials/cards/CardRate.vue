@@ -11,13 +11,13 @@
       <strong>VANDA</strong>
       <p>admin</p>
       <div class="d-flex">
-        <v-icon color="orange"  v-for="n in 5" :key="n"> mdi-star </v-icon>
+        <v-icon color="orange" v-for="n in 5" :key="n"> mdi-star </v-icon>
       </div>
     </div>
   </div>
 </template>
 <style scoped>
-.card{
-    width: 43%;
+.card {
+  width: 43%;
 }
 </style>

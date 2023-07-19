@@ -2,7 +2,7 @@
     <v-row justify="center">
         <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
             <template v-slot:activator="{ props }">
-                <v-btn color="primary" dark v-bind="props" style="width: 30%">
+                <v-btn color="red" dark v-bind="props" style="width: 30%">
                     <slot></slot>
                 </v-btn>
             </template>
@@ -37,6 +37,8 @@
                                         class="bg-red">Preview</v-btn></v-tab>
                                 <v-tab v-show="isNext" @click="checkDetail" :value="nextValue" width="10%"><v-btn
                                         class="bg-red">Next</v-btn></v-tab>
+                                <!-- <v-tab v-show="isNext" :value="nextValue" width="10%"><v-btn
+                                        class="bg-red">Next</v-btn></v-tab> -->
                             </v-tabs>
                         </div>
                     </v-card>
@@ -55,9 +57,19 @@ const isNext = ref(true)
 const nextValue = ref('one')
 const detailHandleSubmit = ref()
 
-function checkDetail(){
-    console.log(detailHandleSubmit.value.submitHandler())
+function checkDetail() {
+    detailHandleSubmit.value.submitHandler()
+        .then(result => {
+            if (result) {
+                tab.value = 'two'
+                isNext.value = false
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 }
+
 
 </script>
 

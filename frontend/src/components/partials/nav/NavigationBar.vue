@@ -7,13 +7,13 @@
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
           <router-link to="/" class="link">
-            <li class="rounded">Home</li>
+            <v-btn id="li-nav" :class="{ 'active': isActive('/') }" class="rounded" variant="text"> Home</v-btn>
           </router-link>
           <router-link to="/explor" class="link">
-            <li class="rounded">Explore</li>
+            <v-btn id="li-nav" :class="{ 'active': isActive('/explor') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
-          <router-link to="/tickets">
-            <li class="rounded">MyTicket</li>
+          <router-link to="/tickets" class="link">
+            <v-btn id="li-nav" :class="{ 'active': isActive('/ticket') }" class="rounded" variant="text">MyTicket</v-btn>
           </router-link>
         </ul>
       </v-left-content>
@@ -59,6 +59,7 @@
 </template>
 
 <script setup>
+import router from "@/routes/router.js";
 import NotificationComponent from '../../notification/NotificationComponent.vue'
 import { ref } from "vue";
 const items = ref([
@@ -77,6 +78,10 @@ const state = reactive({
   message: false,
   hints: true,
 })
+
+const isActive = (route) => {
+  return router.currentRoute.value.path === route;
+};
 </script>
 <style scoped>
 .nav-bar {
@@ -108,6 +113,12 @@ a {
   color: black;
 }
 
+.active {
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-decoration-thickness: 3px;
+}
+
 .bg-color {
   /* background-color: white; */
   padding: 10px;
@@ -126,8 +137,9 @@ a {
   flex: 1;
 }
 
-li {
+#li-nav {
   /* margin-left: 10%; */
+  font-weight: bold;
   padding: 5px 20px 5px 20px;
 }
 
@@ -135,7 +147,7 @@ li {
   margin-right: 10%;
 }
 
-li:hover {
+#li-nav:hover {
   background-color: red;
   padding: 5px 20px 5px 20px;
   color: white;

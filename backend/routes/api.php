@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
@@ -78,4 +79,5 @@ Route::prefix('/search')->group(function () {
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
+Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
 
