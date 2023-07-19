@@ -31,7 +31,7 @@ import switchBannerForm from '../../components/switchPath/switchLoginComponent.v
 const loginForm = loginFormComponent;
 </script>
 
-<style>
+<style scoped>
 .cardContainer {
     width: 90%;
     height: 60vh;

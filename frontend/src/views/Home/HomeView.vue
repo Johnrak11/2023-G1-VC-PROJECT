@@ -1,22 +1,24 @@
 <template>
-  <navigation-bar></navigation-bar>
-  <banner-view></banner-view>
-  <search-view></search-view>
-  <category-view></category-view>
-  <list-card>
-    <div class="ml-16">
-      <h1>Upcoming Events</h1>
-      <p>You can chooses to display feature</p>
-    </div>
-  </list-card><br>
-  <popular-event>
-    <div class="ml-16">
-      <h1>Most Visited Place</h1>
-      <p>You can chooses to display feature</p>
-    </div>
-  </popular-event>
-  <card-rate></card-rate>
-  <footer-view></footer-view>
+  <div>
+    <navigation-bar></navigation-bar>
+    <banner-view></banner-view>
+    <search-view></search-view>
+    <category-view></category-view>
+    <list-card>
+      <div class="ml-16">
+        <h1>Upcoming Events</h1>
+        <p>You can chooses to display feature</p>
+      </div>
+    </list-card><br>
+    <popular-event>
+      <div class="ml-16">
+        <h1>Most Visited Place</h1>
+        <p>You can chooses to display feature</p>
+      </div>
+    </popular-event>
+    <card-rate></card-rate>
+    <footer-view></footer-view>
+  </div>
 </template>
 <script setup>
 import { createVuetify } from 'vuetify'
