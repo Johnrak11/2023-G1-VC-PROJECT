@@ -67,6 +67,7 @@ const items = ref([
   { title: "History", link: "/profile" },
   { title: "Ticket", link: "/profile" },
   { title: "Dashboard", link: "/dashboard" },
+  {title: 'Managerments', link: "/managerments" },
 ]);
 import { userStore } from "../../../stores/user.js";
 const user = userStore();

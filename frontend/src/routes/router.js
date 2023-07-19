@@ -14,6 +14,8 @@ import DashboardEvent from "../views/dashboard/DashboardEvent.vue";
 import TicketView from "../views/ticket/TicketView.vue";
 import NotificationView from "../views/notifications/NotificationView.vue";
 
+import ManagermentEvent from "../views/admin/ManagermentEvent.vue"; 
+
 const routes = [
   {
     path: "/",
@@ -89,6 +91,12 @@ const routes = [
     name: "notifications",
     component: NotificationView,
   },
+  {
+    path: "/managerments",
+    name: "managerments",
+    component:ManagermentEvent ,
+  },
+
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
