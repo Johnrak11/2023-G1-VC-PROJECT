@@ -32,7 +32,7 @@
             </div>
         </v-hover>
     </div>
-    <div v-else style="margin-left: 10%;" class="d-flex flex-column">
+    <div v-else class="d-flex flex-column">
         <div class="d-flex mt-16" style="margin-left: 40%;">
             <img src="https://static.vecteezy.com/system/resources/previews/015/117/356/original/ticket-icon-in-white-colors-voucher-signs-illustration-png.png" alt="" width="200">
         </div>
