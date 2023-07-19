@@ -116,7 +116,6 @@ function ClickShare(id) {
 
 function booking(){
   router.push('/booking/'+eventInfor.value.id);
-  // console.log(eventInfor.value.id);
 }
 
 

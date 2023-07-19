@@ -1,10 +1,10 @@
-// import axios from "axios";
+
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle.js";
 const ticketStore = defineStore('tickets',{
     state: () => ({
         tickets: [],
-        httpRequest: ''
+        // httpRequest: ''
     }),
     actions: {
         async getDataTickets() {
@@ -16,13 +16,13 @@ const ticketStore = defineStore('tickets',{
             .catch((error) => console.log(error));
           return this.tickets;
         },
-        async searchTickets(user_id, name) {
+        async searchTickets(name) {
           await baseAPI
-          .get(`/tickets/user_id=${user_id}/name=${name}`)
+          .get(`/tickets/search/${name}`)
           .then((response) => {
             this.tickets = response.data.data;
-          })
-          .catch((error) => console.log(error));
+            console.log(response.data.data);
+          }).catch((error) => console.log(error));
         }
     }
 })
