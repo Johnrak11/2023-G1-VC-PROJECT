@@ -6,9 +6,8 @@
   />
   <div class="container d-flex flex-column">
     <div class="detail">
-      <div class="row bg-white d-flex pa-6 flex-column" style="margin-top: -8%;">
+      <div class="row bg-white d-flex pa-6 flex-column" style="margin-top: -8%">
         <div id="row1" class="col-md-6">
-          
           <img v-if="event" class="img" :src="event.image" alt="Image" />
           <div class="d-flex mt-2 justify-space-between">
             <div class="icon-left d-flex">
@@ -35,7 +34,7 @@
           </div>
           <br />
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-6">
           <h1 v-if="event">{{ event.name }}</h1>
           <p class="mt-5" v-if="event">
             {{ event.description }}
@@ -44,20 +43,22 @@
             <div class="icons mt-3">
               <div class="d-flex">
                 <v-icon class="icon1"> mdi-calendar</v-icon>
-                <p class="ml-4 " v-if="event">{{ event.date }}</p>
+                <p class="ml-4" v-if="event">{{ event.date }}</p>
               </div>
               <div class="d-flex g-icon">
                 <v-icon class="icon1"> mdi-map-clock</v-icon>
-                <p class="ml-4 " v-if="event">{{ event.time }}</p>
+                <p class="ml-4" v-if="event">{{ event.time }}</p>
               </div>
               <div class="d-flex g-icon">
                 <v-icon class="icon1">mdi-map-marker</v-icon>
-                <p class="ml-4 " v-if="event">{{ event.location }}</p>
+                <p class="ml-4" v-if="event">{{ event.location }}</p>
               </div>
-              <div class="d-flex g-icon" >
+              <div class="d-flex g-icon">
                 <v-icon class="icon1" size="26">mdi-cash</v-icon>
-                <h2 class="ml-3 price" v-if="eventDetail && eventDetail.price">{{ eventDetail.price }}</h2>
-                <h3 class="ml-3 price" v-else>Free</h3>
+                <h2 class="ml-3 price " v-if="eventDetail && eventDetail.price">
+                  {{ eventDetail.price }}
+                </h2>
+                <h3 class="ml-3 price mt-1" v-else>Free</h3>
               </div>
               <br />
             </div>
@@ -73,8 +74,19 @@
             </div>
           </div>
           <div class="d-flex justify-end button mt-6">
-            <button class="free bg-red pa-1 rounded" v-if="!eventDetail || !eventDetail.price">Register</button>
-            <button class="free bg-red pa-1 rounded" v-else>Booking</button>
+            <button
+              class="free bg-red pa-1 rounded"
+              v-if="!eventDetail || !eventDetail.price"
+            >
+              Register
+            </button>
+            <button
+              class="free bg-red pa-1 rounded"
+              @click.prevent="booking(event.id)"
+              v-else
+            >
+              Booking
+            </button>
           </div>
         </div>
         <agendaComponent></agendaComponent>
@@ -84,7 +96,8 @@
   </div>
 </template>
 <script>
-import { ref, onMounted } from 'vue';
+import router from "@/routes/router";
+import { ref, onMounted } from "vue";
 import agendaComponent from "./AgendaComponent.vue";
 import listCardDetail from "./ListCardDetail.vue";
 import baseAPI from "@/stores/axiosHandle.js";
@@ -103,22 +116,22 @@ export default {
       const route = useRoute();
       const eventId = route.params.id;
       await baseAPI
-      .get(`/events/${eventId}`)
-      .then((response) => {
-        event.value = response.data.data;
-      })  
-      .catch ((error) => console.log(error));
+        .get(`/events/${eventId}`)
+        .then((response) => {
+          event.value = response.data.data;
+        })
+        .catch((error) => console.log(error));
     };
 
     const fetchEventDetail = async () => {
       const route = useRoute();
       const eventId = route.params.id;
       await baseAPI
-      .get(`/eventDetail/${eventId}`)
-      .then((response) => {
-        eventDetail.value = response.data.data;
-      })
-      .catch ((error) => console.log(error));
+        .get(`/eventDetail/${eventId}`)
+        .then((response) => {
+          eventDetail.value = response.data.data;
+        })
+        .catch((error) => console.log(error));
     };
 
     onMounted(() => {
@@ -129,9 +142,14 @@ export default {
     return {
       liked,
       event,
-      eventDetail
+      eventDetail,
     };
-  }
+  },
+  methods: {
+    booking(id) {
+      router.push("/booking/" + id);
+    },
+  },
 };
 </script>
 <style scoped>
@@ -171,7 +189,7 @@ h1 {
 .tic {
   color: red;
 }
-.g-icon{
+.g-icon {
   margin-top: -8%;
 }
 

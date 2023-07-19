@@ -80,7 +80,6 @@ const fetchAgenda = async () => {
 const fetchOrganizer = async () => {
   const route = useRoute();
   const organizerId = route.params.id;
-
   await baseAPI
     .get(`/events/organizer/${organizerId}`)
     .then((response) => {

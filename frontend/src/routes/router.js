@@ -9,6 +9,7 @@ import ExplorePage from "../views/explore/explorePageView.vue";
 import DashboardOrganizer from "../views/dashboard/DashboardOrganizer.vue";
 import DashboardEventPreview from "../views/dashboard/DashboardEventPreview.vue";
 import DetailPage from "../views/detail/DetailView.vue";
+import RedirectPage from "../views/detail/RedirectPage.vue";
 
 import DashboardEvent from "../views/dashboard/DashboardEvent.vue";
 import TicketView from "../views/ticket/TicketView.vue";
@@ -40,7 +41,7 @@ const routes = [
     path: "/booking/:id",
     name: "booking",
     component: BookingView,
-    props:true,
+    props: true,
   },
   {
     path: "/payment",
@@ -53,12 +54,17 @@ const routes = [
     component: ExplorePage,
   },
   {
-    path: "/detail/:id",
-    name: "detail",
+    path: '/detail/:id',
+    name: 'detail',
     component: DetailPage,
-    props: true,
+    props: true
   },
-
+  {
+    path: '/eventRaleted/:id',
+    name: 'eventRelated',
+    component: RedirectPage,
+    props: true
+  },
   {
     path: "/dashboard",
     name: "dashboard",
