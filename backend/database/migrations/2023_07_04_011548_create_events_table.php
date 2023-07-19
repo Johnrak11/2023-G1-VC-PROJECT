@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('longitude')->nullable();
             $table->string('image');
             $table->string('venue');
-            $table->boolean('isPublic')->default(0);
+            $table->boolean('is_public')->default(0);
             $table->unsignedBigInteger('organizer_id');
             $table->foreign('organizer_id')
                 ->references('id')

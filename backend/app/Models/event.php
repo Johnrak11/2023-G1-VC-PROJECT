@@ -22,7 +22,7 @@ class Event extends Model
         'venue',
         'organizer_id',
         'category_id',
-        'isPublic'
+        'is_public'
     ];
     public function tickets(): HasMany
     {

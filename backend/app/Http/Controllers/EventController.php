@@ -32,7 +32,7 @@ class EventController extends Controller
     {
         $perPage = $request->input('perPage', 12); // Number of items per page
         $todayDate = date('Y-m-d');
-        $eventUnDeadline = Event::where('date', '>=', $todayDate)->paginate($perPage);
+        $eventUnDeadline = Event::where('date', '>=', $todayDate)->where('is_public', 1)->paginate($perPage);
 
         if ($eventUnDeadline->isEmpty()) {
             return response()->json([
@@ -54,6 +54,7 @@ class EventController extends Controller
         $todayDate = date('Y-m-d');
         $eventUnDeadline = Event::where('date', '>=', $todayDate)
             ->where('category_id', $categoryId)
+            ->where('is_public', 1)
             ->whereNotIn('id', [$eventId])
             ->inRandomOrder()
             ->limit(12)
@@ -185,13 +186,15 @@ class EventController extends Controller
 
     public function getEventById($id)
     {
-        $eventDetail = Event::find($id);
-        if (isset($eventDetail)) {
+        $eventDetail = Event::where('id', $id)->where('is_public', 1)->first();
+
+        if ($eventDetail) {
             return response()->json(['status' => 'success', 'data' => $eventDetail], 200);
         } else {
-            return response()->json(['status' => false, 'data' => 'Id' . ' ' . $id . ' does not exist'], 404);
+            return response()->json(['status' => false, 'data' => 'Id ' . $id . ' does not exist or is not public'], 404);
         }
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -234,16 +237,16 @@ class EventController extends Controller
         $eventList = Event::query();
 
         if ($request->filled('name')) {
-            $eventList->where('name', 'like', '%' . $request->input('name') . '%');
+            $eventList->where('name', 'like', '%' . $request->input('name') . '%')->where('is_public', 1);
         }
 
         if ($request->filled('category_id')) {
             $categoryId = $request->input('category_id');
-            $eventList->where('category_id', $categoryId);
+            $eventList->where('category_id', $categoryId)->where('is_public', 1);
         }
 
         if ($request->filled('date')) {
-            $eventList->whereDate('date', $request->input('date'));
+            $eventList->whereDate('date', $request->input('date'))->where('is_public', 1);
         }
 
         $events = $eventList->get();
