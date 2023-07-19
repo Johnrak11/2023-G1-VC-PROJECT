@@ -30,28 +30,28 @@
                       <v-card class="dialog d-flex w-100" style="overflow-y: hidden">
                         <v-toolbar color="red" title="Share"></v-toolbar><br />
                         <div class="d-flex justify-space-evenly" style="height: 10vh">
-                          <ShareNetwork network="facebook" :url="events.localHttp + '/detail/' + eventInfor.id"
+                          <ShareNetwork network="facebook" :url="eventStore.localHttp + '/detail/' + event.id"
                             :title="eventInfor.name" :description="eventInfor.description"
                             quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                             class="social-share">
                             <v-icon left class="ml-2 color-icon" size="50" style="height: 5vh">mdi-facebook</v-icon>
                             <p class="text-black mt-5">Facebook</p>
                           </ShareNetwork>
-                          <ShareNetwork network="telegram" :url="events.localHttp + '/detail/' + eventInfor.id"
+                          <ShareNetwork network="telegram" :url="eventStore.localHttp + '/detail/' + event.id"
                             :title="eventInfor.name" :description="eventInfor.description"
                             quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                             class="social-share">
                             <v-icon left class="ml-2 color-icon" size="50">mdi-telegram</v-icon>
                             <p class="text-black mt-2">Telegram</p>
                           </ShareNetwork>
-                          <ShareNetwork network="linkedin" :url="events.localHttp + '/detail/' + eventInfor.id"
+                          <ShareNetwork network="linkedin" :url="eventStore.localHttp + '/detail/' + event.id"
                             :title="eventInfor.name" :description="eventInfor.description"
                             quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                             class="social-share">
                             <v-icon left class="ml-2 color-icon" size="50">mdi-linkedin</v-icon>
                             <p class="text-black mt-2">Linkedin</p>
                           </ShareNetwork>
-                          <ShareNetwork network="whatsapp" :url="events.localHttp + '/detail/' + eventInfor.id"
+                          <ShareNetwork network="whatsapp" :url="eventStore.localHttp + '/detail/' + event.id"
                             :title="eventInfor.name" :description="eventInfor.description"
                             quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                             class="social-share">
@@ -111,7 +111,7 @@
 import { ref, onMounted } from "vue";
 import { eventStores } from "@/stores/eventsStore.js";
 import { defineProps } from "vue";
-
+// import router from '@/routes/router.js';
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
 
@@ -128,14 +128,16 @@ const props = defineProps({
 });
 
 onMounted(() => {
-
   eventStore.getDataCategoryAxios(
     props.eventInfor.category_id,
     props.eventInfor.id
   );
 });
+// function pushRoute(id){
+//   router.push(`/detail/${id}`)
+  
+// }
 </script>
-
 <style scoped>
 .card {
   width: 23%;
