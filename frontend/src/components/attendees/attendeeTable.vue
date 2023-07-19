@@ -1,7 +1,7 @@
 <template>
     <v-container class="mt-10">
         <searchAttendee class="mt-16" :export-to-excel="exportToExcel"/>
-        <v-table class="tbl_exporttable_to_xls mx-auto mt-1 bg-gray">
+        <v-table class="tbl_exporttable_to_xls mx-auto mt-1 bg-gray mb-12">
             <thead>
                 <tr>
                     <th class="text-left">

@@ -42,7 +42,6 @@ const cvvCard = ref();
 const nameCard = ref();
 const dialog = ref(false);
 const creditCardTypeName = ref('');
-// const httpRequest = axiosStore();
 
 const creditCardTypes = [
   { type: 'visa', pattern: /^4[0-9]{12}(?:[0-9]{3})?$/, message: visaCard },
