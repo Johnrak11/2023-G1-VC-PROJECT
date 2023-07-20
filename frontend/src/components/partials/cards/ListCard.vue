@@ -3,14 +3,11 @@
         <slot></slot>
         <div class="ml-4 mr-8 d-flex justify-space-evenly flex-wrap">
             <cardTemplate v-for="event of events.events" :key="event.id" :event="event"></cardTemplate>
-            <!-- <cardLoader v-if="events.isLoader"></cardLoader> -->
         </div>
-        <!-- </router-link> -->
     </div>
 </template>
 <script setup>
 import cardTemplate from './CardTemplate.vue'
-// import cardLoader from './CardLoader.vue'
 import router from "@/routes/router.js";
 import { onMounted } from 'vue'
 import { eventStores } from '@/stores/eventsStore.js'

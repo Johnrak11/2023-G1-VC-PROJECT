@@ -1,8 +1,8 @@
 <template>
-    <v-row justify="center">
+    <v-row justify="end">
         <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
             <template v-slot:activator="{ props }">
-                <v-btn color="red" dark v-bind="props" style="width: 30%">
+                <v-btn color="primary" dark v-bind="props" style="width: 25%">
                     <slot></slot>
                 </v-btn>
             </template>
@@ -14,7 +14,7 @@
                     <v-toolbar-title>Create Event</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn variant="text" @click="dialog = false">
+                        <v-btn v-if="!isNext" @click="submitEvent" variant="text" :loading="eventCreate.isCreate">
                             Save
                         </v-btn>
                     </v-toolbar-items>
@@ -27,35 +27,51 @@
                                     <detailCreate ref="detailHandleSubmit"></detailCreate>
                                 </v-window-item>
                                 <v-window-item value="two">
-                                    <ticketCreate></ticketCreate>
+                                    <ticketCreate ref="eventHandleSubmit"></ticketCreate>
                                 </v-window-item>
                             </v-window>
                         </v-card-text>
                         <div class="tab-container mb-5">
-                            <v-tabs v-model="tab" class="d-flex justify-center aling-center">
-                                <v-tab v-show="!isNext" @click="isNext = !isNext" value="one" width="10%"><v-btn
-                                        class="bg-red">Preview</v-btn></v-tab>
-                                <v-tab v-show="isNext" @click="checkDetail" :value="nextValue" width="10%"><v-btn
-                                        class="bg-red">Next</v-btn></v-tab>
-                                <!-- <v-tab v-show="isNext" :value="nextValue" width="10%"><v-btn
-                                        class="bg-red">Next</v-btn></v-tab> -->
+                            <v-tabs v-model="tab" class="d-flex justify-center">
+                                <v-tab v-show="!isNext" @click="isNext = !isNext" value="one" width="10%">
+                                    <v-btn class="bg-red">Preview</v-btn>
+                                </v-tab>
+                                <v-tab class="btn-tab" v-show="isNext" @click="checkDetail" :value="nextValue" width="10%">
+                                    <v-btn color="red">Next</v-btn>
+                                </v-tab>
                             </v-tabs>
                         </div>
                     </v-card>
                 </v-list>
             </v-card>
         </v-dialog>
+
+        <v-dialog v-model="isAlert" persistent width="500px">
+            <v-card>
+                <v-alert density="compact" type="error" title="Please fill all required fields"
+                    text="Make sure to fill in all the mandatory information before proceeding."></v-alert>
+                <v-card-actions class="bg-white">
+                    <v-btn variant="text" @click="isAlert = false" width="100%">
+                        Agree
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-row>
 </template>
 <script setup>
-import detailCreate from './DetailEventCretae.vue'
-import ticketCreate from './TicketEventCretae.vue'
+import detailCreate from './DetailEventCreate.vue'
+import ticketCreate from './TicketEventCreate.vue'
 import { ref } from 'vue';
+import { eventCreateStores } from '@/stores/eventCreate.js'
+const eventCreate = eventCreateStores()
 const dialog = ref(false)
 const tab = ref('one')
 const isNext = ref(true)
 const nextValue = ref('one')
 const detailHandleSubmit = ref()
+const eventHandleSubmit = ref()
+const isAlert = ref(false)
 
 function checkDetail() {
     detailHandleSubmit.value.submitHandler()
@@ -63,6 +79,30 @@ function checkDetail() {
             if (result) {
                 tab.value = 'two'
                 isNext.value = false
+            } else {
+                isAlert.value = true
+                delayedFunction(2000)
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+function delayedFunction(delay) {
+    setTimeout(() => {
+        isAlert.value = false
+    }, delay);
+}
+
+function submitEvent() {
+    eventHandleSubmit.value.ticketSubmit()
+        .then(result => {
+            if (result) {
+                eventCreate.createEvent()
+                dialog.value = false
+            } else {
+                isAlert.value = true
+                delayedFunction(2000)
             }
         })
         .catch(error => {
@@ -74,12 +114,7 @@ function checkDetail() {
 </script>
 
 <style>
-.dialog-bottom-transition-enter-active,
-.dialog-bottom-transition-leave-active {
-    transition: transform .2s ease-in-out;
-}
-</style>
-<style>
+
 .dialog-bottom-transition-enter-active,
 .dialog-bottom-transition-leave-active {
     transition: transform .2s ease-in-out;
@@ -94,5 +129,10 @@ function checkDetail() {
     width: 60%;
     background-color: rgb(228, 228, 228);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.btn-tab{
+    border: none;
+    background:none;
+    
 }
 </style>

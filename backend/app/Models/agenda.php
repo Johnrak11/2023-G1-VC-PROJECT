@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Agenda extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'date',
+        'title',
+        'description',
+        'event_id'
+    ];
 }

@@ -1,10 +1,9 @@
 <template>
-  <navigation-bar></navigation-bar>
   <banner-view></banner-view>
   <search-view></search-view>
   <category-view></category-view>
   <list-card>
-    <div class="ml-16">
+    <div class="ml-16" data-aos="fade-right" data-aos-duration="3000">
       <h1>Upcoming Events</h1>
       <p>You can chooses to display feature</p>
     </div>

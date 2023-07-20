@@ -1,9 +1,10 @@
 <template>
     <form class="w-60 d-flex flex-column aling-center justify-center border rounded pa-10" elevation="24"
         style="width: 100%;" ref="formRef">
-        <v-input prepend-icon="mdi-ticket">
-            Ticket
-        </v-input>
+        <div class="d-flex align-center mb-4">
+            <v-icon size="24" color="grey" class="mr-2">mdi-ticket</v-icon>
+            <h3>Ticket</h3>
+        </div>
         <div class="input-container">
             <h3>Let's create tickets!</h3>
             <v-label>Create tickets for your event by clicking on the 'Add Tickets' button below.</v-label>
@@ -22,16 +23,11 @@
                 <v-text-field type="number" variant="outlined" v-model="ticketAvailable" :rules="ticketAvailableRules"
                     placeholder="Number of available" append-inner-icon="mdi-ticket"></v-text-field>
             </div>
-            <div class="input">
-                <h3>Ticket per customer*</h3>
-                <v-text-field type="number" variant="outlined" v-model="restriction" :rules="restrictionRules"
-                    placeholder="Ticket restriction" append-inner-icon="mdi-ticket"></v-text-field>
-            </div>
         </div>
 
         <div class="switch-container">
-            <v-switch v-model="modelDiscount" hide-details inset :label="`I don't want to offer early bird discount`"
-                color="red"></v-switch>
+            <v-switch v-model="modelDiscount" :disabled="modelFree" hide-details inset
+                :label="`I don't want to offer early bird discount`" color="red"></v-switch>
         </div>
         <div class="input-row-container">
             <div class="input">
@@ -61,9 +57,10 @@
         </div>
         <div class="input-row-container">
             <div class="input">
-                <v-input prepend-icon="mdi-calendar-check">
-                    Agenda
-                </v-input>
+                <div class="d-flex align-center mb-4">
+                    <v-icon size="24" color="grey" class="mr-2">mdi-calendar-check</v-icon>
+                    <h3>Agenda</h3>
+                </div>
             </div>
             <div class="btn-agenda">
                 <v-btn color="red" @click="isHasAgenda = true" style="width:50%;">
@@ -86,19 +83,20 @@
                     <th class="text-left table-color">
                         Description
                     </th>
+                    <th class="text-left table-color">
+                        Action
+                    </th>
                 </tr>
             </thead>
             <tbody class="table-color">
-                <tr v-for="item in agendas" :key="item.agendaTitle">
-                    <td>{{ item.agendaDate }}</td>
-                    <td>{{ item.agendaTitle }}</td>
-                    <td class="description-column">{{ eventCreate.truncateDescription(item.agendaDescription,40) }} </td>
+                <tr v-for="(item, i) of agendas" :key="i">
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.title }}</td>
+                    <td class="description-column">{{ eventCreate.truncateDescription(item.description, 40) }} </td>
+                    <td><v-icon color="red" @click="deleteAgenda(i)" class="delete" size="24">mdi-delete</v-icon></td>
                 </tr>
             </tbody>
         </v-table>
-        <v-btn class="me-4" @click="ticketSubmit">
-            submit
-        </v-btn>
     </form>
     <v-dialog v-model="isHasAgenda" width="auto">
         <v-sheet width="600px" class="mx-auto">
@@ -125,11 +123,11 @@
     </v-dialog>
 </template>
 
-
 <script setup>
-import { ref } from "vue";
+import { ref, defineExpose, watch } from "vue";
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
+
 
 const modelDiscount = ref(false)
 const modelFree = ref(false)
@@ -137,14 +135,23 @@ const discountItems = ref([])
 const discountItemsModel = ref('Percent(%)')
 const isHasAgenda = ref(false)
 
-const price = ref('')
-const priceRules = ref([(v) => !!v || "Price is required"]);
+watch(modelFree, async (newValue) => {
+    if (modelFree.value) {
+        modelDiscount.value = newValue;
+    }
+})
+
+const price = ref('');
+const priceRules = ref([
+    (v) => !!v || 'Price is required',
+    (v) => v > 0 || 'Price must be more than 0.01',
+]);
 
 const ticketAvailable = ref('');
-const ticketAvailableRules = ref([(v) => !!v || "You must enter the number of available tickets."]);
-
-const restriction = ref('');
-const restrictionRules = ref([(v) => !!v || "You must enter the ticket restriction.'"]);
+const ticketAvailableRules = ref([
+    (v) => !!v || "You must enter the number of available tickets.",
+    (v) => v > 1 || 'Available tickets must be more than 1',
+]);
 
 const discount = ref('');
 const discountRules = ref([(v) => !!v || "You must enter the discount amount."]);
@@ -157,12 +164,11 @@ const ticketDescriptionRules = ref([(v) => !!v || "You must enter the ticket des
 (v) => (v && v.length >= 5) || "Ticket description must be at least 5 characters"]
 );
 
-
-function ticketSubmit() {
+async function ticketSubmit() {
     const isFormValid = validateForm();
     console.log(isFormValid)
     if (!isFormValid) {
-        return;
+        return false;
     }
     let ticketPrice = 'free'
     if (!modelFree.value) {
@@ -171,7 +177,6 @@ function ticketSubmit() {
 
     let newTicket = {
         'available_ticket': ticketAvailable.value,
-        'restriction': restriction.value,
         'description': ticketDescription.value,
         'price': ticketPrice
     }
@@ -191,8 +196,7 @@ function ticketSubmit() {
     else {
         eventCreate.agendas = []
     }
-    eventCreate.createEvent()
-
+    return true;
 }
 
 function validateForm() {
@@ -201,12 +205,16 @@ function validateForm() {
         priceRules.value = [(v) => !!v || "Price is required"]
         return false
     }
+    if (!modelFree.value && Number(price.value) < 0.01) {
+        priceRules.value = [(v) => v > 0 || 'Price must be more than 0.01']
+        return false
+    }
     if (!ticketAvailable.value) {
         ticketAvailableRules.value = [(v) => !!v || "You must enter the number of available tickets."]
         return false
     }
-    if (!restriction.value) {
-        restrictionRules.value = [(v) => !!v || "You must enter the ticket restriction."]
+    if (ticketAvailable.value && Number(ticketAvailable.value) <= 1) {
+        ticketAvailableRules.value = [(v) => v > 0 || 'Available tickets must be more than 1']
         return false
     }
     if (!discount.value && !modelDiscount.value) {
@@ -247,20 +255,29 @@ const format = (date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-
     return `Selected date is ${day}/${month}/${year}`;
 }
 const agendaSubmit = handleSubmit(values => {
-    let newAgenda = values
-    newAgenda['agendaDate'] = eventCreate.formatDate(agendaDate.value)
+    let newAgenda = {
+        'title': values.agendaTitle,
+        'description': values.agendaDescription
+    }
+    newAgenda['date'] = eventCreate.formatDate(agendaDate.value)
     agendas.value.push(newAgenda)
     handleReset()
     isHasAgenda.value = false
 })
 
+function deleteAgenda(index) {
+    agendas.value.splice(index, 1)
+}
+
+defineExpose({
+    ticketSubmit
+});
 </script>
 
-<style>
+<style scoped>
 form {
     padding: 20px;
 }
@@ -317,5 +334,14 @@ form {
 
 .table-color {
     background-color: rgb(235, 235, 235);
+
+}
+
+tbody::-webkit-scrollbar {
+    display: none;
+}
+
+.delete {
+    cursor: pointer;
 }
 </style>

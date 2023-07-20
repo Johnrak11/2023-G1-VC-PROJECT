@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+
     Route::prefix('/auth')->group(function () {
         //logout
         Route::post('/logout', function (Request $request) {
@@ -40,6 +41,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
             }
             return (new AuthController())->getUserInfo($request);
         });
+    });
+    Route::prefix('/events')->group(function () {
+        Route::post('/', [EventController::class, 'store']);
+        Route::prefix('/previews')->group(function () {
+            Route::get('/', [EventController::class, 'getPreviewEvents']);
+            Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
+        });
+        
     });
 });
 
@@ -74,10 +83,13 @@ Route::prefix('/search')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
 });
+Route::prefix('/eventDetail')->group(function () {
+    Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
+    
+});
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
-Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
 Route::get('/tickets', [TicketController::class, 'getAllTicket']);
 Route::get('/tickets/search', [TicketController::class, 'searchTicket']);
 

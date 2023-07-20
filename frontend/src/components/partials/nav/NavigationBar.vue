@@ -23,23 +23,11 @@
               Home</v-btn
             >
           </router-link>
-          <router-link to="/explor" class="link">
-            <v-btn
-              id="li-nav"
-              :class="{ active: isActive('/explor') }"
-              class="rounded"
-              variant="text"
-              >Explore</v-btn
-            >
+          <router-link to="/explore" class="link">
+            <v-btn id="li-nav" :class="{ 'active': isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
           <router-link to="/tickets" class="link">
-            <v-btn
-              id="li-nav"
-              :class="{ active: isActive('/ticket') }"
-              class="rounded"
-              variant="text"
-              >MyTicket</v-btn
-            >
+            <v-btn id="li-nav" :class="{ 'active': isActive('/tickets') }" class="rounded" variant="text">MyTicket</v-btn>
           </router-link>
         </ul>
       </v-left-content>
@@ -161,7 +149,7 @@ a {
 .active {
   text-decoration: underline;
   text-decoration-color: red;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 4px;
 }
 
 .bg-color {

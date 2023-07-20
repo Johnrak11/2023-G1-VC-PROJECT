@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('event_details', function (Blueprint $table) {
             $table->id();
             $table->integer('available_ticket');
-            $table->integer('restriction');
             $table->string('description', 250);
             $table->string('price');
             $table->unsignedBigInteger('event_id');

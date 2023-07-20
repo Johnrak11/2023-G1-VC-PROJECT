@@ -6,6 +6,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { defineStore } from "pinia";
+import baseAPI from "./axiosHandle";
 
 export const eventCreateStores = defineStore("eventCreate", {
   state: () => ({
@@ -15,6 +16,8 @@ export const eventCreateStores = defineStore("eventCreate", {
     eventPoster: "",
     eventDescription: "",
     eventAddress: "",
+    eventLongitude: "",
+    eventLatitude: "",
     eventVenue: "",
 
     ticket: {},
@@ -24,6 +27,7 @@ export const eventCreateStores = defineStore("eventCreate", {
     isLoadingDialog: false,
     imagePreview: "https://placehold.co/600x400/png",
     isSubmit: false,
+    isCreate: false,
   }),
   getters: {},
   actions: {
@@ -92,22 +96,41 @@ export const eventCreateStores = defineStore("eventCreate", {
       return `${formattedDate} ${formattedTime}`;
     },
 
-    createEvent() {
+    async createEvent() {
+      this.isCreate = true;
       let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
-      console.log(dateTimeFormat);
       let newEvent = {
         name: this.eventName,
         description: this.eventDescription,
         date: dateTimeFormat[0],
         time: dateTimeFormat[1],
         location: this.eventAddress,
+        longitude: this.eventLongitude,
+        latitude: this.eventLatitude,
         image: this.eventPoster,
         category_id: this.eventCategories,
+        venue: this.eventVenue,
+      };
+      let createRequest = {
+        event: newEvent,
+        ticket: this.ticket,
+        discount: this.discount,
+        agendas: this.agendas,
       };
       console.log(newEvent);
       console.log(this.ticket);
       console.log(this.discount);
       console.log(this.agendas);
+      await baseAPI
+        .post("/events", createRequest)
+        .then((response) => {
+          console.log(response.data);
+          this.isCreate = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.isCreate = false;
+        });
     },
 
     convertDateTimeFormat(inputDate) {
@@ -123,7 +146,7 @@ export const eventCreateStores = defineStore("eventCreate", {
       return [formattedDate, formattedTime];
     },
 
-    truncateDescription(description,textLength) {
+    truncateDescription(description, textLength) {
       const maxLength = textLength; // Maximum characters to display
       if (description.length <= maxLength) {
         return description;

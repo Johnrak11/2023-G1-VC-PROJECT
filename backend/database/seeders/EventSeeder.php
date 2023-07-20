@@ -24,7 +24,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/136585049/original/f290d43b0dd338d83267b3a9129fd5e28bdfd22d/design-eye-catching-banner-and-flyers.jpg',
                 'venue' => "At Berng snuor",
                 'organizer_id' => 4,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -36,7 +37,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGDMWL6GLR9r2o0RTHYLXWBDXs4aqrKirPoo-kZKUjctiNmyUI3tZchA8bBHkq7Ot4T2g&usqp=CAU',
                 'venue' => "At Banteay Meanchey",
                 'organizer_id' => 3,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1
 
             ],
             [
@@ -48,7 +50,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/premium-vector/music-event-banner-template-with-photo_52683-13693.jpg',
                 'venue' => "At Batambong",
                 'organizer_id' => 2,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -60,7 +63,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/premium-vector/music-event-banner-template-with-photo_52683-13693.jpg',
                 'venue' => "On the beach",
                 'organizer_id' => 4,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
 
             ],
             [
@@ -72,7 +76,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At aeon",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -84,7 +89,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At WAT PHNOM",
                 'organizer_id' => 1,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -96,7 +102,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At WAT PHNOM",
                 'organizer_id' => 4,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -108,7 +115,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At the beach",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -120,7 +128,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
                 'venue' => "At PNC",
                 'organizer_id' => 1,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -132,7 +141,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At PSE",
                 'organizer_id' => 2,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -144,7 +154,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At Rolyal Palase",
                 'organizer_id' => 2,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -156,7 +167,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "In front of the Royal Palace",
                 'organizer_id' => 2,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
 
             ],
             [
@@ -168,7 +180,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At Berng Snour",
                 'organizer_id' => 3,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Electric Dreams',
@@ -179,7 +192,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At city",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Game',
@@ -190,7 +204,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At Takao",
                 'organizer_id' => 4,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -202,7 +217,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/premium-psd/esports-event-social-media-banner-template_202605-313.jpg',
                 'venue' => "At Kompong Tom",
                 'organizer_id' => 5,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
 
             ],
             [
@@ -214,7 +230,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/premium-vector/game-day-esports-gaming-post-banner-template-social-media-with-esports-logo_126068-396.jpg?w=2000',
                 'venue' => "At Batambong",
                 'organizer_id' => 4,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
 
             ],
             [
@@ -226,7 +243,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Kep",
                 'organizer_id' => 3,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -238,7 +256,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Aeon",
                 'organizer_id' => 3,
-                'category_id' => 6
+                'category_id' => 6,
+                'is_public' => 1
 
             ],
             [
@@ -250,7 +269,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Aeon",
                 'organizer_id' => 3,
-                'category_id' => 6
+                'category_id' => 6,
+                'is_public' => 1
 
             ],
             [
@@ -262,7 +282,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "kandal",
                 'organizer_id' => 3,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -274,7 +295,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "kaoh pech",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -286,7 +308,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Olympic",
                 'organizer_id' => 3,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
 
             ],
             [
@@ -298,7 +321,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Olympic",
                 'organizer_id' => 5,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -310,7 +334,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At kandal",
                 'organizer_id' => 5,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
 
             ],
             [
@@ -322,7 +347,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 1,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Food Expo',
@@ -333,7 +359,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Diamond Island Convention and Exhibition Center",
                 'organizer_id' => 2,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
             ],
             [
                 'name' => 'Fashion Show',
@@ -344,7 +371,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Sovanna Shopping Center",
                 'organizer_id' => 3,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1
             ],
             [
                 'name' => 'Sports Tournament',
@@ -355,7 +383,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At National Olympic Stadium",
                 'organizer_id' => 5,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1
             ],
             [
                 'name' => 'Art Exhibition',
@@ -366,7 +395,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At National Museum of Cambodia",
                 'organizer_id' => 5,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Career Fair',
@@ -377,7 +407,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Phnom Penh Hotel",
                 'organizer_id' => 1,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
             ],
             [
                 'name' => 'Film Festival',
@@ -388,7 +419,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Major Cineplex",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Charity Auction',
@@ -399,7 +431,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Raffles Hotel Le Royal",
                 'organizer_id' => 3,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
             ],
             [
                 'name' => 'Tech Conference',
@@ -410,7 +443,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Sofitel Phnom Penh Phokeethra",
                 'organizer_id' => 4,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1
             ],
             [
                 'name' => 'Dance Competition',
@@ -421,7 +455,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Chaktomuk Theater",
                 'organizer_id' => 5,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1
             ],
             [
                 'name' => 'Photography Exhibition',
@@ -432,7 +467,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Bophana Center",
                 'organizer_id' => 1,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Health Expo',
@@ -443,7 +479,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 1,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1
             ],
             [
                 'name' => 'Culinary Competition',
@@ -454,7 +491,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At The Place Restaurant",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Startup Pitch Competition',
@@ -465,7 +503,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Raintree Cambodia",
                 'organizer_id' => 3,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1
             ],
             [
                 'name' => 'Literature Festival',
@@ -476,7 +515,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://cdn.dribbble.com/users/15617/screenshots/6400465/screenshot_1x.jpg',
                 'venue' => "At FCC Angkor",
                 'organizer_id' => 4,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1
             ],
             [
                 'name' => 'Environmental Exhibition',
@@ -487,7 +527,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://cdn.dribbble.com/users/15617/screenshots/6400465/screenshot_1x.jpg',
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 5,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1
             ],
             [
                 'name' => 'Art Auction',
@@ -498,7 +539,8 @@ class EventSeeder extends Seeder
                 'image' => 'https://cdn.dribbble.com/users/15617/screenshots/6400465/screenshot_1x.jpg',
                 'venue' => "At Sofitel Phnom Penh Phokeethra",
                 'organizer_id' => 3,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1
             ],
         ];
         foreach ($ListEvents as $ListEvent) {
