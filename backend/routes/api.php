@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
     });
     Route::prefix('/events')->group(function () {
+        Route::delete('/{eventId}', [EventController::class, 'deleteEventById']);
         Route::post('/', [EventController::class, 'store']);
         Route::prefix('/previews')->group(function () {
             Route::get('/', [EventController::class, 'getPreviewEvents']);
@@ -63,8 +64,6 @@ Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
 });
 
-// Route::get('/tickets', [TicketController::class, 'getAllTicket']);
-
 //-------search for events------------
 Route::prefix('/events')->group(function () {
     Route::get('/{id}', [EventController::class, 'getEventById']);
@@ -72,8 +71,6 @@ Route::prefix('/events')->group(function () {
     Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
-    Route::delete('/{eventId}', [EventController::class, 'deleteEventById']);
-
     Route::prefix('/booking')->group(function () {
         Route::get('/{eventId}', [EventController::class, 'booking']);
     });
