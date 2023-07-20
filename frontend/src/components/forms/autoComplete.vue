@@ -1,6 +1,5 @@
 <template>
   <div class="w-90 ml-5 d-flex justify-center">
-    <!-- <v-text-field label="Address" :rules="addressRule" v-model="address.address" class="w-90"></v-text-field> -->
     <v-text-field density="compact" placeholder="Your address" variant="outlined" :rules="addressRule"
       v-model="address.address" class="w-90"></v-text-field>
     <v-btn size="small" color="indigo" class="bg-red" icon="mdi-map-marker" :loading="address.loading"

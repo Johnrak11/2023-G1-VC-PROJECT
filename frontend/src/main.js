@@ -1,4 +1,5 @@
 // ----- library----
+// reference https://animate.style
 import "animate.css";
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -12,6 +13,8 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
 // ----- scroll animation -----
+
+// reference https://egghead.io/blog/how-to-use-the-animate-on-scroll-aos-library-in-vue
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -52,7 +55,7 @@ app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
 app.component("banner-view", BannerView);
-app.component('VueDatePicker', VueDatePicker);
+app.component("VueDatePicker", VueDatePicker);
 
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init();

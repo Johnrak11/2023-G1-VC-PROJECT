@@ -1,8 +1,8 @@
 <template>
-    <v-row justify="center">
+    <v-row justify="end">
         <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
             <template v-slot:activator="{ props }">
-                <v-btn color="red" dark v-bind="props" style="width: 30%">
+                <v-btn color="primary" dark v-bind="props" style="width: 25%">
                     <slot></slot>
                 </v-btn>
             </template>
@@ -36,8 +36,8 @@
                                 <v-tab v-show="!isNext" @click="isNext = !isNext" value="one" width="10%">
                                     <v-btn class="bg-red">Preview</v-btn>
                                 </v-tab>
-                                <v-tab v-show="isNext" @click="checkDetail" :value="nextValue" width="10%">
-                                    <v-btn class="bg-red">Next</v-btn>
+                                <v-tab class="btn-tab" v-show="isNext" @click="checkDetail" :value="nextValue" width="10%">
+                                    <v-btn color="red">Next</v-btn>
                                 </v-tab>
                             </v-tabs>
                         </div>
@@ -65,21 +65,17 @@ import ticketCreate from './TicketEventCreate.vue'
 import { ref } from 'vue';
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
-
-
 const dialog = ref(false)
 const tab = ref('one')
 const isNext = ref(true)
 const nextValue = ref('one')
 const detailHandleSubmit = ref()
 const eventHandleSubmit = ref()
-
 const isAlert = ref(false)
 
 function checkDetail() {
     detailHandleSubmit.value.submitHandler()
         .then(result => {
-            console.log(result)
             if (result) {
                 tab.value = 'two'
                 isNext.value = false
@@ -118,12 +114,7 @@ function submitEvent() {
 </script>
 
 <style>
-.dialog-bottom-transition-enter-active,
-.dialog-bottom-transition-leave-active {
-    transition: transform .2s ease-in-out;
-}
-</style>
-<style>
+
 .dialog-bottom-transition-enter-active,
 .dialog-bottom-transition-leave-active {
     transition: transform .2s ease-in-out;
@@ -138,5 +129,10 @@ function submitEvent() {
     width: 60%;
     background-color: rgb(228, 228, 228);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.btn-tab{
+    border: none;
+    background:none;
+    
 }
 </style>

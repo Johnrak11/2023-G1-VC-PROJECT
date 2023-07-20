@@ -1,9 +1,10 @@
 <template>
-    <form @submit.prevent="submitHandler" class="w-100 d-flex flex-column aling-center justify-center border rounded pa-10"
+    <form @submit.prevent="submitHandler" class="w-100 d-flex flex-column justify-center border rounded pa-10"
         elevation="24">
-        <v-input prepend-icon="mdi-information">
-            Details
-        </v-input>
+        <div class="d-flex align-center mb-4">
+            <v-icon size="24" color="grey" class="mr-2">mdi-information</v-icon>
+            <h3>Detail</h3>
+        </div>
         <div class="input-container">
             <h3>Give your event a name.*</h3>
             <v-label>See how your name appears on the event page and a list of all places where your event name will be
@@ -56,7 +57,7 @@
             <div class="d-flex mb-0">
                 <v-text-field v-model="addressStorage.address" :counter="10" :rules="addressRules" label="Address"
                     variant="outlined" style="width:100%;"></v-text-field>
-                <v-btn size="small" color="red mt-2 ml-5" class="bg-red" icon="mdi-map-marker"
+                <v-btn size="small" class="bg-red mt-2 ml-5" icon="mdi-map-marker"
                     :loading="addressStorage.loading" @click="addressStorage.locaterButtonPressed()"></v-btn>
             </div>
             <v-btn v-if="addressStorage.latitude" variant="outlined" :loading="false" prepend-icon="mdi-map"
@@ -155,7 +156,6 @@ const venueRules = [
     v => !!v || 'Venue is required',
 ];
 
-
 async function submitHandler() {
     const isFormValid = validateForm();
     if (!isFormValid) {
@@ -215,7 +215,7 @@ function seletedLocation() {
 }
 </script>
 
-<style>
+<style scoped>
 form {
     padding: 20px;
 }

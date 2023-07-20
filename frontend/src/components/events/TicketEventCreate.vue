@@ -1,9 +1,10 @@
 <template>
     <form class="w-60 d-flex flex-column aling-center justify-center border rounded pa-10" elevation="24"
         style="width: 100%;" ref="formRef">
-        <v-input prepend-icon="mdi-ticket">
-            Ticket
-        </v-input>
+        <div class="d-flex align-center mb-4">
+            <v-icon size="24" color="grey" class="mr-2">mdi-ticket</v-icon>
+            <h3>Ticket</h3>
+        </div>
         <div class="input-container">
             <h3>Let's create tickets!</h3>
             <v-label>Create tickets for your event by clicking on the 'Add Tickets' button below.</v-label>
@@ -56,9 +57,10 @@
         </div>
         <div class="input-row-container">
             <div class="input">
-                <v-input prepend-icon="mdi-calendar-check">
-                    Agenda
-                </v-input>
+                <div class="d-flex align-center mb-4">
+                    <v-icon size="24" color="grey" class="mr-2">mdi-calendar-check</v-icon>
+                    <h3>Agenda</h3>
+                </div>
             </div>
             <div class="btn-agenda">
                 <v-btn color="red" @click="isHasAgenda = true" style="width:50%;">
@@ -120,7 +122,6 @@
         </v-sheet>
     </v-dialog>
 </template>
-
 
 <script setup>
 import { ref, defineExpose, watch } from "vue";
@@ -276,7 +277,7 @@ defineExpose({
 });
 </script>
 
-<style>
+<style scoped>
 form {
     padding: 20px;
 }
@@ -333,6 +334,11 @@ form {
 
 .table-color {
     background-color: rgb(235, 235, 235);
+
+}
+
+tbody::-webkit-scrollbar {
+    display: none;
 }
 
 .delete {
