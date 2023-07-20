@@ -12,7 +12,10 @@
           <router-link to="/explore" class="link">
             <v-btn id="li-nav" :class="{ 'active': isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
-          <router-link to="/tickets" class="link">
+          <router-link to="/explore" class="link">
+            <v-btn id="li-nav" :class="{ 'active': isActive('/explore') }" class="rounded" variant="text">Map</v-btn>
+          </router-link>
+          <router-link v-if="getSession('role')" to="/tickets" class="link">
             <v-btn id="li-nav" :class="{ 'active': isActive('/tickets') }" class="rounded" variant="text">MyTicket</v-btn>
           </router-link>
         </ul>

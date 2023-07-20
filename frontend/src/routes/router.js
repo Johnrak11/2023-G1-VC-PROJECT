@@ -21,6 +21,8 @@ function authenticateBeforeEnter() {
   return function (to, from, next) {
     const { getSession } = sessionStore();
     const { getCookie } = cookieStore();
+    console.log(getSession("role"))
+    console.log(getCookie("token"))
     if (getSession("role") && getCookie("token")) {
       next();
     } else {
@@ -68,7 +70,7 @@ const routes = [
     name: "booking",
     component: BookingView,
     props: true,
-    beforeEnter: authenticateBeforeEnter,
+    beforeEnter: [authenticateBeforeEnter()],
   },
   {
     path: "/detail/:id",
@@ -104,7 +106,7 @@ const routes = [
     path: "/tickets",
     name: "tickets",
     component: TicketView,
-    beforeEnter: authenticateBeforeEnter,
+    beforeEnter: [authenticateBeforeEnter()],
   },
   {
     path: "/dashboard/preview",
@@ -119,7 +121,7 @@ const routes = [
     path: "/notifications",
     name: "notifications",
     component: NotificationView,
-    beforeEnter: authenticateBeforeEnter,
+    beforeEnter: [authenticateBeforeEnter()],
   },
 ];
 const router = createRouter({
