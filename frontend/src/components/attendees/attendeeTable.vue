@@ -39,7 +39,7 @@
     </v-container>
 </template>
 <script setup>
-import searchAttendee from "./searchAttendee.vue";
+import searchAttendee from "./headListAttendee.vue";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import baseAPI from "@/stores/axiosHandle.js";
@@ -55,7 +55,6 @@ onMounted(async () => {
         attendees.value = response.data.data;
     } catch (error) {
         console.error(error);
-        // Display an error message to the user
     }
 });
 // =====References : https://docs.sheetjs.com/docs/=====
@@ -69,7 +68,7 @@ function exportToExcel() {
   // Add data rows
   attendees.value.forEach((attendee, index) => {
     const rowIndex = index + 2;
-    XLSX.utils.sheet_add_aoa(worksheet, [[attendee.user.firstname, attendee.user.lastname, attendee.user.email, attendee.user.phone_number, attendee.booking_date, "Ok"]], { origin: `A${rowIndex}` });
+    XLSX.utils.sheet_add_aoa(worksheet, [[attendee.user.firstname, attendee.user.lastname, attendee.user.email, attendee.user.phone_number, attendee.booking_date, "Ok"]], { origin: `A${rowIndex}`, style: { fill: { fgColor: { rgb: "FF0000" } }, font: { color: { rgb: "FFFFFF" }, bold: true } } });
   });
 
   XLSX.utils.book_append_sheet(workbook, worksheet, "Attendees");
