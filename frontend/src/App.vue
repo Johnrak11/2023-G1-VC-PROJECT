@@ -1,19 +1,36 @@
 <template>
-  <router-view></router-view>
+  <div>
+    <navigation-bar v-if="shouldShowNavBar"></navigation-bar>
+    <router-view />
+  </div>
 </template>
 
 <script setup>
 import { userStore } from "./stores/user.js";
 import { cookieStore } from "./stores/cookies.js";
+import { onMounted, computed } from "vue";
+import router from "@/routes/router.js";
 
-const { getCookie } = cookieStore()
+const { getCookie } = cookieStore();
 const user = userStore();
 const userToken = getCookie("token");
-user.token = userToken
+user.token = userToken;
 if (userToken) {
   user.getUserInfor();
 }
+
+const shouldShowNavBar = computed(() => {
+  const currentPath = router.currentRoute.value.path;
+  return !currentPath.startsWith("/dashboard");
+});
+
+onMounted(() => {
+  const currentPageRoute = router.currentRoute.value;
+  console.log("router", currentPageRoute);
+});
+
 </script>
+
 <style>
 html {
   scroll-behavior: smooth;

@@ -20,7 +20,7 @@ export const eventStores = defineStore("event", {
         .get("/events")
         .then((response) => {
           let responeseData = response.data.data;
-          console.log(responeseData);
+          // console.log(responeseData);
           this.events = responeseData.data;
           this.pagination.currentPage = responeseData.current_page;
           this.pagination.lastPage = responeseData.last_page;
@@ -49,7 +49,7 @@ export const eventStores = defineStore("event", {
         .get(`/events?page=${pageNumber}`)
         .then((response) => {
           let responeseData = response.data.data;
-          console.log(responeseData);
+          // console.log(responeseData);
           this.events = responeseData.data;
           this.pagination.currentPage = responeseData.current_page;
           this.pagination.lastPage = responeseData.last_page;
@@ -80,24 +80,12 @@ export const eventStores = defineStore("event", {
     },
     async getEventPrice(eventId) {
       await baseAPI
-        .get(`eventDetail/${eventId}`)
+        .get(`/eventDetail/${eventId}`)
         .then((response) => {
-          this.events = response.data.data;
-          console.log(this.events);
-          // console.log(this.events);
+          this.eventDetail = response.data.data;
+          console.log(this.eventDetail);
         })
         .catch((error) => console.log(error));
     },
-    // async getEventPrice(eventId) {
-    //   await baseAPI
-    //     .get(
-    //       `eventDetail/${eventId}`
-    //     )
-    //     .then((response) => {
-    //       this.eventDetail = response.data.data;
-    //       console.log("EventDetail", response.data);
-    //     })
-    //     .catch((error) => console.log(error));
-    // },
   },
 });

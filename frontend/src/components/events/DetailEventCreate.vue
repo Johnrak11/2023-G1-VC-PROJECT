@@ -1,9 +1,10 @@
 <template>
-    <form @submit.prevent="submitHandler" class="w-100 d-flex flex-column aling-center justify-center border rounded pa-10"
+    <form @submit.prevent="submitHandler" class="w-100 d-flex flex-column justify-center border rounded pa-10"
         elevation="24">
-        <v-input prepend-icon="mdi-information">
-            Details
-        </v-input>
+        <div class="d-flex align-center mb-4">
+            <v-icon size="24" color="grey" class="mr-2">mdi-information</v-icon>
+            <h3>Detail</h3>
+        </div>
         <div class="input-container">
             <h3>Give your event a name.*</h3>
             <v-label>See how your name appears on the event page and a list of all places where your event name will be
@@ -53,8 +54,15 @@
         <div class="input-container">
             <h3>Where is your event taking place? *</h3>
             <v-label>Add a venue to your event to tell your attendees where to join the event.</v-label>
-            <v-text-field v-model="address" :counter="10" :rules="addressRules" label="Address" variant="outlined"
-                style="width:100%;"></v-text-field>
+            <div class="d-flex mb-0">
+                <v-text-field v-model="addressStorage.address" :counter="10" :rules="addressRules" label="Address"
+                    variant="outlined" style="width:100%;"></v-text-field>
+                <v-btn size="small" class="bg-red mt-2 ml-5" icon="mdi-map-marker"
+                    :loading="addressStorage.loading" @click="addressStorage.locaterButtonPressed()"></v-btn>
+            </div>
+            <v-btn v-if="addressStorage.latitude" variant="outlined" :loading="false" prepend-icon="mdi-map"
+                @click="isOpenMap = !isOpenMap" class="w-100 mb-5" style="margin-top: -5px;">
+                Select map</v-btn>
             <v-text-field v-model="venue" :counter="10" :rules="venueRules" label="Venue" variant="outlined"
                 style="width:100%;"></v-text-field>
         </div>
@@ -67,9 +75,30 @@
             </v-card-text>
         </v-card>
     </v-dialog>
+    <!-- ---- map -->
+    <v-dialog v-model="isOpenMap" width="auto">
+        <div class="rounded map-container">
+            <OpenStreetMap></OpenStreetMap>
+            <div class="d-flex btn-map-submit">
+                <v-btn v-if="addressStorage.isFresh" variant="outlined" class=" bg-red" width="10%"
+                    :loading="addressStorage.loading" @click="addressStorage.locaterButtonPressed()">
+                    Refresh
+                </v-btn>
+                <v-btn :loading="addressStorage.loading" @click="seletedLocation" variant=" outlined" class="bg-red"
+                    width="10%">
+                    Select
+                </v-btn>
+            </div>
+        </div>
+    </v-dialog>
 </template>
 <script setup>
 import { ref, defineExpose, onMounted } from 'vue'
+import OpenStreetMap from '@/components/maps/SelectMap.vue'
+
+import { addressStore } from '../../stores/address.js'
+let addressStorage = addressStore()
+
 
 import { eventCreateStores } from '@/stores/eventCreate.js'
 import { categoryStore } from '@/stores/categoryStore.js'
@@ -80,7 +109,7 @@ const minDate = ref(new Date())
 minDate.value.setDate(minDate.value.getDate() + 6)
 const maxDate = new Date()
 maxDate.setMonth(maxDate.getMonth() + 1)
-
+const isOpenMap = ref(false)
 const image = ref("");
 const selectImage = (event) => {
     const file = event.target.files[0];
@@ -119,7 +148,6 @@ const description = ref('')
 const descriptionRules = [
     v => !!v || 'description is required',
 ];
-const address = ref('')
 const addressRules = [
     v => !!v || 'Address is required',
 ];
@@ -127,7 +155,6 @@ const venue = ref('')
 const venueRules = [
     v => !!v || 'Venue is required',
 ];
-
 
 async function submitHandler() {
     const isFormValid = validateForm();
@@ -138,9 +165,10 @@ async function submitHandler() {
         eventCreate.eventCategories = category.value
         eventCreate.eventDate = minDate.value
         eventCreate.eventDescription = description.value
-        eventCreate.eventAddress = address.value
+        eventCreate.eventAddress = addressStorage.address
+        eventCreate.eventLatitude = addressStorage.latitude
+        eventCreate.eventLongitude = addressStorage.longitude
         eventCreate.eventVenue = venue.value
-        eventCreate.createEvent()
         return true;
     }
 }
@@ -163,7 +191,7 @@ function validateForm() {
         descriptionRules.value = [(v) => !!v || "Description is required"];
         isValid = false;
     }
-    if (!address.value) {
+    if (!addressStorage.address) {
         addressRules.value = [(v) => !!v || "Address is required"];
         isValid = false;
     }
@@ -181,9 +209,13 @@ defineExpose({
     submitHandler
 });
 
+function seletedLocation() {
+    isOpenMap.value = false
+    addressStorage.getAddress(addressStorage.latitude, addressStorage.longitude)
+}
 </script>
 
-<style>
+<style scoped>
 form {
     padding: 20px;
 }
@@ -230,5 +262,15 @@ form {
 .custom-datepicker .vdp-input {
     background-color: rgb(190, 104, 104);
     border: none;
+}
+
+.map-container {
+    padding: 10px;
+}
+
+.btn-map-submit {
+    margin-top: 2px;
+    gap: 10px;
+    justify-content: flex-end;
 }
 </style>

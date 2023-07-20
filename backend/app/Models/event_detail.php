@@ -10,7 +10,6 @@ class Event_detail extends Model
     use HasFactory;
     protected $fillable = [
         'available_ticket',
-        'restriction',
         'description',
         'price',
         'event_id',
@@ -18,5 +17,10 @@ class Event_detail extends Model
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+    
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class);
     }
 }

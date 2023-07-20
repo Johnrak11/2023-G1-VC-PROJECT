@@ -1,5 +1,4 @@
 <template>
-  <navigation-bar></navigation-bar>
   <banner-view></banner-view>
   <search-view></search-view>
   <category-view></category-view>

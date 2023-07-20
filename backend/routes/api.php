@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+
     Route::prefix('/auth')->group(function () {
         //logout
         Route::post('/logout', function (Request $request) {
@@ -41,6 +42,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
+    Route::prefix('/events')->group(function () {
+        Route::delete('/{eventId}', [EventController::class, 'deleteEventById']);
+        Route::post('/', [EventController::class, 'store']);
+        Route::prefix('/previews')->group(function () {
+            Route::get('/', [EventController::class, 'getPreviewEvents']);
+            Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
+        });
+        
+    });
 });
 
 // ----- authentication group----
@@ -54,8 +64,6 @@ Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
 });
 
-// Route::get('/tickets', [TicketController::class, 'getAllTicket']);
-
 //-------search for events------------
 Route::prefix('/events')->group(function () {
     Route::get('/{id}', [EventController::class, 'getEventById']);
@@ -63,7 +71,6 @@ Route::prefix('/events')->group(function () {
     Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
-
     Route::prefix('/booking')->group(function () {
         Route::get('/{eventId}', [EventController::class, 'booking']);
     });
@@ -73,9 +80,13 @@ Route::prefix('/search')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
 });
+Route::prefix('/eventDetail')->group(function () {
+    Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
+    
+});
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
-Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
 Route::get('/tickets', [TicketController::class, 'getAllTicket']);
 Route::get('/tickets/search', [TicketController::class, 'searchTicket']);
+
