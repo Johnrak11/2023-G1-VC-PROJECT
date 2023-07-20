@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { sessionStore } from "./session.js";
 export const addressStore = defineStore("address", {
   state: () => ({
     address: "",
@@ -8,15 +9,33 @@ export const addressStore = defineStore("address", {
     isDenied: false,
     latitude: null,
     longitude: null,
-    isFresh : false
+    isFresh: false,
   }),
   getters: {},
   actions: {
+    getUserCurrentLatLng() {
+      const { setSession } = sessionStore();
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setSession("latitude", position.coords.latitude);
+            setSession("longitude", position.coords.longitude);
+          },
+          (error) => {
+            console.log(error.message);
+            this.isConfirmed("warning", "Please turn on the location");
+          }
+        );
+      } else {
+        console.log("Your browser does not support geolocation");
+      }
+    },
+
     locaterButtonPressed() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            this.isFresh = false
+            this.isFresh = false;
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
             this.getAddress(

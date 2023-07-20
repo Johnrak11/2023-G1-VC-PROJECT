@@ -48,6 +48,13 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </router-link>
             </v-list-item>
+
+            <v-list-item v-if="listRole.includes(getSession('role'))" value="dashboard">
+              <router-link to="/dashboard">
+                <v-list-item-title>Dashboard</v-list-item-title>
+              </router-link>
+            </v-list-item>
+
             <v-list-item value="logout" @click="user.logout()">
               <v-list-item-title>logout</v-list-item-title>
             </v-list-item>
@@ -66,9 +73,10 @@ const items = ref([
   { title: "Profile", link: "/profile" },
   { title: "History", link: "/profile" },
   { title: "Ticket", link: "/profile" },
-  { title: "Dashboard", link: "/dashboard" },
 ]);
-import { userStore } from "../../../stores/user.js";
+import { userStore } from "@/stores/user.js";
+import { sessionStore } from "@/stores/session.js";
+const { getSession } = sessionStore()
 const user = userStore();
 import { reactive } from 'vue'
 
@@ -78,7 +86,7 @@ const state = reactive({
   message: false,
   hints: true,
 })
-
+const listRole = ref(["organizer", "admin"])
 const isActive = (route) => {
   return router.currentRoute.value.path === route;
 };
