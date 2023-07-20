@@ -11,6 +11,7 @@ use App\Http\Resources\EventResource;
 use App\Http\Resources\OrganizerResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -123,10 +124,16 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function deleteEventById(Request $eventId)
     {
-        //
+        $event = Event::find($eventId);
+        if ( Auth::user()->role !== 'admin') {
+            return response()->json(['message' => 'No permission to delete this event'], 403);
+        }
+        $event->delete();
+        return response()->json(['success' => true, 'message' => 'Event deleted successfully'], 200);
     }
+    
     public function getOrganizerId($eventId)
     {
         $event = Event::find($eventId);

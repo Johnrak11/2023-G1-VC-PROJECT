@@ -63,6 +63,7 @@ Route::prefix('/events')->group(function () {
     Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
+    Route::delete('/{eventId}', [EventController::class, 'deleteEventById']);
 
     Route::prefix('/booking')->group(function () {
         Route::get('/{eventId}', [EventController::class, 'booking']);
@@ -79,3 +80,4 @@ Route::get('/categories', [CategoryController::class, 'getAllCategory']);
 Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
 Route::get('/tickets', [TicketController::class, 'getAllTicket']);
 Route::get('/tickets/search', [TicketController::class, 'searchTicket']);
+
