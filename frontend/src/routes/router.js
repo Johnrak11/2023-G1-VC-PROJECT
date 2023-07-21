@@ -4,15 +4,17 @@ import HomePage from "../views/home/HomeView.vue";
 import LoginForm from "../views/login/loginView.vue";
 import BookingView from "../views/booking/BookingView.vue";
 import ExplorePage from "../views/explore/explorePageView.vue";
+import ListMapView from "../views/listMap/ListMapView.vue";
 
-import DashboardOrganizer from "../views/dashboard/DashboardOrganizer.vue";
-import DashboardEventPreview from "../views/dashboard/DashboardEventPreview.vue";
+import DashboardOrganizer from "../views/dashboard/orgznizerInfor/DashboardOrganizer.vue";
+import DashboardEventPreview from "../views/dashboard/eventPreview/DashboardEventPreview.vue";
 import DetailPage from "../views/detail/DetailView.vue";
 import RedirectPage from "../views/detail/RedirectPage.vue";
 
-import DashboardEvent from "../views/dashboard/DashboardEvent.vue";
+import DashboardEvent from "../views/dashboard/eventPosted/DashboardEventPosted.vue";
 import TicketView from "../views/ticket/TicketView.vue";
 import NotificationView from "../views/notifications/NotificationView.vue";
+import Attendee from "@/views/dashboard/attendee/attendeeView.vue";
 
 import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
@@ -21,8 +23,8 @@ function authenticateBeforeEnter() {
   return function (to, from, next) {
     const { getSession } = sessionStore();
     const { getCookie } = cookieStore();
-    console.log(getSession("role"))
-    console.log(getCookie("token"))
+    console.log(getSession("role"));
+    console.log(getCookie("token"));
     if (getSession("role") && getCookie("token")) {
       next();
     } else {
@@ -55,6 +57,11 @@ const routes = [
     component: ExplorePage,
   },
   {
+    path: "/listMap",
+    name: "listMap",
+    component: ListMapView,
+  },
+  {
     path: "/register",
     name: "register",
     props: true,
@@ -84,24 +91,7 @@ const routes = [
     component: RedirectPage,
     props: true,
   },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardOrganizer,
-    beforeEnter: [
-      authenticateBeforeEnter,
-      roleBeforeEnter(["organizer", "admin"]),
-    ],
-  },
-  {
-    path: "/dashboard/event",
-    name: "event",
-    component: DashboardEvent,
-    beforeEnter: [
-      authenticateBeforeEnter,
-      roleBeforeEnter(["organizer", "admin"]),
-    ],
-  },
+
   {
     path: "/tickets",
     name: "tickets",
@@ -109,19 +99,43 @@ const routes = [
     beforeEnter: [authenticateBeforeEnter()],
   },
   {
-    path: "/dashboard/preview",
-    name: "eventPreview",
-    component: DashboardEventPreview,
-    beforeEnter: [
-      authenticateBeforeEnter,
-      roleBeforeEnter(["organizer", "admin"]),
-    ],
-  },
-  {
     path: "/notifications",
     name: "notifications",
     component: NotificationView,
     beforeEnter: [authenticateBeforeEnter()],
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashboardOrganizer,
+    beforeEnter: [
+      authenticateBeforeEnter(),
+      roleBeforeEnter(["organizer", "admin"]),
+    ],
+  },
+  {
+    path: "/dashboard/event",
+    name: "eventPosted",
+    component: DashboardEvent,
+    beforeEnter: [
+      authenticateBeforeEnter(),
+      roleBeforeEnter(["organizer", "admin"]),
+    ],
+  },
+  {
+    path: "/dashboard/preview",
+    name: "eventPreview",
+    component: DashboardEventPreview,
+    beforeEnter: [
+      authenticateBeforeEnter(),
+      roleBeforeEnter(["organizer", "admin"]),
+    ],
+  },
+  {
+    path: "/dashboard/attendees/:eventId",
+    name: "attendees",
+    component: Attendee,
+    props: true,
   },
 ];
 const router = createRouter({

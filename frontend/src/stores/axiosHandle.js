@@ -7,17 +7,16 @@ const baseAPI = axios.create({
 });
 
 baseAPI.interceptors.request.use((config) => {
-  const { getCookie, removeCookie } = cookieStore();
-  const { removeSession } = sessionStore();
+  const { getCookie } = cookieStore();
+  const { removeSession, getSession } = sessionStore();
   const token = getCookie("token"); // Replace 'token' with the actual cookie name
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   } else {
     console.log("something wrong...");
-    if (token) {
-      removeCookie("token");
+    if (getSession("role")) {
+      removeSession("role");
     }
-    removeSession("role");
   }
   config.headers["Content-Type"] = "application/json";
   return config;

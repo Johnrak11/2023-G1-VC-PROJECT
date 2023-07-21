@@ -2,11 +2,11 @@
     <v-card>
         <v-layout>
             <v-main class="bg-grey-lighten-2">
-                <ListCard>
+                <ListCardPreview>
                     <div class="w-50 d-flex justify-end mt-3">
                         <createEventDailog> Create </createEventDailog>
                     </div>
-                </ListCard>
+                </ListCardPreview>
                 <ContainLeftDashboard />
             </v-main>
         </v-layout>
@@ -14,9 +14,9 @@
 </template>
 
 <script setup>
-import ContainLeftDashboard from "./ContainLeftDashboard.vue";
-import ListCard from "../../components/partials/dashboards/ListCardPreview.vue";
-import createEventDailog from "../../components/events/CreateEventDialog.vue";
+import ContainLeftDashboard from "../ContainLeftDashboard.vue";
+import ListCardPreview from "../../../components/partials/dashboards/ListCardPreview.vue";
+import createEventDailog from "../../../components/events/CreateEventDialog.vue";
 
 </script>
 

@@ -10,7 +10,7 @@
   </list-card><br>
   <popular-event>
     <div class="ml-16">
-      <h1>Most Visited Place</h1>
+      <h1>Upcoming Events In Area</h1>
       <p>You can chooses to display feature</p>
     </div>
   </popular-event>
