@@ -2,14 +2,16 @@
     <div id="card-scroll" class="overflow-y-auto mt-15" v-scroll.self="onScroll" style="width: 50%;height: 100vh;">
         <slot></slot>
         <div class="ml-12 mt-5 mb-5 d-flex justify-space-evenly flex-wrap">
-            <CardMapTemplate v-for="event of events.events" :key="event.id" :event="event"></CardMapTemplate>
+            <CardMapTemplate v-for="event of events.recommendEvent" :key="event.id" :event="event"></CardMapTemplate>
         </div>
     </div>
 </template>
 <script setup>
 import CardMapTemplate from './CardMapTemplate.vue'
-import router from "@/routes/router.js";
 import { ref, onMounted } from 'vue'
+
+import { sessionStore } from '@/stores/session.js'
+const { getSession } = sessionStore()
 import { eventStores } from '@/stores/eventsStore.js'
 const events = eventStores()
 
@@ -19,13 +21,10 @@ function onScroll() {
 }
 
 onMounted(() => {
-    const currentPageRoute = router.currentRoute.value.query.page;
-    if (currentPageRoute) {
-        events.getPaginationData(currentPageRoute)
-        console.log(currentPageRoute)
-    } else {
-        events.getDataAxios()
-    }
+    let latitude = getSession('latitude')
+    let longitude = getSession('longitude')
+    let km = 10
+    events.getRecommendEvent(latitude, longitude, km)
 })
 </script>
 
@@ -44,7 +43,7 @@ img {
     margin-left: 70%;
 }
 
-#card-scroll::-webkit-scrollbar{
+#card-scroll::-webkit-scrollbar {
     display: none;
 }
 </style>

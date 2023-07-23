@@ -7,10 +7,10 @@
         <l-map class="rounded" ref="map" v-model:zoom="zoom" :center="center">
             <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" layer-type="base"
                 name="OpenStreetMap"></l-tile-layer>
-            <l-marker :lat-lng="markerLatLng">
-                <!-- <l-popup>
-            <MapShowCard v-if="eventinfor" :event="eventinfor"></MapShowCard>
-          </l-popup> -->
+            <l-marker v-for="event of events.recommendEvent" :key="event.id" :lat-lng="[event.latitude, event.longitude]">
+                <l-popup>
+                    Hello..
+                </l-popup>
             </l-marker>
         </l-map>
     </div>
@@ -18,11 +18,11 @@
   
 <script setup>
 import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
+import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
 import { ref, computed } from "vue";
 
 const zoom = ref(12);
-const markerLatLng = ref([11.570809, 104.922381]);
+// const markerLatLng = ref([11.570809, 104.922381]);
 
 
 const center = computed(() => {
@@ -41,6 +41,8 @@ const onClick = () => {
     }, 2000);
 };
 
+import { eventStores } from '@/stores/eventsStore.js'
+const events = eventStores()
 </script>
 
 
