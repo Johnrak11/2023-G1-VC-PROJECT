@@ -44,6 +44,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::prefix('/events')->group(function () {
         Route::post('/', [EventController::class, 'store']);
+        Route::put('/edit/{eventId}', [EventController::class, 'edit']);
+        Route::get('/getEvent',[EventController::class, 'getAllEvents']);
+        Route::get('/{eventId}', [EventController::class, 'getEventId']);
 
         Route::prefix('/previews')->group(function () {
             Route::get('/', [EventController::class, 'getPreviewEvents']);
