@@ -13,10 +13,8 @@
             <v-btn id="li-nav" :class="{ 'active': isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
           <router-link to="/listMap" class="link">
-            <v-btn id="li-nav" :class="{ 'active': isActive('/listMap') }" class="rounded" variant="text">Listing Map</v-btn>
-          </router-link>
-          <router-link v-if="getSession('role')" to="/tickets" class="link">
-            <v-btn id="li-nav" :class="{ 'active': isActive('/tickets') }" class="rounded" variant="text">MyTicket</v-btn>
+            <v-btn id="li-nav" :class="{ 'active': isActive('/listMap') }" class="rounded" variant="text">Listing
+              Map</v-btn>
           </router-link>
         </ul>
       </v-left-content>
@@ -34,7 +32,6 @@
           </template>
           <NotificationComponent />
         </v-menu>
-
         <router-link v-if="!user.token" to="/login"><v-btn color="red" width="5">Login</v-btn></router-link>
         <v-menu v-else>
           <template v-slot:activator="{ props }">
@@ -51,13 +48,16 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </router-link>
             </v-list-item>
-
+            <v-list-item v-if="getSession('role')" value="ticket">
+              <router-link to="/tickets">
+                <v-list-item-title>Tickets</v-list-item-title>
+              </router-link>
+            </v-list-item>
             <v-list-item v-if="listRole.includes(getSession('role'))" value="dashboard">
               <router-link to="/dashboard">
                 <v-list-item-title>Dashboard</v-list-item-title>
               </router-link>
             </v-list-item>
-
             <v-list-item value="logout" @click="user.logout()">
               <v-list-item-title>logout</v-list-item-title>
             </v-list-item>
@@ -74,8 +74,6 @@ import NotificationComponent from '../../notification/NotificationComponent.vue'
 import { ref } from "vue";
 const items = ref([
   { title: "Profile", link: "/profile" },
-  { title: "History", link: "/profile" },
-  { title: "Ticket", link: "/profile" },
 ]);
 import { userStore } from "@/stores/user.js";
 import { sessionStore } from "@/stores/session.js";
@@ -171,7 +169,7 @@ a {
 
 .profile {
   justify-content: flex-end;
-  margin-right: 10%;
+  /* margin-right: 10%; */
 }
 
 #li-nav:hover {

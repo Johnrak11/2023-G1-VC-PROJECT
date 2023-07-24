@@ -18,6 +18,7 @@ import Attendee from "@/views/dashboard/attendee/attendeeView.vue";
 
 import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
+import { sweetAlert } from "@/stores/sweetAlert.js";
 
 function authenticateBeforeEnter() {
   return function (to, from, next) {
@@ -45,6 +46,29 @@ function roleBeforeEnter(listRole) {
   };
 }
 
+function listMapBeforeEnter() {
+  return function (to, from, next) {
+    const { alertMessage } = sweetAlert();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          next();
+        },
+        (error) => {
+          console.log(error);
+          alertMessage(
+            "warning",
+            "Please enable location services to allow this feature to work."
+          );
+        }
+      );
+    } else {
+      console.log("Your browser does not support geolocation");
+    }
+  };
+}
+
 const routes = [
   {
     path: "/",
@@ -60,6 +84,7 @@ const routes = [
     path: "/listMap",
     name: "listMap",
     component: ListMapView,
+    beforeEnter: [listMapBeforeEnter()],
   },
   {
     path: "/register",

@@ -66,7 +66,6 @@
                 </v-col>
               </div>
             </div>
-
             <v-card-text>
               <div class="caard" style="margin-top: -15%">
                 <div class="top">
