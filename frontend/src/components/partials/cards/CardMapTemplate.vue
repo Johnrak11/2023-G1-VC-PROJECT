@@ -1,6 +1,5 @@
 <template >
-  <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="center-bottom"
-    class="card bg-grey-lighten-2 mt-5 ml-5">
+  <div class="bg-grey-lighten-2 mt-5" style="width: 43%;">
     <v-hover v-slot="{ isHovering, props }">
       <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props" class="hover">
         <router-link :to="`/detail/${eventInfor.id}`">
@@ -117,8 +116,9 @@ function ClickShare(id) {
   console.log(id);
 }
 
-function booking(){
-  router.push('/booking/'+eventInfor.value.id);
+function booking() {
+  router.push('/booking/' + eventInfor.value.id);
+  // console.log(eventInfor.value.id);
 }
 
 
@@ -126,14 +126,13 @@ function booking(){
 
 <style scoped>
 .card {
-  background-color: red;
-  width: 23%;
+  width: 70%;
 }
 
 a {
   text-decoration: none;
   color: black;
-  width: 18%;
+  /* width: 18%; */
   height: 44vh;
   cursor: pointer;
 }

@@ -14,6 +14,8 @@ import { userStore } from '../../stores/user.js'
 import Loading from 'vue-loading-overlay';
 import { decodeCredential } from "vue3-google-login";
 import { ref } from "vue";
+import { sessionStore } from "@/stores/session.js";
+const { setSession } = sessionStore();
 
 const user = userStore()
 import { addressStore } from '../../stores/address.js';
@@ -28,17 +30,10 @@ let isLoading = ref(false);
 
 
 async function callback(response) {
-    const currentRoute = router.currentRoute.value.path
     isLoading.value = true;
-    if (currentRoute === '/login') {
-        isAddressReady.value = true
-        userProcess(response);
-
-    } else {
-        address.locaterButtonPressed();
-        await getAddress();
-        userProcess(response);
-    }
+    address.locaterButtonPressed();
+    await getAddress();
+    userProcess(response);
 }
 
 async function getAddress() {
@@ -80,6 +75,7 @@ async function googleAuth(googleUser) {
         user.user = response.data.user
         user.token = response.data.token
         setCookie('token', user.token)
+        setSession('role', user.user.role)
         isLoading.value = false;
         router.push('/')
         console.log(user.token)

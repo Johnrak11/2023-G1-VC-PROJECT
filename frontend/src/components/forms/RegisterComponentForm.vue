@@ -47,7 +47,8 @@ let address = addressStore();
 
 import { cookieStore } from '@/stores/cookies.js'
 const { setCookie } = cookieStore()
-
+import { sessionStore } from "@/stores/session.js";
+const { setSession } = sessionStore();
 import { ref } from "vue";
 import router from '@/routes/router.js';
 import { userStore } from '../../stores/user.js'
@@ -110,7 +111,7 @@ async function submitForm() {
         user.user = response.data.user
         user.token = response.data.token
         setCookie('token', user.token)
-        console.log(user.user)
+        setSession('role', user.user.role)
         router.push('/')
       }
     })

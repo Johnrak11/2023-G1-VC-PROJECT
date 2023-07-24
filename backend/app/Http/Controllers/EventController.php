@@ -17,6 +17,7 @@ use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class EventController extends Controller
 {
@@ -126,6 +127,18 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function getAllEvents()
+    {
+        $userId = Auth::user()->id;
+        $events = Event::where('organizer_id', $userId)->get();
+        return response()->json(['message' => 'success', 'data' => $events], 200);
+    }
+    public function getEventId($eventId)
+    {
+        $userId = Auth::user()->id;
+        $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
+        return response()->json(['message' => 'success', 'data' =>new EventResource($event)], 200);
+    }
     public function store(Request $request)
     {
         $eventRules = [
@@ -298,5 +311,118 @@ class EventController extends Controller
             return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
         }
         return response()->json(['success' => true, 'data' => $events], 200);
+    }
+
+    public function edit(Request $request, $eventId)
+    {
+        $eventRules = [
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i:s'],
+            'location' => ['required', 'string'],
+            'longitude' => ['required', 'numeric'],
+            'latitude' => ['required', 'numeric'],
+            'image' => ['required'],
+            'venue' => ['required', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
+        ];
+
+        $eventRequest = $request->input('event');
+        $eventRequest['organizer_id'] = Auth::user()->id;
+        $validator = Validator::make($eventRequest, $eventRules);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $event = Event::where('id', $eventId)
+            ->where('organizer_id', Auth::user()->id)
+            ->firstOrFail();
+
+        $event->update($eventRequest);
+
+        if ($request->input('ticket')) {
+            $eventDetailRequest = $request->input('ticket');
+            $eventDetailRequest['event_id'] = $event->id;
+            $eventDetail = $this->eventDetailEdit($eventDetailRequest, $request);
+
+            if ($request->input('discount')) {
+                $discountRequest = $request->input('discount');
+                $discountRequest['event_detail_id'] = $eventDetail->id;
+                $this->discountEdit($discountRequest, $request);
+            }
+        }
+
+        if (is_array($request->input('agendas')) && !empty($request->input('agendas'))) {
+            $newAgendas = [];
+            foreach ($request->input('agendas') as $agendaRequest) {
+                $agendaRequest['event_id'] = $event->id;
+                $date = DateTime::createFromFormat("m/d/Y h:i A", $agendaRequest['date']);
+                if ($date) {
+                    $formattedDate = $date->format('Y-m-d H:i:s');
+                    $agendaRequest['date'] = $formattedDate;
+                    $newAgenda = $this->agendaEdit($agendaRequest,$request);
+                    array_push($newAgendas, $newAgenda);
+                } else {
+                    return 'agenda date incorrect';
+                }
+            }
+        }
+
+        return response()->json(['success' => true, 'message' => 'Event updated successfully',new EventResource($event)], 200);
+    }
+    public function eventDetailEdit($id, $request)
+    {
+        $eventDetailRules = [
+            'available_ticket' => ['required', 'integer', 'min:0'],
+            'description' => ['required', 'string'],
+            'price' => ['required'],
+            'event_id' => ['required', 'exists:events,id'],
+        ];
+        $validator = Validator::make($request, $eventDetailRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $eventDetail = Event_detail::find($id);
+        if (!$eventDetail) {
+            return 'Event detail not found';
+        }
+        $eventDetail->update($validator->validated());
+        return $eventDetail;
+    }
+    public function discountEdit($request, $discountId)
+    {
+        $discountRules = [
+            'end_date' =>  ['required', 'date_format:Y-m-d H:i:s'],
+            'percent' => ['required', 'integer'],
+            'event_detail_id' => ['required', 'exists:event_details,id'],
+        ];
+        $validator = Validator::make($request, $discountRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $discount = Discount::findOrFail($discountId);
+        $discount->update($validator->validated());
+        return $discount;
+    }
+    public function agendaEdit($id, $request)
+    {
+        $agendaRules = [
+            'date' => ['required', 'date_format:Y-m-d H:i:s'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'event_id' => ['required', 'exists:events,id'],
+        ];
+        $validator = Validator::make($request, $agendaRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $agenda = Agenda::find($id);
+        if (!$agenda) {
+            return 'Agenda not found';
+        }
+        $agenda->update($validator->validated());
+        return $agenda;
     }
 }

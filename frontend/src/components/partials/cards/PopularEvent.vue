@@ -1,27 +1,39 @@
-
 <template>
-    <div class="mt-6 ml-16 mr-16">
+    <div class="mt-6 ml-16 mr-16" id="nav-scroll">
         <slot></slot>
-        <div class="ml-4 mr-8 d-flex flex-wrap">
-            <cardTemplate v-for="event in events" :key="event.id" :event="event"></cardTemplate>
+        <div class="ml-4 mr-8 d-flex justify-space-evenly flex-wrap">
+            <cardTemplate v-for="event of events.recommendEvent" :key="event.id" :event="event"></cardTemplate>
         </div>
-        <router-link to="/explor">
-            <button class="bg-red explore mt-5">Explore</button>
-        </router-link>
-    </div><br>
+    </div>
 </template>
 <script setup>
-import cardTemplate from './CardTemplate.vue';
+import cardTemplate from './CardTemplate.vue'
+import { onMounted } from 'vue'
+import { eventStores } from '@/stores/eventsStore.js'
+import { sessionStore } from '@/stores/session.js'
+const { getSession } = sessionStore()
+const events = eventStores()
+
+onMounted(() => {
+    let latitude = getSession('latitude')
+    let longitude = getSession('longitude')
+    let km = 6
+    events.getRecommendEvent(latitude, longitude, km)
+})
 </script>
+
 <style scoped>
-.explore {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    padding: 5px 50px 5px 50px;
+.card {
+    width: 22%;
+
 }
 
-a {
-    text-decoration: none;
+img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#booking {
+    margin-left: 70%;
 }
 </style>

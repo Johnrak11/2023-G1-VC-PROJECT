@@ -114,7 +114,6 @@ function submitEvent() {
 </script>
 
 <style>
-
 .dialog-bottom-transition-enter-active,
 .dialog-bottom-transition-leave-active {
     transition: transform .2s ease-in-out;
@@ -130,9 +129,10 @@ function submitEvent() {
     background-color: rgb(228, 228, 228);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.btn-tab{
+
+.btn-tab {
     border: none;
-    background:none;
-    
+    background: none;
+
 }
 </style>

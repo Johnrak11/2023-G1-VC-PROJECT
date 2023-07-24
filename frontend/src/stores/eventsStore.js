@@ -2,8 +2,9 @@ import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle.js";
 export const eventStores = defineStore("event", {
   state: () => ({
-    isLoader : true,
+    isLoader: true,
     events: [],
+    recommendEvent: [],
     reletedEvent: [],
     localHttp: "http://172.16.0.143:8080",
     pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
@@ -15,17 +16,15 @@ export const eventStores = defineStore("event", {
   },
   actions: {
     async getDataAxios() {
-      this.isLoader = true
+      // this.isLoader = true;
       await baseAPI
         .get("/events")
         .then((response) => {
           let responeseData = response.data.data;
-          // console.log(responeseData);
           this.events = responeseData.data;
           this.pagination.currentPage = responeseData.current_page;
           this.pagination.lastPage = responeseData.last_page;
           this.pagination.links = responeseData.links;
-          // this.isLoader = false
         })
         .catch((error) => console.log(error));
       return this.events;
@@ -57,6 +56,18 @@ export const eventStores = defineStore("event", {
         })
         .catch((error) => console.log(error));
       return this.events;
+    },
+
+    async getRecommendEvent(lat, lng, km) {
+      this.isLoader = true;
+      await baseAPI
+        .get(`/events/recommend/${lat}/${lng}/${km}`)
+        .then((response) => {
+          let responeseData = response.data;
+          this.recommendEvent = responeseData;
+          console.log(this.recommendEvent)
+        })
+        .catch((error) => console.log(error));
     },
 
     async getDataCategoryAxios(categoryId, eventId) {

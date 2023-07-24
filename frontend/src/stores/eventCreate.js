@@ -7,7 +7,7 @@ import {
 } from "firebase/storage";
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle";
-
+import { eventPreviewStores } from "@/stores/eventPreview.js";
 export const eventCreateStores = defineStore("eventCreate", {
   state: () => ({
     eventName: "",
@@ -97,6 +97,7 @@ export const eventCreateStores = defineStore("eventCreate", {
     },
 
     async createEvent() {
+      const {getOrganizerEvent} = eventPreviewStores()
       this.isCreate = true;
       let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
       let newEvent = {
@@ -124,7 +125,8 @@ export const eventCreateStores = defineStore("eventCreate", {
       await baseAPI
         .post("/events", createRequest)
         .then((response) => {
-          console.log(response.data);
+          console.log(response)
+          getOrganizerEvent(0)
           this.isCreate = false;
         })
         .catch((error) => {
