@@ -5,6 +5,7 @@ export const eventStores = defineStore("event", {
     isLoader: true,
     events: [],
     recommendEvent: [],
+    recommendEventLimit: [],
     reletedEvent: [],
     localHttp: "http://172.16.0.143:8080",
     pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
@@ -59,13 +60,18 @@ export const eventStores = defineStore("event", {
     },
 
     async getRecommendEvent(lat, lng, km) {
-      this.isLoader = true;
       await baseAPI
         .get(`/events/recommend/${lat}/${lng}/${km}`)
         .then((response) => {
-          let responeseData = response.data;
-          this.recommendEvent = responeseData;
-          console.log(this.recommendEvent)
+          let responseData = response.data;
+          this.recommendEvent = responseData;
+          if (responseData.length > 8) {
+            console.log(responseData.length)
+            this.recommendEventLimit = responseData.slice(0, 8);
+          } else {
+            this.recommendEventLimit = responseData;
+          }
+          console.log(this.recommendEventLimit);
         })
         .catch((error) => console.log(error));
     },

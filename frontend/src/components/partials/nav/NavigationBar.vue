@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
+  <v-layout :style="{ top: navbarTop }" class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
     <v-nav-bar-left class=" d-flex left">
       <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover;" />
     </v-nav-bar-left>
@@ -13,7 +13,7 @@
             <v-btn id="li-nav" :class="{ 'active': isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
           <router-link to="/listMap" class="link">
-            <v-btn id="li-nav" :class="{ 'active': isActive('/listMap') }" class="rounded" variant="text">ListMap</v-btn>
+            <v-btn id="li-nav" :class="{ 'active': isActive('/listMap') }" class="rounded" variant="text">Listing Map</v-btn>
           </router-link>
           <router-link v-if="getSession('role')" to="/tickets" class="link">
             <v-btn id="li-nav" :class="{ 'active': isActive('/tickets') }" class="rounded" variant="text">MyTicket</v-btn>
@@ -93,6 +93,21 @@ const listRole = ref(["organizer", "admin"])
 const isActive = (route) => {
   return router.currentRoute.value.path === route;
 };
+
+// ---- navbar scroll----
+const prevScrollpos = ref(window.pageYOffset);
+
+window.addEventListener('scroll', () => {
+  const currentScrollPos = window.pageYOffset;
+  if (prevScrollpos.value > currentScrollPos) {
+    navbarTop.value = '0';
+  } else {
+    navbarTop.value = '-80px';
+  }
+  prevScrollpos.value = currentScrollPos;
+});
+
+const navbarTop = ref('0');
 </script>
 <style scoped>
 .nav-bar {
@@ -101,6 +116,7 @@ const isActive = (route) => {
   position: fixed;
   top: 0;
   width: 100%;
+  transition: top 0.3s;
 }
 
 ul {
