@@ -60,6 +60,9 @@
                         <v-list-item v-else value="list">
                             <v-list-item-title>Delete</v-list-item-title>
                         </v-list-item>
+                        <v-list-item value="list">
+                            <QrcodeDialog :eventInfor="props.eventPreview">QR CODE</QrcodeDialog>
+                        </v-list-item>
                     </v-list>
                 </v-menu>
             </div>
@@ -75,6 +78,7 @@ const props = defineProps({
 })
 import router from "@/routes/router.js";
 import { onMounted } from 'vue'
+import QrcodeDialog from '@/components/qrCode/QrCodeDialog.vue'
 
 const currentpath = ref('')
 onMounted(() => {
