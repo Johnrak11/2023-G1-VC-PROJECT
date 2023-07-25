@@ -1,6 +1,5 @@
 <template >
-  <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="center-bottom"
-    class="card bg-grey-lighten-2 mt-5 ml-5">
+  <div class="bg-grey-lighten-2 mt-5" style="width: 43%;">
     <v-hover v-slot="{ isHovering, props }">
       <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props" class="hover">
         <router-link :to="`/detail/${eventInfor.id}`">
@@ -71,7 +70,7 @@
                   <div>
                     <v-card-title class="text-black" style="margin-left: -5%;">{{ eventInfor.name }}</v-card-title>
                   </div>
-                  <div class="d-flex mt-2">
+                  <div class="d-flex" style="margin-top: -5%;">
                     <p class="ml-1 mt-2 mb-2" style="font-size: 15px">Date:
                       {{ eventInfor.date }}
                     </p>
@@ -125,27 +124,25 @@ function booking() {
 
 <style scoped>
 .card {
-  background-color: red;
-  width: 23%;
-  /* margin-left: 20%; */
+  width: 70%;
 }
 
 a {
   text-decoration: none;
   color: black;
-  width: 18%;
+  /* width: 18%; */
   height: 44vh;
   cursor: pointer;
 }
 
-/* img {
+img {
   width: 100%;
-} */
+}
 
-/* #booking {
+#booking {
   margin-left: 75%;
   height: 20vh;
-} */
+}
 
 .app img {
   width: 60%;

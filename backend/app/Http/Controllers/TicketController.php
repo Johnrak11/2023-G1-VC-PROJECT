@@ -7,7 +7,7 @@ use App\Http\Requests\StoreticketRequest;
 use App\Http\Requests\UpdateticketRequest;
 use App\Http\Resources\TicketResource;
 use GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Facades\Event;
+use App\Models\Event;
 use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
 
 class TicketController extends Controller
@@ -19,12 +19,13 @@ class TicketController extends Controller
     {
         //
     }
-    public function getAllTicket() {
+    public function getAllTicket()
+    {
         $ticket = Ticket::all();
         $ticket = TicketResource::collection($ticket);
         // $ticket = Event::where('name', )->get();
 
-        return response()->json(['message' => true, 'data' => $ticket],201);
+        return response()->json(['message' => true, 'data' => $ticket], 201);
     }
     /**
      * Show the form for creating a new resource.
@@ -32,6 +33,20 @@ class TicketController extends Controller
     public function create()
     {
         //
+    }
+
+    public function getOwnerOfTicket($eventId)
+    {
+        $ticketsOfUsers = Ticket::where('event_id', $eventId)
+            ->with('user')
+            ->get();
+        if($ticketsOfUsers!=null){
+            return response()->json(['status'=>'success', 'data' => $ticketsOfUsers],200);
+        }
+        if($ticketsOfUsers==null){
+            return response()->json(['status' => 'success', 'data' => 'Sorry, we do not have any data that fit with the event'],204);
+        }
+        return false;
     }
 
     /**
@@ -73,10 +88,10 @@ class TicketController extends Controller
     {
         //
     }
-    public function searchTicket( $request) {
+    public function searchTicket($request)
+    {
         $tickets = $request->input('ticket_code');
         $name = TicketResource::collection($tickets);
         return $name;
-
     }
 }
