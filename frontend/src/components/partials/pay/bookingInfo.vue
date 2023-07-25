@@ -18,12 +18,12 @@
         <tr>
           <td>PRICE</td>
           <td v-if="event.event_detail && event.event_detail.length > 0">{{ "$" + event.event_detail[0].price }}</td>
-          <td v-else>Free</td>
+          <td v-else>$0</td>
         </tr>
       </tbody>
     </v-table>
     <div class="w-50 mb-10">
-      <payment-form class="mt-8 "></payment-form>
+      <payment-form class="mt-8 " :eventId="eventId"></payment-form>
     </div>
   </div>
 </template>

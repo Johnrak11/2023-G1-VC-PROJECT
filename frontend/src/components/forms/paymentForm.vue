@@ -20,6 +20,7 @@
               <button-component-form @click="saveData">Pay</button-component-form>
             </v-card-actions>
           </form>
+          <h1 @click="createTicket">Hello</h1>
         </v-card>
       </v-dialog>
     </v-row>
@@ -30,7 +31,7 @@ import visaCard from "../../assets/credit_card/visa.png";
 import masterCard from "../../assets/credit_card/mastercard.png";
 import discover from "../../assets/credit_card/discover.png";
 import americanCard from "../../assets/credit_card/american_express.png";
-import { ref, computed } from 'vue';
+import { ref, computed, defineProps } from 'vue';
 import ButtonComponentForm from '../buttons/ButtonComponentForm.vue';
 import baseAPI from "@/stores/axiosHandle.js";
 import router from "@/routes/router.js";
@@ -42,7 +43,15 @@ const cvvCard = ref();
 const nameCard = ref();
 const dialog = ref(false);
 const creditCardTypeName = ref('');
-// const httpRequest = axiosStore();
+// ===create Ticket===
+const bookingDate = new Date();
+const formattedDate = bookingDate.toISOString().substring(0, 10);
+const props = defineProps({
+  eventId: {
+    type: Number,
+    required: true
+  }
+});
 
 const creditCardTypes = [
   { type: 'visa', pattern: /^4[0-9]{12}(?:[0-9]{3})?$/, message: visaCard },
@@ -86,6 +95,34 @@ const requiredRule = v => !!v || 'Field is required'
 
 // ===Save data to validate in db===
 const userId = ref(1);
+
+function generateTicketCode() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let code = '';
+  for (let i = 0; i < 8; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+async function createTicket() {
+  const ticketCode = generateTicketCode();
+  const ticket = {
+    'ticket_code': ticketCode,
+    'booking_date': formattedDate,
+    'is_check_in': true,
+    'user_id': userId.value,
+    'event_id': parseInt(props.eventId)
+  };
+  console.log(ticket);
+  try {
+    const response = await baseAPI.post('/create/tickets', ticket);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+    throw error; // Rethrow the error to be handled by the caller
+  }
+}
 async function saveData() {
   let creditCard = {
     'name': nameCard.value,
@@ -95,29 +132,31 @@ async function saveData() {
     'expiration': expirationCard.value,
     'user_id': userId.value
   }
-  await baseAPI.post('/booking/creditCard', creditCard).then((response) => {
+  try {
+    const response = await baseAPI.post('/booking/creditCard', creditCard);
     if (response.status === 200) {
+      await createTicket();
       Swal.fire({
         position: 'top-center',
         icon: 'success',
         title: 'Your ticket has been paid!',
         showConfirmButton: false,
         timer: 1500
-      })
+      });
     } else {
       Swal.fire({
         position: 'top-center',
         icon: 'error',
-        title: 'Something was wrong!',
+        title: 'Something went wrong!',
         showConfirmButton: false,
         timer: 1500
-      })
+      });
     }
-    createTicket();
     router.push('/');
-  }).catch((error) => {
-    console.log(error.response.data); // log the error message returned by the server
-  });
+  } catch (error) {
+    console.log(error.response.data);
+    throw error; // Rethrow the error to be handled by the caller
+  }
 }
 </script>
 <style scoped>
