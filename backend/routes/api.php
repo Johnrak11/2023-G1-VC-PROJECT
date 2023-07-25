@@ -50,6 +50,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
     });
+    Route::get('/tickets',[TicketController::class, 'getAllTicket']);
+    Route::get('/tickets/search/{name}',[TicketController::class, 'searchTicket']);
 });
 
 // ----- authentication group----
@@ -58,6 +60,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/registers', ([AuthController::class, 'register']));
     Route::post('/login', ([AuthController::class, 'login']));
 });
+// Route::get('/tickets', 'TicketController@getAllTicket')->middleware('auth:api');
 
 Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
@@ -91,6 +94,4 @@ Route::prefix('/eventDetail')->group(function () {
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
-Route::get('/tickets', [TicketController::class, 'getAllTicket']);
-Route::get('/tickets/search', [TicketController::class, 'searchTicket']);
-Route::get('/ticket/{eventId}', [TicketController::class, 'getOwnerOfTicket']);
+

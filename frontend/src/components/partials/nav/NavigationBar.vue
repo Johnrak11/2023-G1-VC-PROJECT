@@ -115,6 +115,7 @@ const navbarTop = ref('0');
   top: 0;
   width: 100%;
   transition: top 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 ul {

@@ -88,7 +88,7 @@ async function googleAuth(googleUser) {
 
 </script>
 
-<style>
+<style scoped>
 .loading_overly {
     position: absolute;
     z-index: 99;

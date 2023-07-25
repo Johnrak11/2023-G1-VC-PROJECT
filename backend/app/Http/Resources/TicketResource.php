@@ -20,7 +20,7 @@ class TicketResource extends JsonResource
             'booking_date' => $this->booking_date,
             'is_check_in' => $this->is_check_in,
             'user_id' => $this->user_id,
-            'event_id' => $this->event_id,
+            'event' => $this->event,
         ];
     }
 }
