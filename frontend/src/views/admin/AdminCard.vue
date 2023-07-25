@@ -43,9 +43,15 @@
           </div>
         </div>
       </div>
+      <vertical-button/>
     </div>
   </v-card>
 </template>
+
+<script setup>
+  import VerticalButton from '../../components/buttons/VerticalButton.vue'
+</script>
+
 <style scoped>
 .delete-icon,
 .edit-icon {

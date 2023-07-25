@@ -25,14 +25,7 @@
                   single-line
                   hide-details
                   class="w-50 mr-3"
-                ></v-text-field>
-                <v-text-field
-                  variant="solo"
-                  label="Search templates"
                   append-inner-icon="mdi-magnify"
-                  single-line
-                  hide-details
-                  class="w-50"
                 ></v-text-field>
               </div>
             </div>
