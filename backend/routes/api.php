@@ -51,6 +51,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
         
     });
+    Route::prefix('/search')->group(function () {
+        Route::prefix('/admin')->group(function () {
+            Route::get('/searchEvent', [EventController::class, 'searchEventsName']);
+        });
+    });
+    
 });
 
 // ----- authentication group----
@@ -76,10 +82,10 @@ Route::prefix('/events')->group(function () {
     });
 });
 Route::prefix('/search')->group(function () {
-
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
+    
 });
 Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);

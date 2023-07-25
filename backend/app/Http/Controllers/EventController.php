@@ -311,4 +311,31 @@ class EventController extends Controller
         }
         return response()->json(['success' => true, 'data' => $events], 200);
     }
+
+    public function searchEventsName(Request $request)
+    {
+        $organizer = Auth::user();
+        if ($organizer->role !== 'admin') {
+            return response()->json(['message' => 'No permission to search events'], 403);
+        }
+        $eventList = Event::query();
+
+        if ($request->filled('name')) {
+            $eventList->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('email') && $organizer->email === $request->input('email')) {
+            $eventList->where('organizer_id', $organizer->id);
+        }
+
+
+
+        $events = $eventList->get();
+
+        if ($events->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $events], 200);
+    }
 }
