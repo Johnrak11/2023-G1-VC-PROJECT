@@ -8,7 +8,6 @@
                     <MapShowCard v-if="eventinfor" :event="eventinfor"></MapShowCard>
                 </l-popup>
             </l-marker>
-
         </l-map>
     </div>
 </template>

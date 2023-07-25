@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import ContainLeftDashboard from "./ContainLeftDashboard.vue";
-import CardDashboard from "../../components/partials/dashboards/CardDashboard.vue";
+import ContainLeftDashboard from "../ContainLeftDashboard.vue";
+import CardDashboard from "../../../components/partials/dashboards/CardDashboard.vue";
 </script>
 <style scoped>
 .border {

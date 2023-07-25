@@ -2,7 +2,8 @@
     <v-card class=" bg-white pa-3 mt-4 mr-10 overflow-y-auto" :elevation="2">
         <div class="d-flex justify-space-between">
             <div class="d-flex">
-                <img class="rounded" src="https://liftedasia.com/assets/content_images/vannda-660x440.jpg" alt="" width="80" height="80">
+                <img class="rounded" src="https://liftedasia.com/assets/content_images/vannda-660x440.jpg" alt="" width="80"
+                    height="80">
                 <div>
                     <h2 class=" ml-6">Tutorial on Canvas Painting for Beginners</h2>
                     <div class="d-flex justify-space-between ml-3">
@@ -41,14 +42,31 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <v-icon class="mt-2">mdi-dots-vertical</v-icon>
+            <div class="text-center">
+                <v-menu open-on-hover>
+                    <template v-slot:activator="{ props }">
+                        <v-icon class="mt-2" v-bind="props">mdi-dots-vertical</v-icon>
+                    </template>
+
+                    <v-list>
+                        <v-list-item v-for="(item, index) of items" :key="index">
+                            <router-link :to="{ name: item.name, params: { eventId: eventId } }">
+                                <v-list-item-title>{{ item.title }}</v-list-item-title></router-link>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
             </div>
         </div>
         <!-- <hr style="width: 100%;"><br> -->
 
     </v-card>
 </template>
+<script setup>
+const eventId = 1;
+const items = [
+    { title: 'Attendee', name: "attendees" },
+];
+</script>
 <style scoped>
 .text {
     font-size: 12px;

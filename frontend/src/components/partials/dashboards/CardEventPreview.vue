@@ -47,10 +47,21 @@
                         <v-icon class="mt-2" v-bind="props">mdi-dots-vertical</v-icon>
                     </template>
                     <v-list>
-                        <v-list-item>
-                            <v-list-item-title @click="alert.publicAlert(props.eventPreview.id)">Post</v-list-item-title>
-                            <v-list-item-title class="mt-5">Edit</v-list-item-title>
-                            <v-list-item-title class="mt-5">Delete</v-list-item-title>
+                        <v-list-item value="list" @click="alert.publicAlert(props.eventPreview.id)">
+                            <v-list-item-title>Post</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item value="list">
+                            <v-list-item-title>Edit</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item value="list" @click="router.push(`/dashboard/attendees/${props.eventPreview.id}`)"
+                            v-if="currentpath === '/dashboard/event'">
+                            <v-list-item-title>Attendees</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item v-else value="list">
+                            <v-list-item-title>Delete</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item value="list">
+                            <QrcodeDialog :eventInfor="props.eventPreview">QR CODE</QrcodeDialog>
                         </v-list-item>
                     </v-list>
                 </v-menu>
@@ -60,11 +71,23 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { ref, defineProps } from 'vue';
 import { sweetAlert } from '@/stores/sweetAlert.js';
 const props = defineProps({
     eventPreview: Object
 })
+import router from "@/routes/router.js";
+import { onMounted } from 'vue'
+import QrcodeDialog from '@/components/qrCode/QrCodeDialog.vue'
+
+const currentpath = ref('')
+onMounted(() => {
+    const currentPageRoute = router.currentRoute.value.path;
+    currentpath.value = currentPageRoute
+
+})
+
+
 const alert = sweetAlert()
 </script>
 <style scoped>

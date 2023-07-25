@@ -16,7 +16,7 @@
       </div>
     </v-card>
     <div class="ml-8 mb-5">
-      <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventsPreviews" :key="eventPreview.id"
+      <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventPreviews" :key="eventPreview.id"
         :eventPreview="eventPreview" />
     </div>
   </v-card>
@@ -29,7 +29,7 @@ import { onMounted } from "vue";
 const eventPreviewStorage = eventPreviewStores()
 
 onMounted(() => {
-  eventPreviewStorage.getPreviewEvent()
+  eventPreviewStorage.getOrganizerEvent(0)
 })
 </script>
 <style scoped>
