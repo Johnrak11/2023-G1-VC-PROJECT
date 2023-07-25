@@ -1,13 +1,11 @@
 <template>
-    <v-card v-if="eventinfor" color="#1F7087" theme="dark">
+    <v-card v-if="eventinfor">
         <div class="d-flex flex-no-wrap justify-space-between">
             <div>
                 <v-card-title class="text-h5">
                     {{ eventinfor.name }}
                 </v-card-title>
-
-                <v-card-subtitle>{{ eventinfor.venue }}</v-card-subtitle>
-
+                <v-card-subtitle>{{ distanationToKm }}</v-card-subtitle>
                 <v-card-actions>
                     <a class="direction" :href="getGoogleMapsLink(eventinfor.latitude, eventinfor.longitude)"
                         target="_blank">
@@ -17,7 +15,6 @@
                     </a>
                 </v-card-actions>
             </div>
-
             <v-avatar class="ma-3" size="125" rounded="0">
                 <v-img :src="eventinfor.image"></v-img>
             </v-avatar>
@@ -33,6 +30,14 @@ const props = defineProps({
 })
 
 const eventinfor = ref(props.event)
+import { addressStore } from "@/stores/address.js";
+const { distance, formatDistance } = addressStore()
+import { sessionStore } from "@/stores/session";
+const { getSession } = sessionStore()
+const userLat = ref(getSession('latitude'))
+const userLng = ref(getSession('longitude'))
+const distanation = distance(userLat.value, eventinfor.value.latitude, userLng.value, eventinfor.value.longitude)
+const distanationToKm = formatDistance(distanation)
 
 
 function getGoogleMapsLink(lat, lng) {
@@ -43,6 +48,6 @@ function getGoogleMapsLink(lat, lng) {
 <style scoped>
 .direction {
     text-decoration: none;
-    color: white;
+    color: red;
 }
 </style>

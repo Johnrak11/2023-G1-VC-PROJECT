@@ -25,7 +25,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Berng snuor",
                 'organizer_id' => 4,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.570633,
+                'longitude' => 104.927112,
 
             ],
             [
@@ -38,7 +40,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Banteay Meanchey",
                 'organizer_id' => 3,
                 'category_id' => 4,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.563804,
+                'longitude' => 104.930285,
 
             ],
             [
@@ -51,7 +55,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Batambong",
                 'organizer_id' => 2,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
 
             ],
             [
@@ -64,7 +70,9 @@ class EventSeeder extends Seeder
                 'venue' => "On the beach",
                 'organizer_id' => 4,
                 'category_id' => 3,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.484967,
+                'longitude' => 104.877136,
 
             ],
             [
@@ -90,7 +98,9 @@ class EventSeeder extends Seeder
                 'venue' => "At WAT PHNOM",
                 'organizer_id' => 1,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
 
             ],
             [
@@ -103,7 +113,9 @@ class EventSeeder extends Seeder
                 'venue' => "At WAT PHNOM",
                 'organizer_id' => 4,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.569450,
+                'longitude' => 104.890678,
 
             ],
             [
@@ -116,7 +128,9 @@ class EventSeeder extends Seeder
                 'venue' => "At the beach",
                 'organizer_id' => 2,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.553375,
+                'longitude' => 104.919171,
 
             ],
             [
@@ -129,7 +143,9 @@ class EventSeeder extends Seeder
                 'venue' => "At PNC",
                 'organizer_id' => 1,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.567218,
+                'longitude' => 104.920433,
 
             ],
             [
@@ -142,7 +158,9 @@ class EventSeeder extends Seeder
                 'venue' => "At PSE",
                 'organizer_id' => 2,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.558720,
+                'longitude' => 104.917961,
 
             ],
             [
@@ -155,7 +173,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Rolyal Palase",
                 'organizer_id' => 2,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.572915,
+                'longitude' => 104.884368,
 
             ],
             [
@@ -168,7 +188,9 @@ class EventSeeder extends Seeder
                 'venue' => "In front of the Royal Palace",
                 'organizer_id' => 2,
                 'category_id' => 3,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.567791,
+                'longitude' => 104.890668,
 
             ],
             [
@@ -181,7 +203,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Berng Snour",
                 'organizer_id' => 3,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.570633,
+                'longitude' => 104.927112,
             ],
             [
                 'name' => 'Electric Dreams',
@@ -205,7 +229,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Takao",
                 'organizer_id' => 4,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.575571,
+                'longitude' => 104.916816,
 
             ],
             [
@@ -218,7 +244,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Kompong Tom",
                 'organizer_id' => 5,
                 'category_id' => 3,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.570633,
+                'longitude' => 104.927112,
 
             ],
             [
@@ -231,8 +259,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Batambong",
                 'organizer_id' => 4,
                 'category_id' => 3,
-                'is_public' => 1
-
+                'is_public' => 1,
+                'latitude' => 11.573892,
+                'longitude' => 104.911347,
             ],
             [
                 'name' => 'Sing a Song',
@@ -244,7 +273,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Kep",
                 'organizer_id' => 3,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.563804,
+                'longitude' => 104.930285,
 
             ],
             [
@@ -257,7 +288,9 @@ class EventSeeder extends Seeder
                 'venue' => "Aeon",
                 'organizer_id' => 3,
                 'category_id' => 6,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.570809,
+                'longitude' => 104.922381,
 
             ],
             [
@@ -270,7 +303,9 @@ class EventSeeder extends Seeder
                 'venue' => "Aeon",
                 'organizer_id' => 3,
                 'category_id' => 6,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
 
             ],
             [
@@ -283,7 +318,10 @@ class EventSeeder extends Seeder
                 'venue' => "kandal",
                 'organizer_id' => 3,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.484967,
+                'longitude' => 104.877136,
+        
 
             ],
             [
@@ -296,7 +334,9 @@ class EventSeeder extends Seeder
                 'venue' => "kaoh pech",
                 'organizer_id' => 2,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
 
             ],
             [
@@ -309,7 +349,9 @@ class EventSeeder extends Seeder
                 'venue' => "Olympic",
                 'organizer_id' => 3,
                 'category_id' => 3,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.567218,
+                'longitude' => 104.920433,
 
             ],
             [
@@ -322,7 +364,9 @@ class EventSeeder extends Seeder
                 'venue' => "Olympic",
                 'organizer_id' => 5,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.538954,
+                'longitude' => 104.910152,
 
             ],
             [
@@ -335,7 +379,9 @@ class EventSeeder extends Seeder
                 'venue' => "At kandal",
                 'organizer_id' => 5,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.564350,
+                'longitude' => 104.934307,
 
             ],
             [
@@ -348,7 +394,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 1,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.546937,
+                'longitude' => 104.899812,
             ],
             [
                 'name' => 'Food Expo',
@@ -360,7 +408,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Diamond Island Convention and Exhibition Center",
                 'organizer_id' => 2,
                 'category_id' => 3,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.570809,
+                'longitude' => 104.922381,
             ],
             [
                 'name' => 'Fashion Show',
@@ -372,7 +422,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Sovanna Shopping Center",
                 'organizer_id' => 3,
                 'category_id' => 4,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
             ],
             [
                 'name' => 'Sports Tournament',
@@ -384,7 +436,9 @@ class EventSeeder extends Seeder
                 'venue' => "At National Olympic Stadium",
                 'organizer_id' => 5,
                 'category_id' => 5,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
             ],
             [
                 'name' => 'Art Exhibition',
@@ -396,7 +450,9 @@ class EventSeeder extends Seeder
                 'venue' => "At National Museum of Cambodia",
                 'organizer_id' => 5,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.569987,
+                'longitude' => 104.892275,
             ],
             [
                 'name' => 'Career Fair',
@@ -408,7 +464,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Phnom Penh Hotel",
                 'organizer_id' => 1,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.574804,
+                'longitude' => 104.921898,
             ],
             [
                 'name' => 'Film Festival',
@@ -420,7 +478,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Major Cineplex",
                 'organizer_id' => 2,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.567791,
+                'longitude' => 104.890668,  
             ],
             [
                 'name' => 'Charity Auction',
@@ -432,7 +492,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Raffles Hotel Le Royal",
                 'organizer_id' => 3,
                 'category_id' => 3,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.572915,
+                'longitude' => 104.884368,
             ],
             [
                 'name' => 'Tech Conference',
@@ -444,7 +506,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Sofitel Phnom Penh Phokeethra",
                 'organizer_id' => 4,
                 'category_id' => 4,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.558720,
+                'longitude' => 104.917961,
             ],
             [
                 'name' => 'Dance Competition',
@@ -456,7 +520,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Chaktomuk Theater",
                 'organizer_id' => 5,
                 'category_id' => 5,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.562952,
+                'longitude' => 104.925999,
             ],
             [
                 'name' => 'Photography Exhibition',
@@ -468,7 +534,8 @@ class EventSeeder extends Seeder
                 'venue' => "At Bophana Center",
                 'organizer_id' => 1,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 111.567218,
+                'longitude' => 104.920433,
             ],
             [
                 'name' => 'Health Expo',
@@ -480,7 +547,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 1,
                 'category_id' => 1,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.553375,
+                'longitude' => 104.919171,
             ],
             [
                 'name' => 'Culinary Competition',
@@ -492,7 +561,9 @@ class EventSeeder extends Seeder
                 'venue' => "At The Place Restaurant",
                 'organizer_id' => 2,
                 'category_id' => 2,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.569450,
+                'longitude' => 104.890678,
             ],
             [
                 'name' => 'Startup Pitch Competition',
@@ -504,7 +575,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Raintree Cambodia",
                 'organizer_id' => 3,
                 'category_id' => 3,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
             ],
             [
                 'name' => 'Literature Festival',
@@ -516,7 +589,9 @@ class EventSeeder extends Seeder
                 'venue' => "At FCC Angkor",
                 'organizer_id' => 4,
                 'category_id' => 4,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.484967,
+                'longitude' => 104.877136,
             ],
             [
                 'name' => 'Environmental Exhibition',
@@ -528,7 +603,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 5,
                 'category_id' => 5,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
             ],
             [
                 'name' => 'Art Auction',
@@ -540,7 +617,9 @@ class EventSeeder extends Seeder
                 'venue' => "At Sofitel Phnom Penh Phokeethra",
                 'organizer_id' => 3,
                 'category_id' => 5,
-                'is_public' => 1
+                'is_public' => 1,
+                'latitude' => 11.570809,
+                'longitude' => 104.922381,
             ],
         ];
         foreach ($ListEvents as $ListEvent) {

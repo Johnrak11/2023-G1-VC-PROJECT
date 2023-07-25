@@ -14,14 +14,17 @@ import router from "@/routes/router.js";
 const { getCookie } = cookieStore();
 const user = userStore();
 const userToken = getCookie("token");
+import { addressStore } from "@/stores/address.js";
+const { getUserCurrentLatLng } = addressStore()
 user.token = userToken;
 if (userToken) {
   user.getUserInfor();
+  getUserCurrentLatLng()
 }
 
 const shouldShowNavBar = computed(() => {
   const currentPath = router.currentRoute.value.path;
-  return !currentPath.startsWith("/dashboard");
+  return !currentPath.startsWith("/dashboard") || !currentPath.startsWith("/managerments") ;
 });
 
 onMounted(() => {

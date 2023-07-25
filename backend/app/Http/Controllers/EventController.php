@@ -23,12 +23,13 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getPreviewEvents(Request $request)
+    public function getOrganizerEvents(Request $request)
     {
-        $perPage = $request->input('perPage', 12); // Number of items per page
+        $perPage = $request->input('perPage', 20); // Number of items per page
+        $isPublic = $request->input('isPublic');
         $organizerId = Auth::user()->id;
         $previewEvents = Event::where('organizer_id', $organizerId)
-            ->where('is_public', 0)
+            ->where('is_public', $isPublic)
             ->orderBy('date', 'asc')
             ->paginate($perPage);
 
@@ -68,7 +69,6 @@ class EventController extends Controller
             'message' => 'Event has been posted successfully',
         ], 200);
     }
-
 
 
     public function getEvents(Request $request)
@@ -115,17 +115,7 @@ class EventController extends Controller
             ], 200);
         }
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $eventRules = [

@@ -11,7 +11,7 @@ export const sweetAlert = defineStore("alert", {
         icon: incon,
         title: message,
         showConfirmButton: false,
-        timer: 1000,
+        timer: 2000,
       });
     },
 
@@ -33,7 +33,7 @@ export const sweetAlert = defineStore("alert", {
     },
 
     isConfirmed(icon, message) {
-      console.log(message)
+      console.log(message);
       const Toast = Swal.mixin({
         toast: true,
         position: "top",
