@@ -53,7 +53,6 @@ const onClick = async () => {
     loading.value = false;
 };
 const staticAnchor = [16, 37]
-
 </script>
 
 

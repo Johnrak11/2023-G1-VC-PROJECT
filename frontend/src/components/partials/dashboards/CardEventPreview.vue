@@ -47,7 +47,7 @@
             </div>
             <div>
                 <strong>Location</strong>
-                <p class="mt-2">{{ truncateDescription(props.eventPreview.location,20) }}</p>
+                <p class="mt-2">{{ truncateDescription(props.eventPreview.location, 20) }}</p>
             </div>
             <div>
                 <strong>Venue</strong>
@@ -59,14 +59,18 @@
                         <v-icon class="mt-2" v-bind="props">mdi-dots-vertical</v-icon>
                     </template>
                     <v-list>
-                        <v-list-item value="list" @click="alert.publicAlert(props.eventPreview.id)">
+                        <v-list-item value="list" v-if="currentpath !== '/dashboard/event'"
+                            @click="alert.publicAlert(props.eventPreview.id)">
                             <v-list-item-title>Post</v-list-item-title>
                         </v-list-item>
-                        <v-list-item value="list">
-                            <EditEventDialog :eventId="props.eventPreview.id">Edit</EditEventDialog>
+                        <v-list-item value="list" class='d-flex align-center'>
+                            <EditEventDialog :eventId="props.eventPreview.id">
+                                Edit
+                            </EditEventDialog>
                         </v-list-item>
-                        <v-list-item value="list" @click="router.push(`/dashboard/attendees/${props.eventPreview.id}`)"
-                            v-if="currentpath === '/dashboard/event'">
+                        <v-list-item value="list" @click="
+                            router.push(`/dashboard/attendees/${props.eventPreview.id}`)
+                            " v-if="currentpath === '/dashboard/event'">
                             <v-list-item-title>Attendees</v-list-item-title>
                         </v-list-item>
                         <v-list-item v-else value="list">
@@ -87,7 +91,7 @@ import EditEventDialog from "@/components/events/editEvents/EditEventDialog.vue"
 import { ref, defineProps } from 'vue';
 import { sweetAlert } from '@/stores/sweetAlert.js';
 import { eventCreateStores } from '@/stores/eventCreate.js';
-const {truncateDescription} = eventCreateStores()
+const { truncateDescription } = eventCreateStores()
 const props = defineProps({
     eventPreview: Object
 })

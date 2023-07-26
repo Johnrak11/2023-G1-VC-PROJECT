@@ -28,7 +28,7 @@
                         :title="eventInfor.name" :description="eventInfor.description"
                         quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                         class="social-share">
-                        <v-icon left class="ml-2 color-icon" color="blue" size="50" style="height: 5vh">mdi-facebook</v-icon>
+                        <v-icon left class="ml-2 mt-3 color-icon" color="blue" size="50" style="height: 5vh">mdi-facebook</v-icon>
                         <p class="text-black mt-5">Facebook</p>
                       </ShareNetwork>
                       <ShareNetwork network="telegram" :url="events.localHttp + '/detail/' + eventInfor.id"
@@ -37,7 +37,7 @@
                         class="social-share" id="my-iframe" allow-same-origin>
                         <img :src="eventInfor.img" alt="">
                         <!-- <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-telegram</v-icon> -->
-                        <img src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png" alt="" style="margin-top: -20%;" width="10">
+                        <img src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png" alt="" width="67">
                         <p class="text-black" style="margin-top: -20%;">Telegram</p>
                       </ShareNetwork>
                       <ShareNetwork network="linkedin" :url="events.localHttp + '/detail/' + eventInfor.id"
@@ -57,7 +57,7 @@
                     </div>
                     <br />
                     <v-card-actions class="justify-center">
-                      <v-btn variant="text" @click="isActive.value = false">Close</v-btn>
+                      <v-btn variant="text" @click="isActive.value = false" style="width: 100%;">Close</v-btn>
                     </v-card-actions>
                   </v-card>
                 </template>

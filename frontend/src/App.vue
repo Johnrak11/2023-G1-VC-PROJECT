@@ -15,7 +15,7 @@ const { getCookie } = cookieStore();
 const user = userStore();
 const userToken = getCookie("token");
 import { addressStore } from "@/stores/address.js";
-const {getUserCurrentLatLng} = addressStore()
+const { getUserCurrentLatLng } = addressStore()
 user.token = userToken;
 if (userToken) {
   user.getUserInfor();

@@ -3,16 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ticket;
-use App\Http\Requests\StoreticketRequest;
-use App\Http\Requests\UpdateticketRequest;
 use App\Http\Resources\TicketResource;
-use GuzzleHttp\Psr7\Request;
-use App\Models\Event;
-use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
 
 class TicketController extends Controller
 {
-   
+
     public function getAllTicket()
     {
         $user = auth()->user();
@@ -21,19 +16,14 @@ class TicketController extends Controller
 
         return response()->json(['status' => true, 'data' => $ticketResources], 200);
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
 
     public function getOwnerOfTicket($eventId)
     {
         $ticketsOfUsers = Ticket::where('event_id', $eventId)
             ->with('user')
             ->get();
+
         if ($ticketsOfUsers != null) {
             return response()->json(['status' => 'success', 'data' => $ticketsOfUsers], 200);
         }

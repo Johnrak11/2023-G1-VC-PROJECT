@@ -7,6 +7,7 @@ use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
 use App\Http\Resources\EventBookingResource;
 use App\Http\Resources\EventCategoryResource;
+use App\Http\Resources\EventEditInforResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\OrganizerResource;
 use App\Models\Agenda;
@@ -117,9 +118,6 @@ class EventController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function getAllEvents()
     {
         $userId = Auth::user()->id;
@@ -132,6 +130,9 @@ class EventController extends Controller
         $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
         return response()->json(['message' => 'success', 'data' => new EventResource($event)], 200);
     }
+
+    // =============== Create ========
+
     public function store(Request $request)
     {
         $eventRules = [
@@ -182,9 +183,6 @@ class EventController extends Controller
         return response()->json(['success' => true, 'message' => 'Event created successfully'], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function eventDetailStore($request)
     {
         $eventDetailRules = [
@@ -244,19 +242,11 @@ class EventController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function booking($id)
     {
         //
         $eventBooking = Event::find($id);
         return new EventBookingResource($eventBooking);
-        // if (isset($eventBooking)) {
-        //     return response()->json(['status' => 'success', 'data' => $eventBooking], 200);
-        // } else {
-        //     return response()->json(['status' => false, 'data' => 'Id' . ' ' . $id . ' does not exist'], 404);
-        // }
     }
 
     public function getOrganizerId($eventId)
@@ -291,7 +281,9 @@ class EventController extends Controller
         return response()->json(['success' => true, 'data' => $events], 200);
     }
 
-    public function edit(Request $request, $eventId)
+    // =============== Update========
+
+    public function update(Request $request)
     {
         $eventRules = [
             'name' => ['required', 'string', 'max:255'],
@@ -304,31 +296,41 @@ class EventController extends Controller
             'image' => ['required'],
             'venue' => ['required', 'string'],
             'category_id' => ['required', 'exists:categories,id'],
+            'organizer_id' => ['required', 'exists:users,id'],
         ];
 
-        $eventRequest = $request->input('event');
-        $eventRequest['organizer_id'] = Auth::user()->id;
+        $eventRequest = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'date' => $request->date,
+            'time' => $request->time,
+            'location' => $request->location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'image' => $request->image,
+            'venue' => $request->venue,
+            'category_id' => $request->category_id,
+            'organizer_id' => $request->organizer_id,
+        ];
         $validator = Validator::make($eventRequest, $eventRules);
-
         if ($validator->fails()) {
             return $validator->errors();
         }
-
-        $event = Event::where('id', $eventId)
+        $event = Event::where('id', $request->id)
             ->where('organizer_id', Auth::user()->id)
             ->firstOrFail();
-
         $event->update($eventRequest);
 
-        if ($request->input('ticket')) {
-            $eventDetailRequest = $request->input('ticket');
-            $eventDetailRequest['event_id'] = $event->id;
-            $eventDetail = $this->eventDetailEdit($eventDetailRequest, $request);
+        // ---- upadte event detail -----
+        if ($request->input('event_detail')) {
+            $eventDetailRequest = $request->input('event_detail');
+            $eventDetailRequest[0]['event_id'] = $event->id;
+            $eventDetail = $this->eventDetailEdit($eventDetailRequest[0]);
 
-            if ($request->input('discount')) {
-                $discountRequest = $request->input('discount');
+            if ($request->input('discounts')[0]['discounts']) {
+                $discountRequest = $request->input('discounts')[0]['discounts'];
                 $discountRequest['event_detail_id'] = $eventDetail->id;
-                $this->discountEdit($discountRequest, $request);
+                $this->discountEdit($discountRequest);
             }
         }
 
@@ -336,22 +338,34 @@ class EventController extends Controller
             $newAgendas = [];
             foreach ($request->input('agendas') as $agendaRequest) {
                 $agendaRequest['event_id'] = $event->id;
-                $date = DateTime::createFromFormat("m/d/Y h:i A", $agendaRequest['date']);
-                if ($date) {
-                    $formattedDate = $date->format('Y-m-d H:i:s');
-                    $agendaRequest['date'] = $formattedDate;
-                    $newAgenda = $this->agendaEdit($agendaRequest, $request);
+                if (!empty($agendaRequest['id'])) {
+                    $newAgenda = $this->agendaEdit($agendaRequest, $agendaRequest['id']);
                     array_push($newAgendas, $newAgenda);
                 } else {
-                    return 'agenda date incorrect';
+                    $newAgenda = $this->agendaEdit($agendaRequest);
+                    array_push($newAgendas, $newAgenda);
+                }
+            }
+            // Get all agendas for the event
+            $eventAgendas = Agenda::where('event_id', $event->id)->get();
+            // Delete agendas that are not in the $newAgendas array
+            foreach ($eventAgendas as $agenda) {
+                $found = false;
+                foreach ($newAgendas as $newAgenda) {
+                    if ($agenda->id == $newAgenda->id) {
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found) {
+                    $agenda->delete();
                 }
             }
         }
-
         return response()->json(['success' => true, 'message' => 'Event updated successfully', new EventResource($event)], 200);
     }
-    
-    public function eventDetailEdit($id, $request)
+
+    public function eventDetailEdit($request)
     {
         $eventDetailRules = [
             'available_ticket' => ['required', 'integer', 'min:0'],
@@ -359,11 +373,17 @@ class EventController extends Controller
             'price' => ['required'],
             'event_id' => ['required', 'exists:events,id'],
         ];
-        $validator = Validator::make($request, $eventDetailRules);
+        $eventDetailRequest = [
+            'available_ticket' => $request['available_ticket'],
+            'description' => $request['description'],
+            'price' => $request['price'],
+            'event_id' => $request['event_id'],
+        ];
+        $validator = Validator::make($eventDetailRequest, $eventDetailRules);
         if ($validator->fails()) {
             return $validator->errors();
         }
-        $eventDetail = Event_detail::find($id);
+        $eventDetail = Event_detail::find($request['id']);
         if (!$eventDetail) {
             return 'Event detail not found';
         }
@@ -371,23 +391,29 @@ class EventController extends Controller
         return $eventDetail;
     }
 
-    public function discountEdit($request, $discountId)
+    public function discountEdit($request)
     {
         $discountRules = [
             'end_date' =>  ['required', 'date_format:Y-m-d H:i:s'],
             'percent' => ['required', 'integer'],
             'event_detail_id' => ['required', 'exists:event_details,id'],
         ];
-        $validator = Validator::make($request, $discountRules);
+
+        $discountRequest = [
+            'end_date' => $request['end_date'],
+            'percent' => $request['percent'],
+            'event_detail_id' => $request['event_detail_id'],
+        ];
+        $validator = Validator::make($discountRequest, $discountRules);
         if ($validator->fails()) {
             return $validator->errors();
         }
-        $discount = Discount::findOrFail($discountId);
+        $discount = Discount::find($request['id']);
         $discount->update($validator->validated());
         return $discount;
     }
 
-    public function agendaEdit($id, $request)
+    public function agendaEdit($request, $id = null)
     {
         $agendaRules = [
             'date' => ['required', 'date_format:Y-m-d H:i:s'],
@@ -399,14 +425,18 @@ class EventController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
-        $agenda = Agenda::find($id);
-        if (!$agenda) {
-            return 'Agenda not found';
-        }
-        $agenda->update($validator->validated());
+        $agendaData = $validator->validated();
+        $agenda = Agenda::updateOrCreate(['id' => $id], $agendaData);
         return $agenda;
     }
 
+    
+    public function getEditInfor($eventId)
+    {
+        $userId = Auth::user()->id;
+        $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
+        return response()->json(['message' => 'success', 'data' => new EventEditInforResource($event)], 200);
+    }
 
     // Referencses====
     // Recomand event 
