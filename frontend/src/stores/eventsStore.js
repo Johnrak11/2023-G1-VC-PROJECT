@@ -7,7 +7,7 @@ export const eventStores = defineStore("event", {
     recommendEvent: [],
     recommendEventLimit: [],
     reletedEvent: [],
-    localHttp: "http://192.168.91.229:8080",
+    localHttp: "http://localhost:8080",
     pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
   }),
   gatters: {

@@ -25,9 +25,18 @@ function authenticateBeforeEnter() {
   return function (to, from, next) {
     const { getSession } = sessionStore();
     const { getCookie } = cookieStore();
-    console.log(getSession("role"));
-    console.log(getCookie("token"));
     if (getSession("role") && getCookie("token")) {
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  };
+}
+
+function scanAuthenticateBeforeEnter() {
+  return function (to, from, next) {
+    const { getCookie } = cookieStore();
+    if (getCookie("token")) {
       next();
     } else {
       next({ name: "login" });
@@ -168,7 +177,7 @@ const routes = [
     name: "scan",
     component: ScanPage,
     props: true,
-    beforeEnter: [authenticateBeforeEnter()],
+    beforeEnter: [scanAuthenticateBeforeEnter()],
   },
 ];
 const router = createRouter({
