@@ -152,6 +152,36 @@ class EventDetailSeeder extends Seeder
                 'price' => '10$',
                 'event_id' => 23,
             ],
+            [
+                'available_ticket' => 50,
+                'description' => 'World-renowned film festival featuring premieres of international cinema',
+                'price' => 'free',
+                'event_id' => 24,
+            ],
+            [
+                'available_ticket' => 100,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '10$',
+                'event_id' => 25,
+            ],
+            [
+                'available_ticket' => 30,
+                'description' => 'World-renowned film festival featuring premieres of international cinema',
+                'price' => 'free',
+                'event_id' => 26,
+            ],
+            [
+                'available_ticket' => 20,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '11$',
+                'event_id' => 27,
+            ],
+            [
+                'available_ticket' => 10,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '5$',
+                'event_id' => 28,
+            ],
             
         ];
 
