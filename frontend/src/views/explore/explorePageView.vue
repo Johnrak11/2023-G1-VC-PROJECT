@@ -1,5 +1,4 @@
 <template>
-  <navigation-bar></navigation-bar>
   <banner-view></banner-view>
   <search-view></search-view>
   <category-view></category-view>
@@ -12,6 +11,7 @@
   <pagination-view></pagination-view>
   <footer-view></footer-view>
 </template>
+
 <script>
 import ListCard from '@/components/partials/cards/ListCard.vue'
 import { createVuetify } from 'vuetify'
@@ -29,4 +29,5 @@ export default createVuetify({
     },
   },
 })
+
 </script>

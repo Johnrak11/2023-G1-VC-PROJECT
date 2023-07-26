@@ -15,11 +15,13 @@ class TicketResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=> $this->id,
+            'id' => $this->id,
             'ticket_code' => $this->ticket_code,
             'booking_date' => $this->booking_date,
             'is_check_in' => $this->is_check_in,
-            'user_id' => $this->customers,
+            'user_id' => $this->user_id,
+            'userName' => $this->user->firstname . ' ' . $this->user->lastname,
+            'user_id' => $this->user_id,
             'event' => $this->event,
         ];
     }

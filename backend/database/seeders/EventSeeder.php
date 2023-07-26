@@ -21,10 +21,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-12',
                 'time' => '6:00:00',
                 'location' => 'Order MeanChey',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/136585049/original/f290d43b0dd338d83267b3a9129fd5e28bdfd22d/design-eye-catching-banner-and-flyers.jpg',
                 'venue' => "At Berng snuor",
                 'organizer_id' => 4,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.570633,
+                'longitude' => 104.927112,
 
             ],
             [
@@ -33,10 +36,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-12-12',
                 'time' => '9:00:00',
                 'location' => 'Banteay Meanchey',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGDMWL6GLR9r2o0RTHYLXWBDXs4aqrKirPoo-kZKUjctiNmyUI3tZchA8bBHkq7Ot4T2g&usqp=CAU',
                 'venue' => "At Banteay Meanchey",
                 'organizer_id' => 3,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1,
+                'latitude' => 11.563804,
+                'longitude' => 104.930285,
 
             ],
             [
@@ -45,10 +51,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-12',
                 'time' => '4:32:00',
                 'location' => 'Batambong',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/premium-vector/music-event-banner-template-with-photo_52683-13693.jpg',
                 'venue' => "At Batambong",
                 'organizer_id' => 2,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
 
             ],
             [
@@ -57,10 +66,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-12-12',
                 'time' => '4:32:00',
                 'location' => 'Kep',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/premium-vector/music-event-banner-template-with-photo_52683-13693.jpg',
                 'venue' => "On the beach",
                 'organizer_id' => 4,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.484967,
+                'longitude' => 104.877136,
 
             ],
             [
@@ -69,10 +81,11 @@ class EventSeeder extends Seeder
                 'date' => '2024-07-08',
                 'time' => '2:30:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At aeon",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
 
             ],
             [
@@ -81,10 +94,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-07-08',
                 'time' => '3:32:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At WAT PHNOM",
                 'organizer_id' => 1,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
 
             ],
             [
@@ -93,10 +109,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-08',
                 'time' => '8:30:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At WAT PHNOM",
                 'organizer_id' => 4,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.569450,
+                'longitude' => 104.890678,
 
             ],
             [
@@ -105,10 +124,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-08',
                 'time' => '6:00:00',
                 'location' => 'Press Seyhanuk',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.jakpost.net/c/2020/11/05/2020_11_05_106846_1604546091._large.jpg',
                 'venue' => "At the beach",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.553375,
+                'longitude' => 104.919171,
 
             ],
             [
@@ -120,7 +142,10 @@ class EventSeeder extends Seeder
                 'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
                 'venue' => "At PNC",
                 'organizer_id' => 1,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.567218,
+                'longitude' => 104.920433,
 
             ],
             [
@@ -129,10 +154,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-08',
                 'time' => '2:30:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At PSE",
                 'organizer_id' => 2,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.558720,
+                'longitude' => 104.917961,
 
             ],
             [
@@ -141,10 +169,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-09',
                 'time' => '1:30:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At Rolyal Palase",
                 'organizer_id' => 2,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.572915,
+                'longitude' => 104.884368,
 
             ],
             [
@@ -153,10 +184,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-11',
                 'time' => '4:00:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "In front of the Royal Palace",
                 'organizer_id' => 2,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.567791,
+                'longitude' => 104.890668,
 
             ],
             [
@@ -165,10 +199,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-12-12',
                 'time' => '11:00:00',
                 'location' => 'Oder MeanChey Province',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At Berng Snour",
                 'organizer_id' => 3,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.570633,
+                'longitude' => 104.927112,
             ],
             [
                 'name' => 'Electric Dreams',
@@ -176,10 +213,11 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-12',
                 'time' => '10:00:00',
                 'location' => 'Kompong Cham',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At city",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1
             ],
             [
                 'name' => 'Game',
@@ -187,10 +225,13 @@ class EventSeeder extends Seeder
                 'date' => '2024-01-10',
                 'time' => '9:00:00',
                 'location' => 'TaKao Province',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/273906027/original/5554387306b011bdffb38446806a49cb06d9c57b/create-an-awesome-esports-tournament-gaming-banner-poster-and-event-flyer-d52e.jpg',
                 'venue' => "At Takao",
                 'organizer_id' => 4,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.575571,
+                'longitude' => 104.916816,
 
             ],
             [
@@ -199,10 +240,13 @@ class EventSeeder extends Seeder
                 'date' => '2024-02-02',
                 'time' => '8:00:00',
                 'location' => 'Kompong Tom Province',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/premium-psd/esports-event-social-media-banner-template_202605-313.jpg',
                 'venue' => "At Kompong Tom",
                 'organizer_id' => 5,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.570633,
+                'longitude' => 104.927112,
 
             ],
             [
@@ -211,11 +255,13 @@ class EventSeeder extends Seeder
                 'date' => '2024-03-02',
                 'time' => '1:00:00',
                 'location' => 'Batambong Province',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/premium-vector/game-day-esports-gaming-post-banner-template-social-media-with-esports-logo_126068-396.jpg?w=2000',
                 'venue' => "At Batambong",
                 'organizer_id' => 4,
-                'category_id' => 3
-
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.573892,
+                'longitude' => 104.911347,
             ],
             [
                 'name' => 'Sing a Song',
@@ -223,10 +269,13 @@ class EventSeeder extends Seeder
                 'date' => '2024-05-02',
                 'time' => '12:00:00',
                 'location' => 'kep Province',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Kep",
                 'organizer_id' => 3,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.563804,
+                'longitude' => 104.930285,
 
             ],
             [
@@ -235,10 +284,13 @@ class EventSeeder extends Seeder
                 'date' => '2024-07-02',
                 'time' => '7:00:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Aeon",
                 'organizer_id' => 3,
-                'category_id' => 6
+                'category_id' => 6,
+                'is_public' => 1,
+                'latitude' => 11.570809,
+                'longitude' => 104.922381,
 
             ],
             [
@@ -247,10 +299,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-09-02',
                 'time' => '7:00:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Aeon",
                 'organizer_id' => 3,
-                'category_id' => 6
+                'category_id' => 6,
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
 
             ],
             [
@@ -259,10 +314,14 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-02',
                 'time' => '4:00:00',
                 'location' => 'kandal',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "kandal",
                 'organizer_id' => 3,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.484967,
+                'longitude' => 104.877136,
+        
 
             ],
             [
@@ -271,10 +330,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-9-02',
                 'time' => '4:00:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "kaoh pech",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
 
             ],
             [
@@ -283,10 +345,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-12-02',
                 'time' => '4:00:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Olympic",
                 'organizer_id' => 3,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.567218,
+                'longitude' => 104.920433,
 
             ],
             [
@@ -295,10 +360,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-08-12',
                 'time' => '5:00:00',
                 'location' => 'Phnom Penh',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "Olympic",
                 'organizer_id' => 5,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.538954,
+                'longitude' => 104.910152,
 
             ],
             [
@@ -307,10 +375,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-07-30',
                 'time' => '5:30:00',
                 'location' => 'Kandal',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoJBsIjRMDJdBK6QmlDiF1peqJGOwR8E_1Aw&usqp=CAU',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At kandal",
                 'organizer_id' => 5,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.564350,
+                'longitude' => 104.934307,
 
             ],
             [
@@ -319,10 +390,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-08-20',
                 'time' => '16:00:00',
                 'location' => 'Koh Pich',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-13.jpg',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 1,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.546937,
+                'longitude' => 104.899812,
             ],
             [
                 'name' => 'Food Expo',
@@ -330,10 +404,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-09-05',
                 'time' => '10:00:00',
                 'location' => 'Diamond Island',
-                'image' => 'https://www.phnompenhpost.com/sites/default/files/styles/full-screen/public/field/image/03_0.jpg?itok=5mVxGyqT',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Diamond Island Convention and Exhibition Center",
                 'organizer_id' => 2,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.570809,
+                'longitude' => 104.922381,
             ],
             [
                 'name' => 'Fashion Show',
@@ -341,10 +418,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-15',
                 'time' => '19:00:00',
                 'location' => 'Sovanna Shopping Center',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-12.jpg',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Sovanna Shopping Center",
                 'organizer_id' => 3,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
             ],
             [
                 'name' => 'Sports Tournament',
@@ -352,10 +432,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-07-29',
                 'time' => '13:00:00',
                 'location' => 'National Olympic Stadium',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-19.jpg',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At National Olympic Stadium",
                 'organizer_id' => 5,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
             ],
             [
                 'name' => 'Art Exhibition',
@@ -363,10 +446,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-12-08',
                 'time' => '11:00:00',
                 'location' => 'National Museum of Cambodia',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-8.jpg',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At National Museum of Cambodia",
                 'organizer_id' => 5,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.569987,
+                'longitude' => 104.892275,
             ],
             [
                 'name' => 'Career Fair',
@@ -374,10 +460,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-01',
                 'time' => '9:00:00',
                 'location' => 'Phnom Penh Hotel',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-20.jpg',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Phnom Penh Hotel",
                 'organizer_id' => 1,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.574804,
+                'longitude' => 104.921898,
             ],
             [
                 'name' => 'Film Festival',
@@ -385,10 +474,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-25',
                 'time' => '18:00:00',
                 'location' => 'Major Cineplex',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-6.jpg',
+                'image' => 'https://img.freepik.com/free-vector/flat-design-leaves-art-exhibition-facebook-template_23-2149481815.jpg?w=2000',
                 'venue' => "At Major Cineplex",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.567791,
+                'longitude' => 104.890668,  
             ],
             [
                 'name' => 'Charity Auction',
@@ -396,10 +488,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-05',
                 'time' => '17:00:00',
                 'location' => 'Raffles Hotel Le Royal',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-18.jpg',
+                'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Raffles Hotel Le Royal",
                 'organizer_id' => 3,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.572915,
+                'longitude' => 104.884368,
             ],
             [
                 'name' => 'Tech Conference',
@@ -407,10 +502,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-09-15',
                 'time' => '8:00:00',
                 'location' => 'Sofitel Phnom Penh Phokeethra',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-10.jpg',
+                'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Sofitel Phnom Penh Phokeethra",
                 'organizer_id' => 4,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1,
+                'latitude' => 11.558720,
+                'longitude' => 104.917961,
             ],
             [
                 'name' => 'Dance Competition',
@@ -418,10 +516,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-08-27',
                 'time' => '14:00:00',
                 'location' => 'Chaktomuk Theater',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-15.jpg',
+                'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Chaktomuk Theater",
                 'organizer_id' => 5,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1,
+                'latitude' => 11.562952,
+                'longitude' => 104.925999,
             ],
             [
                 'name' => 'Photography Exhibition',
@@ -429,10 +530,12 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-10',
                 'time' => '12:00:00',
                 'location' => 'Bophana Center',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-9.jpg',
+                'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Bophana Center",
                 'organizer_id' => 1,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 111.567218,
+                'longitude' => 104.920433,
             ],
             [
                 'name' => 'Health Expo',
@@ -440,10 +543,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-18',
                 'time' => '10:00:00',
                 'location' => 'Koh Pich',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-14.jpg',
+                'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 1,
-                'category_id' => 1
+                'category_id' => 1,
+                'is_public' => 1,
+                'latitude' => 11.553375,
+                'longitude' => 104.919171,
             ],
             [
                 'name' => 'Culinary Competition',
@@ -451,10 +557,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-09-22',
                 'time' => '15:00:00',
                 'location' => 'The Place Restaurant',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-11.jpg',
+                'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At The Place Restaurant",
                 'organizer_id' => 2,
-                'category_id' => 2
+                'category_id' => 2,
+                'is_public' => 1,
+                'latitude' => 11.569450,
+                'longitude' => 104.890678,
             ],
             [
                 'name' => 'Startup Pitch Competition',
@@ -462,10 +571,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-10-05',
                 'time' => '9:00:00',
                 'location' => 'Raintree Cambodia',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-17.jpg',
+                'image' => 'https://s3.amazonaws.com/thumbnails.venngage.com/template/d91f871a-b814-4e74-aa42-c0b1abeb21aa.png',
                 'venue' => "At Raintree Cambodia",
                 'organizer_id' => 3,
-                'category_id' => 3
+                'category_id' => 3,
+                'is_public' => 1,
+                'latitude' => 11.563309,
+                'longitude' => 104.893327,
             ],
             [
                 'name' => 'Literature Festival',
@@ -473,10 +585,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-12-01',
                 'time' => '11:00:00',
                 'location' => 'FCC Angkor',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-5.jpg',
+                'image' => 'https://cdn.dribbble.com/users/15617/screenshots/6400465/screenshot_1x.jpg',
                 'venue' => "At FCC Angkor",
                 'organizer_id' => 4,
-                'category_id' => 4
+                'category_id' => 4,
+                'is_public' => 1,
+                'latitude' => 11.484967,
+                'longitude' => 104.877136,
             ],
             [
                 'name' => 'Environmental Exhibition',
@@ -484,10 +599,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-11-08',
                 'time' => '10:00:00',
                 'location' => 'Koh Pich',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-16.jpg',
+                'image' => 'https://cdn.dribbble.com/users/15617/screenshots/6400465/screenshot_1x.jpg',
                 'venue' => "At Koh Pich Convention and Exhibition Center",
                 'organizer_id' => 5,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1,
+                'latitude' => 11.544893,
+                'longitude' => 104.912683,
             ],
             [
                 'name' => 'Art Auction',
@@ -495,10 +613,13 @@ class EventSeeder extends Seeder
                 'date' => '2023-12-03',
                 'time' => '18:00:00',
                 'location' => 'Sofitel Phnom Penh Phokeethra',
-                'image' => 'https://www.khmertimeskh.com/wp-content/uploads/2019/11/Blog-1-7.jpg',
+                'image' => 'https://cdn.dribbble.com/users/15617/screenshots/6400465/screenshot_1x.jpg',
                 'venue' => "At Sofitel Phnom Penh Phokeethra",
                 'organizer_id' => 3,
-                'category_id' => 5
+                'category_id' => 5,
+                'is_public' => 1,
+                'latitude' => 11.570809,
+                'longitude' => 104.922381,
             ],
         ];
         foreach ($ListEvents as $ListEvent) {

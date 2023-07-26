@@ -6,35 +6,22 @@
                     placeholder="email" @keydown="backEmailError = ''">
                 </v-text-field> -->
                 <div class="text-subtitle-1 text-medium-emphasis">Account</div>
-                <v-text-field
-                    density="compact"
-                    placeholder="Email address" @keydown="backEmailError = ''"
-                    prepend-inner-icon="mdi-email-outline"
-                    variant="outlined"
-                    class="w-100" v-model="email" :rules="emailRules" type="email" label="Email"
-                                
-                ></v-text-field>
+                <v-text-field density="compact" placeholder="Email address" @keydown="backEmailError = ''"
+                    prepend-inner-icon="mdi-email-outline" variant="outlined" class="w-100" v-model="email"
+                    :rules="emailRules" type="email" label="Email"></v-text-field>
                 <small v-if="backEmailError" class="error-message">{{ backEmailError }}</small>
                 <!-- <v-text-field @keydown="backPasswordError = ''" class="w-90 ml-5" v-model="password" :rules="passwordRules"
                     :type="passwordShow ? 'text' : 'password'" label="Password" placeholder="password"
                     :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'" @click:append="passwordShow = !passwordShow">
                 </v-text-field> -->
                 <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
-                Password
+                    Password
                 </div>
 
-                <v-text-field
-                    :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-                    :type="visible ? 'text' : 'password'"
-                    density="compact"
-                    placeholder="Enter your password"
-                    prepend-inner-icon="mdi-lock-outline"
-                    variant="outlined"
-                    @click:append-inner="visible = !visible"
-                    @keydown="backPasswordError = ''" class="w-100" v-model="password" :rules="passwordRules"
-                                label="Password" 
-
-                ></v-text-field>
+                <v-text-field :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'"
+                    density="compact" placeholder="Enter your password" prepend-inner-icon="mdi-lock-outline"
+                    variant="outlined" @click:append-inner="visible = !visible" @keydown="backPasswordError = ''"
+                    class="w-100" v-model="password" :rules="passwordRules" label="Password"></v-text-field>
                 <small v-if="backPasswordError" class="error-message">{{ backPasswordError }}</small>
                 <span class="blue-text">Forget Password?</span>
             </v-card-text>
@@ -52,9 +39,11 @@ import { ref } from 'vue'
 import baseAPI from "@/stores/axiosHandle.js";
 import { cookieStore } from '@/stores/cookies.js'
 const { setCookie } = cookieStore()
+import { sessionStore } from "@/stores/session.js";
+const { setSession } = sessionStore();
 const invalideForm = ref('')
 
-const  visible = ref(false);
+const visible = ref(false);
 const password = ref('');
 const passwordRules = [
     v => !!v || 'Password is required',
@@ -71,6 +60,7 @@ const isLoading = ref(false)
 const user = userStore()
 const backEmailError = ref('')
 const backPasswordError = ref('')
+
 async function submitHandler() {
     invalideForm.value = ''
     const isFormValid = validateForm();
@@ -93,7 +83,7 @@ async function submitHandler() {
                 user.user = response.data.user
                 user.token = response.data.token
                 setCookie('token', user.token)
-                console.log(user.user)
+                setSession('role', user.user.role)
                 router.push('/')
             }
         })

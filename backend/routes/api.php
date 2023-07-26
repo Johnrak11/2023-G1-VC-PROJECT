@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+
     Route::prefix('/auth')->group(function () {
         //logout
         Route::post('/logout', function (Request $request) {
@@ -40,6 +42,23 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
+    Route::prefix('/events')->group(function () {
+        Route::post('/', [EventController::class, 'store']);
+
+        Route::prefix('/previews')->group(function () {
+            Route::get('/', [EventController::class, 'getOrganizerEvents']);
+            Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
+        });
+    });
+
+
+    // ---- ticket with token-----
+    Route::prefix('/tickets')->group(function () {
+        Route::get('/', [TicketController::class, 'getAllTicket']);
+        Route::get('/search/{name}', [TicketController::class, 'searchTicket']);
+        Route::get('/scan/{eventId}', [TicketController::class, 'getTicketByEventId']);
+        Route::post('/', [TicketController::class, 'store']);
+    });
 });
 
 // ----- authentication group----
@@ -48,6 +67,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/registers', ([AuthController::class, 'register']));
     Route::post('/login', ([AuthController::class, 'login']));
 });
+// Route::get('/tickets', 'TicketController@getAllTicket')->middleware('auth:api');
 
 Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
@@ -66,15 +86,18 @@ Route::prefix('/events')->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::get('/{eventId}', [EventController::class, 'booking']);
     });
+    Route::prefix('/recommend')->group(function () {
+        Route::get('/{lat}/{lng}/{km}', [EventController::class, 'getEventsWithinRadius']);
+    });
 });
 Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
 });
+Route::prefix('/eventDetail')->group(function () {
+    Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
+});
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
-Route::get('/tickets',[TicketController::class, 'getAllTicket']);
-Route::get('/tickets/search',[TicketController::class, 'searchTicket']);
-Route::post('/create/tickets', [TicketController::class, 'store']);

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="bg-grey-lighten-2 card-event" style="height: 100vh; overflow-y: scroll;" >
+  <v-card class="bg-grey-lighten-2 card-event" style="height: 100vh; overflow-y: scroll;">
     <ul class="mt-16 ml-8">
       <li class="d-flex icon mt-2">
         <v-list-item prepend-icon="mdi-calendar" title="Event" value="event"></v-list-item>
@@ -15,13 +15,22 @@
         <slot></slot>
       </div>
     </v-card>
-    <div class="ml-8 mb-5">
-      <CardEvent v-for="n in 2" :key="n" />
+    <div class="ml-8 mb-5" v-if="eventPreviewStorage.eventPosteds">
+      <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventPosteds" :key="eventPreview"
+        :eventPreview="eventPreview" />
     </div>
   </v-card>
 </template>
 <script setup>
-import CardEvent from "./CardEvent.vue";
+
+import CardEventPreview from "./CardEventPreview.vue";
+import { eventPreviewStores } from "@/stores/eventPreview.js";
+import { onMounted } from "vue";
+const eventPreviewStorage = eventPreviewStores()
+
+onMounted(() => {
+  eventPreviewStorage.getOrganizerEvent(1)
+})
 </script>
 <style scoped>
 button {
@@ -34,7 +43,8 @@ button:hover {
   background-color: red;
   color: white;
 }
-.card-event::-webkit-scrollbar{
+
+.card-event::-webkit-scrollbar {
   display: none;
 }
 </style>
