@@ -45,7 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('/events')->group(function () {
         Route::post('/', [EventController::class, 'store']);
         Route::put('/edit/{eventId}', [EventController::class, 'edit']);
-        Route::get('/getEvent',[EventController::class, 'getAllEvents']);
+        Route::get('/getEvent', [EventController::class, 'getAllEvents']);
         Route::get('/{eventId}', [EventController::class, 'getEventId']);
 
         Route::prefix('/previews')->group(function () {
@@ -79,8 +79,11 @@ Route::prefix('/booking')->group(function () {
 
 //-------search for events------------
 Route::prefix('/events')->group(function () {
-    Route::get('/{id}', [EventController::class, 'getEventById']);
+
+    Route::get('detail/{id}', [EventController::class, 'getEventById']);
+
     Route::get('/organizer/{organizerId}', [EventController::class, 'getOrganizerId']);
+
     Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
@@ -104,4 +107,3 @@ Route::prefix('/eventDetail')->group(function () {
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
 // Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
-

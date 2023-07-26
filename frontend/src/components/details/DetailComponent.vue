@@ -96,7 +96,7 @@ const fetchEvent = async () => {
   const route = useRoute();
   const eventId = route.params.id;
   try {
-    const response = await baseAPI.get(`/events/${eventId}`);
+    const response = await baseAPI.get(`/events/detail/${eventId}`);
     event.value = response.data.data;
   } catch (error) {
     console.log(error);
