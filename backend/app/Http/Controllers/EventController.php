@@ -117,21 +117,21 @@ class EventController extends Controller
         }
     }
 
-   
+    /**
+     * Store a newly created resource in storage.
+     */
     public function getAllEvents()
     {
         $userId = Auth::user()->id;
         $events = Event::where('organizer_id', $userId)->get();
         return response()->json(['message' => 'success', 'data' => $events], 200);
     }
-    
     public function getEventId($eventId)
     {
         $userId = Auth::user()->id;
         $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
-        return response()->json(['message' => 'success', 'data' =>new EventResource($event)], 200);
+        return response()->json(['message' => 'success', 'data' => new EventResource($event)], 200);
     }
-
     public function store(Request $request)
     {
         $eventRules = [
@@ -340,7 +340,7 @@ class EventController extends Controller
                 if ($date) {
                     $formattedDate = $date->format('Y-m-d H:i:s');
                     $agendaRequest['date'] = $formattedDate;
-                    $newAgenda = $this->agendaEdit($agendaRequest,$request);
+                    $newAgenda = $this->agendaEdit($agendaRequest, $request);
                     array_push($newAgendas, $newAgenda);
                 } else {
                     return 'agenda date incorrect';
@@ -348,8 +348,9 @@ class EventController extends Controller
             }
         }
 
-        return response()->json(['success' => true, 'message' => 'Event updated successfully',new EventResource($event)], 200);
+        return response()->json(['success' => true, 'message' => 'Event updated successfully', new EventResource($event)], 200);
     }
+    
     public function eventDetailEdit($id, $request)
     {
         $eventDetailRules = [
@@ -369,6 +370,7 @@ class EventController extends Controller
         $eventDetail->update($validator->validated());
         return $eventDetail;
     }
+
     public function discountEdit($request, $discountId)
     {
         $discountRules = [
@@ -384,6 +386,7 @@ class EventController extends Controller
         $discount->update($validator->validated());
         return $discount;
     }
+
     public function agendaEdit($id, $request)
     {
         $agendaRules = [
@@ -403,7 +406,8 @@ class EventController extends Controller
         $agenda->update($validator->validated());
         return $agenda;
     }
-    
+
+
     // Referencses====
     // Recomand event 
     //Laravel Geospatial Docs: https://laravel.com/docs/8.x/eloquent-mutators#spatial-casting

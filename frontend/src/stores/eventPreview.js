@@ -11,7 +11,7 @@ export const eventPreviewStores = defineStore("eventPreview", {
   actions: {
     async getOrganizerEvent(isPublic) {
       await baseAPI
-        .get(`/events/previews?isPublic=${isPublic}`)
+        .get(`/events/previews/organizer?isPublic=${isPublic}`)
         .then((response) => {
           let responeseData = response.data.data;
           if (isPublic == 0) {

@@ -47,7 +47,7 @@
             </div>
             <div>
                 <strong>Location</strong>
-                <p class="mt-2">{{ props.eventPreview.location }}</p>
+                <p class="mt-2">{{ truncateDescription(props.eventPreview.location,20) }}</p>
             </div>
             <div>
                 <strong>Venue</strong>
@@ -86,6 +86,8 @@
 import EditEventDialog from "@/components/events/editEvents/EditEventDialog.vue";
 import { ref, defineProps } from 'vue';
 import { sweetAlert } from '@/stores/sweetAlert.js';
+import { eventCreateStores } from '@/stores/eventCreate.js';
+const {truncateDescription} = eventCreateStores()
 const props = defineProps({
     eventPreview: Object
 })

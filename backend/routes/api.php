@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
+
     Route::prefix('/events')->group(function () {
         Route::post('/', [EventController::class, 'store']);
         Route::put('/edit/{eventId}', [EventController::class, 'edit']);
@@ -49,7 +50,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{eventId}', [EventController::class, 'getEventId']);
 
         Route::prefix('/previews')->group(function () {
-            Route::get('/', [EventController::class, 'getOrganizerEvents']);
+            Route::get('/organizer', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
     });
