@@ -7,6 +7,7 @@ use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,19 +43,27 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
+
     Route::prefix('/events')->group(function () {
         Route::post('/', [EventController::class, 'store']);
-        Route::put('/edit/{eventId}', [EventController::class, 'edit']);
-        Route::get('/getEvent',[EventController::class, 'getAllEvents']);
-        Route::get('/{eventId}', [EventController::class, 'getEventId']);
+        Route::get('/getEvent', [EventController::class, 'getAllEvents']);
+        // Route::get('/{eventId}', [EventController::class, 'getEventId']);
+
+        Route::prefix('/edits')->group(function () {
+            Route::get('/infor/{eventId}', [EventController::class, 'getEditInfor']);
+        });
+
+        Route::put('/update', [EventController::class, 'update']);
 
         Route::prefix('/previews')->group(function () {
             Route::get('/', [EventController::class, 'getPreviewEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
     });
-    Route::get('/tickets',[TicketController::class, 'getAllTicket']);
-    Route::get('/tickets/search/{name}',[TicketController::class, 'searchTicket']);
+    Route::get('/tickets', [TicketController::class, 'getAllTicket']);
+    Route::get('/tickets/search/{name}', [TicketController::class, 'searchTicket']);
+
+    Route::get('/notifications', [NotificationController::class, 'notifications']);
 });
 
 // ----- authentication group----
@@ -90,10 +99,8 @@ Route::prefix('/search')->group(function () {
 });
 Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
-    
 });
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
 Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
-
