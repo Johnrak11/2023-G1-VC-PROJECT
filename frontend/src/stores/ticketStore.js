@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle";
 import router from "@/routes/router.js";
-export const ticketStore = defineStore("categories", {
+export const ticketStore = defineStore("ticket", {
   state: () => ({
     tickets: [],
     isRegister: null,

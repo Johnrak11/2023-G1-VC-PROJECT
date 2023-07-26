@@ -23,9 +23,10 @@
       </tbody>
     </v-table>
     <div class="button w-50 mb-10">
-      <payment-form v-if="event.event_detail.length > 0 && event.event_detail[0].price != 'free' && ticket.isRegister" class="mt-8 "
-        :eventId="eventId"></payment-form>
-      <v-btn v-else-if="event.event_detail.length > 0 && event.event_detail[0].price === 'free' && ticket.isRegister" color="red" @click="ticket.createTicket(router.currentRoute.value.params.id)">Register</v-btn>
+      <payment-form v-if="event.event_detail.length > 0 && event.event_detail[0].price != 'free' && ticket.isRegister"
+        class="mt-8 " :eventId="eventId"></payment-form>
+      <v-btn v-else-if="event.event_detail.length > 0 && event.event_detail[0].price === 'free' && ticket.isRegister"
+        color="red" @click="ticket.createTicket(router.currentRoute.value.params.id)">Register</v-btn>
       <v-btn v-else disabled color="red">Booked</v-btn>
     </div>
   </div>
@@ -71,7 +72,8 @@ async function fetchEvent() {
   /* margin-left: 2%; */
   box-shadow: 5px 5px 10px gray;
 }
-.button{
+
+.button {
   text-align: end;
   margin-top: 10px;
 }

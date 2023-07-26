@@ -43,7 +43,7 @@
 <script setup>
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const { truncateDescription } = eventCreateStores()
-import ticketStore from '@/stores/ticketStore'
+import {ticketStore} from '@/stores/ticketStore.js'
 import { onMounted } from "vue";
 const tickets = ticketStore();
 onMounted(() => {
