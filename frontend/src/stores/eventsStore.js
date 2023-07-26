@@ -5,8 +5,12 @@ export const eventStores = defineStore("event", {
     isLoader: true,
     events: [],
     recommendEvent: [],
+<<<<<<< HEAD
+=======
+    recommendEventLimit: [],
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
     reletedEvent: [],
-    localHttp: "http://172.16.0.143:8080",
+    localHttp: "http://192.168.91.229:8080",
     pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
   }),
   gatters: {
@@ -59,6 +63,7 @@ export const eventStores = defineStore("event", {
     },
 
     async getRecommendEvent(lat, lng, km) {
+<<<<<<< HEAD
       this.isLoader = true;
       await baseAPI
         .get(`/events/recommend/${lat}/${lng}/${km}`)
@@ -66,6 +71,20 @@ export const eventStores = defineStore("event", {
           let responeseData = response.data;
           this.recommendEvent = responeseData;
           console.log(this.recommendEvent)
+=======
+      await baseAPI
+        .get(`/events/recommend/${lat}/${lng}/${km}`)
+        .then((response) => {
+          let responseData = response.data;
+          this.recommendEvent = responseData;
+          if (responseData.length > 8) {
+            console.log(responseData.length)
+            this.recommendEventLimit = responseData.slice(0, 8);
+          } else {
+            this.recommendEventLimit = responseData;
+          }
+          console.log(this.recommendEventLimit);
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
         })
         .catch((error) => console.log(error));
     },

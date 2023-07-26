@@ -113,7 +113,11 @@ function submitEvent() {
 
 </script>
 
+<<<<<<< HEAD
 <style>
+=======
+<style scoped>
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 .dialog-bottom-transition-enter-active,
 .dialog-bottom-transition-leave-active {
     transition: transform .2s ease-in-out;

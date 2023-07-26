@@ -3,9 +3,13 @@
     <v-hover v-slot="{ isHovering, props }">
       <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props" class="hover">
         <router-link :to="`/detail/${eventInfor.id}`">
+<<<<<<< HEAD
           <v-img class="align-end text-white" height="200" :src="eventInfor.image" cover>
             <v-card-title>{{ eventInfor.name }}</v-card-title>
           </v-img>
+=======
+          <v-img class="align-end text-white" height="200" :src="eventInfor.image" cover></v-img>
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
         </router-link>
         <div class="d-flex justify-space-between">
           <v-card-subtitle class="pt-4 d-flex">
@@ -69,15 +73,25 @@
             <div class="top">
               <router-link :to="`/detail/${eventInfor.id}`">
                 <div>
+<<<<<<< HEAD
                   <!-- <p>{{ eventInfor.description }}</p> -->
                   <div class="d-flex mt-2">
                     <!-- <v-icon size="17"> mdi-calendar</v-icon> -->
+=======
+                  <div>
+                    <v-card-title class="text-black" style="margin-left: -5%;">{{ eventInfor.name }}</v-card-title>
+                  </div>
+                  <div class="d-flex" style="margin-top: -5%;">
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
                     <p class="ml-1 mt-2 mb-2" style="font-size: 15px">Date:
                       {{ eventInfor.date }}
                     </p>
                   </div>
                   <div class="d-flex" style="margin-top: -5%;">
+<<<<<<< HEAD
                     <!-- <v-icon size="17">mdi-map-marker</v-icon> -->
+=======
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
                     <p style="font-size: 15px" class="ml-1 mt-1">Venue:
                       {{ eventCreate.truncateDescription(eventInfor.venue, 20) }}
                     </p>
@@ -88,7 +102,11 @@
           </div>
         </v-card-text>
         <v-card-actions>
+<<<<<<< HEAD
           <v-btn color="white" class="ml-3 bg-red mb-5" @click.prevent="booking">
+=======
+          <v-btn color="white" class="bg-red mb-3" @click.prevent="booking" style="width: 100%;">
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
             Booking
           </v-btn>
         </v-card-actions>
@@ -118,7 +136,10 @@ function ClickShare(id) {
 
 function booking() {
   router.push('/booking/' + eventInfor.value.id);
+<<<<<<< HEAD
   // console.log(eventInfor.value.id);
+=======
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 }
 
 

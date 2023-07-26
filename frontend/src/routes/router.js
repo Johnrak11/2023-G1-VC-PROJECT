@@ -10,6 +10,7 @@ import DashboardOrganizer from "../views/dashboard/orgznizerInfor/DashboardOrgan
 import DashboardEventPreview from "../views/dashboard/eventPreview/DashboardEventPreview.vue";
 import DetailPage from "../views/detail/DetailView.vue";
 import RedirectPage from "../views/detail/RedirectPage.vue";
+import ScanPage from "../views/scanAttendee/ScanPage.vue";
 
 import DashboardEvent from "../views/dashboard/eventPosted/DashboardEventPosted.vue";
 import TicketView from "../views/ticket/TicketView.vue";
@@ -18,6 +19,10 @@ import Attendee from "@/views/dashboard/attendee/attendeeView.vue";
 
 import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
+<<<<<<< HEAD
+=======
+import { sweetAlert } from "@/stores/sweetAlert.js";
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 
 function authenticateBeforeEnter() {
   return function (to, from, next) {
@@ -44,6 +49,32 @@ function roleBeforeEnter(listRole) {
     }
   };
 }
+<<<<<<< HEAD
+=======
+
+function listMapBeforeEnter() {
+  return function (to, from, next) {
+    const { alertMessage } = sweetAlert();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          next();
+        },
+        (error) => {
+          console.log(error);
+          alertMessage(
+            "warning",
+            "Please enable location services to allow this feature to work."
+          );
+        }
+      );
+    } else {
+      console.log("Your browser does not support geolocation");
+    }
+  };
+}
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 
 const routes = [
   {
@@ -60,6 +91,10 @@ const routes = [
     path: "/listMap",
     name: "listMap",
     component: ListMapView,
+<<<<<<< HEAD
+=======
+    beforeEnter: [listMapBeforeEnter()],
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
   },
   {
     path: "/register",
@@ -136,11 +171,26 @@ const routes = [
     name: "attendees",
     component: Attendee,
     props: true,
+<<<<<<< HEAD
+=======
+  },
+  {
+    path: "/tickets/scan/:eventId",
+    name: "scan",
+    component: ScanPage,
+    props: true,
+    beforeEnter: [authenticateBeforeEnter()],
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
   },
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name;
+  next();
 });
 
 export default router;

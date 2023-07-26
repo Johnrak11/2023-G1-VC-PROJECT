@@ -22,7 +22,8 @@
                             <img src="https://static.vecteezy.com/system/resources/previews/015/117/356/original/ticket-icon-in-white-colors-voucher-signs-illustration-png.png"
                                 alt="" width="200">
                         </div>
-                        <h2 class="text-center text-grey-lighten-1">You don't have a ticket, please purchase a ticket to attend !!!</h2>
+                        <h2 class="text-center text-grey-lighten-1">You don't have a ticket, please purchase a ticket to
+                            attend !!!</h2>
                     </div>
                     <div v-else>
                         <TicketComponent></TicketComponent>

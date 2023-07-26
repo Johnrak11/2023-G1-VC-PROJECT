@@ -7,9 +7,7 @@
           <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
             class="card bg-grey-lighten-2 ml-5 hover" :color="isSelected ? 'red' : 'grey-lighten-1'" @click="toggle">
             <router-link :to="`/eventRaleted/${event.id}`">
-              <v-img class="align-end text-white" height="50%" max-width="100vh" :src="event.image" cover>
-                <v-card-title>{{ event.name }}</v-card-title>
-              </v-img>
+              <v-img class="align-end text-white" height="50%" max-width="100vh" :src="event.image" cover></v-img>
             </router-link>
             <div class="d-flex justify-space-between">
               <v-card-subtitle class="pt-4 d-flex">
@@ -68,14 +66,16 @@
                 </v-col>
               </div>
             </div>
-
             <v-card-text>
               <div class="caard" style="margin-top: -15%">
                 <div class="top">
                   <router-link :to="`/eventRaleted/${event.id}`">
                     <div>
+                      <div>
+                        <v-card-title class="text-black" style="margin-left: -5%;">{{ eventInfor.name }}</v-card-title>
+                      </div>
                       <!-- <p>{{ eventInfor.description }}</p> -->
-                      <div class="d-flex mt-1">
+                      <div class="d-flex" style="margin-top: -2%;">
                         <!-- <v-icon size="17"> mdi-calendar</v-icon> -->
                         <p class="ml-1" style="font-size: 15px">
                           Date:
@@ -95,7 +95,7 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="white" class="btn mt-3 bg-red mb-5 d-flex" @click.prevent="booking(event.id)">
+              <v-btn color="white" class="bg-red mb-3" @click.prevent="booking" style="width: 100%;">
                 Booking
               </v-btn>
             </v-card-actions>
@@ -140,7 +140,7 @@ onMounted(() => {
 <style scoped>
 .card {
   width: 25%;
-  height: 50vh;
+  height: 65vh;
 
   flex-direction: column;
 }

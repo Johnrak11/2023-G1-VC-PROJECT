@@ -1,5 +1,5 @@
 <template>
-  <img class="img1 mt-10" src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
+  <img id="top-detail" class="img1 mt-10" src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
     alt="" />
 
   <v-btn icon class="bg-red back-btn">
@@ -115,6 +115,8 @@ const fetchEventDetail = async () => {
 };
 
 onMounted(() => {
+  var element = document.getElementById("top-detail");
+  element.scrollIntoView({ behavior: "smooth" });
   fetchEvent();
   fetchEventDetail();
 });

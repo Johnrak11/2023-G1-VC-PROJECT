@@ -15,7 +15,11 @@ const { getCookie } = cookieStore();
 const user = userStore();
 const userToken = getCookie("token");
 import { addressStore } from "@/stores/address.js";
+<<<<<<< HEAD
 const {getUserCurrentLatLng} = addressStore()
+=======
+const { getUserCurrentLatLng } = addressStore()
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 user.token = userToken;
 if (userToken) {
   user.getUserInfor();
@@ -24,7 +28,12 @@ if (userToken) {
 
 const shouldShowNavBar = computed(() => {
   const currentPath = router.currentRoute.value.path;
-  return !currentPath.startsWith("/dashboard");
+  return (!currentPath.startsWith("/dashboard") &&
+    !currentPath.startsWith("/login") &&
+    !currentPath.startsWith("/register") &&
+    !currentPath.startsWith("/tickets/scan/")
+
+  );
 });
 
 onMounted(() => {

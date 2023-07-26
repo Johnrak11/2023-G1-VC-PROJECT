@@ -1,15 +1,31 @@
 <template>
+<<<<<<< HEAD
     <div id="card-scroll" class="overflow-y-auto mt-15" v-scroll.self="onScroll" style="width: 50%;height: 100vh;">
         <slot></slot>
         <div class="ml-12 mt-5 mb-5 d-flex justify-space-evenly flex-wrap">
             <CardMapTemplate v-for="event of events.recommendEvent" :key="event.id" :event="event"></CardMapTemplate>
+=======
+    <div id="card-scroll" class="overflow-y-auto mt-15" v-scroll.self="onScroll" style="width: 50%;height: 100vh">
+        <slot></slot>
+        <div class="ml-12 mt-5 mb-5 d-flex justify-space-evenly flex-wrap">
+            <CardMapTemplate v-for="event of events.recommendEvent" :key="event.id" :event="event"></CardMapTemplate>
+            <div v-if="events.recommendEvent.length === 0" class="not-found d-flex flex-column align-center"
+                style="margin-top: 38%;">
+                <img :src="searchGif" style="width: 90px">
+                <h2>There are no upcoming Events in your area..</h2>
+            </div>
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
         </div>
     </div>
 </template>
 <script setup>
 import CardMapTemplate from './CardMapTemplate.vue'
 import { ref, onMounted } from 'vue'
+<<<<<<< HEAD
 
+=======
+import searchGif from '@/assets/iconSearch.gif'
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 import { sessionStore } from '@/stores/session.js'
 const { getSession } = sessionStore()
 import { eventStores } from '@/stores/eventsStore.js'
@@ -23,7 +39,11 @@ function onScroll() {
 onMounted(() => {
     let latitude = getSession('latitude')
     let longitude = getSession('longitude')
+<<<<<<< HEAD
     let km = 10
+=======
+    let km = 5
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
     events.getRecommendEvent(latitude, longitude, km)
 })
 </script>
@@ -47,6 +67,7 @@ img {
     display: none;
 }
 </style>
+<<<<<<< HEAD
 
 
 <!-- <template>
@@ -81,3 +102,5 @@ export default {
     },
 }
 </script> -->
+=======
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b

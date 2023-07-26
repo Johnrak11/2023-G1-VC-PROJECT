@@ -43,7 +43,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
     Route::prefix('/events')->group(function () {
         Route::post('/', [EventController::class, 'store']);
         Route::get('/getEvent', [EventController::class, 'getAllEvents']);
@@ -56,14 +59,25 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/update', [EventController::class, 'update']);
 
         Route::prefix('/previews')->group(function () {
-            Route::get('/', [EventController::class, 'getPreviewEvents']);
+            Route::get('/', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
     });
+<<<<<<< HEAD
     Route::get('/tickets', [TicketController::class, 'getAllTicket']);
     Route::get('/tickets/search/{name}', [TicketController::class, 'searchTicket']);
 
     Route::get('/notifications', [NotificationController::class, 'notifications']);
+=======
+
+
+    // ---- ticket with token-----
+    Route::prefix('/tickets')->group(function () {
+        Route::get('/', [TicketController::class, 'getAllTicket']);
+        Route::get('/search/{name}', [TicketController::class, 'searchTicket']);
+        Route::get('/scan/{eventId}', [TicketController::class, 'getTicketByEventId']);
+    });
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 });
 
 // ----- authentication group----
@@ -91,6 +105,9 @@ Route::prefix('/events')->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::get('/{eventId}', [EventController::class, 'booking']);
     });
+    Route::prefix('/recommend')->group(function () {
+        Route::get('/{lat}/{lng}/{km}', [EventController::class, 'getEventsWithinRadius']);
+    });
 });
 Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
@@ -103,4 +120,7 @@ Route::prefix('/eventDetail')->group(function () {
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
+<<<<<<< HEAD
 Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
+=======
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b

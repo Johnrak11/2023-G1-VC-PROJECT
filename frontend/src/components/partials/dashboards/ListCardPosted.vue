@@ -6,7 +6,11 @@
       </li>
     </ul>
     <v-card class="bg-white pa-5 mr-10 rounded ml-8" :elevation="5">
+<<<<<<< HEAD
       <h3>Event</h3>
+=======
+      <h3>Event(2)</h3>
+>>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
       <div class="d-flex justify-md-end">
         <div class="w-50">
           <v-text-field variant="solo" label="Search templates" append-inner-icon="mdi-magnify" single-line hide-details

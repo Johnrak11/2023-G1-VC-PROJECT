@@ -68,7 +68,7 @@ export const addressStore = defineStore("address", {
     isConfirmed(icon, message) {
       const Toast = Swal.mixin({
         toast: true,
-        position: "top-start",
+        position: "top",
         showConfirmButton: false,
         timer: 1800,
         timerProgressBar: true,

@@ -29,7 +29,7 @@ const getLatLng = (event) => {
 
 </script>
   
-<style>
+<style scoped>
 .map-container {
     height: 500px;
     width: 900px;
