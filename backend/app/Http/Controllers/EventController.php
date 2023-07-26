@@ -259,6 +259,33 @@ class EventController extends Controller
         // }
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateeventRequest $request, event $event)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function deleteEventById($eventId)
+    {
+        $admin = Auth::user();
+        if ($admin->role !== 'admin') {
+            return response()->json(['message' => 'No permission to delete this event'], 403);
+        }
+
+        $event = Event::where('id', $eventId)->first();
+        if (!$event) {
+            return response()->json(['message' => 'Event not found'], 404);
+        }
+
+        $event->delete();
+        return response()->json(['success' => true, 'message' => 'Event deleted successfully'], 200);
+    }
+
     public function getOrganizerId($eventId)
     {
         $event = Event::find($eventId);
@@ -284,10 +311,34 @@ class EventController extends Controller
         }
 
         $events = $eventList->get();
+        if ($events->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
+        }
+        return response()->json(['success' => true, 'data' => $events], 200);
+    }
+
+    public function searchEventsName(Request $request)
+    {
+        $organizer = Auth::user();
+        if ($organizer->role !== 'admin') {
+            return response()->json(['message' => 'No permission to search events'], 403);
+        }
+        $eventList = Event::query();
+
+        if ($request->filled('name')) {
+            $eventList->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('email') && $organizer->email === $request->input('email')) {
+            $eventList->where('organizer_id', $organizer->id);
+        }
+
+        $events = $eventList->get();
 
         if ($events->isEmpty()) {
             return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
         }
+
         return response()->json(['success' => true, 'data' => $events], 200);
     }
 

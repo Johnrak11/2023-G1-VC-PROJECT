@@ -5,6 +5,17 @@ export const sweetAlert = defineStore("alert", {
   state: () => ({}),
   gatters: {},
   actions: {
+    successDelete() {
+      Swal.fire("Deleted!", "Your event card has been deleted.", "success");
+    },
+    unSuccessDelete() {
+      Swal.fire(
+        "Error!",
+        "An error occurred while deleting the event card.",
+        "error"
+      );
+    },
+
     alertMessage(incon, message) {
       Swal.fire({
         position: "center",
