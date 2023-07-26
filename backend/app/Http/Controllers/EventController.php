@@ -249,17 +249,7 @@ class EventController extends Controller
         return new EventBookingResource($eventBooking);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateeventRequest $request, event $event)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function deleteEventById($eventId)
     {
         $admin = Auth::user();
