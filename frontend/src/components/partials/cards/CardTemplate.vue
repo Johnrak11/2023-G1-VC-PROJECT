@@ -1,6 +1,6 @@
 <template >
   <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="center-bottom"
-    class="card bg-grey-lighten-2 mt-5 ml-5">
+    class="card bg-grey-lighten-2 mt-5 ml-8">
     <v-hover v-slot="{ isHovering, props }">
       <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props" class="hover">
         <router-link :to="`/detail/${eventInfor.id}`">
@@ -125,7 +125,7 @@ function booking() {
 <style scoped>
 .card {
   background-color: red;
-  width: 23%;
+  width: 21%;
   /* margin-left: 20%; */
 }
 
