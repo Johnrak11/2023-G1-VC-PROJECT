@@ -1,19 +1,20 @@
 <template>
   <v-layout :style="{ top: navbarTop }" class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
-    <v-nav-bar-left class=" d-flex left">
-      <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover;" />
+    <v-nav-bar-left class="d-flex left">
+      <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover" />
     </v-nav-bar-left>
-    <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%;">
+    <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
           <router-link to="/" class="link">
-            <v-btn id="li-nav" :class="{ 'active': isActive('/') }" class="rounded" variant="text"> Home</v-btn>
+            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">
+              Home</v-btn>
           </router-link>
           <router-link to="/explore" class="link">
-            <v-btn id="li-nav" :class="{ 'active': isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
+            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
           <router-link to="/listMap" class="link">
-            <v-btn id="li-nav" :class="{ 'active': isActive('/listMap') }" class="rounded" variant="text">Listing
+            <v-btn id="li-nav" :class="{ active: isActive('/listMap') }" class="rounded" variant="text">Listing
               Map</v-btn>
           </router-link>
         </ul>
@@ -53,6 +54,11 @@
                 <v-list-item-title>Dashboard</v-list-item-title>
               </router-link>
             </v-list-item>
+            <v-list-item v-if="getSession('role') === 'admin'" value="dashboard">
+              <router-link to="management/event/delete">
+                <v-list-item-title>Management</v-list-item-title>
+              </router-link>
+            </v-list-item>
             <v-list-item value="logout" @click="user.logout()">
               <v-list-item-title>logout</v-list-item-title>
             </v-list-item>
@@ -65,21 +71,21 @@
 
 <script setup>
 import router from "@/routes/router.js";
-import NotificationComponent from '../../notification/NotificationComponent.vue'
+import NotificationComponent from "../../notification/NotificationComponent.vue";
 import { ref } from "vue";
 import { userStore } from "@/stores/user.js";
 import { sessionStore } from "@/stores/session.js";
-const { getSession } = sessionStore()
+const { getSession } = sessionStore();
 const user = userStore();
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
 const state = reactive({
   fav: true,
   menu: false,
   message: false,
   hints: true,
-})
-const listRole = ref(["organizer", "admin"])
+});
+const listRole = ref(["organizer", "admin"]);
 const isActive = (route) => {
   return router.currentRoute.value.path === route;
 };
@@ -87,17 +93,17 @@ const isActive = (route) => {
 // ---- navbar scroll----
 const prevScrollpos = ref(window.pageYOffset);
 
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   const currentScrollPos = window.pageYOffset;
   if (prevScrollpos.value > currentScrollPos) {
-    navbarTop.value = '0';
+    navbarTop.value = "0";
   } else {
-    navbarTop.value = '-80px';
+    navbarTop.value = "-80px";
   }
   prevScrollpos.value = currentScrollPos;
 });
 
-const navbarTop = ref('0');
+const navbarTop = ref("0");
 </script>
 <style scoped>
 .nav-bar {
@@ -147,7 +153,6 @@ a {
 
 .left v-img {
   width: 10%;
-
 }
 
 .right {

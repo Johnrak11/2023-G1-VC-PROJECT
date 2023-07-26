@@ -45,6 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
     Route::prefix('/events')->group(function () {
+        Route::delete('/{eventId}', [EventController::class, 'deleteEventById']);
         Route::post('/', [EventController::class, 'store']);
         Route::get('/getEvent', [EventController::class, 'getAllEvents']);
         Route::get('/{eventId}', [EventController::class, 'getEventId']);
@@ -59,8 +60,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/organizer', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
+        
     });
-
+    Route::prefix('/search')->group(function () {
+        Route::prefix('/admin')->group(function () {
+            Route::get('/searchEvent', [EventController::class, 'searchEventsName']);
+        });
+    });
+    
     // ---- ticket with token-----
     Route::prefix('/tickets')->group(function () {
         Route::get('/', [TicketController::class, 'getAllTicket']);
@@ -93,7 +100,6 @@ Route::prefix('/events')->group(function () {
     Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
-
     Route::prefix('/booking')->group(function () {
         Route::get('/{eventId}', [EventController::class, 'booking']);
     });
@@ -105,10 +111,10 @@ Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
+    
 });
 Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
 });
 
-// Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);

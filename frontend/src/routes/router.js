@@ -79,6 +79,8 @@ function listMapBeforeEnter() {
   };
 }
 
+import ManagermentEvent from "../views/admin/ManagermentEvent.vue";
+
 const routes = [
   {
     path: "/",
@@ -171,6 +173,12 @@ const routes = [
     name: "attendees",
     component: Attendee,
     props: true,
+  },
+  {
+    path: "/management/event/delete",
+    name: "deleteEvent",
+    component: ManagermentEvent,
+    beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
   },
   {
     path: "/tickets/scan/:eventId",
