@@ -1,6 +1,9 @@
 <template>
-  <div class="bigContainer mt-16">
-    <div class="cardContainer bg-red mx-auto"></div>
+  <router-link to="/">
+    <v-btn class="back-home" prepend-icon="mdi-arrow-left" variant="tonal">Back</v-btn>
+  </router-link>
+  <div class="bigContainer mt-16 ">
+    <div class="cardContainer bg-red mx-auto mb-16"></div>
     <div class="registerContainer d-flex animate__animated pt-2 animate__fadeInRight">
       <div class="SwitchRegisterComponentFrom">
         <switchBannerForm>
@@ -31,7 +34,7 @@ import RegisterComponentForm from "../../components/forms/RegisterComponentForm.
 import switchBannerForm from "../../components/switchPath/switchLoginComponent.vue";
 </script>
 
-<style>
+<style scoped>
 .cardContainer {
   margin-top: 10%;
   width: 90%;
@@ -68,5 +71,13 @@ hr {
   position: relative;
   left: 6%;
   margin-top: 17%;
+}
+
+.back-home {
+  width: 10%;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  z-index: 100;
 }
 </style>

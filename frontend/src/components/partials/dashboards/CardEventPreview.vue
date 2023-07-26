@@ -60,7 +60,7 @@
                         <v-list-item v-else value="list">
                             <v-list-item-title>Delete</v-list-item-title>
                         </v-list-item>
-                        <v-list-item value="list">
+                        <v-list-item value="list" v-if="currentpath === '/dashboard/event'">
                             <QrcodeDialog :eventInfor="props.eventPreview">QR CODE</QrcodeDialog>
                         </v-list-item>
                     </v-list>
