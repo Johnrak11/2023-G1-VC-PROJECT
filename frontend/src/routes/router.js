@@ -166,8 +166,8 @@ const routes = [
     props: true,
   },
   {
-    path: "/managerments",
-    name: "managerments",
+    path: "/managerments/event/delete",
+    name: "deleteEvent",
     component: ManagermentEvent,
   },
   {

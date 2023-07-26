@@ -45,7 +45,7 @@
 
 
 <script setup>
-import VerticalButton from "../../components/buttons/VerticalButton.vue";
+import VerticalButton from "../../buttons/VerticalButton.vue";
 </script>
 
 

@@ -1,49 +1,21 @@
 <template>
-  <v-layout
-    :style="{ top: navbarTop }"
-    class="nav-bar d-flex justify-space-between w-100 bg-color"
-    :elevation="7"
-  >
+  <v-layout :style="{ top: navbarTop }" class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
     <v-nav-bar-left class="d-flex left">
-      <v-img
-        src="../../../assets/logo.png"
-        alt=""
-        style="margin-left: -20%; height: 50px; object-fit: cover"
-      />
+      <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover" />
     </v-nav-bar-left>
-    <v-nav-bar-right
-      class="d-flex right justify-space-between"
-      style="margin-right: 4%"
-    >
+    <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
           <router-link to="/" class="link">
-            <v-btn
-              id="li-nav"
-              :class="{ active: isActive('/') }"
-              class="rounded"
-              variant="text"
-            >
-              Home</v-btn
-            >
+            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">
+              Home</v-btn>
           </router-link>
           <router-link to="/explore" class="link">
-            <v-btn
-              id="li-nav"
-              :class="{ active: isActive('/explore') }"
-              class="rounded"
-              variant="text"
-              >Explore</v-btn
-            >
+            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
           <router-link to="/listMap" class="link">
-            <v-btn
-              id="li-nav"
-              :class="{ active: isActive('/listMap') }"
-              class="rounded"
-              variant="text"
-              >Listing Map</v-btn
-            >
+            <v-btn id="li-nav" :class="{ active: isActive('/listMap') }" class="rounded" variant="text">Listing
+              Map</v-btn>
           </router-link>
         </ul>
       </v-left-content>
@@ -53,33 +25,18 @@
           <option value="">English</option>
           <option value="">ខ្មែរ</option>
         </select>
-        <v-menu
-          v-model="state.menu"
-          :close-on-content-click="false"
-          location="end"
-        >
+        <v-menu v-model="state.menu" :close-on-content-click="false" location="end">
           <template v-slot:activator="{ props }">
-            <v-badge
-              content="0"
-              color="error"
-              class="mr-5 notification"
-              v-bind="props"
-            >
+            <v-badge content="0" color="error" class="mr-5 notification" v-bind="props">
               <v-icon>mdi-bell-outline</v-icon>
             </v-badge>
           </template>
           <NotificationComponent />
         </v-menu>
-        <router-link v-if="!user.token" to="/login"
-          ><v-btn color="red" width="5">Login</v-btn></router-link
-        >
+        <router-link v-if="!user.token" to="/login"><v-btn color="red" width="5">Login</v-btn></router-link>
         <v-menu v-else>
           <template v-slot:activator="{ props }">
-            <v-avatar
-              v-if="user.user.profile_picture"
-              v-bind="props"
-              value="Avatar"
-            >
+            <v-avatar v-if="user.user.profile_picture" v-bind="props" value="Avatar">
               <v-img alt="Avatar" :src="user.user.profile_picture"></v-img>
             </v-avatar>
             <v-avatar color="grey" v-else v-bind="props">
@@ -87,11 +44,7 @@
             </v-avatar>
           </template>
           <v-list>
-            <v-list-item
-              v-for="(item, index) in items"
-              :key="index"
-              :value="index"
-            >
+            <v-list-item v-for="(item, index) in items" :key="index" :value="index">
               <router-link :to="item.link">
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </router-link>
@@ -101,16 +54,13 @@
                 <v-list-item-title>Tickets</v-list-item-title>
               </router-link>
             </v-list-item>
-            <v-list-item
-              v-if="listRole.includes(getSession('role'))"
-              value="dashboard"
-            >
+            <v-list-item v-if="listRole.includes(getSession('role'))" value="dashboard">
               <router-link to="/dashboard">
                 <v-list-item-title>Dashboard</v-list-item-title>
               </router-link>
             </v-list-item>
             <v-list-item>
-              <router-link to="/managerments">
+              <router-link to="managerments/event/delete">
                 <v-list-item-title>managerments</v-list-item-title>
               </router-link>
             </v-list-item>
