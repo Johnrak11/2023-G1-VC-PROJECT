@@ -95,7 +95,7 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="white" class="bg-red mb-3" @click.prevent="booking" style="width: 100%;">
+              <v-btn color="white" class="bg-red mb-3" @click.prevent="booking(event.id)" style="width: 100%;">
                 Booking
               </v-btn>
             </v-card-actions>

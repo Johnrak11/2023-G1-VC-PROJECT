@@ -65,10 +65,10 @@
             </div>
           </div>
           <div class="d-flex justify-end button mt-6">
-            <button class="free bg-red pa-1 rounded" v-if="!eventDetail || !eventDetail.price">
+            <button class="free bg-red pa-1 rounded" v-if="!eventDetail || eventDetail.price === 'free'">
               Register
             </button>
-            <button class="free bg-red pa-1 rounded" @click.prevent="booking(event.id)" v-else>
+            <button class="free bg-red pa-1 rounded" v-else @click.prevent="booking(event.id)" >
               Booking
             </button>
           </div>
