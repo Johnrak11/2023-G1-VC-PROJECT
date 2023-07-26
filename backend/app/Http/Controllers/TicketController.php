@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
 
 class TicketController extends Controller
 {
-  
+
     public function getAllTicket()
     {
         $user = auth()->user();
@@ -26,12 +26,13 @@ class TicketController extends Controller
      */
     public function store(StoreticketRequest $request)
     {
+        $user = auth()->user();
         $ticket = ticket::create([
             'ticket_code' => $request->input('ticket_code'),
             'booking_date' => $request->input('booking_date'),
             'is_check_in' => $request->input('is_check_in'),
-            'user_id' => $request->input('user_id'),
             'event_id' => $request->input('event_id'),
+            'user_id' => $user->id,
         ]);
         // $ticket = Ticket::createTicket($request);
         return response()->json(['success' => true, 'data' => $ticket], 200);
@@ -78,6 +79,18 @@ class TicketController extends Controller
             $ticket['is_check_in'] = 1;
             $ticket->save();
             return response()->json(['success' => true, 'message' => "Get attendent successfuly", 'data' => new TicketResource($ticket)], 200);
+        }
+        return response()->json(['success' => true, 'message' => "You already register", 'data' => new TicketResource($ticket)], 200);
+    }
+
+
+    public function isTicketBooked($eventId)
+    {
+        $user = auth()->user();
+        $ticket = Ticket::where('user_id', $user->id)
+            ->where('event_id', $eventId)->first();
+        if (!isset($ticket)) {
+            return response()->json(['success' => false, 'message' => "You didn't register yet"], 400);
         }
         return response()->json(['success' => true, 'message' => "You already register", 'data' => new TicketResource($ticket)], 200);
     }

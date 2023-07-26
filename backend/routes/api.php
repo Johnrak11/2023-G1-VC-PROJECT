@@ -57,7 +57,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [TicketController::class, 'getAllTicket']);
         Route::get('/search/{name}', [TicketController::class, 'searchTicket']);
         Route::get('/scan/{eventId}', [TicketController::class, 'getTicketByEventId']);
+        Route::get('/isBooked/{eventId}', [TicketController::class, 'isTicketBooked']);
         Route::post('/', [TicketController::class, 'store']);
+    });
+
+    Route::prefix('/booking')->group(function () {
+        Route::post('/creditCard', [CreditCardController::class, 'store']);
     });
 });
 
@@ -68,10 +73,6 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', ([AuthController::class, 'login']));
 });
 // Route::get('/tickets', 'TicketController@getAllTicket')->middleware('auth:api');
-
-Route::prefix('/booking')->group(function () {
-    Route::post('/creditCard', [CreditCardController::class, 'store']);
-});
 
 // Route::get('/tickets', [TicketController::class, 'getAllTicket']);
 

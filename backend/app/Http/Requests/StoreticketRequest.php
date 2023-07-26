@@ -30,7 +30,6 @@ class StoreticketRequest extends FormRequest
             'ticket_code' => ['required', 'string', 'max:8','min:8', 'unique:tickets'],
             'booking_date' => ['required', 'string', 'max:255'],
             'is_check_in' => ['required', 'max:12'],
-            'user_id' => ['required'],
             'event_id' => ['required'],
         ];
     }

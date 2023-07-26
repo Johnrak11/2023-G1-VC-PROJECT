@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle";
-
+import router from "@/routes/router.js";
 export const ticketStore = defineStore("categories", {
   state: () => ({
     tickets: [],
-    httpRequest: "",
-    ticketCode: null,
+    isRegister: null,
   }),
   actions: {
     async getDataTickets() {
@@ -35,26 +34,37 @@ export const ticketStore = defineStore("categories", {
         .catch((error) => console.log(error));
     },
 
-    async createTicket(userId, eventId) {
-      // const {userId, eventId} = payload;
+    async isBooked(eventId) {
+      await baseAPI
+        .get(`/tickets/isBooked/${eventId}`)
+        .then((response) => {
+          console.log(response.data.data);
+          this.isRegister = false;
+        })
+        .catch((error) => {
+          this.isRegister = true;
+          console.log(error);
+        });
+    },
+
+    async createTicket(eventId) {
       const bookingDate = new Date().toISOString().substring(0, 10);
       const ticketData = {
         ticket_code: this.generateTicketCode(),
         booking_date: bookingDate,
         is_check_in: 0,
-        user_id: userId,
         event_id: eventId,
       };
       try {
-        const response = await baseAPI.post("/create/tickets", ticketData);
+        const response = await baseAPI.post("/tickets", ticketData);
         if (response.status === 200) {
-          this.ticketCode = ticketData.ticket_code;
-          return true;
+          console.log(response.data);
+          this.tickets = response.data.data;
+          router.push("/tickets");
         }
       } catch (error) {
         console.log(error);
       }
-      return false;
     },
   },
 });
