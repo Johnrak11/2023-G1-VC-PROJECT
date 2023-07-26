@@ -21,6 +21,8 @@ import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
 import { sweetAlert } from "@/stores/sweetAlert.js";
 
+import PageNotFound from "../views/404/PageNotFound.vue"
+
 function authenticateBeforeEnter() {
   return function (to, from, next) {
     const { getSession } = sessionStore();
@@ -169,6 +171,13 @@ const routes = [
     component: ScanPage,
     props: true,
     beforeEnter: [authenticateBeforeEnter()],
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: "404 page not found",
+    component: PageNotFound,
+    props: true,
+
   },
 ];
 const router = createRouter({

@@ -1,7 +1,7 @@
 <template>
     <div class="mt-6" id="nav-scroll" style="margin-left: 5%;">
         <slot></slot>
-        <div class="ml-10 mr-8 d-flex flex-wrap">
+        <div class="ml-4 mr-8 d-flex flex-wrap">
             <cardTemplate v-for="event of events.events" :key="event.id" :event="event"></cardTemplate>
         </div>
     </div>

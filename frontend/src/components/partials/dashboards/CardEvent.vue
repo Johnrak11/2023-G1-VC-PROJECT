@@ -8,7 +8,6 @@
                     <h2 class=" ml-6">Tutorial on Canvas Painting for Beginners</h2>
                     <div class="d-flex justify-space-between ml-3">
                         <div class="d-flex">
-                            <!-- <img src="https://cdn-icons-png.flaticon.com/512/3082/3082383.png" alt="" width="30"> -->
                             <v-icon class="mt-2">mdi-map-marker</v-icon>
                             <div class="text ml-2">
                                 <span class="text-grey-lighten-1">Status</span><br>
@@ -16,7 +15,6 @@
                             </div>
                         </div>
                         <div class="d-flex">
-                            <!-- <img src="https://cdn-icons-png.flaticon.com/512/3564/3564808.png" alt="" width="30"> -->
                             <v-icon class="mt-2">mdi-calendar</v-icon>
                             <div class="text ml-3">
                                 <span class="text-grey-lighten-1">Start on</span>
@@ -24,7 +22,6 @@
                             </div>
                         </div>
                         <div class="d-flex">
-                            <!-- <img src="https://cdn-icons-png.flaticon.com/512/4406/4406665.png" alt="" width="30"> -->
                             <v-icon class="mt-2">mdi-calendar</v-icon>
                             <div class="text ml-3">
                                 <span class="text-grey-lighten-1">Ticket</span>
@@ -32,7 +29,6 @@
                             </div>
                         </div>
                         <div class="d-flex">
-                            <!-- <img src="https://icons.veryicon.com/png/o/object/material-design-icons-1/tag-24.png" alt="" -->
                             <v-icon class="mt-2">mdi-map</v-icon>
                             <div class="text ml-3">
                                 <span class="text-grey-lighten-1">Tickets sold</span>
