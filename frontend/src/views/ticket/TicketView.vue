@@ -36,7 +36,7 @@
 </template>
 <script setup>
 import TicketComponent from '../../components/partials/tickets/TicketComponent.vue';
-import ticketStore from "@/stores/ticketStore";
+import {ticketStore} from "@/stores/ticketStore";
 const tickets = ticketStore();
 import { ref } from 'vue';
 const loading = ref(false);
