@@ -105,5 +105,15 @@ export const eventStores = defineStore("event", {
         })
         .catch((error) => console.log(error));
     },
+    async searchEventsByAdmin(name, email) {
+      await baseAPI
+      .get(
+        `/search/admin/searchEvent?name=${name}&email=${email}`
+      )
+      .then((response) => {
+        this.events = response.data.data;
+      })
+      .catch((error) => console.log(error));
+    },
   },
 });
