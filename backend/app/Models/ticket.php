@@ -14,7 +14,7 @@ class Ticket extends Model
         'booking_date',
         'is_check_in',
         'user_id',
-        'event_id',
+        'event_id'
     ];
     public function event(): BelongsTo
     {
@@ -23,5 +23,15 @@ class Ticket extends Model
     public function customers(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public static function createTicket($request){
+        $tikets = Ticket::create([
+            'ticket_code' => $request->ticket_code,
+            'booking_date' => $request->booking_date,
+            'is_check_in' => $request->is_check_in,
+            'user_id' => $request->user_id,
+            'event_id' => $request->event_id
+        ]);
+        return $tikets;
     }
 }

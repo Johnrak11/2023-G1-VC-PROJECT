@@ -17,10 +17,9 @@
               maxlength="4"></v-text-field>
             <v-text-field v-model="nameCard" label="Name on Card" :rules="[requiredRule]" maxlength="50"></v-text-field>
             <v-card-actions>
-              <button-component-form @click="saveData">Pay</button-component-form>
+              <button-component-form @click="payment">Pay</button-component-form>
             </v-card-actions>
           </form>
-          <h1 @click="createTicket">Hello</h1>
         </v-card>
       </v-dialog>
     </v-row>
@@ -36,6 +35,7 @@ import ButtonComponentForm from '../buttons/ButtonComponentForm.vue';
 import baseAPI from "@/stores/axiosHandle.js";
 import router from "@/routes/router.js";
 import Swal from 'sweetalert2';
+import ticketStore from "@/stores/ticketStore";
 
 const cardNumber = ref();
 const expirationCard = ref();
@@ -44,8 +44,8 @@ const nameCard = ref();
 const dialog = ref(false);
 const creditCardTypeName = ref('');
 // ===create Ticket===
-const bookingDate = new Date();
-const formattedDate = bookingDate.toISOString().substring(0, 10);
+// const bookingDate = new Date();
+// const formattedDate = bookingDate.toISOString().substring(0, 10);
 const props = defineProps({
   eventId: {
     type: Number,
@@ -96,32 +96,31 @@ const requiredRule = v => !!v || 'Field is required'
 // ===Save data to validate in db===
 const userId = ref(1);
 
-function generateTicketCode() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let code = '';
-  for (let i = 0; i < 8; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return code;
-}
-async function createTicket() {
-  const ticketCode = generateTicketCode();
-  const ticket = {
-    'ticket_code': ticketCode,
-    'booking_date': formattedDate,
-    'is_check_in': true,
-    'user_id': userId.value,
-    'event_id': parseInt(props.eventId)
-  };
-  console.log(ticket);
-  try {
-    const response = await baseAPI.post('/create/tickets', ticket);
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.log(error.response.data);
-    throw error; // Rethrow the error to be handled by the caller
-  }
+// function generateTicketCode() {
+//   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+//   let code = '';
+//   for (let i = 0; i < 8; i++) {
+//     code += chars.charAt(Math.floor(Math.random() * chars.length));
+//   }
+//   return code;
+// }
+// async function createTicket() {
+//   let ticket = {
+//     'ticket_code': generateTicketCode(),
+//     'booking_date': formattedDate,
+//     'is_check_in': '0',
+//     'user_id': userId.value,
+//     'event_id': parseInt(props.eventId)
+//   }
+//   console.log(ticket)
+//   await baseAPI.post('/create/tickets', ticket).then((response) => {
+//     console.log(response.data);
+//   }).catch((error) => {
+//     console.log(error)
+//   });
+// }
+async function payment(){
+  await saveData();
 }
 async function saveData() {
   let creditCard = {
@@ -132,31 +131,36 @@ async function saveData() {
     'expiration': expirationCard.value,
     'user_id': userId.value
   }
-  try {
-    const response = await baseAPI.post('/booking/creditCard', creditCard);
+  // let payload ={
+  //   userId: userId.value,
+  //   eventId: props.eventId
+  // }
+  const createOneTicket = ticketStore();
+  const ticket = await createOneTicket.createTicket(userId.value, props.eventId);
+  await baseAPI.post('/booking/creditCard', creditCard).then((response) => {
     if (response.status === 200) {
-      await createTicket();
+      console.log(ticket)
+      // ===References: https://sweetalert2.github.io/===
       Swal.fire({
         position: 'top-center',
         icon: 'success',
         title: 'Your ticket has been paid!',
         showConfirmButton: false,
         timer: 1500
-      });
+      })
     } else {
       Swal.fire({
         position: 'top-center',
         icon: 'error',
-        title: 'Something went wrong!',
+        title: 'Something was wrong!',
         showConfirmButton: false,
         timer: 1500
-      });
+      })
     }
     router.push('/');
-  } catch (error) {
-    console.log(error.response.data);
-    throw error; // Rethrow the error to be handled by the caller
-  }
+  }).catch((error) => {
+    console.log(error.response.data); // log the error message returned by the server
+  });
 }
 </script>
 <style scoped>
