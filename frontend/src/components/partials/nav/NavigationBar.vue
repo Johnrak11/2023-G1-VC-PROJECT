@@ -109,6 +109,11 @@
                 <v-list-item-title>Dashboard</v-list-item-title>
               </router-link>
             </v-list-item>
+            <v-list-item>
+              <router-link to="/managerments">
+                <v-list-item-title>managerments</v-list-item-title>
+              </router-link>
+            </v-list-item>
             <v-list-item value="logout" @click="user.logout()">
               <v-list-item-title>logout</v-list-item-title>
             </v-list-item>

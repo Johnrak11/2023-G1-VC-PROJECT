@@ -43,14 +43,86 @@
           </div>
         </div>
       </div>
-      <vertical-button/>
+      <div>
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-icon class="mt-2" v-bind="props">mdi-dots-vertical</v-icon>
+          </template>
+          <v-list>
+            <v-list-item
+              value="list"
+              @click="alert.publicAlert(props.eventPreview.id)"
+            >
+              <v-list-item-title>Post</v-list-item-title>
+            </v-list-item>
+            <v-list-item value="list">
+              <v-list-item-title>Edit</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              value="list"
+              @click="
+                props.eventPreview &&
+                  deleteEventCard(props.eventPreview.eventId)
+              "
+            >
+              <v-list-item-title>Delete</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
     </div>
   </v-card>
 </template>
 
 <script setup>
-  import VerticalButton from '../../components/buttons/VerticalButton.vue'
+import { ref, defineProps } from "vue";
+import { sweetAlert } from "@/stores/sweetAlert.js";
+import router from "@/routes/router.js";
+import { onMounted } from "vue";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+const props = defineProps({
+  eventPreview: Object,
+});
+
+const currentpath = ref("");
+onMounted(() => {
+  const currentPageRoute = router.currentRoute.value.path;
+  currentpath.value = currentPageRoute;
+});
+
+function deleteEventCard(eventId) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      axios
+        .delete(`/events/${eventId}`)
+        .then(() => {
+          Swal.fire("Deleted!", "Your event card has been deleted.", "success");
+        })
+        .catch((error) => {
+          console.error(error);
+          Swal.fire(
+            "Error!",
+            "An error occurred while deleting the event card.",
+            "error"
+          );
+        });
+    }
+  });
+}
+
+const alert = sweetAlert();
 </script>
+
 
 <style scoped>
 .delete-icon,
