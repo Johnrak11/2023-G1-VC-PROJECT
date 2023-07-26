@@ -42,9 +42,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
+
     Route::prefix('/events')->group(function () {
         Route::delete('/{eventId}', [EventController::class, 'deleteEventById']);
         Route::post('/', [EventController::class, 'store']);
+
         Route::prefix('/previews')->group(function () {
             Route::get('/', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
@@ -57,8 +59,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
     });
     
-
-
     // ---- ticket with token-----
     Route::prefix('/tickets')->group(function () {
         Route::get('/', [TicketController::class, 'getAllTicket']);
@@ -73,7 +73,6 @@ Route::prefix('auth')->group(function () {
     Route::post('/registers', ([AuthController::class, 'register']));
     Route::post('/login', ([AuthController::class, 'login']));
 });
-// Route::get('/tickets', 'TicketController@getAllTicket')->middleware('auth:api');
 
 Route::prefix('/booking')->group(function () {
     Route::post('/creditCard', [CreditCardController::class, 'store']);
@@ -103,5 +102,4 @@ Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
 });
 
-// Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);

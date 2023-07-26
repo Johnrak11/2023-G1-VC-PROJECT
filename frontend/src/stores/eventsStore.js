@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle.js";
+import { sweetAlert } from "./sweetAlert.js";
 export const eventStores = defineStore("event", {
   state: () => ({
     isLoader: true,
@@ -66,7 +67,7 @@ export const eventStores = defineStore("event", {
           let responseData = response.data;
           this.recommendEvent = responseData;
           if (responseData.length > 8) {
-            console.log(responseData.length)
+            console.log(responseData.length);
             this.recommendEventLimit = responseData.slice(0, 8);
           } else {
             this.recommendEventLimit = responseData;
@@ -104,15 +105,29 @@ export const eventStores = defineStore("event", {
         })
         .catch((error) => console.log(error));
     },
+    
     async searchEventsByAdmin(name, email) {
       await baseAPI
-      .get(
-        `/search/admin/searchEvent?name=${name}&email=${email}`
-      )
-      .then((response) => {
-        this.events = response.data.data;
-      })
-      .catch((error) => console.log(error));
+        .get(`/search/admin/searchEvent?name=${name}&email=${email}`)
+        .then((response) => {
+          this.events = response.data.data;
+        })
+        .catch((error) => console.log(error));
+    },
+
+    async deleteEvent(eventId) {
+      const { unSuccessDelete, successDelete } = sweetAlert();
+      await baseAPI
+        .delete(`/events/${eventId}`)
+        .then((response) => {
+          this.getDataAxios()
+          console.log(response.data);
+          successDelete();
+        })
+        .catch((error) => {
+          console.log(error);
+          unSuccessDelete();
+        });
     },
   },
 });

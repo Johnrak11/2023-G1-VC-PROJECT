@@ -21,7 +21,7 @@ import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
 import { sweetAlert } from "@/stores/sweetAlert.js";
 
-import PageNotFound from "../views/404/PageNotFound.vue"
+import PageNotFound from "../views/404/PageNotFound.vue";
 
 function authenticateBeforeEnter() {
   return function (to, from, next) {
@@ -168,9 +168,10 @@ const routes = [
     props: true,
   },
   {
-    path: "/managerments/event/delete",
+    path: "/management/event/delete",
     name: "deleteEvent",
     component: ManagermentEvent,
+    beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
   },
   {
     path: "/tickets/scan/:eventId",
@@ -180,11 +181,10 @@ const routes = [
     beforeEnter: [authenticateBeforeEnter()],
   },
   {
-    path: '/:catchAll(.*)',
+    path: "/:catchAll(.*)",
     name: "404 page not found",
     component: PageNotFound,
     props: true,
-
   },
 ];
 const router = createRouter({

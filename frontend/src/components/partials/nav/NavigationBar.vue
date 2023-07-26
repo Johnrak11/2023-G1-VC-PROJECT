@@ -59,9 +59,9 @@
                 <v-list-item-title>Dashboard</v-list-item-title>
               </router-link>
             </v-list-item>
-            <v-list-item>
-              <router-link to="managerments/event/delete">
-                <v-list-item-title>managerments</v-list-item-title>
+            <v-list-item v-if="getSession('role') === 'admin'" value="dashboard">
+              <router-link to="management/event/delete">
+                <v-list-item-title>Management</v-list-item-title>
               </router-link>
             </v-list-item>
             <v-list-item value="logout" @click="user.logout()">

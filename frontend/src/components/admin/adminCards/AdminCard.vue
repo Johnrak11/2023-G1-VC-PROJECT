@@ -1,67 +1,51 @@
 <template>
-  <v-card class="bg-white pa-5 mr-10 rounded mt-5" :elevation="5">
+  <v-card class=" bg-white pa-3 mt-4 mr-10 overflow-y-auto" :elevation="2"
+    style="border-left: 3px solid red; border-radius: 10px;">
     <div class="d-flex justify-space-between">
       <div class="d-flex">
-        <img class="rounded" src="https://liftedasia.com/assets/content_images/vannda-660x440.jpg" alt="" width="160"
-          height="90" />
+        <img class="rounded" :src="props.eventInfor.image" alt="" width="60" height="60">
         <div>
-          <h3 class="ml-6">Tutorial on Canvas Painting for Beginners</h3>
-          <div class="d-flex justify-space-between ml-4 mt-4">
-            <div class="d-flex">
-              <v-icon>mdi-map-marker</v-icon>
-              <div class="text ml-2">
-                <span class="text-grey-lighten-1">Status</span><br />
-                <p class="mt-0">Publish</p>
-              </div>
-            </div>
-            <div class="d-flex ml-5">
-              <v-icon>mdi-calendar</v-icon>
-              <div class="text ml-3">
-                <span class="text-grey-lighten-1">Start on</span>
-                <p class="mt-0">30 June,2023 7:30AM</p>
-              </div>
-            </div>
-            <div class="d-flex">
-              <v-icon>mdi-calendar</v-icon>
-              <div class="text ml-3">
-                <span class="text-grey-lighten-1">Ticket</span>
-                <p class="mt-0 ml-2">500</p>
-              </div>
-            </div>
-            <div class="d-flex ml-5">
-              <v-icon>mdi-map</v-icon>
-              <div class="text ml-3">
-                <span class="text-grey-lighten-1">Tickets sold</span>
-                <p class="mt-0 ml-5">430</p>
-              </div>
-            </div>
-          </div>
+          <strong class="ml-6">Title</strong>
+          <p class=" ml-6 mt-2">{{ props.eventInfor.name }}</p>
         </div>
       </div>
-      <vertical-button />
+      <div>
+        <strong>Date</strong>
+        <p class="mt-2">{{ props.eventInfor.date }}</p>
+      </div>
+      <div>
+        <strong>Time</strong>
+        <p class="mt-2">{{ props.eventInfor.time }}</p>
+      </div>
+      <div>
+        <strong>Location</strong>
+        <p class="mt-2">{{ props.eventInfor.location }}</p>
+      </div>
+      <div>
+        <strong>Venue</strong>
+        <p class="mt-2">{{ props.eventInfor.venue }}</p>
+      </div>
+      <div class="mt-3">
+        <VerticalButton :event="props.eventInfor"></VerticalButton>
+      </div>
     </div>
   </v-card>
 </template>
 
-
 <script setup>
 import VerticalButton from "../../buttons/VerticalButton.vue";
+import { defineProps } from 'vue';
+// import { sweetAlert } from '@/stores/sweetAlert.js';
+// const alert = sweetAlert()
+
+const props = defineProps({
+  eventInfor: Object
+})
+// import { onMounted } from 'vue'
+
 </script>
-
-
 <style scoped>
-.delete-icon,
-.edit-icon {
-  cursor: pointer;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-}
-
-.delete-icon:hover {
-  transform: scale(1.2);
-}
-
-.edit-icon:hover {
-  transform: scale(1.2);
+.text {
+  font-size: 12px;
 }
 </style>

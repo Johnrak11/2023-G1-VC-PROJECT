@@ -17,7 +17,7 @@
             </div>
         </v-card>
         <div class="ml-8 mb-5">
-            <AdminCard v-for="event of events.events" :key="event.id" />
+            <AdminCard v-for="event of events.events" :key="event.id" :eventInfor="event" />
         </div>
     </v-card>
 </template>
@@ -27,12 +27,8 @@ import AdminCard from './AdminCard.vue'
 import { onMounted, ref } from "vue";
 import { eventStores } from '@/stores/eventsStore.js'
 const events = eventStores()
-// import ticketStore from "@/stores/ticketStore";
 const loading = ref(false);
-// const tickets = ticketStore();
 const name = ref("");
-
-
 onMounted(() => {
     events.getDataAxios()
 })

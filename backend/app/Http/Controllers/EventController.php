@@ -254,14 +254,14 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function deleteEventById(int $eventId)
+    public function deleteEventById($eventId)
     {
-        $organizer = Auth::user();
-        if ($organizer->role !== 'admin') {
+        $admin = Auth::user();
+        if ($admin->role !== 'admin') {
             return response()->json(['message' => 'No permission to delete this event'], 403);
         }
 
-        $event = Event::where('id', $eventId)->where('organizer_id', $organizer->id)->first();
+        $event = Event::where('id', $eventId)->first();
         if (!$event) {
             return response()->json(['message' => 'Event not found'], 404);
         }
@@ -316,8 +316,6 @@ class EventController extends Controller
         if ($request->filled('email') && $organizer->email === $request->input('email')) {
             $eventList->where('organizer_id', $organizer->id);
         }
-
-
 
         $events = $eventList->get();
 

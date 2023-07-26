@@ -12,7 +12,7 @@
       <router-link to="/dashboard" class="nav">
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
       </router-link>
-      <router-link to="/managerments/event/delete" class="nav">
+      <router-link to="management/event/delete" class="nav">
         <v-list-item prepend-icon="mdi-delete" title="Event" value="event"></v-list-item>
       </router-link>
       <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
