@@ -87,7 +87,7 @@
           </div>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="white" class="ml-3 bg-red mb-5" @click.prevent="booking">
+          <v-btn color="white" class="bg-red mb-3" @click.prevent="booking" style="width: 100%;">
             Booking
           </v-btn>
         </v-card-actions>
@@ -115,8 +115,8 @@ function ClickShare(id) {
   console.log(id);
 }
 
-function booking(){
-  router.push('/booking/'+eventInfor.value.id);
+function booking() {
+  router.push('/booking/' + eventInfor.value.id);
 }
 
 

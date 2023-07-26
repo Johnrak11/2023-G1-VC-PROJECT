@@ -2,7 +2,7 @@
 <template>
     <v-dialog transition="dialog-top-transition" class="dialog-card" width="auto">
         <template v-slot:activator="{ props }">
-            <v-btn color="primary" v-bind="props">
+            <v-btn v-bind="props" style="margin-left: -12px;">
                 <slot></slot>
             </v-btn>
         </template>
@@ -13,7 +13,7 @@
                 <v-card-text>
                     <div class="text-p text-center">Scan to get attendent</div>
                     <figure class="qrcode">
-                        <vue-qrcode value="https://github.com/fengyuanchen" tag="svg" :options="{
+                        <vue-qrcode :value="`${events.localHttp}/tickets/scan/${eventInfor.id}`" tag="svg" :options="{
                             errorCorrectionLevel: 'Q',
                             width: 300,
                         }"></vue-qrcode>
@@ -42,6 +42,8 @@ import domtoimage from 'dom-to-image';
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const { truncateDescription } = eventCreateStores()
 import { defineProps } from 'vue';
+import { eventStores } from '@/stores/eventsStore.js';
+const events = eventStores()
 import logo from '@/assets/logo-only.png'
 const props = defineProps({
     eventInfor: Object
@@ -81,8 +83,6 @@ function downloadQRCode() {
 
 .dialog-card {
     backdrop-filter: blur(5px);
-    /* Apply the blur effect to the dialog card background */
     background-color: rgba(136, 136, 136, 0.5);
-    /* Adjust the color and opacity of the blurred background */
 }
 </style>

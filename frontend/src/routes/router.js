@@ -10,6 +10,7 @@ import DashboardOrganizer from "../views/dashboard/orgznizerInfor/DashboardOrgan
 import DashboardEventPreview from "../views/dashboard/eventPreview/DashboardEventPreview.vue";
 import DetailPage from "../views/detail/DetailView.vue";
 import RedirectPage from "../views/detail/RedirectPage.vue";
+import ScanPage from "../views/scanAttendee/ScanPage.vue";
 
 import DashboardEvent from "../views/dashboard/eventPosted/DashboardEventPosted.vue";
 import TicketView from "../views/ticket/TicketView.vue";
@@ -162,10 +163,22 @@ const routes = [
     component: Attendee,
     props: true,
   },
+  {
+    path: "/tickets/scan/:eventId",
+    name: "scan",
+    component: ScanPage,
+    props: true,
+    beforeEnter: [authenticateBeforeEnter()],
+  },
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name;
+  next();
 });
 
 export default router;

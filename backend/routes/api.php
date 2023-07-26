@@ -50,8 +50,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
     });
-    Route::get('/tickets',[TicketController::class, 'getAllTicket']);
-    Route::get('/tickets/search/{name}',[TicketController::class, 'searchTicket']);
+
+
+    // ---- ticket with token-----
+    Route::prefix('/tickets')->group(function () {
+        Route::get('/', [TicketController::class, 'getAllTicket']);
+        Route::get('/search/{name}', [TicketController::class, 'searchTicket']);
+        Route::get('/scan/{eventId}', [TicketController::class, 'getTicketByEventId']);
+    });
 });
 
 // ----- authentication group----
@@ -94,4 +100,3 @@ Route::prefix('/eventDetail')->group(function () {
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
-
