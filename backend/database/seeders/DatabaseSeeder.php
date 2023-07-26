@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Categories;
 use App\Models\Event;
+use App\Models\EventDetail;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(OrganizerSeeder::class);
         $this->call(EventSeeder::class);
+        $this->call(AgendaSeeder::class);
         $this->call(TicketSeeder::class);
-      
+        $this->call(EventDetailSeeder::class);
+        $this->call(DiscountSeeder::class);
     }
 }
