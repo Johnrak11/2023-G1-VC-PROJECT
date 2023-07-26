@@ -295,7 +295,6 @@ class EventController extends Controller
         }
 
         $events = $eventList->get();
-
         if ($events->isEmpty()) {
             return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
         }
