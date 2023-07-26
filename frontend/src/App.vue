@@ -28,7 +28,9 @@ const shouldShowNavBar = computed(() => {
     !currentPath.startsWith("/login") &&
     !currentPath.startsWith("/register") &&
     !currentPath.startsWith("/tickets/scan/") &&
-    !currentPath.startsWith("/managerments") 
+    !currentPath.startsWith("/managerments") &&
+    !currentPath.startsWith("/404")
+
   );
 });
 
