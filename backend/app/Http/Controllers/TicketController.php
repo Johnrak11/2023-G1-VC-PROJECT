@@ -7,7 +7,7 @@ use App\Http\Requests\StoreticketRequest;
 use App\Http\Requests\UpdateticketRequest;
 use App\Http\Resources\TicketResource;
 use GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Facades\Event;
+use App\Models\Event;
 use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
 
 class TicketController extends Controller
@@ -40,6 +40,20 @@ class TicketController extends Controller
     public function create()
     {
         //
+    }
+
+    public function getOwnerOfTicket($eventId)
+    {
+        $ticketsOfUsers = Ticket::where('event_id', $eventId)
+            ->with('user')
+            ->get();
+        if($ticketsOfUsers!=null){
+            return response()->json(['status'=>'success', 'data' => $ticketsOfUsers],200);
+        }
+        if($ticketsOfUsers==null){
+            return response()->json(['status' => 'success', 'data' => 'Sorry, we do not have any data that fit with the event'],204);
+        }
+        return false;
     }
 
     /**

@@ -7,10 +7,12 @@ import router from "./routes/router";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
-import VueSocialSharing from "vue-social-sharing";
+// import shareIt from 'vue-share-it';
+import VueSocialSharing from 'vue-social-sharing';
 import { createPinia } from "pinia";
-import VueDatePicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+import JsonExcel from "vue-json-excel";
 
 // ----- scroll animation -----
 
@@ -56,6 +58,7 @@ app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
 app.component("banner-view", BannerView);
 app.component("VueDatePicker", VueDatePicker);
+app.component("downloadExcel", JsonExcel);
 
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init();

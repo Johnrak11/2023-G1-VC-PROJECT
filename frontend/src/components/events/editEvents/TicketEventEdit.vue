@@ -1,13 +1,14 @@
 <template>
     <form class="w-60 d-flex flex-column aling-center justify-center border rounded pa-10" elevation="24"
-        style="width: 100%;" ref="formRef">
+        style="width: 100%" ref="formRef">
         <div class="d-flex align-center mb-4">
             <v-icon size="24" color="grey" class="mr-2">mdi-ticket</v-icon>
             <h3>Ticket</h3>
         </div>
         <div class="input-container">
             <h3>Let's create tickets!</h3>
-            <v-label>Create tickets for your event by clicking on the 'Add Tickets' button below.</v-label>
+            <v-label>Create tickets for your event by clicking on the 'Add Tickets' button
+                below.</v-label>
         </div>
         <div class="switch-container">
             <v-switch v-model="modelFree" hide-details inset :label="`Tickets are free?`" color="red"></v-switch>
@@ -38,7 +39,7 @@
             <div class="input">
                 <h3>Price*</h3>
                 <v-select :disabled="modelDiscount" v-model="discountItemsModel" :items="discountItems" readonly
-                    label="Read-only" style="width:100%;"></v-select>
+                    label="Read-only" style="width: 100%"></v-select>
             </div>
         </div>
         <div class="input-row-container">
@@ -53,7 +54,7 @@
         <div class="input-container mt-5">
             <h3>Please describe your ticket*</h3>
             <v-textarea v-model="ticketDescription" :rules="ticketDescriptionRules" variant="outlined" counter
-                label="Description" maxlength="120" single-line style="width:100%;"></v-textarea>
+                label="Description" maxlength="120" single-line style="width: 100%"></v-textarea>
         </div>
         <div class="input-row-container">
             <div class="input">
@@ -63,47 +64,43 @@
                 </div>
             </div>
             <div class="btn-agenda">
-                <v-btn color="red" @click="isHasAgenda = true" style="width:50%;">
+                <v-btn color="red" @click="createAgenda" style="width: 50%">
                     <v-icon left>mdi-plus</v-icon>
                     Create Agenda
                 </v-btn>
             </div>
         </div>
         <!-- ----- agenda ---- -->
-        <v-table v-if="agendas.length !== 0" fixed-header class="boder table-color"
-            :height="(agendas.length < 2) ? 'auto' : '200px'">
+        <v-table fixed-header class="boder table-color">
             <thead class="table-color">
                 <tr>
-                    <th class="text-left table-color">
-                        DateTime
-                    </th>
-                    <th class="text-left table-color">
-                        Title
-                    </th>
-                    <th class="text-left table-color">
-                        Description
-                    </th>
-                    <th class="text-left table-color">
-                        Action
-                    </th>
+                    <th class="text-left table-color">DateTime</th>
+                    <th class="text-left table-color">Title</th>
+                    <th class="text-left table-color">Description</th>
+                    <th class="text-left table-color ml-5">Action</th>
                 </tr>
             </thead>
             <tbody class="table-color">
                 <tr v-for="(item, i) of agendas" :key="i">
                     <td>{{ item.date }}</td>
                     <td>{{ item.title }}</td>
-                    <td class="description-column">{{ eventCreate.truncateDescription(item.description, 40) }} </td>
-                    <td><v-icon color="red" @click="deleteAgenda(i)" class="delete" size="24">mdi-delete</v-icon></td>
+                    <td class="description-column">
+                        {{ eventCreate.truncateDescription(item.description, 40) }}
+                    </td>
+                    <td class="d-flex mt-5">
+                        <v-icon color="red" @click="deleteAgenda(i)" class="delete" size="24">mdi-delete</v-icon>
+                        <v-icon @click="editAgenda(i)" class="ml-5">mdi-pencil</v-icon>
+                    </td>
                 </tr>
             </tbody>
         </v-table>
     </form>
     <v-dialog v-model="isHasAgenda" width="auto">
         <v-sheet width="600px" class="mx-auto">
-            <form @submit.prevent="agendaSubmit">
+            <form>
                 <v-text-field v-model="agendaTitle.value.value" :counter="50"
                     :error-messages="agendaTitle.errorMessage.value" label="Title" width="100%"
-                    style="width: 100%;"></v-text-field>
+                    style="width: 100%"></v-text-field>
 
                 <VueDatePicker width="100%" class="custom-datepicke" v-model="agendaDate" :counter="7" :start-time="'12:00'"
                     :max-date="maxDate" :min-date="agendaDate" :preview-format="format" ignore-time-validation
@@ -112,10 +109,9 @@
 
                 <v-textarea class="mt-5" v-model="agendaDescription.value.value" :counter="200"
                     :error-messages="agendaDescription.errorMessage.value" name="input-7-1" variant="filled" label="Label"
-                    auto-grow style="width: 100%;"></v-textarea>
+                    auto-grow style="width: 100%"></v-textarea>
                 <div class="btn-agenda">
-                    <v-btn color="red" type="submit" style="width: 30%;">
-                        Add
+                    <v-btn color="red" type="button" @click="submitAgendaContain" style="width: 30%"> {{ updateMessage }}
                     </v-btn>
                 </div>
             </form>
@@ -124,77 +120,78 @@
 </template>
 
 <script setup>
-import { ref, defineExpose, watch } from "vue";
-import { eventCreateStores } from '@/stores/eventCreate.js'
-const eventCreate = eventCreateStores()
+import { ref, defineExpose, watch, onMounted } from "vue";
+import { eventCreateStores } from "@/stores/eventCreate.js";
+const eventCreate = eventCreateStores();
 
+import { eventEditStores } from "@/stores/eventEdit.js";
+const eventEdit = eventEditStores();
 
-const modelDiscount = ref(false)
-const modelFree = ref(false)
-const discountItems = ref([])
-const discountItemsModel = ref('Percent(%)')
-const isHasAgenda = ref(false)
+const modelDiscount = ref(false);
+const modelFree = ref(false);
+const discountItems = ref([]);
+const discountItemsModel = ref("Percent(%)");
+const isHasAgenda = ref(false);
 
 watch(modelFree, async (newValue) => {
     if (modelFree.value) {
         modelDiscount.value = newValue;
     }
-})
+});
 
-const price = ref('');
+const price = ref("");
 const priceRules = ref([
-    (v) => !!v || 'Price is required',
-    (v) => v > 0 || 'Price must be more than 0.01',
+    (v) => !!v || "Price is required",
+    (v) => v > 0 || "Price must be more than 0.01",
 ]);
 
-const ticketAvailable = ref('');
+const ticketAvailable = ref("");
 const ticketAvailableRules = ref([
     (v) => !!v || "You must enter the number of available tickets.",
-    (v) => v > 1 || 'Available tickets must be more than 1',
+    (v) => v > 1 || "Available tickets must be more than 1",
 ]);
 
-const discount = ref('');
-const discountRules = ref([(v) => !!v || "You must enter the discount amount."]);
+const discount = ref("");
+const discountRules = ref([
+    (v) => !!v || "You must enter the discount amount.",
+]);
 
 const dateDiscount = ref(new Date());
 dateDiscount.value.setDate(dateDiscount.value.getDate() + 6);
 
-const ticketDescription = ref('');
-const ticketDescriptionRules = ref([(v) => !!v || "You must enter the ticket description.",
-(v) => (v && v.length >= 5) || "Ticket description must be at least 5 characters"]
-);
+const ticketDescription = ref("");
+const ticketDescriptionRules = ref([
+    (v) => !!v || "You must enter the ticket description.",
+    (v) =>
+        (v && v.length >= 5) || "Ticket description must be at least 5 characters",
+]);
 
 async function ticketSubmit() {
     const isFormValid = validateForm();
-    console.log(isFormValid)
+    console.log(isFormValid);
     if (!isFormValid) {
         return false;
     }
-    let ticketPrice = 'free'
+    let ticketPrice = "free";
     if (!modelFree.value) {
         ticketPrice = price.value + '$'
     }
+    eventEdit.eventEditInfor.event_detail[0].available_ticket = ticketAvailable.value;
+    eventEdit.eventEditInfor.event_detail[0].description = ticketDescription.value;
+    eventEdit.eventEditInfor.event_detail[0].price = ticketPrice;
 
-    let newTicket = {
-        'available_ticket': ticketAvailable.value,
-        'description': ticketDescription.value,
-        'price': ticketPrice
-    }
-    eventCreate.ticket = newTicket
+    // let editDiscont = eventEdit.eventEditInfor.discounts[0].discounts
     if (modelDiscount.value) {
-        eventCreate.discount = {}
+        eventEdit.eventEditInfor.discounts[0].discounts = {};
     } else {
-        let newDiscount = {
-            'percent': discount.value,
-            'end_date': eventCreate.datebaseFormatDate(dateDiscount.value)
-        }
-        eventCreate.discount = newDiscount
+        eventEdit.eventEditInfor.discounts[0].discounts.percent = discount.value
+        eventEdit.eventEditInfor.discounts[0].discounts.end_date = eventCreate.datebaseFormatDate(dateDiscount.value)
     }
+    // ---- agenda---
     if (agendas.value.length !== 0) {
-        eventCreate.agendas = agendas.value
-    }
-    else {
-        eventCreate.agendas = []
+        eventEdit.eventEditInfor.agendas = agendas.value;
+    } else {
+        eventEdit.eventEditInfor.agendas = [];
     }
     return true;
 }
@@ -202,80 +199,131 @@ async function ticketSubmit() {
 function validateForm() {
     let isValid = true;
     if (!price.value && !modelFree.value) {
-        priceRules.value = [(v) => !!v || "Price is required"]
-        return false
+        priceRules.value = [(v) => !!v || "Price is required"];
+        return false;
     }
     if (!modelFree.value && Number(price.value) < 0.01) {
-        priceRules.value = [(v) => v > 0 || 'Price must be more than 0.01']
-        return false
+        priceRules.value = [(v) => v > 0 || "Price must be more than 0.01"];
+        return false;
     }
     if (!ticketAvailable.value) {
-        ticketAvailableRules.value = [(v) => !!v || "You must enter the number of available tickets."]
-        return false
+        ticketAvailableRules.value = [
+            (v) => !!v || "You must enter the number of available tickets.",
+        ];
+        return false;
     }
     if (ticketAvailable.value && Number(ticketAvailable.value) <= 1) {
-        ticketAvailableRules.value = [(v) => v > 0 || 'Available tickets must be more than 1']
-        return false
+        ticketAvailableRules.value = [
+            (v) => v > 0 || "Available tickets must be more than 1",
+        ];
+        return false;
     }
     if (!discount.value && !modelDiscount.value) {
-        discountRules.value = [(v) => !!v || "You must enter the discount amount."]
-        return false
+        discountRules.value = [(v) => !!v || "You must enter the discount amount."];
+        return false;
     }
     if (!ticketDescription.value) {
-        ticketDescriptionRules.value = [(v) => !!v || "You must enter the ticket description."]
-        return false
+        ticketDescriptionRules.value = [
+            (v) => !!v || "You must enter the ticket description.",
+        ];
+        return false;
     }
     return isValid;
 }
 
-
 // ------ agenda validate -------
-const agendas = ref([])
-
-import { useField, useForm } from 'vee-validate'
+const agendas = ref([]);
+const updateMessage = ref('Create')
+const agendaIndex = ref()
+import { useField, useForm } from "vee-validate";
 const { handleSubmit, handleReset } = useForm({
     validationSchema: {
         agendaTitle(value) {
-            if (value?.length >= 2) return true
-            return 'Title needs to be at least 2 characters.'
+            if (value?.length >= 2) return true;
+            return "Title needs to be at least 2 characters.";
         },
         agendaDescription: (value) => {
             if (value?.length >= 5) return true;
-            return 'Description needs to be at least 10 characters.'
+            return "Description needs to be at least 10 characters.";
         },
-    }
-})
-const agendaTitle = useField('agendaTitle')
-const agendaDescription = useField('agendaDescription')
-const agendaDate = ref(new Date())
-agendaDate.value.setDate(agendaDate.value.getDate() + 6)
-const maxDate = ref(new Date())
-maxDate.value.setMonth(maxDate.value.getMonth() + 1)
+    },
+});
+const agendaTitle = useField("agendaTitle");
+const agendaDescription = useField("agendaDescription");
+const agendaDate = ref(new Date());
+agendaDate.value.setDate(agendaDate.value.getDate() + 6);
+const maxDate = ref(new Date());
+maxDate.value.setMonth(maxDate.value.getMonth() + 1);
+
 const format = (date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     return `Selected date is ${day}/${month}/${year}`;
+};
+
+function editAgenda(index) {
+    updateMessage.value = 'Update'
+    agendaIndex.value = index
+    agendaTitle.value.value = agendas.value[agendaIndex.value].title
+    agendaDate.value = agendas.value[agendaIndex.value].date
+    agendaDescription.value.value = agendas.value[agendaIndex.value].description
+    isHasAgenda.value = true
+}
+function createAgenda() {
+    updateMessage.value = 'Create'
+    isHasAgenda.value = true
 }
 
-const agendaSubmit = handleSubmit(values => {
+const submitAgendaContain = handleSubmit(values => {
     let newAgenda = {
         'title': values.agendaTitle,
         'description': values.agendaDescription
     }
-    newAgenda['date'] = eventCreate.formatDate(agendaDate.value)
-    agendas.value.push(newAgenda)
+    newAgenda['date'] = eventCreate.datebaseFormatDate(agendaDate.value)
+    if (updateMessage.value === 'Update') {
+        newAgenda['event_id'] = agendas.value[agendaIndex.value].event_id
+        newAgenda['id'] = agendas.value[agendaIndex.value].id
+        agendas.value.splice(agendaIndex.value, 1, newAgenda);
+    } else {
+        agendas.value.push(newAgenda)
+    }
     handleReset()
     isHasAgenda.value = false
 })
 
 function deleteAgenda(index) {
-    agendas.value.splice(index, 1)
+    agendas.value.splice(index, 1);
 }
 
 defineExpose({
-    ticketSubmit
+    ticketSubmit,
 });
+
+
+onMounted(() => {
+    ticketAvailable.value = eventEdit.eventEditInfor.event_detail[0].available_ticket;
+    if (eventEdit.eventEditInfor.event_detail[0].price === 'free') {
+        modelFree.value = true;
+    } else {
+        price.value = parseFloat(eventEdit.eventEditInfor.event_detail[0].price)
+    }
+    ticketDescription.value = eventEdit.eventEditInfor.event_detail[0].description
+
+    let editDiscont = eventEdit.eventEditInfor.discounts[0].discounts
+    if (editDiscont === null) {
+        modelDiscount.value = true
+    } else {
+        discount.value = editDiscont.percent;
+        dateDiscount.value = editDiscont.end_date
+    }
+    if (eventEdit.eventEditInfor.agendas === null) {
+        agendas.value = [];
+    } else {
+        agendas.value = eventEdit.eventEditInfor.agendas
+    }
+});
+
 </script>
 
 <style scoped>
@@ -287,7 +335,6 @@ form {
     display: flex;
     flex-direction: column;
     gap: 5px;
-
 }
 
 .input {
@@ -314,7 +361,6 @@ form {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
-
 }
 
 .date-container-two {
@@ -335,7 +381,6 @@ form {
 
 .table-color {
     background-color: rgb(235, 235, 235);
-
 }
 
 tbody::-webkit-scrollbar {

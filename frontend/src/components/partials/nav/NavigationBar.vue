@@ -3,7 +3,8 @@
     
 <v-nav-bar-left class=" d-flex left">
       <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover;" />
-    </v-nav-bar-left>    <v-nav-bar-right class="d-flex right justify-space-between">
+    </v-nav-bar-left>
+    <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%;">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
           <router-link to="/" class="link">
@@ -12,20 +13,23 @@
           <router-link to="/explore" class="link">
             <v-btn id="li-nav" :class="{ 'active': isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
           </router-link>
-          <router-link to="/tickets" class="link">
+          <router-link to="/listMap" class="link">
+            <v-btn id="li-nav" :class="{ 'active': isActive('/listMap') }" class="rounded" variant="text">ListMap</v-btn>
+          </router-link>
+          <router-link v-if="getSession('role')" to="/tickets" class="link">
             <v-btn id="li-nav" :class="{ 'active': isActive('/tickets') }" class="rounded" variant="text">MyTicket</v-btn>
           </router-link>
         </ul>
       </v-left-content>
-      <v-right-content class="d-flex profile">
-        <select class="mr-5">
+      <v-right-content class="d-flex profile align-center">
+        <select>
           <option value="">ED/KH</option>
           <option value="">English</option>
           <option value="">ខ្មែរ</option>
         </select>
         <v-menu v-model="state.menu" :close-on-content-click="false" location="end">
           <template v-slot:activator="{ props }">
-            <v-badge content="0" color="error" class="mt-2 mr-5 notification" v-bind="props">
+            <v-badge content="0" color="error" class="mr-5 notification" v-bind="props">
               <v-icon>mdi-bell-outline</v-icon>
             </v-badge>
           </template>
@@ -48,6 +52,13 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </router-link>
             </v-list-item>
+
+            <v-list-item v-if="listRole.includes(getSession('role'))" value="dashboard">
+              <router-link to="/dashboard">
+                <v-list-item-title>Dashboard</v-list-item-title>
+              </router-link>
+            </v-list-item>
+
             <v-list-item value="logout" @click="user.logout()">
               <v-list-item-title>logout</v-list-item-title>
             </v-list-item>
@@ -66,9 +77,10 @@ const items = ref([
   { title: "Profile", link: "/profile" },
   { title: "History", link: "/profile" },
   { title: "Ticket", link: "/profile" },
-  { title: "Dashboard", link: "/dashboard" },
 ]);
-import { userStore } from "../../../stores/user.js";
+import { userStore } from "@/stores/user.js";
+import { sessionStore } from "@/stores/session.js";
+const { getSession } = sessionStore()
 const user = userStore();
 import { reactive } from 'vue'
 
@@ -78,7 +90,7 @@ const state = reactive({
   message: false,
   hints: true,
 })
-
+const listRole = ref(["organizer", "admin"])
 const isActive = (route) => {
   return router.currentRoute.value.path === route;
 };
@@ -144,6 +156,7 @@ a {
 }
 
 .profile {
+  justify-content: flex-end;
   margin-right: 10%;
 }
 

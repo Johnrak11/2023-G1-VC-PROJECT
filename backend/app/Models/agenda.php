@@ -15,4 +15,8 @@ class Agenda extends Model
         'description',
         'event_id'
     ];
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

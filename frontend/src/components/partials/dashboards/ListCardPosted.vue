@@ -6,7 +6,7 @@
       </li>
     </ul>
     <v-card class="bg-white pa-5 mr-10 rounded ml-8" :elevation="5">
-      <h3>Event(2)</h3>
+      <h3>Event</h3>
       <div class="d-flex justify-md-end">
         <div class="w-50">
           <v-text-field variant="solo" label="Search templates" append-inner-icon="mdi-magnify" single-line hide-details
@@ -15,8 +15,8 @@
         <slot></slot>
       </div>
     </v-card>
-    <div class="ml-8 mb-5">
-      <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventPreviews" :key="eventPreview.id"
+    <div class="ml-8 mb-5" v-if="eventPreviewStorage.eventPosteds">
+      <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventPosteds" :key="eventPreview"
         :eventPreview="eventPreview" />
     </div>
   </v-card>
@@ -29,7 +29,7 @@ import { onMounted } from "vue";
 const eventPreviewStorage = eventPreviewStores()
 
 onMounted(() => {
-  eventPreviewStorage.getOrganizerEvent(0)
+  eventPreviewStorage.getOrganizerEvent(1)
 })
 </script>
 <style scoped>

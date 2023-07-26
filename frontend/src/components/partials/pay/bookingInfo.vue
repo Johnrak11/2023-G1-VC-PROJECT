@@ -18,7 +18,7 @@
         <tr>
           <td>PRICE</td>
           <td v-if="event.event_detail && event.event_detail.length > 0">{{ "$" + event.event_detail[0].price }}</td>
-          <td v-else>Free</td>
+          <td v-else>$0</td>
         </tr>
       </tbody>
     </v-table>

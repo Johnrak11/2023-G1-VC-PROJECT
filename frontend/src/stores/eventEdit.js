@@ -8,29 +8,30 @@ import {
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle";
 import { eventPreviewStores } from "@/stores/eventPreview.js";
-export const eventCreateStores = defineStore("eventCreate", {
-  state: () => ({
-    eventName: "",
-    eventCategories: "",
-    eventDate: "",
-    eventPoster: "",
-    eventDescription: "",
-    eventAddress: "",
-    eventLongitude: "",
-    eventLatitude: "",
-    eventVenue: "",
+// import { event } from "jquery";
 
-    ticket: {},
-    discount: {},
-    agendas: [],
+export const eventEditStores = defineStore("eventEdit", {
+  state: () => ({
+    eventId: "", // add eventId to store the ID of the event to be edited
+    eventEditInfor: {},
     imagePath: "",
     isLoadingDialog: false,
     imagePreview: "https://placehold.co/600x400/png",
     isSubmit: false,
-    isCreate: false,
+    isEdit: false, // change isCreate to isEdit
   }),
   getters: {},
   actions: {
+    async fetchEditEvent(eventId) {
+      await baseAPI
+        .get(`/events/edits/infor/${eventId}`)
+        .then((response) => {
+          let handleResponse = response.data;
+          this.eventEditInfor = handleResponse.data;
+        })
+        .catch((error) => console.log(error));
+    },
+
     async fireUploadImage(file) {
       if (this.eventPoster != "") {
         this.fireDeleteImage();
@@ -96,43 +97,27 @@ export const eventCreateStores = defineStore("eventCreate", {
       return `${formattedDate} ${formattedTime}`;
     },
 
-    async createEvent() {
+    async editEvent() {
       const {getOrganizerEvent} = eventPreviewStores()
-      this.isCreate = true;
-      let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
-      let newEvent = {
-        name: this.eventName,
-        description: this.eventDescription,
-        date: dateTimeFormat[0],
-        time: dateTimeFormat[1],
-        location: this.eventAddress,
-        longitude: this.eventLongitude,
-        latitude: this.eventLatitude,
-        image: this.eventPoster,
-        category_id: this.eventCategories,
-        venue: this.eventVenue,
-      };
-      let createRequest = {
-        event: newEvent,
-        ticket: this.ticket,
-        discount: this.discount,
-        agendas: this.agendas,
-      };
-      console.log(newEvent);
-      console.log(this.ticket);
-      console.log(this.discount);
-      console.log(this.agendas);
-      await baseAPI
-        .post("/events", createRequest)
-        .then((response) => {
+      console.log("final submit", this.eventEditInfor);
+
+      // date: dateTimeFormat[0],
+      // time: dateTimeFormat[1],
+      // let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
+
+      try {
+        const response = await baseAPI.put(
+          `/events/update`,
+          this.eventEditInfor
+        ).then((response) => {
           console.log(response)
           getOrganizerEvent(0)
-          this.isCreate = false;
-        })
-        .catch((error) => {
-          console.log(error);
-          this.isCreate = false;
+          this.isEdit = false;
         });
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     convertDateTimeFormat(inputDate) {
@@ -155,6 +140,24 @@ export const eventCreateStores = defineStore("eventCreate", {
       } else {
         return description.substring(0, maxLength) + "...";
       }
+    },
+
+    setEventData(event) {
+      // set the event data to the store when editing an event
+      this.eventId = event.id;
+      this.eventName = event.name;
+      this.eventCategories = event.category_id;
+      this.eventDate = new Date(`${event.date}T${event.time}`);
+      this.eventPoster = event.image;
+      this.eventDescription = event.description;
+      this.eventAddress = event.location;
+      this.eventLongitude = event.longitude;
+      this.eventLatitude = event.latitude;
+      this.eventVenue = event.venue;
+      this.ticket = event.ticket;
+      this.discount = event.discount;
+      this.agendas = event.agendas;
+      this.imagePreview = event.image;
     },
   },
 });

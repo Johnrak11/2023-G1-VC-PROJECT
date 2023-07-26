@@ -138,7 +138,7 @@ class EventController extends Controller
     {
         $userId = Auth::user()->id;
         $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
-        return response()->json(['message' => 'success', 'data' => $event], 200);
+        return response()->json(['message' => 'success', 'data' =>new EventResource($event)], 200);
     }
     public function store(Request $request)
     {
@@ -371,7 +371,7 @@ class EventController extends Controller
             }
         }
 
-        return response()->json(['success' => true, 'message' => 'Event updated successfully'], 200);
+        return response()->json(['success' => true, 'message' => 'Event updated successfully',new EventResource($event)], 200);
     }
     public function eventDetailEdit($id, $request)
     {
