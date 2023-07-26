@@ -24,7 +24,13 @@ if (userToken) {
 
 const shouldShowNavBar = computed(() => {
   const currentPath = router.currentRoute.value.path;
-  return !currentPath.startsWith("/dashboard");
+  return (!currentPath.startsWith("/dashboard") &&
+    !currentPath.startsWith("/login") &&
+    !currentPath.startsWith("/register") &&
+    !currentPath.startsWith("/tickets/scan/") &&
+    !currentPath.startsWith("/404")
+
+  );
 });
 
 onMounted(() => {

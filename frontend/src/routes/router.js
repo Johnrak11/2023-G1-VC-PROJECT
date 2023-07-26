@@ -10,6 +10,7 @@ import DashboardOrganizer from "../views/dashboard/orgznizerInfor/DashboardOrgan
 import DashboardEventPreview from "../views/dashboard/eventPreview/DashboardEventPreview.vue";
 import DetailPage from "../views/detail/DetailView.vue";
 import RedirectPage from "../views/detail/RedirectPage.vue";
+import ScanPage from "../views/scanAttendee/ScanPage.vue";
 
 import DashboardEvent from "../views/dashboard/eventPosted/DashboardEventPosted.vue";
 import TicketView from "../views/ticket/TicketView.vue";
@@ -18,14 +19,26 @@ import Attendee from "@/views/dashboard/attendee/attendeeView.vue";
 
 import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
+import { sweetAlert } from "@/stores/sweetAlert.js";
+
+import PageNotFound from "../views/404/PageNotFound.vue";
 
 function authenticateBeforeEnter() {
   return function (to, from, next) {
     const { getSession } = sessionStore();
     const { getCookie } = cookieStore();
-    console.log(getSession("role"));
-    console.log(getCookie("token"));
     if (getSession("role") && getCookie("token")) {
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  };
+}
+
+function scanAuthenticateBeforeEnter() {
+  return function (to, from, next) {
+    const { getCookie } = cookieStore();
+    if (getCookie("token")) {
       next();
     } else {
       next({ name: "login" });
@@ -45,6 +58,29 @@ function roleBeforeEnter(listRole) {
   };
 }
 
+function listMapBeforeEnter() {
+  return function (to, from, next) {
+    const { alertMessage } = sweetAlert();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          next();
+        },
+        (error) => {
+          console.log(error);
+          alertMessage(
+            "warning",
+            "Please enable location services to allow this feature to work."
+          );
+        }
+      );
+    } else {
+      console.log("Your browser does not support geolocation");
+    }
+  };
+}
+
 const routes = [
   {
     path: "/",
@@ -60,6 +96,7 @@ const routes = [
     path: "/listMap",
     name: "listMap",
     component: ListMapView,
+    beforeEnter: [listMapBeforeEnter()],
   },
   {
     path: "/register",
@@ -137,10 +174,28 @@ const routes = [
     component: Attendee,
     props: true,
   },
+  {
+    path: "/tickets/scan/:eventId",
+    name: "scan",
+    component: ScanPage,
+    props: true,
+    beforeEnter: [scanAuthenticateBeforeEnter()],
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "404 page not found",
+    component: PageNotFound,
+    props: true,
+  },
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name;
+  next();
 });
 
 export default router;

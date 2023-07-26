@@ -49,12 +49,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{eventId}', [EventController::class, 'getEventId']);
 
         Route::prefix('/previews')->group(function () {
-            Route::get('/', [EventController::class, 'getPreviewEvents']);
+            Route::get('/', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
     });
-    Route::get('/tickets',[TicketController::class, 'getAllTicket']);
-    Route::get('/tickets/search/{name}',[TicketController::class, 'searchTicket']);
+
+
+    // ---- ticket with token-----
+    Route::prefix('/tickets')->group(function () {
+        Route::get('/', [TicketController::class, 'getAllTicket']);
+        Route::get('/search/{name}', [TicketController::class, 'searchTicket']);
+        Route::get('/scan/{eventId}', [TicketController::class, 'getTicketByEventId']);
+    });
 });
 
 // ----- authentication group----
@@ -82,6 +88,9 @@ Route::prefix('/events')->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::get('/{eventId}', [EventController::class, 'booking']);
     });
+    Route::prefix('/recommend')->group(function () {
+        Route::get('/{lat}/{lng}/{km}', [EventController::class, 'getEventsWithinRadius']);
+    });
 });
 Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
@@ -90,10 +99,9 @@ Route::prefix('/search')->group(function () {
 });
 Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
-    
 });
 
 // Route::get('/customer/paginate', ([EventController::class, 'getEventsPaginate']));
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
-Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
+// Route::get('/eventDetail/{eventId}', [EventDetailController::class, 'getEventDetail']);
 

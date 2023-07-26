@@ -2,7 +2,7 @@
     <div class="mt-6 ml-16 mr-16" id="nav-scroll">
         <slot></slot>
         <div class="ml-4 mr-8 d-flex justify-space-evenly flex-wrap">
-            <cardTemplate v-for="event of events.recommendEvent" :key="event.id" :event="event"></cardTemplate>
+            <cardTemplate v-for="event of events.recommendEventLimit" :key="event.id" :event="event"></cardTemplate>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@ const events = eventStores()
 onMounted(() => {
     let latitude = getSession('latitude')
     let longitude = getSession('longitude')
-    let km = 6
+    let km = 10
     events.getRecommendEvent(latitude, longitude, km)
 })
 </script>
@@ -25,7 +25,6 @@ onMounted(() => {
 <style scoped>
 .card {
     width: 22%;
-
 }
 
 img {

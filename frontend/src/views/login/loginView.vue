@@ -1,4 +1,7 @@
 <template>
+    <router-link to="/">
+        <v-btn class="back-home" append-icon="mdi-arrow-right" variant="tonal">Back</v-btn>
+    </router-link>
     <div class="bigContainer mt-16 h-100 ">
         <div class="cardContainer bg-red mx-auto" :class="`elevation-${isHovering ? 30 : 10}`"></div>
         <div class="loginContainer d-flex animate__animated animate__fadeInLeft  mt-2">
@@ -37,8 +40,6 @@ const loginForm = loginFormComponent;
     height: 60vh;
     position: relative;
     margin-top: 8%;
-
-
 }
 
 .v-btn,
@@ -72,5 +73,14 @@ hr {
     width: 100%;
     position: relative;
     left: 15%;
+}
+
+.back-home {
+    width: 10%;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    z-index: 100;
+    transition: right 0.3s;
 }
 </style>
