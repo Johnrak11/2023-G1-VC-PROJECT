@@ -1,5 +1,5 @@
 <template>
-  <img class="img1 mt-10" src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
+  <img id="top-detail" class="img1 mt-10" src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
     alt="" />
 
   <v-btn icon class="bg-red back-btn">
@@ -65,10 +65,10 @@
             </div>
           </div>
           <div class="d-flex justify-end button mt-6">
-            <button class="free bg-red pa-1 rounded" v-if="!eventDetail || !eventDetail.price">
+            <button class="free bg-red pa-1 rounded" v-if="!eventDetail || eventDetail.price === 'free'">
               Register
             </button>
-            <button class="free bg-red pa-1 rounded" @click.prevent="booking(event.id)" v-else>
+            <button class="free bg-red pa-1 rounded" v-else @click.prevent="booking(event.id)" >
               Booking
             </button>
           </div>
@@ -96,7 +96,7 @@ const fetchEvent = async () => {
   const route = useRoute();
   const eventId = route.params.id;
   try {
-    const response = await baseAPI.get(`/events/${eventId}`);
+    const response = await baseAPI.get(`/events/detail/${eventId}`);
     event.value = response.data.data;
   } catch (error) {
     console.log(error);
@@ -115,6 +115,8 @@ const fetchEventDetail = async () => {
 };
 
 onMounted(() => {
+  var element = document.getElementById("top-detail");
+  element.scrollIntoView({ behavior: "smooth" });
   fetchEvent();
   fetchEventDetail();
 });

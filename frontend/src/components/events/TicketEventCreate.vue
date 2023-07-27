@@ -257,6 +257,7 @@ const format = (date) => {
     const year = date.getFullYear();
     return `Selected date is ${day}/${month}/${year}`;
 }
+
 const agendaSubmit = handleSubmit(values => {
     let newAgenda = {
         'title': values.agendaTitle,

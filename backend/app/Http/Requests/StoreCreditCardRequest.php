@@ -33,7 +33,6 @@ class StoreCreditCardRequest extends FormRequest
             'number' => 'required|numeric|digits_between:13,19',
             'type' => 'required|string|max:20',
             'expiration' => 'required|date|after:today',
-            'user_id' => 'required|exists:users,id'
         ];
     }
 }

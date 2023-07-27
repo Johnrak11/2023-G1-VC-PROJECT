@@ -1,47 +1,52 @@
 <template>
-    <div v-if="tickets.lenght == 0">
-        <div class="d-flex mt-10" style="margin-left: 15%;">
-            <img src="https://o.remove.bg/downloads/4ee5f78b-85ba-4566-a6a2-fca7bc21679d/download-removebg-preview.png"
-                alt="">
-        </div>
-        <h2 class="text-center text-grey-lighten-1">You don't have ticket yet, please booking an event!!!</h2>
-    </div>
-    <div>
-        <v-hover v-slot="{ isHovering, props }" v-for="ticket of tickets.tickets" :key="ticket" style="width: 100%;">
-            <div v-bind="props" :class="`elevation-${isHovering ? 24 : 6}`" class="pa-3 mt-5 d-flex rounded-lg bg-white"
-                style="border-left: 5px solid red; height: 18vh; cursor: pointer;">
-                <div class="d-flex w-75">
+    <div v-if="tickets.tickets.length > 0">
+        <v-hover v-slot="{ isHovering, props }" v-for="ticket of tickets.tickets" :key="ticket.id" style="width: 100%;">
+            <div v-bind="props" :class="`elevation-${isHovering}`"
+                class="pa-3 mt-5 d-flex rounded-lg bg-grey-lighten-3 justify-space-between"
+                style="border-left: 5px solid red; height: 13vh; cursor: pointer;">
+                <div class="d-flex ">
                     <div>
                         <img class="rounded-xl"
-                            src="https://wheninphnompenh.com/wp-content/uploads/2023/05/DSC_0078-1024x1024.jpg" width="100"
+                            src="https://wheninphnompenh.com/wp-content/uploads/2023/05/DSC_0078-1024x1024.jpg" width="70"
                             alt="">
                     </div>
-                    <div class=" ml-9">
+                    <div class="ml-5 mt-3">
                         <h3>{{ ticket.event.name }}</h3>
-                        <p>{{ ticket.event.location }}</p>
-                        <p>{{ ticket.event.venue }}</p>
                         <p>{{ ticket.event.date }} {{ ticket.event.time }}</p>
                     </div>
                 </div>
-                <div class="d-flex w-25 justify-space-between" style="margin-left: -15%;">
+                <div class="mt-3">
+                    <p><span class="bold">Location:</span> {{ truncateDescription(ticket.event.location,40) }}</p>
+                    <p>Venue: {{ ticket.event.venue }}</p>
+                </div>
+                <div class="d-flex ">
                     <div class="mt-5">
-                        <p>Ticket Number: {{ ticket.ticket_code }}</p>
                         <p>Booking date: {{ ticket.booking_date }}</p>
                     </div>
-                    <h1 class="mt-5" style="margin-right: -40%;">{{ ticket.event.price }}</h1>
+                </div>
+                <div class="mr-10">
+                    <p class="mt-2">Ticket code: </p>
+                    <h2 style="margin-top: -5%;" class="ml-5">{{ ticket.ticket_code }}</h2>
                 </div>
             </div>
         </v-hover>
     </div>
+    <div v-else style="margin-left: 10%;" class="d-flex flex-column">
+        <div class="d-flex mt-16">
+            <img src="https://static.vecteezy.com/system/resources/previews/015/117/356/original/ticket-icon-in-white-colors-voucher-signs-illustration-png.png"
+                alt="" width="200">
+        </div>
+        <h2 class="text-center text-grey-lighten-1">You don't have any tickets yet !!!</h2>
+    </div>
 </template>
+
 <script setup>
-import { ticketStore } from '@/stores/ticketStore'
-// import eventStores from "@/stores/eventsStore.js";
-// import { axiosStore } from "@/stores/axiosHandle.js";
+import { eventCreateStores } from '@/stores/eventCreate.js'
+const { truncateDescription } = eventCreateStores()
+import {ticketStore} from '@/stores/ticketStore.js'
 import { onMounted } from "vue";
 const tickets = ticketStore();
 onMounted(() => {
     tickets.getDataTickets();
-    // console.log(tickets);
 });
 </script>

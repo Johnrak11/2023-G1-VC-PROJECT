@@ -10,6 +10,7 @@ import DashboardOrganizer from "../views/dashboard/orgznizerInfor/DashboardOrgan
 import DashboardEventPreview from "../views/dashboard/eventPreview/DashboardEventPreview.vue";
 import DetailPage from "../views/detail/DetailView.vue";
 import RedirectPage from "../views/detail/RedirectPage.vue";
+import ScanPage from "../views/scanAttendee/ScanPage.vue";
 
 import DashboardEvent from "../views/dashboard/eventPosted/DashboardEventPosted.vue";
 import TicketView from "../views/ticket/TicketView.vue";
@@ -24,9 +25,18 @@ function authenticateBeforeEnter() {
   return function (to, from, next) {
     const { getSession } = sessionStore();
     const { getCookie } = cookieStore();
-    console.log(getSession("role"));
-    console.log(getCookie("token"));
     if (getSession("role") && getCookie("token")) {
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  };
+}
+
+function scanAuthenticateBeforeEnter() {
+  return function (to, from, next) {
+    const { getCookie } = cookieStore();
+    if (getCookie("token")) {
       next();
     } else {
       next({ name: "login" });
@@ -68,6 +78,8 @@ function listMapBeforeEnter() {
     }
   };
 }
+
+import ManagermentEvent from "../views/admin/ManagermentEvent.vue";
 
 const routes = [
   {
@@ -162,10 +174,28 @@ const routes = [
     component: Attendee,
     props: true,
   },
+  {
+    path: "/management/event/delete",
+    name: "deleteEvent",
+    component: ManagermentEvent,
+    beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
+  },
+  {
+    path: "/tickets/scan/:eventId",
+    name: "scan",
+    component: ScanPage,
+    props: true,
+    beforeEnter: [scanAuthenticateBeforeEnter()],
+  },
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name;
+  next();
 });
 
 export default router;

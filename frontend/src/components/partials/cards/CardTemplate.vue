@@ -1,6 +1,6 @@
 <template >
   <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="center-bottom"
-    class="card bg-grey-lighten-2 mt-5 ml-5">
+    class="card bg-grey-lighten-2 mt-5 ml-8">
     <v-hover v-slot="{ isHovering, props }">
       <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props" class="hover">
         <router-link :to="`/detail/${eventInfor.id}`">
@@ -28,34 +28,36 @@
                         :title="eventInfor.name" :description="eventInfor.description"
                         quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                         class="social-share">
-                        <v-icon left class="ml-2 color-icon" size="50" style="height: 5vh">mdi-facebook</v-icon>
+                        <v-icon left class="ml-2 mt-3 color-icon" color="blue" size="50" style="height: 5vh">mdi-facebook</v-icon>
                         <p class="text-black mt-5">Facebook</p>
                       </ShareNetwork>
                       <ShareNetwork network="telegram" :url="events.localHttp + '/detail/' + eventInfor.id"
                         :title="eventInfor.name" :description="eventInfor.description"
                         quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                         class="social-share" id="my-iframe" allow-same-origin>
-                        <v-icon left class="ml-2 color-icon" size="50">mdi-telegram</v-icon>
-                        <p class="text-black mt-2">Telegram</p>
+                        <img :src="eventInfor.img" alt="">
+                        <!-- <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-telegram</v-icon> -->
+                        <img src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png" alt="" width="67">
+                        <p class="text-black" style="margin-top: -20%;">Telegram</p>
                       </ShareNetwork>
                       <ShareNetwork network="linkedin" :url="events.localHttp + '/detail/' + eventInfor.id"
-                        :title="eventInfor.name" :description="eventInfor.description"
+                        :title="eventInfor.name" :description="eventInfor.description" 
                         quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                         class="social-share">
-                        <v-icon left class="ml-2 color-icon" size="50">mdi-linkedin</v-icon>
+                        <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-linkedin</v-icon>
                         <p class="text-black mt-2">Linkedin</p>
                       </ShareNetwork>
                       <ShareNetwork network="whatsapp" :url="events.localHttp + '/detail/' + eventInfor.id"
                         :title="eventInfor.name" :description="eventInfor.description"
                         quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                         class="social-share">
-                        <v-icon left class="ml-2 color-icon" size="50">mdi-whatsapp</v-icon>
+                        <v-icon left class="ml-2 color-icon" color="green" size="50">mdi-whatsapp</v-icon>
                         <p class="text-black mt-2">Whatsapp</p>
                       </ShareNetwork>
                     </div>
                     <br />
                     <v-card-actions class="justify-center">
-                      <v-btn variant="text" @click="isActive.value = false">Close</v-btn>
+                      <v-btn variant="text" @click="isActive.value = false" style="width: 100%;">Close</v-btn>
                     </v-card-actions>
                   </v-card>
                 </template>
@@ -87,7 +89,7 @@
           </div>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="white" class="ml-3 bg-red mb-5" @click.prevent="booking">
+          <v-btn color="white" class="bg-red mb-3" @click.prevent="booking" style="width: 100%;">
             Booking
           </v-btn>
         </v-card-actions>
@@ -117,7 +119,6 @@ function ClickShare(id) {
 
 function booking() {
   router.push('/booking/' + eventInfor.value.id);
-  // console.log(eventInfor.value.id);
 }
 
 
@@ -126,7 +127,7 @@ function booking() {
 <style scoped>
 .card {
   background-color: red;
-  width: 23%;
+  width: 21%;
   /* margin-left: 20%; */
 }
 
@@ -137,15 +138,6 @@ a {
   height: 44vh;
   cursor: pointer;
 }
-
-/* img {
-  width: 100%;
-} */
-
-/* #booking {
-  margin-left: 75%;
-  height: 20vh;
-} */
 
 .app img {
   width: 60%;

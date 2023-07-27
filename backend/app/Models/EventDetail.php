@@ -15,4 +15,9 @@ class EventDetail extends Model
         'price',
         'event_id',
     ];
+
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class);
+    }
 }

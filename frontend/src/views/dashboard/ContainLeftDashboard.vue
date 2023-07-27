@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer v-model="drawer" :rail="rail" permanent @click="rail = false" :elevation="5">
-    <v-list-item prepend-avatar="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" title="Vanda SOPHAL" nav>
+    <v-list-item :prepend-avatar="user.user?.profile_picture" :title="`${user.user?.firstname} ${user.user?.lastname}`"
+      nav>
       <template v-slot:append>
         <v-btn variant="text" icon="mdi-chevron-left" @click.stop="rail = !rail"></v-btn>
       </template>
@@ -27,20 +28,17 @@
   <NavbarDashboard></NavbarDashboard>
   <router-view></router-view>
 </template>
-<script>
+
+
+<script setup>
+import { ref } from 'vue';
 import NavbarDashboard from "../../components/partials/nav/NavbarDashboard.vue";
-export default {
-  data() {
-    return {
-      drawer: true,
-      rail: true,
-    };
-  },
-  components: {
-    NavbarDashboard
-  }
-};
+import { userStore } from '@/stores/user.js'
+const user = userStore()
+const drawer = ref(true);
+const rail = ref(true);
 </script>
+
 <style scoped>
 .nav {
   text-decoration: none;

@@ -6,7 +6,8 @@
       </li>
     </ul>
     <v-card class="bg-white pa-5 mr-10 rounded ml-8" :elevation="5">
-      <h3>Event(2)</h3>
+      <h3 v-if="eventPreviewStorage.eventPosteds">Event({{ eventPreviewStorage.eventPosteds?.length }})</h3>
+      <h3 v-else> There are no Event public yet</h3>
       <div class="d-flex justify-md-end">
         <div class="w-50">
           <v-text-field variant="solo" label="Search templates" append-inner-icon="mdi-magnify" single-line hide-details

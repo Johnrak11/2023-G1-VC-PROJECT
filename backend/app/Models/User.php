@@ -70,12 +70,21 @@ class User extends Authenticatable
         $login = $request->only(['email', 'password']);
         return $login;
     }
+    
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class);
     }
-    public function events(){
-    
+
+    public function events()
+    {
+
         return $this->hasMany(Event::class);
+    }
+
+    public function creditCards()
+    {
+
+        return $this->hasMany(Credit_Card::class);
     }
 }

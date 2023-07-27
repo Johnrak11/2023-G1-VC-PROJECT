@@ -7,6 +7,7 @@ use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
 use App\Http\Resources\EventBookingResource;
 use App\Http\Resources\EventCategoryResource;
+use App\Http\Resources\EventEditInforResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\OrganizerResource;
 use App\Models\Agenda;
@@ -17,6 +18,7 @@ use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class EventController extends Controller
 {
@@ -116,6 +118,21 @@ class EventController extends Controller
         }
     }
 
+    public function getAllEvents()
+    {
+        $userId = Auth::user()->id;
+        $events = Event::where('organizer_id', $userId)->get();
+        return response()->json(['message' => 'success', 'data' => $events], 200);
+    }
+    public function getEventId($eventId)
+    {
+        $userId = Auth::user()->id;
+        $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
+        return response()->json(['message' => 'success', 'data' => new EventResource($event)], 200);
+    }
+
+    // =============== Create ========
+
     public function store(Request $request)
     {
         $eventRules = [
@@ -166,9 +183,6 @@ class EventController extends Controller
         return response()->json(['success' => true, 'message' => 'Event created successfully'], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function eventDetailStore($request)
     {
         $eventDetailRules = [
@@ -228,19 +242,28 @@ class EventController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function booking($id)
     {
         //
         $eventBooking = Event::find($id);
         return new EventBookingResource($eventBooking);
-        // if (isset($eventBooking)) {
-        //     return response()->json(['status' => 'success', 'data' => $eventBooking], 200);
-        // } else {
-        //     return response()->json(['status' => false, 'data' => 'Id' . ' ' . $id . ' does not exist'], 404);
-        // }
+    }
+
+
+    public function deleteEventById($eventId)
+    {
+        $admin = Auth::user();
+        if ($admin->role !== 'admin') {
+            return response()->json(['message' => 'No permission to delete this event'], 403);
+        }
+
+        $event = Event::where('id', $eventId)->first();
+        if (!$event) {
+            return response()->json(['message' => 'Event not found'], 404);
+        }
+
+        $event->delete();
+        return response()->json(['success' => true, 'message' => 'Event deleted successfully'], 200);
     }
 
     public function getOrganizerId($eventId)
@@ -268,11 +291,192 @@ class EventController extends Controller
         }
 
         $events = $eventList->get();
-
         if ($events->isEmpty()) {
             return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
         }
         return response()->json(['success' => true, 'data' => $events], 200);
+    }
+
+    public function searchEventsName(Request $request)
+    {
+        $organizer = Auth::user();
+        if ($organizer->role !== 'admin') {
+            return response()->json(['message' => 'No permission to search events'], 403);
+        }
+        $eventList = Event::query();
+
+        if ($request->filled('name')) {
+            $eventList->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('email') && $organizer->email === $request->input('email')) {
+            $eventList->where('organizer_id', $organizer->id);
+        }
+
+        $events = $eventList->get();
+
+        if ($events->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $events], 200);
+    }
+
+    // =============== Update========
+
+    public function update(Request $request)
+    {
+        $eventRules = [
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i:s'],
+            'location' => ['required', 'string'],
+            'longitude' => ['required', 'numeric'],
+            'latitude' => ['required', 'numeric'],
+            'image' => ['required'],
+            'venue' => ['required', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'organizer_id' => ['required', 'exists:users,id'],
+        ];
+
+        $eventRequest = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'date' => $request->date,
+            'time' => $request->time,
+            'location' => $request->location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'image' => $request->image,
+            'venue' => $request->venue,
+            'category_id' => $request->category_id,
+            'organizer_id' => $request->organizer_id,
+        ];
+        $validator = Validator::make($eventRequest, $eventRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $event = Event::where('id', $request->id)
+            ->where('organizer_id', Auth::user()->id)
+            ->firstOrFail();
+        $event->update($eventRequest);
+
+        // ---- upadte event detail -----
+        if ($request->input('event_detail')) {
+            $eventDetailRequest = $request->input('event_detail');
+            $eventDetailRequest[0]['event_id'] = $event->id;
+            $eventDetail = $this->eventDetailEdit($eventDetailRequest[0]);
+
+            if ($request->input('discounts')[0]['discounts']) {
+                $discountRequest = $request->input('discounts')[0]['discounts'];
+                $discountRequest['event_detail_id'] = $eventDetail->id;
+                $this->discountEdit($discountRequest);
+            }
+        }
+
+        if (is_array($request->input('agendas')) && !empty($request->input('agendas'))) {
+            $newAgendas = [];
+            foreach ($request->input('agendas') as $agendaRequest) {
+                $agendaRequest['event_id'] = $event->id;
+                if (!empty($agendaRequest['id'])) {
+                    $newAgenda = $this->agendaEdit($agendaRequest, $agendaRequest['id']);
+                    array_push($newAgendas, $newAgenda);
+                } else {
+                    $newAgenda = $this->agendaEdit($agendaRequest);
+                    array_push($newAgendas, $newAgenda);
+                }
+            }
+            // Get all agendas for the event
+            $eventAgendas = Agenda::where('event_id', $event->id)->get();
+            // Delete agendas that are not in the $newAgendas array
+            foreach ($eventAgendas as $agenda) {
+                $found = false;
+                foreach ($newAgendas as $newAgenda) {
+                    if ($agenda->id == $newAgenda->id) {
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found) {
+                    $agenda->delete();
+                }
+            }
+        }
+        return response()->json(['success' => true, 'message' => 'Event updated successfully', new EventResource($event)], 200);
+    }
+
+    public function eventDetailEdit($request)
+    {
+        $eventDetailRules = [
+            'available_ticket' => ['required', 'integer', 'min:0'],
+            'description' => ['required', 'string'],
+            'price' => ['required'],
+            'event_id' => ['required', 'exists:events,id'],
+        ];
+        $eventDetailRequest = [
+            'available_ticket' => $request['available_ticket'],
+            'description' => $request['description'],
+            'price' => $request['price'],
+            'event_id' => $request['event_id'],
+        ];
+        $validator = Validator::make($eventDetailRequest, $eventDetailRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $eventDetail = Event_detail::find($request['id']);
+        if (!$eventDetail) {
+            return 'Event detail not found';
+        }
+        $eventDetail->update($validator->validated());
+        return $eventDetail;
+    }
+
+    public function discountEdit($request)
+    {
+        $discountRules = [
+            'end_date' =>  ['required', 'date_format:Y-m-d H:i:s'],
+            'percent' => ['required', 'integer'],
+            'event_detail_id' => ['required', 'exists:event_details,id'],
+        ];
+
+        $discountRequest = [
+            'end_date' => $request['end_date'],
+            'percent' => $request['percent'],
+            'event_detail_id' => $request['event_detail_id'],
+        ];
+        $validator = Validator::make($discountRequest, $discountRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $discount = Discount::find($request['id']);
+        $discount->update($validator->validated());
+        return $discount;
+    }
+
+    public function agendaEdit($request, $id = null)
+    {
+        $agendaRules = [
+            'date' => ['required', 'date_format:Y-m-d H:i:s'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'event_id' => ['required', 'exists:events,id'],
+        ];
+        $validator = Validator::make($request, $agendaRules);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $agendaData = $validator->validated();
+        $agenda = Agenda::updateOrCreate(['id' => $id], $agendaData);
+        return $agenda;
+    }
+
+    
+    public function getEditInfor($eventId)
+    {
+        $userId = Auth::user()->id;
+        $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
+        return response()->json(['message' => 'success', 'data' => new EventEditInforResource($event)], 200);
     }
 
     // Referencses====

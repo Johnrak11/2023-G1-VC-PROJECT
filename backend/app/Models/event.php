@@ -40,4 +40,8 @@ class Event extends Model
     {
         return $this->hasMany(Event_detail::class);
     }
+    public function agendas()
+    {
+        return $this->hasMany(Agenda::class);
+    }
 }

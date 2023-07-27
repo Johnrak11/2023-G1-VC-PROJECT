@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\event_detail;
+// use App\Models\event_detail;
 use App\Http\Requests\Storeevent_detailRequest;
 use App\Http\Requests\Updateevent_detailRequest;
 use App\Models\event;
-use App\Models\EventDetail;
+use App\Models\Event_detail;
 
 class EventDetailController extends Controller
 {
@@ -43,7 +43,7 @@ class EventDetailController extends Controller
     }
     public function getEventDetail($eventId)
     {
-        $eventDetail = EventDetail::where('event_id', '>=', $eventId)->first();
+        $eventDetail = Event_detail::where('event_id', '>=', $eventId)->first();
         if (isset($eventDetail)) {
             return response()->json(['status' => 'success', 'data' => $eventDetail], 200);
         } else {
@@ -51,7 +51,7 @@ class EventDetailController extends Controller
         }
         // return $eventDetail;
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -71,7 +71,7 @@ class EventDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $event_detail)
+    public function destroy($event_detail)
     {
         //
     }

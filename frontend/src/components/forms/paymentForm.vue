@@ -7,7 +7,7 @@
           <v-card-title>
             Payment
           </v-card-title>
-          <form action="" class="ml-12" @submit.prevent="saveData">
+          <form action="" class="ml-12">
             <v-text-field type="number" class="text-start" v-model="cardNumber" label="Number of credit card"
               :rules="[requiredRule, cardNumberRule]" maxlength="19"><img v-if="creditCardType"
                 :src="creditCardType.message"></v-text-field>
@@ -17,7 +17,7 @@
               maxlength="4"></v-text-field>
             <v-text-field v-model="nameCard" label="Name on Card" :rules="[requiredRule]" maxlength="50"></v-text-field>
             <v-card-actions>
-              <button-component-form @click="saveData">Pay</button-component-form>
+              <button-component-form @click.prevent="saveData">Pay</button-component-form>
             </v-card-actions>
           </form>
         </v-card>
@@ -30,12 +30,13 @@ import visaCard from "../../assets/credit_card/visa.png";
 import masterCard from "../../assets/credit_card/mastercard.png";
 import discover from "../../assets/credit_card/discover.png";
 import americanCard from "../../assets/credit_card/american_express.png";
-import { ref, computed } from 'vue';
+import { ref, computed, defineProps } from 'vue';
 import ButtonComponentForm from '../buttons/ButtonComponentForm.vue';
 import baseAPI from "@/stores/axiosHandle.js";
-import router from "@/routes/router.js";
-import Swal from 'sweetalert2';
-
+import { ticketStore } from "@/stores/ticketStore";
+import { sweetAlert } from "@/stores/sweetAlert";
+const { alertMessage } = sweetAlert()
+const { createTicket } = ticketStore()
 const cardNumber = ref();
 const expirationCard = ref();
 const cvvCard = ref();
@@ -43,12 +44,18 @@ const nameCard = ref();
 const dialog = ref(false);
 const creditCardTypeName = ref('');
 
+const props = defineProps({
+  eventId: {
+    type: Number,
+    required: true
+  }
+});
+
 const creditCardTypes = [
   { type: 'visa', pattern: /^4[0-9]{12}(?:[0-9]{3})?$/, message: visaCard },
   { type: 'mastercard', pattern: /^5[1-5][0-9]{14}$/, message: masterCard },
   { type: 'amex', pattern: /^3[47][0-9]{13}$/, message: americanCard },
   { type: 'discover', pattern: /^6(?:011|5[0-9]{2})[0-9]{12}$/, message: discover }
-  // Add more credit card types and patterns here if needed
 ];
 
 const creditCardType = computed(() => {
@@ -61,7 +68,7 @@ const creditCardType = computed(() => {
   }
   return null;
 });
-// ===Find type of credit card===
+
 function defineType(value) {
   creditCardTypeName.value = value
 }
@@ -83,41 +90,60 @@ const expirationRule = v => {
 const cvvRule = v => /^\d{3,4}$/.test(v) || 'Invalid CVC'
 const requiredRule = v => !!v || 'Field is required'
 
-// ===Save data to validate in db===
-const userId = ref(1);
+function validateExpirationDate(expirationDate) {
+  const expiration = new Date(expirationDate);
+  const currentDate = new Date();
+  return expiration >= currentDate;
+}
+
+
+function paymentValidate() {
+  let isValid = true;
+  if (!creditCardTypeName.value) {
+    isValid = false;
+  }
+  if (!expirationCard.value) {
+    isValid = false;
+  }
+  if (!validateExpirationDate(expirationCard.value)) {
+    isValid = false;
+  }
+  if (!cvvCard.value) {
+    isValid = false;
+  }
+  if (String(cvvCard.value).length != 3 && String(cvvCard.value).length != 4) {
+    console.log(String(cvvCard.value).length)
+    isValid = false;
+  }
+  if (!nameCard.value) {
+    isValid = false;
+  }
+  return isValid;
+}
+
 async function saveData() {
+  const isPayValidate = paymentValidate()
+  if (!isPayValidate) {
+    return false
+  }
   let creditCard = {
     'name': nameCard.value,
     'cvv': cvvCard.value,
     'number': cardNumber.value,
     'type': creditCardTypeName.value,
     'expiration': expirationCard.value,
-    'user_id': userId.value
   }
   await baseAPI.post('/booking/creditCard', creditCard).then((response) => {
-    if (response.status === 200) {
-      Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Your ticket has been paid!',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    } else {
-      Swal.fire({
-        position: 'top-center',
-        icon: 'error',
-        title: 'Something was wrong!',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
-    router.push('/');
+    console.log(response.data)
+    alertMessage('success', 'Payment Successfully')
   }).catch((error) => {
     console.log(error.response.data); // log the error message returned by the server
   });
+  createTicket(props.eventId);
 
 }
+
+
 </script>
 <style scoped>
 img {

@@ -25,6 +25,8 @@ class EventResource extends JsonResource
             'venue' => $this->venue,
             'organizer_id' => $this->organizer_id,
             'category_id' => $this->category_id,
+            'agenda' => $this->agendas,
+            'event_detail' => $this->details,
         ];
     }
 }
