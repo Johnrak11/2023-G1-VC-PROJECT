@@ -6,24 +6,30 @@
     <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <router-link to="/" class="link">
+          <!-- <router-link to="/" class="link">
             <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">
               Home</v-btn>
           </router-link>
           <router-link to="/explore" class="link">
             <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
+          </router-link> -->
+          <router-link to="/" class="link">
+            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text"></v-btn>
+              {{ t("home") }}
+          </router-link>
+          <router-link to="/explore" class="link">
+            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">{{ t("explore") }}</v-btn>
           </router-link>
           <router-link to="/listMap" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/listMap') }" class="rounded" variant="text">Listing
-              Map</v-btn>
+            <v-btn id="li-nav" :class="{ active: isActive('/listMap') }" class="rounded" variant="text">
+              {{ t("listMap") }}</v-btn>
           </router-link>
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile align-center">
-        <select>
-          <option value="">ED/KH</option>
-          <option value="">English</option>
-          <option value="">ខ្មែរ</option>
+        <select v-model="language" @change="changeLanguage">
+          <option value="en">English</option>
+          <option value="kh">ខ្មែរ</option>
         </select>
         <v-menu v-model="state.menu" :close-on-content-click="false" location="end">
           <template v-slot:activator="{ props }">
@@ -51,21 +57,21 @@
             </v-list-item>
             <v-list-item v-if="getSession('role')" value="ticket">
               <router-link to="/tickets">
-                <v-list-item-title>Tickets</v-list-item-title>
+                <v-list-item-title>{{ t("ticket") }}</v-list-item-title>
               </router-link>
             </v-list-item>
             <v-list-item v-if="listRole.includes(getSession('role'))" value="dashboard">
               <router-link to="/dashboard">
-                <v-list-item-title>Dashboard</v-list-item-title>
+                <v-list-item-title>{{ t("dashboard") }}</v-list-item-title>
               </router-link>
             </v-list-item>
             <v-list-item v-if="getSession('role') === 'admin'" value="dashboard">
               <router-link to="management/event/delete">
-                <v-list-item-title>Management</v-list-item-title>
+                <v-list-item-title>{{ t("management") }}</v-list-item-title>
               </router-link>
             </v-list-item>
             <v-list-item value="logout" @click="user.logout()">
-              <v-list-item-title>logout</v-list-item-title>
+              <v-list-item-title>{{ t("logout") }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -109,6 +115,18 @@ window.addEventListener("scroll", () => {
 });
 
 const navbarTop = ref("0");
+
+
+
+import { useI18n } from 'vue-i18n';
+
+const { t, locale } = useI18n();
+
+const language = ref('en')
+function changeLanguage() {
+  console.log(locale.value)
+  locale.value = language.value;
+}
 </script>
 <style scoped>
 .nav-bar {

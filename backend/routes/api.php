@@ -68,9 +68,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
     });
     
+
     // ---- ticket with token-----
     Route::prefix('/tickets')->group(function () {
         Route::get('/', [TicketController::class, 'getAllTicket']);
+        Route::get('/attendees/{eventId}', [TicketController::class, 'getAttendees']);
         Route::get('/search/{name}', [TicketController::class, 'searchTicket']);
         Route::get('/scan/{eventId}', [TicketController::class, 'getTicketByEventId']);
         Route::get('/isBooked/{eventId}', [TicketController::class, 'isTicketBooked']);
@@ -112,6 +114,7 @@ Route::prefix('/events')->group(function () {
         Route::get('/{lat}/{lng}/{km}', [EventController::class, 'getEventsWithinRadius']);
     });
 });
+
 Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);

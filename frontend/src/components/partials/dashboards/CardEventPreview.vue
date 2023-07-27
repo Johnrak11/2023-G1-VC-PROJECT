@@ -1,7 +1,7 @@
 <template>
     <v-card class="bg-white pa-3 mt-4 mr-10 overflow-y-auto" :elevation="2">
         <div class="d-flex justify-space-between">
-            <div class="d-flex">
+            <!-- <div class="d-flex">
                 <img class="rounded" :src="props.eventPreview.image" alt="" width="125" height="80" />
                 <div>
                     <h2 class="ml-6">{{ props.eventPreview.name }}</h2>
@@ -35,6 +35,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div> -->
+            <div class="d-flex">
+                <img class="rounded" :src="props.eventPreview.image" alt="" width="60" height="60">
+                <div>
+                    <strong class="ml-6">Title</strong>
+                    <p class=" ml-6 mt-2">{{ props.eventPreview.name }}</p>
                 </div>
             </div>
             <div>

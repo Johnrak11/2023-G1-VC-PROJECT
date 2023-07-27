@@ -34,7 +34,7 @@ class TicketController extends Controller
         return response()->json(['success' => true, 'data' => $ticket], 200);
     }
 
-    public function getOwnerOfTicket($eventId)
+    public function getAttendees($eventId)
     {
         $ticketsOfUsers = Ticket::where('event_id', $eventId)
             ->with('user')

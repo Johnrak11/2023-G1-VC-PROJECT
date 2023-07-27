@@ -17,12 +17,8 @@
         <v-list-item prepend-icon="mdi-calendar" title="Event" value="event"></v-list-item>
       </router-link>
       <router-link to="/dashboard/preview" class="nav">
-        <v-list-item prepend-icon="mdi-calendar" title="Preview" value="preview"></v-list-item>
+        <v-list-item prepend-icon="mdi-calendar-plus" title="Preview" value="preview"></v-list-item>
       </router-link>
-      <v-list-item prepend-icon="mdi-help" title="Report" value="report"></v-list-item>
-      <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
-      <v-list-item prepend-icon="mdi-information" title="About" value="about"></v-list-item>
     </v-list>
   </v-navigation-drawer>
   <NavbarDashboard></NavbarDashboard>
