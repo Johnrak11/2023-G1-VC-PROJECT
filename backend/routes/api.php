@@ -60,17 +60,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/organizer', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
-        
     });
     Route::prefix('/search')->group(function () {
         Route::prefix('/admin')->group(function () {
             Route::get('/searchEvent', [EventController::class, 'searchEventsName']);
         });
     });
-    
+
     // ---- ticket with token-----
     Route::prefix('/tickets')->group(function () {
         Route::get('/', [TicketController::class, 'getAllTicket']);
+        Route::get('/attendees/{eventId}', [TicketController::class, 'getAttendees']);
         Route::get('/search/{name}', [TicketController::class, 'searchTicket']);
         Route::get('/scan/{eventId}', [TicketController::class, 'getTicketByEventId']);
         Route::get('/isBooked/{eventId}', [TicketController::class, 'isTicketBooked']);
@@ -110,11 +110,11 @@ Route::prefix('/events')->group(function () {
         Route::get('/{lat}/{lng}/{km}', [EventController::class, 'getEventsWithinRadius']);
     });
 });
+
 Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
-    
 });
 Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);

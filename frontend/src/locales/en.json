@@ -1,0 +1,9 @@
+{
+  "home": "home",
+  "explore": "explore",
+  "listMap": "listing map",
+  "ticket": "Ticket",
+  "dashboard": "Dashboard",
+  "management" : "management",
+  "logout" : "logout"
+}
