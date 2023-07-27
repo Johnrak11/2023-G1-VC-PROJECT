@@ -6,9 +6,16 @@
     <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <router-link to="/" class="link">
+          <!-- <router-link to="/" class="link">
             <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">
-              {{ t("home") }}</v-btn>
+              Home</v-btn>
+          </router-link>
+          <router-link to="/explore" class="link">
+            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
+          </router-link> -->
+          <router-link to="/" class="link">
+            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text"></v-btn>
+              {{ t("home") }}
           </router-link>
           <router-link to="/explore" class="link">
             <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">{{ t("explore")
@@ -45,6 +52,11 @@
           </template>
           <v-list>
             <v-list-item v-if="getSession('role')" value="ticket">
+              <router-link to="/profile">
+                <v-list-item-title>Profile</v-list-item-title>
+              </router-link>
+            </v-list-item>
+            <v-list-item v-if="getSession('role')" value="ticket">
               <router-link to="/tickets">
                 <v-list-item-title>{{ t("ticket") }}</v-list-item-title>
               </router-link>
@@ -78,7 +90,6 @@ import { sessionStore } from "@/stores/session.js";
 const { getSession } = sessionStore();
 const user = userStore();
 import { reactive } from "vue";
-
 
 const state = reactive({
   fav: true,

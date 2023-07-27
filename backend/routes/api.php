@@ -9,6 +9,7 @@ use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -43,7 +44,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
             return (new AuthController())->getUserInfo($request);
         });
     });
-
     Route::prefix('/events')->group(function () {
         Route::delete('/{eventId}', [EventController::class, 'deleteEventById']);
         Route::post('/', [EventController::class, 'store']);
@@ -60,12 +60,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/organizer', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
+        
     });
     Route::prefix('/search')->group(function () {
         Route::prefix('/admin')->group(function () {
             Route::get('/searchEvent', [EventController::class, 'searchEventsName']);
         });
     });
+    
 
     // ---- ticket with token-----
     Route::prefix('/tickets')->group(function () {
@@ -80,6 +82,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::post('/creditCard', [CreditCardController::class, 'store']);
     });
+    
+    Route::get('/users', [UserController::class, 'getUsers']);
 });
 
 
@@ -116,6 +120,7 @@ Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
+    
 });
 Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);

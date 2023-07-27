@@ -16,6 +16,7 @@ import DashboardEvent from "../views/dashboard/eventPosted/DashboardEventPosted.
 import TicketView from "../views/ticket/TicketView.vue";
 import NotificationView from "../views/notifications/NotificationView.vue";
 import Attendee from "@/views/dashboard/attendee/attendeeView.vue";
+import ProfileView from "../views/profile/ProfileView.vue";
 
 import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
@@ -186,6 +187,12 @@ const routes = [
     component: ScanPage,
     props: true,
     beforeEnter: [scanAuthenticateBeforeEnter()],
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: ProfileView,
+    props: true,
   },
 ];
 const router = createRouter({
