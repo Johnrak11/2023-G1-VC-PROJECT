@@ -15,7 +15,10 @@ class UserController extends Controller
     {
         //
     }
-
+    public function getUsers(){
+        $user = auth()->user();
+        return response()->json(['message'=> 'success', 'data'=>$user]);
+    }
     /**
      * Store a newly created resource in storage.
      */

@@ -117,7 +117,6 @@ class EventController extends Controller
             ], 200);
         }
     }
-<<<<<<< HEAD
 
 
     public function getAllEvents()
@@ -135,9 +134,6 @@ class EventController extends Controller
 
     // =============== Create ========
 
-=======
-
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
     public function store(Request $request)
     {
         $eventRules = [
@@ -286,7 +282,6 @@ class EventController extends Controller
         return response()->json(['success' => true, 'data' => $events], 200);
     }
 
-<<<<<<< HEAD
     // =============== Update========
 
     public function update(Request $request)
@@ -441,20 +436,5 @@ class EventController extends Controller
         $userId = Auth::user()->id;
         $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
         return response()->json(['message' => 'success', 'data' => new EventEditInforResource($event)], 200);
-=======
-    // Referencses====
-    // Recomand event 
-    //Laravel Geospatial Docs: https://laravel.com/docs/8.x/eloquent-mutators#spatial-casting
-    // GeoPHP Library: https://geophp.net/
-    // PostGIS: https://postgis.net/
-    public function getEventsWithinRadius($latitude, $longitude, $kilometers)
-    {
-        $events = Event::select("*")
-            ->selectRaw("( 6371 * 2 * ASIN(SQRT(POWER(SIN((RADIANS($latitude) - RADIANS(latitude)) / 2), 2) + COS(RADIANS($latitude)) * COS(RADIANS(latitude)) * POWER(SIN((RADIANS($longitude) - RADIANS(longitude)) / 2), 2)))) as distance")
-            ->having('distance', '<=', $kilometers)
-            ->get();
-
-        return response()->json($events);
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
     }
 }
