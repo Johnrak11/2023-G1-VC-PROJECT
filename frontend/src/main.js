@@ -29,11 +29,12 @@ import CardRate from "./components/partials/cards/CardRate.vue";
 import FooterView from "./components/partials/footer/FooterView.vue";
 import PaginationView from "./components/partials/pagination/PaginationView.vue";
 import BannerView from "./components/partials/banner/BannerComponent.vue";
+import i18n from './i18n'
 
 loadFonts();
 
 const pinia = createPinia();
-const app = createApp(App);
+const app = createApp(App)
 const CLIENT_ID =
   "789674566579-4bjsq9dlf9gknuq2omokd04bd2ioi96l.apps.googleusercontent.com";
 
@@ -46,6 +47,8 @@ app.use(vuetify);
 app.use(VueSocialSharing);
 app.use(pinia);
 app.use(AOS);
+app.use(i18n);
+
 
 app.component("navigation-bar", NavigationBar);
 app.component("search-view", SearchEvent);
