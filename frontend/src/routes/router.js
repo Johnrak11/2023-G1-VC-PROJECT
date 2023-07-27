@@ -16,21 +16,28 @@ import DashboardEvent from "../views/dashboard/eventPosted/DashboardEventPosted.
 import TicketView from "../views/ticket/TicketView.vue";
 import NotificationView from "../views/notifications/NotificationView.vue";
 import Attendee from "@/views/dashboard/attendee/attendeeView.vue";
+import ProfileView from "../views/profile/ProfileView.vue";
 
 import { sessionStore } from "@/stores/session.js";
 import { cookieStore } from "@/stores/cookies.js";
-<<<<<<< HEAD
-=======
 import { sweetAlert } from "@/stores/sweetAlert.js";
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 
 function authenticateBeforeEnter() {
   return function (to, from, next) {
     const { getSession } = sessionStore();
     const { getCookie } = cookieStore();
-    console.log(getSession("role"));
-    console.log(getCookie("token"));
     if (getSession("role") && getCookie("token")) {
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  };
+}
+
+function scanAuthenticateBeforeEnter() {
+  return function (to, from, next) {
+    const { getCookie } = cookieStore();
+    if (getCookie("token")) {
       next();
     } else {
       next({ name: "login" });
@@ -49,8 +56,6 @@ function roleBeforeEnter(listRole) {
     }
   };
 }
-<<<<<<< HEAD
-=======
 
 function listMapBeforeEnter() {
   return function (to, from, next) {
@@ -74,7 +79,8 @@ function listMapBeforeEnter() {
     }
   };
 }
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
+
+import ManagermentEvent from "../views/admin/ManagermentEvent.vue";
 
 const routes = [
   {
@@ -91,10 +97,7 @@ const routes = [
     path: "/listMap",
     name: "listMap",
     component: ListMapView,
-<<<<<<< HEAD
-=======
     beforeEnter: [listMapBeforeEnter()],
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
   },
   {
     path: "/register",
@@ -171,16 +174,25 @@ const routes = [
     name: "attendees",
     component: Attendee,
     props: true,
-<<<<<<< HEAD
-=======
+  },
+  {
+    path: "/management/event/delete",
+    name: "deleteEvent",
+    component: ManagermentEvent,
+    beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
   },
   {
     path: "/tickets/scan/:eventId",
     name: "scan",
     component: ScanPage,
     props: true,
-    beforeEnter: [authenticateBeforeEnter()],
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
+    beforeEnter: [scanAuthenticateBeforeEnter()],
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: ProfileView,
+    props: true,
   },
 ];
 const router = createRouter({

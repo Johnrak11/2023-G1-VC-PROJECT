@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCreditCardRequest;
 use App\Models\Credit_card;
 use App\Http\Requests\Updatecredit_cardRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreditCardController extends Controller
 {
@@ -29,13 +30,14 @@ class CreditCardController extends Controller
      */
     public function store(StoreCreditCardRequest $request)
     {
+        $user = Auth::user();
         $creditCard = Credit_card::create([
             'name' => $request->input('name'),
             'cvv' => $request->input('cvv'),
             'number' => $request->input('number'),
             'type' => $request->input('type'),
             'expiration' => $request->input('expiration'),
-            'user_id' => $request->input('user_id')
+            'user_id' => $user->id,
         ]);
         return response()->json(['status' => 'success', 'data' => $creditCard], 200);
     }

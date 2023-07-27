@@ -7,22 +7,12 @@ import router from "./routes/router";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import vue3GoogleLogin from "vue3-google-login";
-// import shareIt from 'vue-share-it';
-<<<<<<< HEAD
-import VueSocialSharing from 'vue-social-sharing';
-import { createPinia } from "pinia";
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
-import JsonExcel from "vue-json-excel";
-
-=======
 import VueSocialSharing from "vue-social-sharing";
 import { createPinia } from "pinia";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import JsonExcel from "vue-json-excel";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
 // ----- scroll animation -----
 
 // reference https://egghead.io/blog/how-to-use-the-animate-on-scroll-aos-library-in-vue
@@ -68,12 +58,10 @@ app.component("pagination-view", PaginationView);
 app.component("banner-view", BannerView);
 app.component("VueDatePicker", VueDatePicker);
 app.component("downloadExcel", JsonExcel);
-<<<<<<< HEAD
-
-=======
 app.component(VueQrcode.name, VueQrcode);
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
+
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init();
 });
+
 app.mount("#app");

@@ -16,4 +16,9 @@ class Credit_Card extends Model
         'expiration',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 }

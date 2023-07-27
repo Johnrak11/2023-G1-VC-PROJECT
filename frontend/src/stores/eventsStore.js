@@ -1,16 +1,14 @@
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle.js";
+import { sweetAlert } from "./sweetAlert.js";
 export const eventStores = defineStore("event", {
   state: () => ({
     isLoader: true,
     events: [],
     recommendEvent: [],
-<<<<<<< HEAD
-=======
     recommendEventLimit: [],
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
     reletedEvent: [],
-    localHttp: "http://192.168.91.229:8080",
+    localHttp: "http://localhost:8080",
     pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
   }),
   gatters: {
@@ -63,28 +61,18 @@ export const eventStores = defineStore("event", {
     },
 
     async getRecommendEvent(lat, lng, km) {
-<<<<<<< HEAD
-      this.isLoader = true;
-      await baseAPI
-        .get(`/events/recommend/${lat}/${lng}/${km}`)
-        .then((response) => {
-          let responeseData = response.data;
-          this.recommendEvent = responeseData;
-          console.log(this.recommendEvent)
-=======
       await baseAPI
         .get(`/events/recommend/${lat}/${lng}/${km}`)
         .then((response) => {
           let responseData = response.data;
           this.recommendEvent = responseData;
           if (responseData.length > 8) {
-            console.log(responseData.length)
+            console.log(responseData.length);
             this.recommendEventLimit = responseData.slice(0, 8);
           } else {
             this.recommendEventLimit = responseData;
           }
           console.log(this.recommendEventLimit);
->>>>>>> fa1f02d7f5eed7cd883b4611ac6c301458584a9b
         })
         .catch((error) => console.log(error));
     },
@@ -116,6 +104,30 @@ export const eventStores = defineStore("event", {
           console.log(this.eventDetail);
         })
         .catch((error) => console.log(error));
+    },
+
+    async searchEventsByAdmin(name, email) {
+      await baseAPI
+        .get(`/search/admin/searchEvent?name=${name}&email=${email}`)
+        .then((response) => {
+          this.events = response.data.data;
+        })
+        .catch((error) => console.log(error));
+    },
+
+    async deleteEvent(eventId) {
+      const { unSuccessDelete, successDelete } = sweetAlert();
+      await baseAPI
+        .delete(`/events/${eventId}`)
+        .then((response) => {
+          this.getDataAxios();
+          console.log(response.data);
+          successDelete();
+        })
+        .catch((error) => {
+          console.log(error);
+          unSuccessDelete();
+        });
     },
   },
 });

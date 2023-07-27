@@ -280,6 +280,8 @@ form {
 
 .map-container {
     padding: 10px;
+    height: 500px;
+    width: 900px;
 }
 
 .btn-map-submit {

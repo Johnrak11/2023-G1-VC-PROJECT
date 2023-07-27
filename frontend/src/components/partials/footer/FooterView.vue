@@ -1,11 +1,10 @@
 <template>
-  <footer class="footer pa-10">
+  <footer class="footer" >
     <div class="container">
       <div class="row d-flex flex-direction: row; justify-space-between ml-8 mb-8">
         <div class="col-md-4">
           <h3>About Us</h3>
           <ul>
-            <li> About Us </li>
             <li> Submit Event </li>
             <li> All Venues</li>
             <li>All Location </li>
@@ -35,11 +34,11 @@
           <div class="icons">
             <img
               src="https://cdn3.iconfinder.com/data/icons/picons-social/57/46-facebook-512.png"
-              width="20%"
+              width="15%"
             />
             <img
               src="https://cdn-icons-png.flaticon.com/512/87/87390.png"
-              width="15%"
+              width="10%"
               alt=""
             />
             <img
@@ -56,27 +55,27 @@
             />
           </div>
           <h3>Download Us</h3>
-          <div class="app-store ml-3 d-flex justify-center ">
+          <div class="app-store  d-flex justify-center ">
             <a href="#" class="mx-4"
               ><img
                 class="h-10"
                 src="https://www.pngmart.com/files/10/Download-On-The-App-Store-PNG-Image.png"
                 alt="Download from the App Store"
-                width="110px"
+                width="90px"
             /></a>
             <a href="#"  class="img2"
               ><img
                 class=" mr-10"
                 src="https://www.freepnglogos.com/uploads/play-store-logo-png/play-store-logo-nisi-filters-australia-11.png"
-                width="120px"
+                width="100px"
                 alt="Download from Google Play"
             /></a>
           </div>
         </div>
       </div>
-      <hr>
-      <div class="d-flex justify-center mt-9 ">
-        © 2022, Barren. All rights reserved. Powered by Gambolthemes
+      <hr style="margin-top: -2%;">
+      <div class="d-flex justify-center mt-2 ">
+        admin.eventpeak@gmail.com
       </div>
     </div>
   </footer>
@@ -88,12 +87,12 @@ export default {};
 <style scoped>
 .footer {
   background-color: #d3d4d7;
+  padding: 30px 10px 5px 10px;
 }
 
 .footer h3 {
   font-weight: 600;
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .footer ul {
@@ -110,7 +109,6 @@ hr {
 }
 .footer ul li {
   cursor: pointer;
-  margin-bottom: 10px;
 }
 
 .li {

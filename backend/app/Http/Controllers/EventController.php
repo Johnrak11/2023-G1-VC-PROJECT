@@ -118,7 +118,6 @@ class EventController extends Controller
         }
     }
 
-
     public function getAllEvents()
     {
         $userId = Auth::user()->id;
@@ -250,6 +249,23 @@ class EventController extends Controller
         return new EventBookingResource($eventBooking);
     }
 
+
+    public function deleteEventById($eventId)
+    {
+        $admin = Auth::user();
+        if ($admin->role !== 'admin') {
+            return response()->json(['message' => 'No permission to delete this event'], 403);
+        }
+
+        $event = Event::where('id', $eventId)->first();
+        if (!$event) {
+            return response()->json(['message' => 'Event not found'], 404);
+        }
+
+        $event->delete();
+        return response()->json(['success' => true, 'message' => 'Event deleted successfully'], 200);
+    }
+
     public function getOrganizerId($eventId)
     {
         $event = Event::find($eventId);
@@ -275,10 +291,34 @@ class EventController extends Controller
         }
 
         $events = $eventList->get();
+        if ($events->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
+        }
+        return response()->json(['success' => true, 'data' => $events], 200);
+    }
+
+    public function searchEventsName(Request $request)
+    {
+        $organizer = Auth::user();
+        if ($organizer->role !== 'admin') {
+            return response()->json(['message' => 'No permission to search events'], 403);
+        }
+        $eventList = Event::query();
+
+        if ($request->filled('name')) {
+            $eventList->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('email') && $organizer->email === $request->input('email')) {
+            $eventList->where('organizer_id', $organizer->id);
+        }
+
+        $events = $eventList->get();
 
         if ($events->isEmpty()) {
             return response()->json(['success' => false, 'message' => 'Events not found.'], 404);
         }
+
         return response()->json(['success' => true, 'data' => $events], 200);
     }
 
@@ -431,10 +471,26 @@ class EventController extends Controller
         return $agenda;
     }
 
+    
     public function getEditInfor($eventId)
     {
         $userId = Auth::user()->id;
         $event = Event::where('id', $eventId)->where('organizer_id', $userId)->firstOrFail();
         return response()->json(['message' => 'success', 'data' => new EventEditInforResource($event)], 200);
+    }
+
+    // Referencses====
+    // Recomand event 
+    //Laravel Geospatial Docs: https://laravel.com/docs/8.x/eloquent-mutators#spatial-casting
+    // GeoPHP Library: https://geophp.net/
+    // PostGIS: https://postgis.net/
+    public function getEventsWithinRadius($latitude, $longitude, $kilometers)
+    {
+        $events = Event::select("*")
+            ->selectRaw("( 6371 * 2 * ASIN(SQRT(POWER(SIN((RADIANS($latitude) - RADIANS(latitude)) / 2), 2) + COS(RADIANS($latitude)) * COS(RADIANS(latitude)) * POWER(SIN((RADIANS($longitude) - RADIANS(longitude)) / 2), 2)))) as distance")
+            ->having('distance', '<=', $kilometers)
+            ->get();
+
+        return response()->json($events);
     }
 }

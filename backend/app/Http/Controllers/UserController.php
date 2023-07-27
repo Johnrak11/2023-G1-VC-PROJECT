@@ -17,7 +17,7 @@ class UserController extends Controller
     }
     public function getUsers(){
         $user = auth()->user();
-        return response()->json(['message'=> 'success', 'data'=>$user]);
+        return response()->json(['success'=> true, 'data'=>$user]);
     }
     /**
      * Store a newly created resource in storage.
