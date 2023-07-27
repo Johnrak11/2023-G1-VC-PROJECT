@@ -111,6 +111,7 @@ Route::prefix('/events')->group(function () {
     });
 });
 
+
 Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);

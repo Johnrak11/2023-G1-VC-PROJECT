@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-top: 20%;">
+    <div style="margin-top: 18%;margin-bottom: 5%;">
         <ul class="d-flex justify-space-evenly">
             <li>All</li>
             <li>Workshop</li>
@@ -12,22 +12,23 @@
     </div>
 </template>
 <style scoped>
-ul{
+ul {
     list-style: none;
     margin-left: 5%;
     width: 86%;
 }
-li{
+
+li {
     padding: 5px 20px 5px 20px;
     background: rgba(128, 128, 128, 0.121);
     border-radius: 2px;
 }
-li:hover{
+
+li:hover {
     padding: 5px 20px 5px 20px;
     background-color: red;
     border-radius: 5px;
     color: white;
     cursor: pointer;
 }
-
 </style>

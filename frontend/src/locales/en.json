@@ -5,5 +5,11 @@
   "ticket": "Ticket",
   "dashboard": "Dashboard",
   "management" : "management",
-  "logout" : "logout"
+  "logout": "Logout",
+  "banner title" : "LOCAL EVENT DISCOVERY",
+  "banner subtitle" : "Easy to search, you just enter the keyword",
+  "search event" : "Enter event name",
+  "select category" : "Select category",
+  "select date" : "Select date",
+  "search" : "Search"
 }

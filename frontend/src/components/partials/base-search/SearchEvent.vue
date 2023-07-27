@@ -1,43 +1,65 @@
 <template>
   <div>
-    <img class="banner"
-      src="https://as1.ftcdn.net/v2/jpg/01/07/66/26/1000_F_107662666_zMxONsgMZY1rm8eshfCGMsSfmRPbMuTB.jpg" alt=""
-      width="100%" />
+    <img class="banner" />
   </div>
-  <div class="search-input" style="margin-top: -45%;">
-    <slot></slot>
-    <div class="w-90 search ">
-      <input v-model="searchName" class="bg-grey-lighten-2 pa-3 w-25" type="text" placeholder="Enter more" />
-      <select class="p-16 w-25 pa-3 bg-grey-lighten-2" v-model="searchCategoryByID">
-        <option disabled value="">Select category</option>
-        <option value="">All</option>
-        <option v-for="category of categories.categories" :key="category.id" :value="category.id">
-          {{ category.name }}
-        </option>
-      </select>
-      <input v-model="searchDate" type="date" placeholder="Add time" class="w-25 bg-grey-lighten-2 date" />
-      <button class="pa-3 bg-red" @click="eventSearch">Search</button>
-    </div>
-  </div>
+  <v-form @submit.prevent="eventSearch" class="d-flex align-center mr-12 ml-12 justify-center" style="margin-top: -45%;">
+    <v-row class="w-90 search rounded ml-7 mr-8">
+      <!-- Search Text Field -->
+      <v-text-field v-model="searchName" density="compact" variant="solo" :label="t('search event')"
+        prepend-inner-icon="mdi-magnify" single-line hide-details class="search-input"
+        style="height: 15vh;padding-top: 18px;"></v-text-field>
+      <!-- Category Select -->
+      <v-select v-if="categories.categories" v-model="select" :items="categories.categories" item-title="name"
+        hide-details class="search-input" item-value="id" persistent-hint return-object single-line
+        prepend-inner-icon="mdi-tag" variant="solo"></v-select>
+
+      <VDatePicker v-model="searchDate" color="red">
+        <template #default="{ togglePopover }">
+          <v-text-field v-model="formattedDate" density="compact" variant="solo" :label="t('select date')"
+            @click="togglePopover" prepend-inner-icon="mdi-calendar" single-line hide-details class="search-input"
+            style="height: 15vh;padding-top: 18px;"></v-text-field>
+        </template>
+      </VDatePicker>
+
+      <!-- Search Button -->
+      <v-btn type="submit" :loading="events.isSearch" class="search-input bg-red rounded"
+        style="height: 9vh; width: 10%;">{{ t('search')
+        }}</v-btn>
+    </v-row>
+  </v-form >
 </template>
 <script setup>
-import { ref } from "vue";
+import dayjs from 'dayjs';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+import { ref, computed } from "vue";
 import { eventStores } from "@/stores/eventsStore.js";
 import { onMounted } from "vue";
 import { categoryStore } from "@/stores/categoryStore.js";
 
 const searchName = ref("");
 const searchDate = ref("");
-const searchCategoryByID = ref("");
+const select = ref({ id: '', name: t('select category') });
 const events = eventStores();
 function eventSearch() {
-  console.log(searchName.value + searchDate.value + searchCategoryByID.value);
+  let newDate = ''
+  if (searchDate.value) {
+    newDate = dayjs(searchDate.value).format('YYYY-MM-DD')
+
+  }
   events.searchEvents(
     searchName.value,
-    searchDate.value,
-    searchCategoryByID.value
+    newDate,
+    select.value.id
   );
 }
+
+const formattedDate = computed(() => {
+  if (!searchDate.value) {
+    return null
+  }
+  return dayjs(searchDate.value).format('dddd D MMMM YYYY');
+});
 
 const categories = categoryStore();
 onMounted(() => {
@@ -46,22 +68,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
-input,
-select {
-  /* background-color: #b1b0b0; */
-  border: 1px solid black;
-}
-
-button {
-  width: 10%;
-}
-
 .search {
-  margin-left: 10%;
-}
-
-.search-input {
-  margin-top: -40%;
+  padding: 5px;
+  gap: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
@@ -72,7 +84,12 @@ button {
   height: 100vh;
 }
 
-.date {
-  padding: 11px;
+.search-input {
+  width: 20%;
+  border-radius: 0px;
+  /* Set the desired width */
+  padding: 9px;
+  /* Set the desired padding */
+  /* margin-right: 10px; Add some right margin to separate the elements */
 }
 </style>

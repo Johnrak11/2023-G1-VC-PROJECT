@@ -10,6 +10,7 @@ export const eventStores = defineStore("event", {
     reletedEvent: [],
     localHttp: "http://localhost:8080",
     pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
+    isSearch: false,
   }),
   gatters: {
     showEvents() {
@@ -87,15 +88,24 @@ export const eventStores = defineStore("event", {
     },
 
     async searchEvents(name, date, category) {
+      this.isSearch = true;
+      console.log(name, date, category);
       await baseAPI
         .get(
           `/search/customer/events?name=${name}&date=${date}&category_id=${category}`
         )
         .then((response) => {
           this.events = response.data.data;
+          this.isSearch = false;
+          var element = document.getElementById("nav-scroll");
+          element.scrollIntoView({ behavior: "smooth" });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.isSearch = false;
+          console.log(error);
+        });
     },
+
     async getEventPrice(eventId) {
       await baseAPI
         .get(`/eventDetail/${eventId}`)
