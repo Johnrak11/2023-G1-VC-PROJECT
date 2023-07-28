@@ -236,13 +236,8 @@ class EventController extends Controller
         //
         $eventBooking = Event::find($id);
         return new EventBookingResource($eventBooking);
-        // if (isset($eventBooking)) {
-        //     return response()->json(['status' => 'success', 'data' => $eventBooking], 200);
-        // } else {
-        //     return response()->json(['status' => false, 'data' => 'Id' . ' ' . $id . ' does not exist'], 404);
-        // }
     }
-
+    
     public function getOrganizerId($eventId)
     {
         $event = Event::find($eventId);
