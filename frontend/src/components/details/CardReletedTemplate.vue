@@ -79,6 +79,7 @@
                           {{ event.date }}
                         </p>
                       </div>
+                      
                       <div class="d-flex" style="margin-top: -5%; margin-left: -2%;">
                         <!-- <v-icon size="17">mdi-map-marker</v-icon> -->
                         <p style="font-size: 15px" class="ml-1 mt-2">
