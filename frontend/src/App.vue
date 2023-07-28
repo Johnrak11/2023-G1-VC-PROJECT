@@ -28,8 +28,8 @@ const shouldShowNavBar = computed(() => {
     !currentPath.startsWith("/login") &&
     !currentPath.startsWith("/register") &&
     !currentPath.startsWith("/tickets/scan/") &&
-    !currentPath.startsWith("/managerments") &&
     !currentPath.startsWith("/listusers") &&
+    !currentPath.startsWith("/management/") &&
     !currentPath.startsWith("/404")
 
   );
@@ -42,12 +42,15 @@ onMounted(() => {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Noto+Serif+Khmer:wght@400;600;800&display=swap');
+
 html {
   scroll-behavior: smooth;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Konkhmer Sleokchher', cursive;
+  font-family: 'Noto Serif Khmer', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

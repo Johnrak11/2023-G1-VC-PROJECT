@@ -1,5 +1,5 @@
 <template>
-  <navbar-dashboard />
+  <NavbarDashboard />
   <admin-event />
 </template>
 

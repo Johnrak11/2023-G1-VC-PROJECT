@@ -7,17 +7,13 @@
           <v-img class="align-end text-white" height="200" :src="eventInfor.image" cover></v-img>
         </router-link>
         <div class="d-flex justify-space-between">
-          <v-card-subtitle class="pt-4 d-flex">
-            <v-icon :color="liked ? 'red' : 'grey'" @click="liked = !liked">mdi-heart</v-icon>
-            <p class="mt-0">100</p>
-          </v-card-subtitle>
           <div class="d-flex ml-10 pt-6">
             <v-col cols="auto">
-              <v-dialog transition="dialog-bottom-transition" width="30%">
+              <v-dialog transition="dialog-bottom-transition bg-blue" width="30%">
                 <template v-slot:activator="{ props }">
-                  <div class="d-flex" style="margin-top: -45%">
-                    <v-icon icon="mdi-share" size="30" v-bind="props" @click="ClickShare(eventInfor.id)"></v-icon>
-                    <p class="mt-1">100</p>
+                  <div class="d-flex justify-end align-center share-btn" style="margin-top: -45%;">
+                    <p class="mt-1">Share</p>
+                    <v-icon icon="mdi-share-variant" size="23" v-bind="props" @click="ClickShare(eventInfor.id)"></v-icon>
                   </div>
                 </template>
                 <template v-slot:default="{ isActive }">
@@ -111,7 +107,6 @@ const eventInfor = ref(props.event);
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
 
-const liked = ref(false);
 
 function ClickShare(id) {
   console.log(id);
@@ -187,5 +182,10 @@ a {
 
 .social-share {
   text-decoration: none;
+}
+.share-btn{
+  gap: 5px;
+  width: 100%;
+  margin-left: -40%;
 }
 </style>

@@ -4,6 +4,41 @@
   "listMap": "listing map",
   "ticket": "Ticket",
   "dashboard": "Dashboard",
-  "management" : "management",
-  "logout" : "logout"
+  "management": "management",
+  "logout": "Logout",
+  "banner title": "LOCAL EVENT DISCOVERY",
+  "banner subtitle": "Easy to search, you just enter the keyword",
+  "search event": "Enter event name",
+  "select category": "Select category",
+  "select date": "Select date",
+  "search": "Search",
+  "search email": "Enter organizer email",
+
+  "list": {
+    "all": "All",
+    "workshop": "Workshop",
+    "concert": "Concert",
+    "sport": "Sport",
+    "art": "Art",
+    "business": "Business",
+    "Esport ": "E-sport "
+  },
+  "upcomingEvents": {
+    "main": "Upcoming Events",
+    "subtext": "Stay tuned for exciting events!"
+  },
+
+  "upcomingEventsInArea": {
+    "main": "Upcoming Events In Area",
+    "subtext": "Discover exciting events happening near you!"
+  },
+
+  "serviceCard1": {
+    "main": "Service",
+    "description": "EVENTPEAK is a comprehensive platform that empowers users to easily discover and explore a wide range of local events happening in their area. Whether it's music concerts, festivals, sports events, workshops, classes, theater performances, food and drink events, educational seminars, or social networking meetups, EVENTPEAK has it covered."
+  },
+  "serviceCard2": {
+    "main": "For Users",
+    "description": "We cater to a diverse group of individuals, including personal development seekers, career changers, entrepreneurs, lifelong learners, socializers, and young adults. EVENTPEAK enables them to stay informed about upcoming events, participate in activities that interest them, and engage with their local community."
+  }
 }

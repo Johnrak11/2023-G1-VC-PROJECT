@@ -97,7 +97,7 @@ export const eventCreateStores = defineStore("eventCreate", {
     },
 
     async createEvent() {
-      const {getOrganizerEvent} = eventPreviewStores()
+      const { getOrganizerEvent } = eventPreviewStores();
       this.isCreate = true;
       let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
       let newEvent = {
@@ -125,8 +125,8 @@ export const eventCreateStores = defineStore("eventCreate", {
       await baseAPI
         .post("/events", createRequest)
         .then((response) => {
-          console.log(response)
-          getOrganizerEvent(0)
+          console.log(response);
+          getOrganizerEvent(0);
           this.isCreate = false;
         })
         .catch((error) => {

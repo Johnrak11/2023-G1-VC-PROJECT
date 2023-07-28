@@ -6,19 +6,12 @@
     <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <!-- <router-link to="/" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">
-              Home</v-btn>
-          </router-link>
-          <router-link to="/explore" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
-          </router-link> -->
           <router-link to="/" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text"></v-btn>
-              {{ t("home") }}
+            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">{{ t("home") }}</v-btn>
           </router-link>
           <router-link to="/explore" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">{{ t("explore") }}</v-btn>
+            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">{{ t("explore")
+            }}</v-btn>
           </router-link>
           <router-link to="/listMap" class="link">
             <v-btn id="li-nav" :class="{ active: isActive('/listMap') }" class="rounded" variant="text">
@@ -27,7 +20,7 @@
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile align-center">
-        <select v-model="language" @change="changeLanguage">
+        <select v-model="language" @change="changeLanguage" class="mr-3">
           <option value="en">English</option>
           <option value="kh">ខ្មែរ</option>
         </select>
@@ -83,7 +76,7 @@
 <script setup>
 import router from "@/routes/router.js";
 import NotificationComponent from "../../notification/NotificationComponent.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { userStore } from "@/stores/user.js";
 import { sessionStore } from "@/stores/session.js";
 const { getSession } = sessionStore();
@@ -116,17 +109,28 @@ window.addEventListener("scroll", () => {
 
 const navbarTop = ref("0");
 
-
+import { cookieStore } from '@/stores/cookies.js'
+const { getCookie, setCookie } = cookieStore()
 
 import { useI18n } from 'vue-i18n';
 
-const { t, locale } = useI18n();
+const { t, locale, messages } = useI18n();
 
 const language = ref('en')
 function changeLanguage() {
+  console.log(messages)
   console.log(locale.value)
   locale.value = language.value;
+  setCookie('language', locale.value)
 }
+
+onMounted(() => {
+  let isLanguage = getCookie('language')
+  if (isLanguage) {
+    locale.value = isLanguage;
+    language.value = isLanguage
+  }
+})
 </script>
 <style scoped>
 .nav-bar {
