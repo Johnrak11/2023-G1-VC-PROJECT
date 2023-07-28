@@ -35,7 +35,7 @@
                           v-bind="props"
                           @click="ClickShare(event.id)"
                         ></v-icon>
-                        <p class="mt-1">100</p>
+                        <p class="mt-1 ml-2">100</p>
                       </div>
                     </template>
                     <template v-slot:default="{ isActive }">
@@ -146,28 +146,28 @@
           <br />
         </div>
         <div class="col-md-6">
-          <h1 v-if="event">{{ event.name }}</h1>
+          <h1 v-if="event" style="margin-top: -3%;">{{ event.name }}</h1>
           <p class="mt-5" v-if="event">
             {{ event.description }}
           </p>
           <div class="contact d-flex justify-space-between">
             <div class="icons mt-3 d-flex flex-column justify-space-between">
               <div class="d-flex">
-                <v-icon class="icon1"> mdi-calendar</v-icon>
+                <v-icon color="grey" class="icon1"> mdi-calendar</v-icon>
                 <p class="ml-4" v-if="event">{{ event.date }}</p>
               </div>
-              <div class="d-flex g-icon">
-                <v-icon class="icon1"> mdi-map-clock</v-icon>
+              <div class="d-flex g-icon" >
+                <v-icon color="grey" class="icon1"> mdi-map-clock</v-icon>
                 <p class="ml-4" v-if="event">{{ event.time }}</p>
               </div>
               <div class="d-flex g-icon">
-                <v-icon class="icon1">mdi-map-marker-radius</v-icon>
+                <v-icon color="grey" class="icon1">mdi-map-marker-radius</v-icon>
                 <p class="ml-4 location-text" v-if="event">
                   {{ event.location }}
                 </p>
               </div>
               <div class="d-flex g-icon align-center">
-                <v-icon class="icon1" size="26">mdi-cash</v-icon>
+                <v-icon color="grey" class="icon1" size="26">mdi-cash</v-icon>
                 <h2
                   class="ml-3 text-red"
                   v-if="eventDetail && eventDetail.price"
@@ -309,12 +309,15 @@ h1 {
 }
 
 .g-icon {
-  margin-top: -10%;
+  margin-top: -16vh;
 }
 
 .detail p {
   font-size: 18px;
   line-height: 1.5;
   margin-bottom: 20px;
+}
+.social-share {
+  text-decoration: none;
 }
 </style>

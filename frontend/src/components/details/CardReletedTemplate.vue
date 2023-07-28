@@ -15,47 +15,108 @@
                 <v-col cols="auto">
                   <v-dialog transition="dialog-bottom-transition" width="30%">
                     <template v-slot:activator="{ props }">
-                      <div class="d-flex" style="margin-top: -80%;">
-                        <v-icon  icon="mdi-share-variant" size="25" v-bind="props" @click="ClickShare(event.id)"></v-icon>
+                      <div class="d-flex" style="margin-top: -10%; margin-left: 190px;">
+                        <v-icon icon="mdi-share-variant" size="25" v-bind="props" @click="ClickShare(event.id)"></v-icon>
                         <p class="mt-1"></p>
                       </div>
                     </template>
                     <template v-slot:default="{ isActive }">
-                      <v-card class="dialog d-flex w-100" style="overflow-y: hidden">
+                      <v-card
+                        class="dialog d-flex w-100"
+                        style="overflow-y: hidden"
+                      >
                         <v-toolbar color="red" title="Share"></v-toolbar><br />
-                        <div class="d-flex justify-space-evenly" style="height: 10vh">
-                          <ShareNetwork network="facebook" :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name" :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
-                            class="social-share">
-                            <v-icon left class="ml-2 color-icon" size="50" style="height: 5vh">mdi-facebook</v-icon>
+                        <div
+                          class="d-flex justify-space-evenly"
+                          style="height: 10vh"
+                          v-if="event"
+                        >
+                          <ShareNetwork
+                            network="facebook"
+                            :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name"
+                            :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You"
+                            hashtags="vuejs,vite"
+                            class="social-share"
+                          >
+                            <v-icon
+                              left
+                              class="ml-2 mt-3 color-icon"
+                              color="blue"
+                              size="50"
+                              style="height: 5vh"
+                              >mdi-facebook</v-icon
+                            >
                             <p class="text-black mt-5">Facebook</p>
                           </ShareNetwork>
-                          <ShareNetwork network="telegram" :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name" :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
-                            class="social-share">
-                            <v-icon left class="ml-2 color-icon" size="50">mdi-telegram</v-icon>
-                            <p class="text-black mt-2">Telegram</p>
+                          <ShareNetwork
+                            network="telegram"
+                            :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name"
+                            :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You"
+                            hashtags="vuejs,vite"
+                            class="social-share"
+                            id="my-iframe"
+                            allow-same-origin
+                          >
+                            <img :src="event.img" alt="" />
+                            <!-- <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-telegram</v-icon> -->
+                            <img 
+                              src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png"
+                              alt=""
+                              width="67"
+                            />
+                            <p class="text-black" style="margin-top: -20%">
+                              Telegram
+                            </p>
                           </ShareNetwork>
-                          <ShareNetwork network="linkedin" :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name" :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
-                            class="social-share">
-                            <v-icon left class="ml-2 color-icon" size="50">mdi-linkedin</v-icon>
+                          <ShareNetwork
+                            network="linkedin"
+                            :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name"
+                            :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You"
+                            hashtags="vuejs,vite"
+                            class="social-share"
+                          >
+                            <v-icon
+                              left
+                              class="ml-2 color-icon"
+                              color="blue"
+                              size="50"
+                              >mdi-linkedin</v-icon
+                            >
                             <p class="text-black mt-2">Linkedin</p>
                           </ShareNetwork>
-                          <ShareNetwork network="whatsapp" :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name" :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
-                            class="social-share">
-                            <v-icon left class="ml-2 color-icon" size="50">mdi-whatsapp</v-icon>
+                          <ShareNetwork
+                            network="whatsapp"
+                            :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name"
+                            :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You"
+                            hashtags="vuejs,vite"
+                            class="social-share"
+                          >
+                            <v-icon
+                              left
+                              class="ml-2 color-icon"
+                              color="green"
+                              size="50"
+                              >mdi-whatsapp</v-icon
+                            >
                             <p class="text-black mt-2">Whatsapp</p>
                           </ShareNetwork>
                         </div>
                         <br />
                         <v-card-actions class="justify-center">
-                          <v-btn variant="text" @click="isActive.value = false">Close</v-btn>
+                          <v-btn
+                            variant="text"
+                            @click="isActive.value = false"
+                            style="width: 100%"
+                            >Close</v-btn
+                          >
                         </v-card-actions>
                       </v-card>
                     </template>
