@@ -174,7 +174,7 @@ h1 {
 }
 
 .g-icon {
-  margin-top: -40%;
+  margin-top: -10%;
 }
 
 
