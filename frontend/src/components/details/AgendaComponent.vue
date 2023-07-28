@@ -3,10 +3,10 @@
     <div class="agenda-page d-flex flex-column">
       <div class="agenda d-flex bg-red justify-space-between pa-1">
         <h2 class="mt-1 ml-3">{{ "AGENDA" }}</h2>
-        <p class="mt-1 mr-3">Today</p>
+        <p class="mt-2 mr-3">Today</p>
       </div>
 
-      <div style="display: flex; height: 160px">
+      <div style="display: flex; height: 139px">
         <div
           v-if="items.length === 0"
           class="d-flex justify-center align-center bg-grey-lighten-2 empty-agenda"
@@ -22,15 +22,16 @@
             <div
               v-for="(card, index) in item"
               :key="index"
-              class="card1 d-flex bg-grey-lighten-2"
+              class="card1 d-flex bg-grey-lighten-2" 
             >
               <div class="info mt-3 ml-4">
                 <h2>{{ card.title }}</h2>
+                <p class=" mt-3">{{ card.description }}</p>
                 <div class="d-flex mt-4">
-                  <v-icon color="red"> mdi-calendar</v-icon>
-                  <p class="ml-4 mt-1">{{ card.date }}</p>
+                  <v-icon color="red" style="margin-top: -3%;"> mdi-calendar</v-icon>
+                  <p class="ml-4" style="margin-top: -3%;">{{ card.date }}</p>
                 </div>
-                <p class="ml-10">{{ card.description }}</p>
+                
               </div>
             </div>
           </template>
@@ -101,7 +102,7 @@ p {
 }
 
 .agenda {
-  border-radius: 6px 6px 2px 2px;
+  border-radius: 4px 4px 2px 2px;
 }
 
 .agenda-page {
@@ -110,12 +111,13 @@ p {
 
 .empty-agenda {
   width: 100%;
-  border-radius: 2px 2px 6px 6px;
+  border: 1px solid rgba(238, 142, 142, 0.718);
+  border-radius: 2px 2px 4px 4px;
 }
 .card1 {
-  border: 1px solid rgb(225, 216, 216);
+  border: 1px solid rgba(238, 142, 142, 0.718);
   width: 100%;
-  border-radius: 2px 2px 6px 6px;
+  border-radius: 2px 2px 4px 4px;
 }
 
 .info,
@@ -125,6 +127,7 @@ p {
 
 .organizer {
   width: 60%;
+  border: 1px solid rgba(238, 142, 142, 0.718);
   border-radius: 6px;
 }
 

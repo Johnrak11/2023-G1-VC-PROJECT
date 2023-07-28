@@ -1,5 +1,5 @@
 <template>
-  <div class="row bg-grey-lighten-2">
+  <div class="row ">
     <div class="col-md-4">
       
         <cardTemplate :eventInfor="props.event"></cardTemplate>

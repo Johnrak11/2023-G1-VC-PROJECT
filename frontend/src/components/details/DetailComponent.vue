@@ -13,20 +13,17 @@
           <div class="d-flex mt-2 justify-space-between">
             <div class="icon-left d-flex">
               <div class="d-flex">
-                <v-icon class="mt-1" :color="liked ? 'grey' : 'red'" @click="liked = !liked">mdi-heart</v-icon>
-                <p class="mt-1 ml-2">100</p>
-              </div>
-              <div class="d-flex ml-10">
-                <v-icon icon="mdi-share" size="30"></v-icon>
-                <p class="mt-1 ml-2">100</p>
-              </div>
-            </div>
-            <div class="icon-right">
-              <div class="d-flex">
-                <v-icon class="mr-2" icon="mdi-ticket" size="30"></v-icon>
+                <v-icon  icon="mdi-ticket" size="30"></v-icon>
                 <h3 class="tic mt-1 ml-2" v-if="eventDetail">{{ eventDetail.available_ticket }}</h3>
               </div>
             </div>
+              <div class=" icon-right ">
+                <div class="d-flex ">
+                  <v-icon class="mr-2" icon="mdi-share-variant" size="30"></v-icon>
+                  <p class="mt-1 ml-2">100</p>
+                </div>
+              </div>
+            
           </div>
           <br />
         </div>
@@ -38,15 +35,15 @@
           <div class="contact d-flex justify-space-between">
             <div class="icons mt-3 d-flex flex-column justify-space-between">
               <div class="d-flex">
-                <v-icon class="icon1"> mdi-calendar</v-icon>
+                <v-icon class="icon1" > mdi-calendar</v-icon>
                 <p class="ml-4" v-if="event">{{ event.date }}</p>
               </div>
               <div class="d-flex g-icon">
                 <v-icon class="icon1"> mdi-map-clock</v-icon>
                 <p class="ml-4" v-if="event">{{ event.time }}</p>
               </div>
-              <div class="d-flex g-icon">
-                <v-icon class="icon1">mdi-map-marker</v-icon>
+              <div class="d-flex g-icon" >
+                <v-icon class="icon1">mdi-map-marker-radius</v-icon>
                 <p class="ml-4 location-text" v-if="event">{{ event.location }}</p>
               </div>
               <div class="d-flex g-icon align-center">
@@ -87,8 +84,6 @@ import ShowMap from "../maps/ShowMap.vue";
 import listCard from "./ListCardDetail.vue";
 import baseAPI from "@/stores/axiosHandle.js";
 import { useRoute } from "vue-router";
-
-const liked = ref(false);
 const event = ref(null);
 const eventDetail = ref(null);
 
@@ -179,7 +174,7 @@ h1 {
 }
 
 .g-icon {
-  margin-top: -8%;
+  margin-top: -40%;
 }
 
 

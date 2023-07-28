@@ -5,7 +5,7 @@
         v-slot="{ isSelected, toggle }">
         <v-hover v-slot="{ isHovering, props }" class="card">
           <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
-            class="card bg-grey-lighten-2 ml-5 hover" :color="isSelected ? 'red' : 'grey-lighten-1'" @click="toggle">
+            class="card  ml-5 hover" :color="isSelected ? 'red' : 'grey-lighten-1'" @click="toggle">
             <router-link :to="`/eventRaleted/${event.id}`">
               <v-img class="align-end text-white" height="50%" max-width="100vh" :src="event.image" cover></v-img>
             </router-link>
@@ -15,8 +15,8 @@
                 <v-col cols="auto">
                   <v-dialog transition="dialog-bottom-transition" width="30%">
                     <template v-slot:activator="{ props }">
-                      <div class="d-flex" style="margin-top: -80%">
-                        <v-icon icon="mdi-share" size="30" v-bind="props" @click="ClickShare(event.id)"></v-icon>
+                      <div class="d-flex" style="margin-top: -80%;">
+                        <v-icon  icon="mdi-share-variant" size="25" v-bind="props" @click="ClickShare(event.id)"></v-icon>
                         <p class="mt-1"></p>
                       </div>
                     </template>
@@ -138,7 +138,7 @@ onMounted(() => {
 .card {
   width: 25%;
   height: 65vh;
-
+  
   flex-direction: column;
 }
 
