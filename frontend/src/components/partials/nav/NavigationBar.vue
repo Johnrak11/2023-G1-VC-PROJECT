@@ -6,16 +6,8 @@
     <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%">
       <v-left-content class="ml-16">
         <ul class="d-flex justify-space-evenly mt-2">
-          <!-- <router-link to="/" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">
-              Home</v-btn>
-          </router-link>
-          <router-link to="/explore" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">Explore</v-btn>
-          </router-link> -->
           <router-link to="/" class="link">
-            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text"></v-btn>
-              {{ t("home") }}
+            <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">{{ t("home") }}</v-btn>
           </router-link>
           <router-link to="/explore" class="link">
             <v-btn id="li-nav" :class="{ active: isActive('/explore') }" class="rounded" variant="text">{{ t("explore")

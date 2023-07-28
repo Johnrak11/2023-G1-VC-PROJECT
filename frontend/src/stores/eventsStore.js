@@ -11,6 +11,7 @@ export const eventStores = defineStore("event", {
     localHttp: "http://localhost:8080",
     pagination: { currentPage: 1, lastPage: 5, links: [], totalPage: 1 },
     isSearch: false,
+    errorMessage: "",
   }),
   gatters: {
     showEvents() {
@@ -19,7 +20,6 @@ export const eventStores = defineStore("event", {
   },
   actions: {
     async getDataAxios() {
-      // this.isLoader = true;
       await baseAPI
         .get("/events")
         .then((response) => {
@@ -51,7 +51,6 @@ export const eventStores = defineStore("event", {
         .get(`/events?page=${pageNumber}`)
         .then((response) => {
           let responeseData = response.data.data;
-          // console.log(responeseData);
           this.events = responeseData.data;
           this.pagination.currentPage = responeseData.current_page;
           this.pagination.lastPage = responeseData.last_page;
@@ -73,7 +72,6 @@ export const eventStores = defineStore("event", {
           } else {
             this.recommendEventLimit = responseData;
           }
-          console.log(this.recommendEventLimit);
         })
         .catch((error) => console.log(error));
     },
@@ -117,12 +115,19 @@ export const eventStores = defineStore("event", {
     },
 
     async searchEventsByAdmin(name, email) {
+      this.isSearch = true;
+      console.log(name, email);
       await baseAPI
         .get(`/search/admin/searchEvent?name=${name}&email=${email}`)
         .then((response) => {
           this.events = response.data.data;
+          this.isSearch = false;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.events = [];
+          this.isSearch = false;
+          this.errorMessage = error.response.data.message;
+        });
     },
 
     async deleteEvent(eventId) {

@@ -166,7 +166,7 @@ const ticketDescriptionRules = ref([
         (v && v.length >= 5) || "Ticket description must be at least 5 characters",
 ]);
 
-async function ticketSubmit() {
+async function ticketSubmit() { 
     const isFormValid = validateForm();
     console.log(isFormValid);
     if (!isFormValid) {

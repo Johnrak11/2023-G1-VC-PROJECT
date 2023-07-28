@@ -64,7 +64,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::prefix('/search')->group(function () {
         Route::prefix('/admin')->group(function () {
-            Route::get('/searchEvent', [EventController::class, 'searchEventsName']);
+            Route::get('/searchEvent', [EventController::class, 'searchEventsByAdmin']);
         });
     });
     

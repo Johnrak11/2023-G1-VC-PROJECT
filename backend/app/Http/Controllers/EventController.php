@@ -124,6 +124,7 @@ class EventController extends Controller
         $events = Event::where('organizer_id', $userId)->get();
         return response()->json(['message' => 'success', 'data' => $events], 200);
     }
+
     public function getEventId($eventId)
     {
         $userId = Auth::user()->id;
@@ -297,20 +298,28 @@ class EventController extends Controller
         return response()->json(['success' => true, 'data' => $events], 200);
     }
 
-    public function searchEventsName(Request $request)
+
+    public function searchEventsByAdmin(Request $request)
     {
         $organizer = Auth::user();
         if ($organizer->role !== 'admin') {
             return response()->json(['message' => 'No permission to search events'], 403);
         }
+
         $eventList = Event::query();
 
         if ($request->filled('name')) {
             $eventList->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-        if ($request->filled('email') && $organizer->email === $request->input('email')) {
-            $eventList->where('organizer_id', $organizer->id);
+        if ($request->filled('email')) {
+            $user = User::where('email',  'like', '%' . $request->input('email') . '%')->first();
+
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'Organizer email not found.'], 404);
+            }
+
+            $eventList->where('organizer_id', $user->id);
         }
 
         $events = $eventList->get();
@@ -321,6 +330,7 @@ class EventController extends Controller
 
         return response()->json(['success' => true, 'data' => $events], 200);
     }
+
 
     // =============== Update========
 
@@ -471,7 +481,7 @@ class EventController extends Controller
         return $agenda;
     }
 
-    
+
     public function getEditInfor($eventId)
     {
         $userId = Auth::user()->id;

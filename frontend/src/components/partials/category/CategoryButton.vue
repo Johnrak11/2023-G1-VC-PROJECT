@@ -1,16 +1,22 @@
 <template>
-    <div style="margin-top: 18%;margin-bottom: 5%;">
-        <ul class="d-flex justify-space-evenly">
-            <li>All</li>
-            <li>Workshop</li>
-            <li>Concert</li>
-            <li>Sport</li>
-            <li>Art</li>
-            <li>Business</li>
-            <li>Free</li>
+    <div style="margin-top: 18%;margin-bottom: 5%; margin-left: 5%;">
+        <ul disabled class="d-flex justify-space-between">
+            <li>{{t('list.all')}}</li>
+            <li>{{ t('list.workshop') }}</li>
+            <li>{{ t('list.concert') }}</li>
+            <li>{{ t('list.sport') }}</li>
+            <li>{{ t('list.art') }}</li>
+            <li>{{ t('list.business') }}</li>
+            <li>{{ t('list.esport') }}</li>
         </ul>
     </div>
 </template>
+
+<script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+</script>
+
 <style scoped>
 ul {
     list-style: none;
@@ -24,11 +30,11 @@ li {
     border-radius: 2px;
 }
 
-li:hover {
+/* li:hover {
     padding: 5px 20px 5px 20px;
     background-color: red;
     border-radius: 5px;
     color: white;
     cursor: pointer;
-}
+} */
 </style>

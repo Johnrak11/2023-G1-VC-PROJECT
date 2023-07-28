@@ -4,9 +4,6 @@
       <router-link to="/" class="d-flex justify-center aling-center">
         <v-btn append-icon="mdi-logout" class="bg-red"> Leave </v-btn>
       </router-link>
-      <v-badge content="2" color="error" class="mt-2 mr-5">
-        <v-icon>mdi-bell-outline</v-icon>
-      </v-badge>
       <select class="mr-5">
         <option value="">ED/KH</option>
         <option value="">English</option>
@@ -22,10 +19,12 @@ select {
   padding-left: 10px;
   padding-right: 10px;
 }
-a{
+
+a {
   text-decoration: none;
-  
+
 }
+
 .navbar {
   overflow: hidden;
   position: fixed;
