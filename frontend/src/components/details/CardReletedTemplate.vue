@@ -9,18 +9,15 @@
             <router-link :to="`/eventRaleted/${event.id}`">
               <v-img class="align-end text-white" height="50%" max-width="100vh" :src="event.image" cover></v-img>
             </router-link>
-            <div class="d-flex justify-space-between">
-              <v-card-subtitle class="pt-4 d-flex">
-                <v-icon :color="liked ? 'red' : 'grey'" @click="liked = !liked">mdi-heart</v-icon>
-                <p class="mt-0">100</p>
-              </v-card-subtitle>
-              <div class="d-flex ml-10 pt-6">
+            <div class="d-flex ">
+              
+              <div class="d-flex pt-6">
                 <v-col cols="auto">
                   <v-dialog transition="dialog-bottom-transition" width="30%">
                     <template v-slot:activator="{ props }">
-                      <div class="d-flex" style="margin-top: -45%">
+                      <div class="d-flex" style="margin-top: -80%">
                         <v-icon icon="mdi-share" size="30" v-bind="props" @click="ClickShare(event.id)"></v-icon>
-                        <p class="mt-1">100</p>
+                        <p class="mt-1"></p>
                       </div>
                     </template>
                     <template v-slot:default="{ isActive }">
@@ -72,17 +69,17 @@
                   <router-link :to="`/eventRaleted/${event.id}`">
                     <div>
                       <div>
-                        <v-card-title class="text-black" style="margin-left: -5%;">{{ eventInfor.name }}</v-card-title>
+                        <v-card-title class="text-black" style="margin-left: -8%;">{{ eventInfor.name }}</v-card-title>
                       </div>
                       <!-- <p>{{ eventInfor.description }}</p> -->
-                      <div class="d-flex" style="margin-top: -2%;">
+                      <div class="d-flex" style=" margin-left: -2%;">
                         <!-- <v-icon size="17"> mdi-calendar</v-icon> -->
-                        <p class="ml-1" style="font-size: 15px">
+                        <p class="ml-1" style="font-size: 15px" mt-2>
                           Date:
                           {{ event.date }}
                         </p>
                       </div>
-                      <div class="d-flex" style="margin-top: -5%">
+                      <div class="d-flex" style="margin-top: -5%; margin-left: -2%;">
                         <!-- <v-icon size="17">mdi-map-marker</v-icon> -->
                         <p style="font-size: 15px" class="ml-1 mt-2">
                           Venue:
@@ -95,7 +92,7 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="white" class="bg-red mb-3" @click.prevent="booking(event.id)" style="width: 100%;">
+              <v-btn color="white" class="bg-red mb-3 mt-3" @click.prevent="booking(event.id)" style="width: 100%;">
                 Booking
               </v-btn>
             </v-card-actions>
@@ -115,7 +112,6 @@ import { eventCreateStores } from "@/stores/eventCreate.js";
 const eventCreate = eventCreateStores();
 
 const eventStore = eventStores();
-const liked = ref(false);
 
 function ClickShare(id) {
   console.log(id);
