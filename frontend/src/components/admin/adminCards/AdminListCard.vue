@@ -6,7 +6,7 @@
             </li>
         </ul>
         <v-card class="bg-white pa-5 mr-10 rounded ml-8" :elevation="5">
-            <h3>Event(2)</h3>
+            <h3>Event({{ events.events.length }})</h3>
             <div>
                 <div class="d-flex w-50" style="margin-right: 8%">
                     <v-text-field :loading="loading" density="compact" variant="solo" label="Search tickets..."

@@ -13,6 +13,8 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import JsonExcel from "vue-json-excel";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
+
+
 // ----- scroll animation -----
 
 // reference https://egghead.io/blog/how-to-use-the-animate-on-scroll-aos-library-in-vue
@@ -48,6 +50,7 @@ app.use(VueSocialSharing);
 app.use(pinia);
 app.use(AOS);
 app.use(i18n);
+
 
 
 app.component("navigation-bar", NavigationBar);

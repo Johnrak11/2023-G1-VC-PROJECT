@@ -81,6 +81,7 @@ function listMapBeforeEnter() {
 }
 
 import ManagermentEvent from "../views/admin/ManagermentEvent.vue";
+import ListUsers from "../views/admin/user/ListUsers.vue";
 
 const routes = [
   {
@@ -179,6 +180,12 @@ const routes = [
     path: "/management/event/delete",
     name: "deleteEvent",
     component: ManagermentEvent,
+    beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
+  },
+  {
+    path: "/listusers",
+    name: "List users",
+    component: ListUsers,
     beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
   },
   {
