@@ -1,23 +1,46 @@
 <template>
   <v-sheet class="bg-grey-lighten-2" elevation="8" width="100%">
     <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
-      <v-slide-group-item class="group-card ml-5" v-for="(event, index) in eventStore.reletedEvent" :key="index"
-        v-slot="{ isSelected, toggle }">
+      <v-slide-group-item
+        class="group-card ml-5"
+        v-for="(event, index) in eventStore.reletedEvent"
+        :key="index"
+        v-slot="{ isSelected, toggle }"
+      >
         <v-hover v-slot="{ isHovering, props }" class="card">
-          <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
-            class="card  ml-5 hover" :color="isSelected ? 'red' : 'grey-lighten-1'" @click="toggle">
+          <v-card
+            :elevation="isHovering ? 24 : 2"
+            :class="{ 'on-hover': isHovering }"
+            v-bind="props"
+            class="card ml-5 hover"
+            :color="isSelected ? 'red' : 'grey-lighten-1'"
+            @click="toggle"
+          >
             <router-link :to="`/eventRaleted/${event.id}`">
-              <v-img class="align-end text-white" height="50%" max-width="100vh" :src="event.image" cover></v-img>
+              <v-img
+                class="align-end text-white"
+                height="50%"
+                max-width="100vh"
+                :src="event.image"
+                cover
+              ></v-img>
             </router-link>
-            <div class="d-flex ">
-              
+            <div class="d-flex">
               <div class="d-flex pt-6">
                 <v-col cols="auto">
                   <v-dialog transition="dialog-bottom-transition" width="30%">
                     <template v-slot:activator="{ props }">
-                      <div class="d-flex" style="margin-top: -10%; margin-left: 190px;">
-                        <v-icon icon="mdi-share-variant" size="25" v-bind="props" @click="ClickShare(event.id)"></v-icon>
-                        <p class="mt-1"></p>
+                      <div
+                        class="d-flex justify-end align-center share-btn"
+                        style="margin-top: -45%"
+                      >
+                        <p class="mt-1">Share</p>
+                        <v-icon
+                          icon="mdi-share-variant"
+                          size="23"
+                          v-bind="props"
+                          @click="ClickShare(eventInfor.id)"
+                        ></v-icon>
                       </div>
                     </template>
                     <template v-slot:default="{ isActive }">
@@ -63,7 +86,7 @@
                           >
                             <img :src="event.img" alt="" />
                             <!-- <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-telegram</v-icon> -->
-                            <img 
+                            <img
                               src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png"
                               alt=""
                               width="67"
@@ -130,18 +153,25 @@
                   <router-link :to="`/eventRaleted/${event.id}`">
                     <div>
                       <div>
-                        <v-card-title class="text-black" style="margin-left: -8%;">{{ eventInfor.name }}</v-card-title>
+                        <v-card-title
+                          class="text-black"
+                          style="margin-left: -8%"
+                          >{{ eventInfor.name }}</v-card-title
+                        >
                       </div>
                       <!-- <p>{{ eventInfor.description }}</p> -->
-                      <div class="d-flex" style=" margin-left: -2%;">
+                      <div class="d-flex" style="margin-left: -2%">
                         <!-- <v-icon size="17"> mdi-calendar</v-icon> -->
                         <p class="ml-1" style="font-size: 15px" mt-2>
                           Date:
                           {{ event.date }}
                         </p>
                       </div>
-                      
-                      <div class="d-flex" style="margin-top: -5%; margin-left: -2%;">
+
+                      <div
+                        class="d-flex"
+                        style="margin-top: -5%; margin-left: -2%"
+                      >
                         <!-- <v-icon size="17">mdi-map-marker</v-icon> -->
                         <p style="font-size: 15px" class="ml-1 mt-2">
                           Venue:
@@ -154,7 +184,12 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="white" class="bg-red mb-3 mt-3" @click.prevent="booking(event.id)" style="width: 100%;">
+              <v-btn
+                color="white"
+                class="bg-red mb-3 mt-3"
+                @click.prevent="booking(event.id)"
+                style="width: 100%"
+              >
                 Booking
               </v-btn>
             </v-card-actions>
@@ -184,7 +219,7 @@ const props = defineProps({
 });
 
 function booking(id) {
-  router.push('/booking/' + id);
+  router.push("/booking/" + id);
   // console.log(eventInfor.value.id);
 }
 
@@ -199,7 +234,7 @@ onMounted(() => {
 .card {
   width: 25%;
   height: 65vh;
-  
+
   flex-direction: column;
 }
 
