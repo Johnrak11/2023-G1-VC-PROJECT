@@ -139,8 +139,8 @@ function submitUpdateEvent() {
 
 .all-form-container {
   width: 60%;
-  background-color: rgb(228, 228, 228);
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(70, 70, 70, 0.35) 0px 5px 10px;
 }
 
 .btn-tab {

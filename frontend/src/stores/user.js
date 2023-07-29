@@ -3,6 +3,7 @@ import baseAPI from "./axiosHandle.js";
 import { cookieStore } from "./cookies.js";
 import { sessionStore } from "./session.js";
 
+
 export const userStore = defineStore("user", {
   state: () => ({
     userId: "",
@@ -12,7 +13,7 @@ export const userStore = defineStore("user", {
   }),
   actions: {
     async getUserInfor() {
-      const { setSession, getSession } = sessionStore();
+      const { setSession } = sessionStore();
       await baseAPI
         .get("/auth/user")
         .then((response) => {
@@ -20,7 +21,6 @@ export const userStore = defineStore("user", {
           if (loginHandle.success) {
             this.user = loginHandle.user;
             setSession("role", this.user.role);
-            console.log(getSession("role"));
           }
         })
         .catch((error) => console.log(error));
@@ -52,14 +52,17 @@ export const userStore = defineStore("user", {
     },
 
     async searchUsers(search) {
-      await baseAPI.get("/admin/search/users", {
+      await baseAPI
+        .get("/admin/search/users", {
           params: {
             email: search,
           },
-        }).then((response) => {
-          this.users = response.data.data.data
-          console.log(response.data.data.data) ;
-        }).catch((error) => console.log(error));
+        })
+        .then((response) => {
+          this.users = response.data.data.data;
+          console.log(response.data.data.data);
+        })
+        .catch((error) => console.log(error));
     },
   },
 });

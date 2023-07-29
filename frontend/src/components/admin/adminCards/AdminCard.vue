@@ -47,17 +47,8 @@
 
 <script setup>
 import VerticalButton from "../../buttons/VerticalButton.vue";
-// import { defineProps } from 'vue';
 import { eventStores } from '@/stores/eventsStore.js'
 const events = eventStores()
-// import { sweetAlert } from '@/stores/sweetAlert.js';
-// const alert = sweetAlert()
-
-// const props = defineProps({
-//   eventInfor: Object
-// })
-// import { onMounted } from 'vue'
-
 </script>
 <style scoped>
 .text {

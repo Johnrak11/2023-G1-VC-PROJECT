@@ -1,26 +1,28 @@
 <template>
   <div class="container">
     <v-row justify="center">
-      <button-component-form @click="dialog = !dialog">Payment</button-component-form>
+      <div class="bnt-container" style="width: 100%;">
+        <v-btn type="submit" color="red" class="mr-2" @click="dialog = !dialog">Payment</v-btn>
+      </div>
       <v-dialog v-model="dialog" width="40%">
         <v-card>
           <v-card-title class="text-red mt-5">
             Payment
           </v-card-title>
           <form action="" class="ml-5 mb-5">
-            <v-text-field type="number" class="text-start mr-5" v-model="cardNumber" label="Number of credit card" variant="outlined"
-              :rules="[requiredRule, cardNumberRule]" maxlength="19"><img v-if="creditCardType"
+            <v-text-field type="number" class="text-start mr-5" v-model="cardNumber" label="Number of credit card"
+              variant="outlined" :rules="[requiredRule, cardNumberRule]" maxlength="19"><img v-if="creditCardType"
                 :src="creditCardType.message"></v-text-field>
-            <v-text-field v-model="expirationCard" type="date" class="text-start mr-5" label="Expiration" variant="outlined" :rules="[requiredRule, expirationRule]"
-              maxlength="10"></v-text-field>
-            <v-text-field v-model="cvvCard" type="number" class="text-start mr-5" label="CVV" variant="outlined" :rules="[requiredRule, cvvRule]"
-              maxlength="4"></v-text-field>
-            <v-text-field v-model="nameCard" label="Name on Card" variant="outlined" class="text-start mr-5" :rules="[requiredRule]" maxlength="50"></v-text-field>
+            <v-text-field v-model="expirationCard" type="date" class="text-start mr-5" label="Expiration"
+              variant="outlined" :rules="[requiredRule, expirationRule]" maxlength="10"></v-text-field>
+            <v-text-field v-model="cvvCard" type="number" class="text-start mr-5" label="CVV" variant="outlined"
+              :rules="[requiredRule, cvvRule]" maxlength="4"></v-text-field>
+            <v-text-field v-model="nameCard" label="Name on Card" variant="outlined" class="text-start mr-5"
+              :rules="[requiredRule]" maxlength="50"></v-text-field>
             <v-card-actions>
-              <!-- <button-component-form @click.prevent="saveData" class="ml-15">Pay</button-component-form> -->
               <v-btn @click.prevent="saveData" class="btn bg-red">PAY</v-btn>
             </v-card-actions>
-          </form >
+          </form>
         </v-card>
       </v-dialog>
     </v-row>
@@ -32,7 +34,6 @@ import masterCard from "../../assets/credit_card/mastercard.png";
 import discover from "../../assets/credit_card/discover.png";
 import americanCard from "../../assets/credit_card/american_express.png";
 import { ref, computed, defineProps } from 'vue';
-import ButtonComponentForm from '../buttons/ButtonComponentForm.vue';
 import baseAPI from "@/stores/axiosHandle.js";
 import { ticketStore } from "@/stores/ticketStore";
 import { sweetAlert } from "@/stores/sweetAlert";
@@ -149,7 +150,8 @@ img {
   width: 12%;
   margin-top: 0;
 }
-.btn{
+
+.btn {
   margin-left: 85%;
 }
 </style>

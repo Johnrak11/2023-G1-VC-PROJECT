@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle";
 import router from "@/routes/router.js";
+import { sweetAlert } from "./sweetAlert";
 export const ticketStore = defineStore("ticket", {
   state: () => ({
     tickets: [],
@@ -48,6 +49,7 @@ export const ticketStore = defineStore("ticket", {
     },
 
     async createTicket(eventId) {
+       const { alertMessage }=sweetAlert()
       const bookingDate = new Date().toISOString().substring(0, 10);
       const ticketData = {
         ticket_code: this.generateTicketCode(),
@@ -60,9 +62,11 @@ export const ticketStore = defineStore("ticket", {
         if (response.status === 200) {
           console.log(response.data);
           this.tickets = response.data.data;
+          alertMessage("success", "Register Successfully");
           router.push("/tickets");
         }
       } catch (error) {
+        alertMessage("error", error.response.data.message);
         console.log(error);
       }
     },
