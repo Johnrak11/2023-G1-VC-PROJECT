@@ -15,10 +15,38 @@
         </div>
         <slot></slot>
       </div>
-    </v-card><br>
-    <div class="ml-8 mb-5" v-if="eventPreviewStorage.eventPosteds">
-      <CardEventPreview  />
-    </div>
+    </v-card>
+    <v-table fixed-header height="82vh" style=" border-radius: 5px; width: 95%; overflow-y: hidden; margin-left: 2%;"
+      class="list-user">
+      <thead class="users">
+        <tr>
+          <th class="text-left bg-red" style="width: 10%;">
+            Image
+          </th>
+          <th class="text-left bg-red" style="width: 25%;">
+            Title
+          </th>
+          <th class="text-left bg-red" style="width: 15%;">
+            Date
+          </th>
+          <th class="text-left bg-red" style="width: 10%;">
+            Time
+          </th>
+          <th class="text-left bg-red" style="width: 25%;">
+            Location
+          </th>
+          <th class="text-left bg-red" style="width: 30%;">
+            Venue
+          </th>
+          <th class="text-left bg-red" style="width: 10%;">
+            actions
+          </th>
+        </tr>
+      </thead> 
+      <!-- <div class="ml-8 mb-5" v-if="eventPreviewStorage.eventPosteds"> -->
+        <CardEventPreview  v-for="eventPreview of eventPreviewStorage.eventPosteds" :key="eventPreview" :eventPreview="eventPreview"/>
+      <!-- </div> -->
+    </v-table>
   </v-card>
 </template>
 <script setup>

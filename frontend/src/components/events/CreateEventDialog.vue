@@ -2,7 +2,7 @@
     <v-row justify="end">
         <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
             <template v-slot:activator="{ props }">
-                <v-btn color="primary" dark v-bind="props" style="width: 25%">
+                <v-btn color="red" dark v-bind="props" style="width: 25%; margin-right: 2%; margin-top: -4%;">
                     <slot></slot>
                 </v-btn>
             </template>
