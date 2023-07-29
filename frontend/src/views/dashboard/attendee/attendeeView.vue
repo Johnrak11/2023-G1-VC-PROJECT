@@ -1,12 +1,12 @@
 <template>
-  <v-card>
+  <!-- <v-card > -->
     <v-layout>
-      <v-main class="bg-grey-lighten-2">
+      <v-main class="bg-grey-lighten-3">
         <attendeeTable />
         <ContainLeftDashboardVue />
       </v-main>
     </v-layout>
-  </v-card>
+  <!-- </v-card> -->
 </template>
 <script setup>
 import ContainLeftDashboardVue from "../ContainLeftDashboard.vue"

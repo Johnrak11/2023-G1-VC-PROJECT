@@ -1,5 +1,5 @@
 <template>
-    <v-container class="mt-10" style="height: 92vh; overflow-y: auto;">
+    <div class="mt-5 ml-10 mr-10" style="height: 95vh; overflow-y: auto;">
         <searchAttendee class="mt-16" :export-to-excel="exportToExcel" />
         <v-table class="tbl_exporttable_to_xls mx-auto mb-12">
             <!-- Table header -->
@@ -43,7 +43,7 @@
                 </tr>
             </tbody>
         </v-table>
-    </v-container>
+    </div>
 </template>
   
 <script setup>
@@ -142,9 +142,9 @@ onMounted(async () => {
     margin-left: 10%;
 }
 
-.v-table {
-    box-shadow: 5px 5px 5px gray;
-}
+/* .v-table {
+    box-shadow: 5px 5px 5px rgb(215, 213, 213);
+} */
 
 /* Add the following styles to set a fixed header row */
 .v-table table {

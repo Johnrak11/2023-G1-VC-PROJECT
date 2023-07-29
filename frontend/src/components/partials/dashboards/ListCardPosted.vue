@@ -2,29 +2,31 @@
   <v-card class="bg-grey-lighten-2 card-event" style="height: 100vh; overflow-y: scroll;">
     <ul class="mt-16 ml-8">
       <li class="d-flex icon mt-2">
-        <v-list-item prepend-icon="mdi-calendar" title="Event" value="event"></v-list-item>
+        <v-list-item prepend-icon="mdi-calendar" title="List all events already posted." value="event"></v-list-item>
       </li>
     </ul>
-    <v-card class="bg-white pa-5 mr-10 rounded ml-8" :elevation="5">
-      <h3 v-if="eventPreviewStorage.eventPosteds">Event({{ eventPreviewStorage.eventPosteds?.length }})</h3>
-      <h3 v-else> There are no Event public yet</h3>
-      <div class="d-flex justify-md-end">
+    <div class="mr-10 ml-8">
+      <p v-if="eventPreviewStorage.eventPosteds">Number of events: {{ eventPreviewStorage.eventPosteds?.length }}</p>
+      <!-- <div class="d-flex justify-md-end">
         <div class="w-50">
           <v-text-field variant="solo" label="Search templates" append-inner-icon="mdi-magnify" single-line hide-details
             class="w-50"></v-text-field>
         </div>
         <slot></slot>
-      </div>
-    </v-card>
-    <v-table fixed-header height="82vh" style=" border-radius: 5px; width: 95%; overflow-y: hidden; margin-left: 2%;"
+      </div> -->
+    </div>
+    <v-table fixed-header height="80vh" style=" border-radius: 5px; width: 95%; overflow-y: hidden; margin-left: 2%;"
       class="list-user">
       <thead class="users">
         <tr>
           <th class="text-left bg-red" style="width: 10%;">
             Image
           </th>
-          <th class="text-left bg-red" style="width: 25%;">
+          <th class="text-left bg-red" style="width: 15%;">
             Title
+          </th>
+          <th class="text-left bg-red" style="width: 20%;">
+            Description
           </th>
           <th class="text-left bg-red" style="width: 15%;">
             Date
@@ -43,11 +45,12 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="eventPreviewStorage.eventPosteds != null ">
         <CardEventPreview v-for="eventPosted of eventPreviewStorage.eventPosteds" :key="eventPosted.id"
           :eventData="eventPosted" />
       </tbody>
     </v-table>
+    <h2 v-if="eventPreviewStorage.eventPosteds == null " class="d-flex justify-center text-red" style="margin-top: -20%;">There are no events public yet</h2>
   </v-card>
 </template>
 <script setup>

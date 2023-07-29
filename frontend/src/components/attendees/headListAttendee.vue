@@ -1,11 +1,11 @@
 <template>
-  <v-card class="d-flex">
+  <v-card class="d-flex bg-red" style="height: 8vh;">
     <v-card-title class="d-flex">
-      <h3 class="mt-3 mr-5">Attendees </h3>
+      <h4 class=" mr-5">Attendees </h4>
       <v-spacer></v-spacer>
     </v-card-title>
     <div class="btn w-75 mb-5">
-      <v-btn prepend-icon="mdi-microsoft-excel" color="blue" class="mt-5" variant="outlined" @click="exportToExcel">
+      <v-btn prepend-icon="mdi-microsoft-excel" color="white" class="mt-3" variant="outlined" @click="exportToExcel">
         Export
       </v-btn>
     </div>

@@ -2,9 +2,10 @@
     <tr v-if="props.eventData" style="border: 1px solid black;">
         <td><img :src="props.eventData?.image" alt="" width="50" class="mt-2"></td>
         <td>{{ props.eventData.name }}</td>
+        <td>{{ truncateDescription(props.eventData.description,20) }}</td>
         <td>{{ props.eventData.date }}</td>
         <td>{{ props.eventData.time }}</td>
-        <td>{{ truncateDescription(props.eventData.location) }}</td>
+        <td>{{ truncateDescription(props.eventData.location,20) }}</td>
         <td>{{ props.eventData.venue }}</td>
         <td>
             <div class="mt-3">

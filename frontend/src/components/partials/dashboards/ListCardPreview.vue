@@ -23,8 +23,11 @@
           <th class="text-left bg-red" style="width: 10%;">
             Image
           </th>
-          <th class="text-left bg-red" style="width: 25%;">
+          <th class="text-left bg-red" style="width: 15%;">
             Title
+          </th>
+          <th class="text-left bg-red" style="width: 20%;">
+            Description
           </th>
           <th class="text-left bg-red" style="width: 15%;">
             Date
@@ -43,11 +46,12 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="eventPreviewStorage.eventPreviews != null ">
         <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventPreviews" :key="eventPreview.id"
           :eventData="eventPreview" />
       </tbody>
     </v-table>
+    <h2 v-if="eventPreviewStorage.eventPreviews == null" class="d-flex justify-center text-red" style="margin-top: -20%;">Don't have event yet, please create any events</h2>
     <!-- <div class="ml-8 mb-5">
     </div> -->
   </v-card>
