@@ -250,7 +250,6 @@ class EventController extends Controller
         return new EventBookingResource($eventBooking);
     }
 
-
     public function deleteEventById($eventId)
     {
         $admin = Auth::user();
@@ -266,7 +265,7 @@ class EventController extends Controller
         $event->delete();
         return response()->json(['success' => true, 'message' => 'Event deleted successfully'], 200);
     }
-
+    
     public function getOrganizerId($eventId)
     {
         $event = Event::find($eventId);

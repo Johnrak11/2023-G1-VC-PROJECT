@@ -14,111 +14,111 @@ class AgendaSeeder extends Seeder
     {
         $agendas = [
             [
-                'title' => 'Team Meeting',
+                'title' => 'Tech Simplified',
                 'date' => '2023-08-01',
-                'description' => 'Monthly team meeting to discuss progress and upcoming projects',
+                'description' => 'Technology can be complex and intimidating, but it does not have to be. This title provides a simplified, easy-to-understand guide to technology.',
                 'event_id'=> 1
             ],
             [
-                'title' => 'Client Presentation',
+                'title' => 'Career Connections',
                 'date' => '2023-09-15',
-                'description' => 'Presentation to clients on new product features and updates',
+                'description' => 'A career fair is a valuable opportunity for job seekers to connect with potential employers and explore career options.',
                 'event_id'=> 2
             ],
             [
-                'title' => 'Conference Call',
+                'title' => 'Tech Unleashed',
                 'date' => '2023-10-20',
-                'description' => 'Conference call with international partners to discuss business strategy',
+                'description' => 'Technology is changing the way we live and work at an unprecedented pace. This title explores the latest advancements in technology and how they are transforming our world.',
                 'event_id'=> 1
             ],
             [
-                'title' => 'Training Session',
+                'title' => 'Business Boost',
                 'date' => '2023-11-05',
-                'description' => 'Training session for new employees on company policies and procedures',
+                'description' => 'A business conference is a valuable opportunity for professionals to network, learn and grow their skills and knowledge.',
                 'event_id'=> 3
             ],
             [
-                'title' => 'Project Deadline',
+                'title' => 'Rhythm of the World',
                 'date' => '2023-12-10',
-                'description' => 'Deadline for completion of a major project',
+                'description' => 'A world music festival is a celebration of diverse cultures and sounds from around the globe. This title provides an exciting introduction to the world of music festivals, with a focus on the vibrant and eclectic world music scene.',
                 'event_id'=> 4
             ],
             [
-                'title' => 'Product Launch',
+                'title' => ' Shredding Legends',
                 'date' => '2023-09-01',
-                'description' => 'Launch event for new product line',
+                'description' => 'The electric guitar has been an iconic instrument in the world of music for decades, and countless guitarists have risen to legendary status for their mastery of the instrument.',
                 'event_id'=> 5
             ],
             [
-                'title' => 'Quarterly Review',
+                'title' => 'BTS Mania',
                 'date' => '2023-10-01',
-                'description' => 'Quarterly review of financial performance and business strategy',
+                'description' => 'BTS is one of the biggest and most popular K-pop groups in the world, known for their electrifying performances and catchy songs.',
                 'event_id'=> 6
             ],
             [
-                'title' => 'Employee Appreciation Day',
+                'title' => 'BTS Live Experience',
                 'date' => '2023-07-29',
-                'description' => 'Celebration of employee contributions and achievements',
+                'description' => 'BTS is a global sensation, known for their high-energy performances, stunning choreography, and chart-topping hits.',
                 'event_id'=> 6
             ],
             [
-                'title' => 'Charity Fundraiser',
+                'title' => 'Groove Under the Stars',
                 'date' => '2023-11-15',
-                'description' => 'Fundraiser event for a local charity organization',
+                'description' => 'The Summer Nights Music Festival is a celebration of music, friends, and warm summer evenings',
                 'event_id'=> 7
             ],
             [
-                'title' => 'Holiday Party',
+                'title' => 'Smooth Jazz in the Open Air',
                 'date' => '2023-12-22',
-                'description' => 'End of the year holiday party for employees and guests',
+                'description' => 'Jazz in the Park is a beloved tradition that combines the beauty of nature with the soulful melodies of jazz music. ',
                 'event_id'=> 8
             ],
             [
-                'title' => 'New Hire Orientation',
+                'title' => 'Mastering Your Craft',
                 'date' => '2023-08-15',
-                'description' => 'Orientation for new hires on company culture and policies',
+                'description' => 'A workshop is a valuable opportunity to learn new skills, gain knowledge and improve your craft.',
                 'event_id'=> 9
             ],
             [
-                'title' => 'Vendor Negotiation',
+                'title' => 'The Thrill of Victory',
                 'date' => '2023-09-10',
-                'description' => 'Negotiation session with vendors for better pricing and terms',
+                'description' => 'Sports have been a beloved pastime for centuries, and they continue to captivate audiences around the world with their excitement and drama.',
                 'event_id'=> 10
             ],
             [
-                'title' => 'Product Development Meeting',
+                'title' => 'Boots, Bonfires, and Country Nights',
                 'date' => '2023-10-15',
-                'description' => 'Meeting to discuss new product development and innovation',
+                'description' => ' Country Nights is a celebration of the music, culture, and lifestyle of country living.',
                 'event_id'=> 11
             ],
             [
-                'title' => 'Board Meeting',
+                'title' => 'The Beauty of Creativity',
                 'date' => '2023-11-20',
-                'description' => 'Meeting with the board of directors to discuss company performance and strategy',
+                'description' => 'Art has been a form of human expression for thousands of years, and it continues to inspire and captivate audiences around the world with its beauty and creativity.',
                 'event_id'=> 12
             ],
             [
-                'title' => 'Product Development Meeting',
+                'title' => 'Country Nights',
                 'date' => '2023-10-15',
-                'description' => 'Meeting to discuss new product development and innovation',
+                'description' => 'Country Nights is a celebration of all things country, from the music and dancing to the food and lifestyle',
                 'event_id'=> 11
             ],
             [
-                'title' => 'Board Meeting',
+                'title' => 'The Art of Expression',
                 'date' => '2023-11-20',
-                'description' => 'Meeting with the board of directors to discuss company performance and strategy',
+                'description' => 'Art is a universal form of human expression that has been practiced for thousands of years, and continues to inspire and move people around the world. ',
                 'event_id'=> 12
             ],
             [
-                'title' => 'Marketing Campaign Launch',
+                'title' => 'The Art of Negotiation',
                 'date' => '2023-12-01',
-                'description' => 'Launch event for new marketing campaign and initiatives',
+                'description' => 'Negotiation is a critical skill in the world of business, and mastering it can lead to success in a variety of settings. ',
                 'event_id'=> 13
             ],
             [
-                'title' => 'Annual General Meeting',
+                'title' => 'The Entrepreneur is Journey',
                 'date' => '2023-07-01',
-                'description' => 'Annual general meeting with shareholders to discuss company performance and progress',
+                'description' => 'Starting a business is a dream for many people, but it can also be a daunting and challenging journey.',
                 'event_id'=> 13
             ],
             [
@@ -128,129 +128,129 @@ class AgendaSeeder extends Seeder
                 'event_id'=> 14
             ],
             [
-                'title' => 'Networking Event',
+                'title' => 'The Power of Play',
                 'date' => '2023-09-25',
-                'description' => 'Networking event with industry professionals and peers',
+                'description' => 'Games have been a beloved pastime for centuries, and they continue to captivate audiences around the world with their entertainment and engagement. ',
                 'event_id'=> 15
             ],
             [
-                'title' => 'Employee Training Workshops',
+                'title' => 'The Future of Technology',
                 'date' => '2023-10-25',
-                'description' => 'Workshops for employees to develop new skills and knowledge',
+                'description' => 'The world of technology is constantly evolving, and staying up-to-date on the latest developments is essential for anyone working in IT.',
                 'event_id'=> 16
             ],
             [
-                'title' => 'Networking Event',
+                'title' => 'Gaming for Fun and Profit',
                 'date' => '2023-09-25',
-                'description' => 'Networking event with industry professionals and peers',
+                'description' => 'Games have become a significant part of popular culture, providing entertainment, community, and opportunities for financial gain. ',
                 'event_id'=> 15
             ],
             [
-                'title' => 'Employee Training Workshops',
+                'title' => 'Cybersecurity: Protecting Your Business',
                 'date' => '2023-10-25',
-                'description' => 'Workshops for employees to develop new skills and knowledge',
+                'description' => 'Cybersecurity is a critical issue for businesses of all sizes, and staying ahead of the threats can be a challenge.',
                 'event_id'=> 16
             ],
             [
-                'title' => 'Sales Team Meeting',
+                'title' => 'Speak with Confidence',
                 'date' => '2023-11-15',
-                'description' => 'Monthly meeting for sales team to discuss targets and progress',
+                'description' => 'Public speaking is a valuable skill that can have a significant impact on your personal and professional life.',
                 'event_id'=> 17
             ],
             [
-                'title' => 'Product Demonstration',
+                'title' => 'Sing Your Heart Out',
                 'date' => '2023-12-05',
-                'description' => 'Product demonstration event for potential customers and investors',
+                'description' => 'Singing is a powerful form of self-expression and a beloved pastime for many people around the world.',
                 'event_id'=> 18
             ],
             [
-                'title' => 'Industry Conference',
+                'title' => 'The Rise of Esports',
                 'date' => '2023-08-10',
-                'description' => 'Conferenceevent to learn about latest industry trends and developments',
+                'description' => 'Esports has become a global phenomenon, with millions of fans and professional players around the world.',
                 'event_id'=> 19
             ],
             [
-                'title' => 'Product Demonstration',
+                'title' => 'BTS: The Power of Music',
                 'date' => '2023-12-05',
-                'description' => 'Product demonstration event for potential customers and investors',
+                'description' => 'BTS is a global sensation, known for their electrifying performances, catchy music, and inspiring messages of hope and resilience.',
                 'event_id'=> 18
             ],
             [
-                'title' => 'Industry Conference',
+                'title' => 'Becoming a Pro Gamer',
                 'date' => '2023-08-10',
-                'description' => 'Conferenceevent to learn about latest industry trends and developments',
+                'description' => 'Professional gaming has become a legitimate career path for many talented gamers around the world, with opportunities for fame, fortune, and success in the industry',
                 'event_id'=> 19
             ],
             [
-                'title' => 'Budget Review',
+                'title' => 'Music to Nourish the Soul',
                 'date' => '2023-09-01',
-                'description' => 'Review of budget and expenses for the year',
+                'description' => 'Soulful Sessions is an immersive musical experience that combines the power of music with mindfulness and meditation techniques to create a transformative journey for the mind, body, and soul.',
                 'event_id'=> 20
             ],
             [
-                'title' => 'Employee Performance Review',
+                'title' => 'The Ultimate Gaming Convention',
                 'date' => '2023-10-05',
-                'description' => 'Performance review for employees to discuss progress and goals',
+                'description' => 'Game On is the ultimate gathering for gamers, providing an immersive experience that showcases the latest games, technologies, and trends in the industry.',
                 'event_id'=> 22
             ],
             [
-                'title' => 'Product Testing',
+                'title' => 'The Soul of American Music',
                 'date' => '2023-11-10',
-                'description' => 'Testing session for new product features and updates',
+                'description' => 'Rockin Blues is a celebration of the rich history and enduring legacy of blues music, a genre that has influenced countless musicians and shaped American music for generations.',
                 'event_id'=> 23
             ],
             [
-                'title' => 'Team Building Activity',
+                'title' => 'Classical Masterpieces: The Timeless Beauty of Classical Music',
                 'date' => '2023-12-15',
-                'description' => 'Team building activity for employees to strengthen relationships',
+                'description' => 'Classical Masterpieces is a tribute to the enduring beauty and power of classical music, a genre that has captivated audiences for centuries and continues to inspire and move listeners around the world.',
                 'event_id'=> 24
             ],
             [
-                'title' => 'Product Launch Party',
+                'title' => 'The Evolution of Rhythm and Blues',
                 'date' => '2023-08-25',
-                'description' => 'Launch party for new product line',
+                'description' => ' R&B Explosion is a celebration of the vibrant and evolving genre of rhythm and blues, which has been a cornerstone of American popular music for decades.',
                 'event_id'=> 25
             ],
             [
-                'title' => 'Customer Appreciation Day',
+                'title' => 'The Ultimate Celebration of Sound',
                 'date' => '2023-09-30',
-                'description' => 'Celebration of customer loyalty and satisfaction',
+                'description' => 'Music Fest is the ultimate celebration of the power and beauty of music, bringing together fans and musicians from around the world for an unforgettable experience.',
                 'event_id'=> 26
             ],
             [
-                'title' => 'Employee Volunteer Day',
+                'title' => 'A Culinary Journey Around the World',
                 'date' => '2023-10-30',
-                'description' => 'Volunteer day for employees to give back to the community',
+                'description' => 'Feast Fest is a celebration of the diverse and delicious world of food, bringing together foodies and chefs from around the world for an unforgettable culinary journey. ',
                 'event_id'=> 27
             ],
             [
-                'title' => 'Sales Training Session',
+                'title' => 'The Art of Fashion',
                 'date' => '2023-11-20',
-                'description' => 'Training session for sales team on new sales strategies and techniques',
+                'description' => 'Runway Rendezvous is a celebration of the artistry and creativity of fashion, showcasing the latest trends and designs from the world is top designers and emerging talents.',
                 'event_id'=> 28
             ],
             [
-                'title' => 'Product Development Workshop',
+                'title' => ' The Ultimate Sports Tournament',
                 'date' => '2023-12-05',
-                'description' => 'Workshop for product development team to brainstorm new ideas and features',
+                'description' => 'Champions Clash is the ultimate sports tournament, bringing together the world is top athletes and teams for a thrilling competition that showcases the best of sports.',
                 'event_id'=> 29
             ],
             [
-                'title' => 'Industry Awards Ceremony',
+                'title' => 'Exploring the World of Art Exhibitions',
                 'date' => '2023-08-15',
-                'description' => 'Awards ceremony to recognize outstanding achievements in the industry',
+                'description' => 'Artistry Unveiled is a journey into the world of art exhibitions, showcasing the latest works of art from the world is most celebrated artists and emerging talents.',
                 'event_id'=> 30
             ],
             [
-                'title' => 'Marketing Strategy Meeting',
+                'title' => 'Navigating Your Career Path',
                 'date' => '2023-09-20',
-                'description' => 'Meeting to discuss new marketing strategies and initiatives',
+                'description' => ' Future Focus is a career fair designed to help job seekers and professionals navigate their career path and explore new opportunities.',
                 'event_id'=> 31
             ],
             [
-                'title' => 'Employee Wellness Day',
+                'title' => 'The Art of Film Festivals',
                 'date' => '2023-10-10',
-                'description' => 'Wellness day for employees to focus on health and wellbeing',
+                'description' => 'Cinema Celebration is a tribute to the art of film festivals, showcasing the latest and greatest works of cinema from around the world.',
                 'event_id'=> 32
             ],
         ];
