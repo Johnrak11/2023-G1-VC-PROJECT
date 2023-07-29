@@ -2,7 +2,7 @@
     <v-card>
         <v-layout>
             <v-main class="bg-grey-lighten-2">
-                <ListCardPreview>
+                <ListCardPreview class="animate__animated animate__fadeInUp">
                     <div class="w-50 d-flex justify-end mt-3">
                         <createEventDailog> Create </createEventDailog>
                     </div>

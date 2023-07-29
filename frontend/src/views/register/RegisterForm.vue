@@ -2,25 +2,27 @@
   <router-link to="/">
     <v-btn class="back-home" prepend-icon="mdi-arrow-left" variant="tonal">Back</v-btn>
   </router-link>
-  <div class="bigContainer mt-16 ">
+  <div class="bigContainer mt-16 mb-10">
     <div class="cardContainer bg-red mx-auto mb-16"></div>
     <div class="registerContainer d-flex animate__animated pt-2 animate__fadeInRight">
       <div class="SwitchRegisterComponentFrom">
         <switchBannerForm>
-          <h1 class="white--text">Don't you have an account?</h1>
-          <span class="mt-5 white--text">Please, create register to get an account</span>
+          <h1 class="text-white">Don't you have an account?</h1>
+          <span class="mt-5 text-white">Please, create register to get an account</span>
           <router-link to="/login"><v-btn class="w-50 mt-5">Login</v-btn></router-link>
         </switchBannerForm>
       </div>
       <div class="registerBody bg-white pt-2 pb-2 pl-2 pr-2 d-flex flex-column mt-15">
         <h1 class="ml-5">Register</h1>
-        <googleFrom></googleFrom>
-        <div class="line d-flex mt-5">
-          <hr class="hr mt-3 ml-5" />
-          Or
-          <hr class="hr mt-3" />
-        </div>
         <RegisterComponentForm />
+        <div class="line d-flex justify-center mt-5 mb-5 ml-4 mr-4">
+          <hr class="hr mt-3" style="width: 100%;" />
+          Or
+          <hr class="hr mt-3" style="width: 100%;" />
+        </div>
+        <div class="mb-5 d-flex">
+          <googleFrom></googleFrom>
+        </div>
       </div>
     </div>
   </div>

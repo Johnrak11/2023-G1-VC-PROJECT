@@ -6,17 +6,13 @@
           <v-img class="align-end text-white" height="200" :src="eventInfor.image" cover></v-img>
         </router-link>
         <div class="d-flex justify-space-between">
-          <v-card-subtitle class="pt-4 d-flex">
-            <v-icon :color="liked ? 'red' : 'grey'" @click="liked = !liked">mdi-heart</v-icon>
-            <p class="mt-0">100</p>
-          </v-card-subtitle>
           <div class="d-flex ml-10 pt-6">
             <v-col cols="auto">
               <v-dialog transition="dialog-bottom-transition" width="30%">
                 <template v-slot:activator="{ props }">
-                  <div class="d-flex" style="margin-top: -45%">
-                    <v-icon icon="mdi-share" size="30" v-bind="props" @click="ClickShare(eventInfor.id)"></v-icon>
-                    <p class="mt-1">100</p>
+                  <div class="d-flex justify-end align-center share-btn" style="margin-top: -35%;">
+                    <p class="mt-1">{{ t('cardTemplate.share') }}</p>
+                    <v-icon icon="mdi-share-variant" size="23" v-bind="props" @click="ClickShare(eventInfor.id)"></v-icon>
                   </div>
                 </template>
                 <template v-slot:default="{ isActive }">
@@ -71,13 +67,13 @@
                     <v-card-title class="text-black" style="margin-left: -5%;">{{ eventInfor.name }}</v-card-title>
                   </div>
                   <div class="d-flex" style="margin-top: -5%;">
-                    <p class="ml-1 mt-2 mb-2" style="font-size: 15px">Date:
-                      {{ eventInfor.date }}
+                    <p class="ml-1 mt-2 mb-2" style="font-size: 15px">
+                      {{ t('cardTemplate.startDate') + ': ' + eventInfor.date }}
                     </p>
                   </div>
                   <div class="d-flex" style="margin-top: -5%;">
-                    <p style="font-size: 15px" class="ml-1 mt-1">Venue:
-                      {{ eventCreate.truncateDescription(eventInfor.venue, 20) }}
+                    <p style="font-size: 15px" class="ml-1 mt-1">
+                      {{ t('cardTemplate.venue') + ': ' + eventCreate.truncateDescription(eventInfor.venue, 15) }}
                     </p>
                   </div>
                 </div>
@@ -87,7 +83,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn color="white" class="bg-red mb-3" @click.prevent="booking" style="width: 100%;">
-            Booking
+            {{ t('cardTemplate.booking') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -102,13 +98,13 @@ import { defineProps, ref } from "vue";
 const props = defineProps({
   event: Object,
 });
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const events = eventStores()
 const eventInfor = ref(props.event);
 
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
-
-const liked = ref(false);
 
 function ClickShare(id) {
   console.log(id);
@@ -191,5 +187,11 @@ img {
 
 .social-share {
   text-decoration: none;
+}
+
+.share-btn {
+  gap: 5px;
+  width: 100%;
+  margin-left: -40%;
 }
 </style>

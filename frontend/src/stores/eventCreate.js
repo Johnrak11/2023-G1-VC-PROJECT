@@ -118,10 +118,6 @@ export const eventCreateStores = defineStore("eventCreate", {
         discount: this.discount,
         agendas: this.agendas,
       };
-      console.log(newEvent);
-      console.log(this.ticket);
-      console.log(this.discount);
-      console.log(this.agendas);
       await baseAPI
         .post("/events", createRequest)
         .then((response) => {

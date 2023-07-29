@@ -8,8 +8,7 @@ import {
 import { defineStore } from "pinia";
 import baseAPI from "./axiosHandle";
 import { eventPreviewStores } from "@/stores/eventPreview.js";
-// import { event } from "jquery";
-
+import { sweetAlert } from "./sweetAlert.js";
 export const eventEditStores = defineStore("eventEdit", {
   state: () => ({
     eventId: "", // add eventId to store the ID of the event to be edited
@@ -98,26 +97,20 @@ export const eventEditStores = defineStore("eventEdit", {
     },
 
     async editEvent() {
-      const {getOrganizerEvent} = eventPreviewStores()
+      const { alertMessage } = sweetAlert();
+      const { getOrganizerEvent } = eventPreviewStores();
       console.log("final submit", this.eventEditInfor);
-
-      // date: dateTimeFormat[0],
-      // time: dateTimeFormat[1],
-      // let dateTimeFormat = this.convertDateTimeFormat(this.eventDate);
-
-      try {
-        const response = await baseAPI.put(
-          `/events/update`,
-          this.eventEditInfor
-        ).then((response) => {
-          console.log(response)
-          getOrganizerEvent(0)
+      await baseAPI
+        .put(`/events/update`, this.eventEditInfor)
+        .then((response) => {
+          console.log(response);
+          alertMessage("success", response.data.message);
+          getOrganizerEvent(1);
           this.isEdit = false;
+        })
+        .catch((error) => {
+          alertMessage("error", error.response.data.message);
         });
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
     },
 
     convertDateTimeFormat(inputDate) {
@@ -140,24 +133,6 @@ export const eventEditStores = defineStore("eventEdit", {
       } else {
         return description.substring(0, maxLength) + "...";
       }
-    },
-
-    setEventData(event) {
-      // set the event data to the store when editing an event
-      this.eventId = event.id;
-      this.eventName = event.name;
-      this.eventCategories = event.category_id;
-      this.eventDate = new Date(`${event.date}T${event.time}`);
-      this.eventPoster = event.image;
-      this.eventDescription = event.description;
-      this.eventAddress = event.location;
-      this.eventLongitude = event.longitude;
-      this.eventLatitude = event.latitude;
-      this.eventVenue = event.venue;
-      this.ticket = event.ticket;
-      this.discount = event.discount;
-      this.agendas = event.agendas;
-      this.imagePreview = event.image;
     },
   },
 });

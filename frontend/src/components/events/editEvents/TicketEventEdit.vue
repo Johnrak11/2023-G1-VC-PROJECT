@@ -45,10 +45,14 @@
         <div class="input-row-container">
             <div class="input">
                 <h3>Discount ends on*</h3>
-                <VueDatePicker :disabled="modelDiscount" width="100%" class="custom-datepicke" v-model="dateDiscount"
-                    :counter="7" :start-time="'12:00'" :max-date="maxDate" :min-date="dateDiscount" :preview-format="format"
-                    ignore-time-validation placeholder="Select Date">
-                </VueDatePicker>
+                <VDatePicker v-model="dateDiscount" color="red" :events="events" :min-date="minDate" :max-date="maxDate">
+                    <template #default="{ togglePopover }">
+                        <v-text-field :disabled="modelDiscount" v-model="formattedDiscountDate" density="compact"
+                            variant="outlined" :label="t('select date')" @click="togglePopover"
+                            prepend-inner-icon="mdi-calendar" single-line hide-details
+                            style="height: 15vh;padding-top: 18px;"></v-text-field>
+                    </template>
+                </VDatePicker>
             </div>
         </div>
         <div class="input-container mt-5">
@@ -56,7 +60,7 @@
             <v-textarea v-model="ticketDescription" :rules="ticketDescriptionRules" variant="outlined" counter
                 label="Description" maxlength="120" single-line style="width: 100%"></v-textarea>
         </div>
-        <div class="input-row-container">
+        <div class="input-row-container mb-5">
             <div class="input">
                 <div class="d-flex align-center mb-4">
                     <v-icon size="24" color="grey" class="mr-2">mdi-calendar-check</v-icon>
@@ -102,10 +106,13 @@
                     :error-messages="agendaTitle.errorMessage.value" label="Title" width="100%"
                     style="width: 100%"></v-text-field>
 
-                <VueDatePicker width="100%" class="custom-datepicke" v-model="agendaDate" :counter="7" :start-time="'12:00'"
-                    :max-date="maxDate" :min-date="agendaDate" :preview-format="format" ignore-time-validation
-                    placeholder="Date disable">
-                </VueDatePicker>
+                <VDatePicker v-model="agendaDate" color="red" :events="events" :max-date="maxDate" :min-date="minDate">
+                    <template #default="{ togglePopover }">
+                        <v-text-field v-model="formattedAgendaDate" density="compact" :label="t('select date')"
+                            @click="togglePopover" prepend-inner-icon="mdi-calendar" single-line hide-details
+                            style="height: 15vh;padding-top: 18px;"></v-text-field>
+                    </template>
+                </VDatePicker>
 
                 <v-textarea class="mt-5" v-model="agendaDescription.value.value" :counter="200"
                     :error-messages="agendaDescription.errorMessage.value" name="input-7-1" variant="filled" label="Label"
@@ -120,7 +127,9 @@
 </template>
 
 <script setup>
-import { ref, defineExpose, watch, onMounted } from "vue";
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+import { ref, defineExpose, watch, onMounted, computed } from "vue";
 import { eventCreateStores } from "@/stores/eventCreate.js";
 const eventCreate = eventCreateStores();
 
@@ -156,6 +165,21 @@ const discountRules = ref([
     (v) => !!v || "You must enter the discount amount.",
 ]);
 
+import dayjs from 'dayjs';
+
+const formattedDiscountDate = computed(() => {
+    if (!dateDiscount.value) {
+        return null
+    }
+    return dayjs(dateDiscount.value).format('dddd D MMMM YYYY');
+});
+const formattedAgendaDate = computed(() => {
+    if (!agendaDate.value) {
+        return null
+    }
+    return dayjs(agendaDate.value).format('dddd D MMMM YYYY');
+});
+
 const dateDiscount = ref(new Date());
 dateDiscount.value.setDate(dateDiscount.value.getDate() + 6);
 
@@ -166,7 +190,7 @@ const ticketDescriptionRules = ref([
         (v && v.length >= 5) || "Ticket description must be at least 5 characters",
 ]);
 
-async function ticketSubmit() { 
+async function ticketSubmit() {
     const isFormValid = validateForm();
     console.log(isFormValid);
     if (!isFormValid) {
@@ -252,15 +276,12 @@ const agendaTitle = useField("agendaTitle");
 const agendaDescription = useField("agendaDescription");
 const agendaDate = ref(new Date());
 agendaDate.value.setDate(agendaDate.value.getDate() + 6);
+
+const minDate = ref(new Date());
+minDate.value.setDate(agendaDate.value.getDate() + 6);
 const maxDate = ref(new Date());
 maxDate.value.setMonth(maxDate.value.getMonth() + 1);
 
-const format = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `Selected date is ${day}/${month}/${year}`;
-};
 
 function editAgenda(index) {
     updateMessage.value = 'Update'
@@ -360,6 +381,7 @@ form {
 .input-row-container {
     margin-top: 10px;
     display: flex;
+    gap: 25px;
     justify-content: space-between;
 }
 

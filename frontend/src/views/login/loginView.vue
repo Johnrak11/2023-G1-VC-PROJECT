@@ -2,23 +2,23 @@
     <router-link to="/">
         <v-btn class="back-home" append-icon="mdi-arrow-right" variant="tonal">Back</v-btn>
     </router-link>
-    <div class="bigContainer mt-16 h-100 ">
+    <div class="bigContainer mt-5 h-100 ">
         <div class="cardContainer bg-red mx-auto" :class="`elevation-${isHovering ? 30 : 10}`"></div>
-        <div class="loginContainer d-flex animate__animated animate__fadeInLeft  mt-2">
-            <div class="loginBody bg-white pt-8 pb-8 pl-8 pr-8 d-flex flex-column">
+        <div class="loginContainer d-flex animate__animated animate__fadeInLeft">
+            <div class="loginBody bg-white pt-2 pb-8 mb-10 pl-8 pr-8 d-flex flex-column">
                 <h1 class="ml-5">Login</h1>
-                <googleFrom></googleFrom>
-                <div class="line d-flex mt-5">
+                <loginForm />
+                <div class="line d-flex mt-5 mb-5">
                     <hr class="hr mt-3 ml-5">
                     Or
                     <hr class="hr mt-3">
                 </div>
-                <loginForm />
+                <googleFrom></googleFrom>
             </div>
             <div class="loginSwitchRegister">
                 <switchBannerForm>
-                    <h1 class="white--text">Don't you have an account?</h1>
-                    <span class="mt-5 white--text">Please, register to get an account</span>
+                    <h1 class="text-white">Don't you have an account?</h1>
+                    <span class="mt-5 text-white">Please, register to get an account</span>
                     <router-link to="/register"><v-btn class="w-50 mt-5">Register</v-btn></router-link>
                 </switchBannerForm>
             </div>

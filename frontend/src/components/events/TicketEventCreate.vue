@@ -38,16 +38,21 @@
             <div class="input">
                 <h3>Price*</h3>
                 <v-select :disabled="modelDiscount" v-model="discountItemsModel" :items="discountItems" readonly
-                    label="Read-only" style="width:100%;"></v-select>
+                    label="Read-only" variant="outlined" style="width:100%;"></v-select>
             </div>
         </div>
         <div class="input-row-container">
             <div class="input">
                 <h3>Discount ends on*</h3>
-                <VueDatePicker :disabled="modelDiscount" width="100%" class="custom-datepicke" v-model="dateDiscount"
-                    :counter="7" :start-time="'12:00'" :max-date="maxDate" :min-date="dateDiscount" :preview-format="format"
-                    ignore-time-validation placeholder="Select Date">
-                </VueDatePicker>
+
+                <VDatePicker v-model="dateDiscount" color="red" :events="events" :min-date="dateDiscount"
+                    :max-date="maxDate">
+                    <template #default="{ togglePopover }">
+                        <v-text-field :disabled="modelDiscount" v-model="formattedDate" density="compact" variant="outlined"
+                            :label="t('select date')" @click="togglePopover" prepend-inner-icon="mdi-calendar" single-line
+                            hide-details style="height: 15vh;padding-top: 18px;"></v-text-field>
+                    </template>
+                </VDatePicker>
             </div>
         </div>
         <div class="input-container mt-5">
@@ -101,18 +106,20 @@
     <v-dialog v-model="isHasAgenda" width="auto">
         <v-sheet width="600px" class="mx-auto">
             <form @submit.prevent="agendaSubmit">
-                <v-text-field v-model="agendaTitle.value.value" :counter="50"
-                    :error-messages="agendaTitle.errorMessage.value" label="Title" width="100%"
-                    style="width: 100%;"></v-text-field>
+                <v-text-field v-model="agendaTitle.value.value" :error-messages="agendaTitle.errorMessage.value"
+                    label="Title" width="100%" style="width: 100%;"></v-text-field>
 
-                <VueDatePicker width="100%" class="custom-datepicke" v-model="agendaDate" :counter="7" :start-time="'12:00'"
-                    :max-date="maxDate" :min-date="agendaDate" :preview-format="format" ignore-time-validation
-                    placeholder="Date disable">
-                </VueDatePicker>
+                <VDatePicker v-model="agendaDate" color="red" :events="events" :max-date="maxDate" :min-date="agendaDate">
+                    <template #default="{ togglePopover }">
+                        <v-text-field v-model="formattedDate" density="compact" :label="t('select date')"
+                            @click="togglePopover" prepend-inner-icon="mdi-calendar" single-line hide-details
+                            style="height: 15vh;padding-top: 18px;"></v-text-field>
+                    </template>
+                </VDatePicker>
 
                 <v-textarea class="mt-5" v-model="agendaDescription.value.value" :counter="200"
-                    :error-messages="agendaDescription.errorMessage.value" name="input-7-1" variant="filled" label="Label"
-                    auto-grow style="width: 100%;"></v-textarea>
+                    :error-messages="agendaDescription.errorMessage.value" name="input-7-1" variant="filled"
+                    label="Description" auto-grow style="width: 100%;"></v-textarea>
                 <div class="btn-agenda">
                     <v-btn color="red" type="submit" style="width: 30%;">
                         Add
@@ -124,7 +131,9 @@
 </template>
 
 <script setup>
-import { ref, defineExpose, watch } from "vue";
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+import { ref, defineExpose, watch, computed } from "vue";
 import { eventCreateStores } from '@/stores/eventCreate.js'
 const eventCreate = eventCreateStores()
 
@@ -156,6 +165,13 @@ const ticketAvailableRules = ref([
 const discount = ref('');
 const discountRules = ref([(v) => !!v || "You must enter the discount amount."]);
 
+import dayjs from 'dayjs';
+const formattedDate = computed(() => {
+    if (!dateDiscount.value) {
+        return null
+    }
+    return dayjs(dateDiscount.value).format('dddd D MMMM YYYY');
+});
 const dateDiscount = ref(new Date());
 dateDiscount.value.setDate(dateDiscount.value.getDate() + 6);
 
@@ -190,6 +206,7 @@ async function ticketSubmit() {
         }
         eventCreate.discount = newDiscount
     }
+
     if (agendas.value.length !== 0) {
         eventCreate.agendas = agendas.value
     }
@@ -251,12 +268,13 @@ const agendaDate = ref(new Date())
 agendaDate.value.setDate(agendaDate.value.getDate() + 6)
 const maxDate = ref(new Date())
 maxDate.value.setMonth(maxDate.value.getMonth() + 1)
-const format = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `Selected date is ${day}/${month}/${year}`;
-}
+
+// const format = (date) => {
+//     const day = date.getDate();
+//     const month = date.getMonth() + 1;
+//     const year = date.getFullYear();
+//     return `Selected date is ${day}/${month}/${year}`;
+// }
 
 const agendaSubmit = handleSubmit(values => {
     let newAgenda = {
@@ -313,6 +331,7 @@ form {
 .input-row-container {
     margin-top: 10px;
     display: flex;
+    gap: 25px;
     justify-content: space-between;
 
 }

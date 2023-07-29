@@ -1,8 +1,10 @@
 {
   "home": "home",
+  "profile": "Profile",
   "explore": "explore",
   "listMap": "listing map",
   "ticket": "Ticket",
+  "login": "login",
   "dashboard": "Dashboard",
   "management": "management",
   "logout": "Logout",
@@ -21,7 +23,7 @@
     "sport": "Sport",
     "art": "Art",
     "business": "Business",
-    "Esport ": "E-sport "
+    "esport": "E-sport "
   },
   "upcomingEvents": {
     "main": "Upcoming Events",
@@ -40,5 +42,28 @@
   "serviceCard2": {
     "main": "For Users",
     "description": "We cater to a diverse group of individuals, including personal development seekers, career changers, entrepreneurs, lifelong learners, socializers, and young adults. EVENTPEAK enables them to stay informed about upcoming events, participate in activities that interest them, and engage with their local community."
-  }
+  },
+
+  "cardTemplate": {
+    "booking": "Booking",
+    "startDate": "Start Date",
+    "venue": "Venue",
+    "share": "Share"
+  },
+  
+  "explore more" : "explore more",
+
+  "showMapCard" : {
+    "direction" : "direction"
+  },
+
+  "listShowMapCard" : {
+    "distanation" : "Distanation",
+    "start date": "Start Date",
+    "more detail" : "MORE DETAIL"
+  },
+
+  "search distanation" : "Enter kilometer",
+  "search distanation message" : "There are no upcoming Events in your area.."
+
 }
