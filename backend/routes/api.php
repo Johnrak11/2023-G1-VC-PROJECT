@@ -60,14 +60,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/organizer', [EventController::class, 'getOrganizerEvents']);
             Route::put('/{id}/{is_public}', [EventController::class, 'postPreviewEvent']);
         });
-        
+        Route::prefix('/booking')->group(function () {
+            Route::get('/{eventId}', [EventController::class, 'booking']);
+        });
     });
     Route::prefix('/search')->group(function () {
         Route::prefix('/admin')->group(function () {
             Route::get('/searchEvent', [EventController::class, 'searchEventsByAdmin']);
         });
     });
-    
+
 
     // ---- ticket with token-----
     Route::prefix('/tickets')->group(function () {
@@ -82,7 +84,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::post('/creditCard', [CreditCardController::class, 'store']);
     });
-    
+
     Route::get('/admin/search/users', [UserController::class, 'searchUsers']);
     Route::get('/users', [UserController::class, 'getUsers']);
     Route::put('/users/update/{userId}', [UserController::class, 'updateRole']);
@@ -110,9 +112,7 @@ Route::prefix('/events')->group(function () {
     Route::get('/', ([EventController::class, 'getEvents']));
     Route::get('/category/{categoryId}/{eventId}', [EventController::class, 'getEventsByCategory']);
     Route::get('/agenda/{eventId}', [AgendaController::class, 'getAgendaByEventId']);
-    Route::prefix('/booking')->group(function () {
-        Route::get('/{eventId}', [EventController::class, 'booking']);
-    });
+
     Route::prefix('/recommend')->group(function () {
         Route::get('/{lat}/{lng}/{km}', [EventController::class, 'getEventsWithinRadius']);
     });
@@ -123,11 +123,10 @@ Route::prefix('/search')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::get('/events', [EventController::class, 'searchEventsNotDeadline']);
     });
-    
 });
 Route::prefix('/eventDetail')->group(function () {
     Route::get('/{eventId}', [EventDetailController::class, 'getEventDetail']);
 });
 
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
-Route::get('/users',[UserController::class, 'getAllUsers']);
+Route::get('/users', [UserController::class, 'getAllUsers']);

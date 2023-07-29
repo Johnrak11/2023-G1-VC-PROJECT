@@ -36,27 +36,22 @@
             </v-avatar>
           </template>
           <v-list>
-            <v-list-item v-if="getSession('role')" value="ticket">
-              <router-link to="/profile">
+            <router-link to="/profile">
+              <v-list-item v-if="getSession('role')" value="ticket">
                 <v-list-item-title>{{ t('profile') }}</v-list-item-title>
-              </router-link>
-            </v-list-item>
-            <v-list-item v-if="getSession('role')" value="ticket">
-              <router-link to="/tickets">
+              </v-list-item>
+            </router-link>
+            <router-link to="/tickets">
+              <v-list-item v-if="user.user.role || getSession('role')" value="ticket">
                 <v-list-item-title>{{ t("ticket") }}</v-list-item-title>
-              </router-link>
-            </v-list-item>
-            <v-list-item v-if="listRole.includes(getSession('role'))" value="dashboard">
-              <router-link to="/dashboard">
+              </v-list-item>
+            </router-link>
+            <router-link to="/dashboard/event">
+              <v-list-item v-if="listRole.includes(user.user.role)" value="dashboard">
                 <v-list-item-title>{{ t("dashboard") }}</v-list-item-title>
-              </router-link>
-            </v-list-item>
-            <v-list-item v-if="getSession('role') === 'admin'" value="dashboard">
-              <router-link to="management/event/delete">
-                <v-list-item-title>{{ t("management") }}</v-list-item-title>
-              </router-link>
-            </v-list-item>
-            <v-list-item value="logout" @click="user.logout()">
+              </v-list-item>
+            </router-link>
+            <v-list-item value="logout" @click="user.logout(); router.push('/')">
               <v-list-item-title>{{ t("logout") }}</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -73,7 +68,6 @@ import { userStore } from "@/stores/user.js";
 import { sessionStore } from "@/stores/session.js";
 const { getSession } = sessionStore();
 const user = userStore();
-
 const listRole = ref(["organizer", "admin"]);
 const isActive = (route) => {
   return router.currentRoute.value.path === route;
@@ -83,7 +77,6 @@ const isActive = (route) => {
 const prevScrollpos = ref(window.pageYOffset);
 window.addEventListener("scroll", () => {
   const currentScrollPos = window.pageYOffset;
-  console.log(router.currentRoute.value.path)
   if (currentScrollPos < 20 && router.currentRoute.value.path == '/') {
     bgColor.value = "rgba(255, 255, 255, 0.495)"
   } else {

@@ -10,14 +10,17 @@
     <v-divider class="border"></v-divider>
 
     <v-list density="compact">
-      <router-link to="/dashboard" class="nav">
-        <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
-      </router-link>
       <router-link to="/dashboard/event" class="nav">
         <v-list-item prepend-icon="mdi-calendar" title="Event" value="event"></v-list-item>
       </router-link>
       <router-link to="/dashboard/preview" class="nav">
         <v-list-item prepend-icon="mdi-calendar-plus" title="Preview" value="preview"></v-list-item>
+      </router-link>
+      <router-link v-if="listRole.includes(user.user.role)" to="/dashboard/event/delete" class="nav">
+        <v-list-item prepend-icon="mdi-delete" title="Event" value="event"></v-list-item>
+      </router-link>
+      <router-link v-if="listRole.includes(user.user.role)" to="/dashboard/listUsers" class="nav">
+        <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
       </router-link>
     </v-list>
   </v-navigation-drawer>
@@ -33,6 +36,8 @@ import { userStore } from '@/stores/user.js'
 const user = userStore()
 const drawer = ref(true);
 const rail = ref(true);
+
+const listRole = ref(["admin"]);
 </script>
 
 <style scoped>

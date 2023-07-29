@@ -69,9 +69,9 @@ class TicketController extends Controller
         $ticket = Ticket::where('user_id', $user->id)
             ->where('event_id', $eventId)->first();
         if (!isset($ticket)) {
-            return response()->json(['success' => false, 'message' => "You didn't register yet"], 400);
+            return response()->json(['success' => false, 'message' => "You didn't booking yet"], 400);
         }
-        return response()->json(['success' => true, 'message' => "You already register", 'data' => new TicketResource($ticket)], 200);
+        return response()->json(['success' => true, 'message' => "You already booking", 'data' => new TicketResource($ticket)], 200);
     }
 
     public function searchTicket($name)

@@ -1,10 +1,6 @@
 <template>
-  <img
-    id="top-detail"
-    class="img1 mt-10"
-    src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg"
-    alt=""
-  />
+  <img id="top-detail" class="img1 mt-10"
+    src="https://edgefieldconcerts.com/wp-content/uploads/2022/07/rex-orange-county-2022-ecotl.jpg" alt="" />
 
   <v-btn icon class="bg-red back-btn">
     <v-icon>mdi-arrow-left</v-icon>
@@ -29,112 +25,53 @@
                   <v-dialog transition="dialog-bottom-transition" width="30%">
                     <template v-slot:activator="{ props }">
                       <div class="d-flex" style="margin-top: -45%">
-                        <v-icon
-                          icon="mdi-share-variant"
-                          size="30"
-                          v-bind="props"
-                          @click="ClickShare(event.id)"
-                        ></v-icon>
+                        <v-icon icon="mdi-share-variant" size="30" v-bind="props" @click="ClickShare(event.id)"></v-icon>
                         <p class="mt-1 ml-2">100</p>
                       </div>
                     </template>
                     <template v-slot:default="{ isActive }">
-                      <v-card
-                        class="dialog d-flex w-100"
-                        style="overflow-y: hidden"
-                      >
+                      <v-card class="dialog d-flex w-100" style="overflow-y: hidden">
                         <v-toolbar color="red" title="Share"></v-toolbar><br />
-                        <div
-                          class="d-flex justify-space-evenly"
-                          style="height: 10vh"
-                          v-if="event"
-                        >
-                          <ShareNetwork
-                            network="facebook"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="event.name"
-                            :description="event.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                          >
-                            <v-icon
-                              left
-                              class="ml-2 mt-3 color-icon"
-                              color="blue"
-                              size="50"
-                              style="height: 5vh"
-                              >mdi-facebook</v-icon
-                            >
+                        <div class="d-flex justify-space-evenly" style="height: 10vh" v-if="event">
+                          <ShareNetwork network="facebook" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="event.name" :description="event.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share">
+                            <v-icon left class="ml-2 mt-3 color-icon" color="blue" size="50"
+                              style="height: 5vh">mdi-facebook</v-icon>
                             <p class="text-black mt-5">Facebook</p>
                           </ShareNetwork>
-                          <ShareNetwork
-                            network="telegram"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="event.name"
-                            :description="event.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                            id="my-iframe"
-                            allow-same-origin
-                          >
+                          <ShareNetwork network="telegram" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="event.name" :description="event.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share" id="my-iframe" allow-same-origin>
                             <img :src="event.img" alt="" />
                             <!-- <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-telegram</v-icon> -->
                             <img
                               src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png"
-                              alt=""
-                              width="67"
-                            />
+                              alt="" width="67" />
                             <p class="text-black" style="margin-top: -20%">
                               Telegram
                             </p>
                           </ShareNetwork>
-                          <ShareNetwork
-                            network="linkedin"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="event.name"
-                            :description="event.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                          >
-                            <v-icon
-                              left
-                              class="ml-2 color-icon"
-                              color="blue"
-                              size="50"
-                              >mdi-linkedin</v-icon
-                            >
+                          <ShareNetwork network="linkedin" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="event.name" :description="event.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share">
+                            <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-linkedin</v-icon>
                             <p class="text-black mt-2">Linkedin</p>
                           </ShareNetwork>
-                          <ShareNetwork
-                            network="whatsapp"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="event.name"
-                            :description="event.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                          >
-                            <v-icon
-                              left
-                              class="ml-2 color-icon"
-                              color="green"
-                              size="50"
-                              >mdi-whatsapp</v-icon
-                            >
+                          <ShareNetwork network="whatsapp" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="event.name" :description="event.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share">
+                            <v-icon left class="ml-2 color-icon" color="green" size="50">mdi-whatsapp</v-icon>
                             <p class="text-black mt-2">Whatsapp</p>
                           </ShareNetwork>
                         </div>
                         <br />
                         <v-card-actions class="justify-center">
-                          <v-btn
-                            variant="text"
-                            @click="isActive.value = false"
-                            style="width: 100%"
-                            >Close</v-btn
-                          >
+                          <v-btn variant="text" @click="isActive.value = false" style="width: 100%">Close</v-btn>
                         </v-card-actions>
                       </v-card>
                     </template>
@@ -156,7 +93,7 @@
                 <v-icon color="grey" class="icon1"> mdi-calendar</v-icon>
                 <p class="ml-4" v-if="event">{{ event.date }}</p>
               </div>
-              <div class="d-flex g-icon" >
+              <div class="d-flex g-icon">
                 <v-icon color="grey" class="icon1"> mdi-map-clock</v-icon>
                 <p class="ml-4" v-if="event">{{ event.time }}</p>
               </div>
@@ -168,10 +105,7 @@
               </div>
               <div class="d-flex g-icon align-center">
                 <v-icon color="grey" class="icon1" size="26">mdi-cash</v-icon>
-                <h2
-                  class="ml-3 text-red"
-                  v-if="eventDetail && eventDetail.price"
-                >
+                <h2 class="ml-3 text-red" v-if="eventDetail && eventDetail.price">
                   {{ eventDetail.price }}
                 </h2>
               </div>
@@ -185,17 +119,11 @@
             </div>
           </div>
           <div class="d-flex justify-end button mt-6">
-            <button
-              class="free bg-red pa-1 rounded"
-              v-if="!eventDetail || eventDetail.price === 'free'"
-            >
+            <button class="free bg-red pa-1 rounded" v-if="!eventDetail || eventDetail.price === 'free'"
+              @click.prevent="booking(event.id)">
               Register
             </button>
-            <button
-              class="free bg-red pa-1 rounded"
-              v-else
-              @click.prevent="booking(event.id)"
-            >
+            <button class="free bg-red pa-1 rounded" v-else @click.prevent="booking(event.id)">
               Booking
             </button>
           </div>
@@ -317,6 +245,7 @@ h1 {
   line-height: 1.5;
   margin-bottom: 20px;
 }
+
 .social-share {
   text-decoration: none;
 }

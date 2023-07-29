@@ -5,8 +5,7 @@ import LoginForm from "../views/login/loginView.vue";
 import BookingView from "../views/booking/BookingView.vue";
 import ExplorePage from "../views/explore/explorePageView.vue";
 import ListMapView from "../views/listMap/ListMapView.vue";
-
-import DashboardOrganizer from "../views/dashboard/orgznizerInfor/DashboardOrganizer.vue";
+// import DashboardOrganizer from "../views/dashboard/orgznizerInfor/DashboardOrganizer.vue";
 import DashboardEventPreview from "../views/dashboard/eventPreview/DashboardEventPreview.vue";
 import DetailPage from "../views/detail/DetailView.vue";
 import RedirectPage from "../views/detail/RedirectPage.vue";
@@ -144,15 +143,6 @@ const routes = [
     beforeEnter: [authenticateBeforeEnter()],
   },
   {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardOrganizer,
-    beforeEnter: [
-      authenticateBeforeEnter(),
-      roleBeforeEnter(["organizer", "admin"]),
-    ],
-  },
-  {
     path: "/dashboard/event",
     name: "eventPosted",
     component: DashboardEvent,
@@ -175,15 +165,19 @@ const routes = [
     name: "attendees",
     component: Attendee,
     props: true,
+    beforeEnter: [
+      authenticateBeforeEnter(),
+      roleBeforeEnter(["organizer", "admin"]),
+    ],
   },
   {
-    path: "/management/event/delete",
+    path: "/dashboard/event/delete",
     name: "deleteEvent",
     component: ManagermentEvent,
     beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
   },
   {
-    path: "/listusers",
+    path: "/dashboard/listUsers",
     name: "List users",
     component: ListUsers,
     beforeEnter: [authenticateBeforeEnter(), roleBeforeEnter(["admin"])],
@@ -200,6 +194,7 @@ const routes = [
     name: "profile",
     component: ProfileView,
     props: true,
+    beforeEnter: [scanAuthenticateBeforeEnter()],
   },
 ];
 const router = createRouter({
