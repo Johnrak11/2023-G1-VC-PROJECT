@@ -2,10 +2,10 @@
     <tr v-if="props.eventData" style="border: 1px solid black;">
         <td><img :src="props.eventData?.image" alt="" width="50" class="mt-2"></td>
         <td>{{ props.eventData.name }}</td>
-        <td>{{ truncateDescription(props.eventData.description,20) }}</td>
+        <td>{{ truncateDescription(props.eventData.description, 20) }}</td>
         <td>{{ props.eventData.date }}</td>
         <td>{{ props.eventData.time }}</td>
-        <td>{{ truncateDescription(props.eventData.location,20) }}</td>
+        <td>{{ truncateDescription(props.eventData.location, 20) }}</td>
         <td>{{ props.eventData.venue }}</td>
         <td>
             <div class="mt-3">
@@ -29,7 +29,7 @@
                             " v-if="currentpath === '/dashboard/event'">
                             <v-list-item-title>Attendees</v-list-item-title>
                         </v-list-item>
-                        <v-list-item v-else value="list">
+                        <v-list-item v-else value="list" @click="deletePreviewEvent">
                             <v-list-item-title>Delete</v-list-item-title>
                         </v-list-item>
                         <v-list-item value="list" v-if="currentpath === '/dashboard/event'">
@@ -51,6 +51,7 @@ import { ref } from 'vue';
 import { defineProps } from "vue";
 import { eventCreateStores } from '@/stores/eventCreate.js';
 import { sweetAlert } from '@/stores/sweetAlert.js';
+
 const { truncateDescription } = eventCreateStores()
 const props = defineProps({
     eventData: Object
@@ -66,9 +67,11 @@ onMounted(() => {
     currentpath.value = currentPageRoute
 
 })
-
-
 const alert = sweetAlert()
+
+async function deletePreviewEvent() {
+    alert.deleteEventAlert(props.eventData.id)
+}
 </script>
 <style scoped>
 .action:hover {

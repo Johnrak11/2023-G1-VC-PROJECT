@@ -7,7 +7,7 @@
       <v-list-item value="list">
         <v-list-item-title>Edit</v-list-item-title>
       </v-list-item>
-      <v-list-item value="list" @click="deleteEvent(props.event.id)">
+      <v-list-item value="list" @click="deleteEventAlert(props.event.id)">
         <v-list-item-title>Delete</v-list-item-title>
       </v-list-item>
     </v-list>
@@ -16,8 +16,8 @@
 
 <script setup>
 import { defineProps } from "vue";
-import { eventStores } from "@/stores/eventsStore.js";
-const { deleteEvent } = eventStores()
+import { sweetAlert } from "@/stores/sweetAlert.js";
+const { deleteEventAlert } = sweetAlert()
 const props = defineProps({
   event: Object,
 });
