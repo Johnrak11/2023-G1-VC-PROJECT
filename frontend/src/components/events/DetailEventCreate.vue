@@ -25,7 +25,7 @@
         <div class="input-container mt-5">
             <h3>When is your event?*</h3>
 
-            <VDatePicker v-model="minDate" color="red" :events="events" :min-date="minDate" :max-date="maxDate"
+            <VDatePicker v-model="eventDate" color="red" :events="events" :min-date="minDate" :max-date="maxDate"
                 mode="dateTime">
                 <template #default="{ togglePopover }">
                     <v-text-field v-model="formattedDate" density="compact" variant="outlined" :label="t('select date')"
@@ -114,16 +114,21 @@ const eventCreate = eventCreateStores()
 
 import dayjs from 'dayjs';
 const formattedDate = computed(() => {
-    if (!minDate.value) {
+    if (!eventDate.value) {
         return null
     }
-    return dayjs(minDate.value).format('dddd D MMMM YYYY');
+    return dayjs(eventDate.value).format('dddd D MMMM YYYY');
 });
+
+const eventDate = ref(new Date())
+eventDate.value.setDate(eventDate.value.getDate() + 6)
 
 const minDate = ref(new Date())
 minDate.value.setDate(minDate.value.getDate() + 6)
+
 const maxDate = new Date()
 maxDate.setMonth(maxDate.getMonth() + 1)
+
 const isOpenMap = ref(false)
 const image = ref("");
 const selectImage = (event) => {
@@ -178,7 +183,7 @@ async function submitHandler() {
     } else {
         eventCreate.eventName = eventName.value
         eventCreate.eventCategories = category.value
-        eventCreate.eventDate = dayjs(minDate.value).format('YYYY-MM-DD HH:MM')
+        eventCreate.eventDate = dayjs(eventDate.value).format('YYYY-MM-DD HH:MM')
         eventCreate.eventDescription = description.value
         eventCreate.eventAddress = addressStorage.address
         eventCreate.eventLatitude = addressStorage.latitude

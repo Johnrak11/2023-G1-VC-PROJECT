@@ -44,11 +44,9 @@
         <div class="input-row-container">
             <div class="input">
                 <h3>Discount ends on*</h3>
-
-                <VDatePicker v-model="dateDiscount" color="red" :events="events" :min-date="dateDiscount"
-                    :max-date="maxDate">
+                <VDatePicker v-model="dateDiscount" color="red" :events="events" :min-date="minDate" :max-date="maxDate">
                     <template #default="{ togglePopover }">
-                        <v-text-field :disabled="modelDiscount" v-model="formattedDate" density="compact" variant="outlined"
+                        <v-text-field :disabled="modelDiscount" v-model="formattedDiscountDate" density="compact" variant="outlined"
                             :label="t('select date')" @click="togglePopover" prepend-inner-icon="mdi-calendar" single-line
                             hide-details style="height: 15vh;padding-top: 18px;"></v-text-field>
                     </template>
@@ -109,9 +107,9 @@
                 <v-text-field v-model="agendaTitle.value.value" :error-messages="agendaTitle.errorMessage.value"
                     label="Title" width="100%" style="width: 100%;"></v-text-field>
 
-                <VDatePicker v-model="agendaDate" color="red" :events="events" :max-date="maxDate" :min-date="agendaDate">
+                <VDatePicker v-model="agendaDate" color="red" :events="events" :max-date="maxDate" :min-date="minDate">
                     <template #default="{ togglePopover }">
-                        <v-text-field v-model="formattedDate" density="compact" :label="t('select date')"
+                        <v-text-field v-model="formattedAgendaDate" density="compact" :label="t('select date')"
                             @click="togglePopover" prepend-inner-icon="mdi-calendar" single-line hide-details
                             style="height: 15vh;padding-top: 18px;"></v-text-field>
                     </template>
@@ -166,12 +164,21 @@ const discount = ref('');
 const discountRules = ref([(v) => !!v || "You must enter the discount amount."]);
 
 import dayjs from 'dayjs';
-const formattedDate = computed(() => {
+
+const formattedDiscountDate = computed(() => {
     if (!dateDiscount.value) {
         return null
     }
     return dayjs(dateDiscount.value).format('dddd D MMMM YYYY');
 });
+const formattedAgendaDate = computed(() => {
+    if (!agendaDate.value) {
+        return null
+    }
+    return dayjs(agendaDate.value).format('dddd D MMMM YYYY');
+});
+
+
 const dateDiscount = ref(new Date());
 dateDiscount.value.setDate(dateDiscount.value.getDate() + 6);
 
@@ -266,15 +273,12 @@ const agendaTitle = useField('agendaTitle')
 const agendaDescription = useField('agendaDescription')
 const agendaDate = ref(new Date())
 agendaDate.value.setDate(agendaDate.value.getDate() + 6)
-const maxDate = ref(new Date())
-maxDate.value.setMonth(maxDate.value.getMonth() + 1)
 
-// const format = (date) => {
-//     const day = date.getDate();
-//     const month = date.getMonth() + 1;
-//     const year = date.getFullYear();
-//     return `Selected date is ${day}/${month}/${year}`;
-// }
+
+const minDate = ref(new Date());
+minDate.value.setDate(minDate.value.getDate() + 6);
+const maxDate = ref(new Date());
+maxDate.value.setMonth(maxDate.value.getMonth() + 1);
 
 const agendaSubmit = handleSubmit(values => {
     let newAgenda = {

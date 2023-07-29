@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Http\Requests\StoreeventRequest;
-use App\Http\Requests\UpdateeventRequest;
 use App\Http\Resources\EventBookingResource;
 use App\Http\Resources\EventCategoryResource;
 use App\Http\Resources\EventEditInforResource;
@@ -265,7 +263,7 @@ class EventController extends Controller
         $event->delete();
         return response()->json(['success' => true, 'message' => 'Event deleted successfully'], 200);
     }
-    
+
     public function getOrganizerId($eventId)
     {
         $event = Event::find($eventId);
@@ -362,12 +360,17 @@ class EventController extends Controller
             'category_id' => $request->category_id,
             'organizer_id' => $request->organizer_id,
         ];
+        $admin = Auth::user();
+        if ($admin->role === 'customer') {
+            return response()->json(['message' => 'No permission to delete this event'], 403);
+        }
         $validator = Validator::make($eventRequest, $eventRules);
         if ($validator->fails()) {
             return $validator->errors();
         }
+
         $event = Event::where('id', $request->id)
-            ->where('organizer_id', Auth::user()->id)
+            ->where('organizer_id', $request->organizer_id)
             ->firstOrFail();
         $event->update($eventRequest);
 
@@ -377,10 +380,20 @@ class EventController extends Controller
             $eventDetailRequest[0]['event_id'] = $event->id;
             $eventDetail = $this->eventDetailEdit($eventDetailRequest[0]);
 
+
             if ($request->input('discounts')[0]['discounts']) {
                 $discountRequest = $request->input('discounts')[0]['discounts'];
                 $discountRequest['event_detail_id'] = $eventDetail->id;
-                $this->discountEdit($discountRequest);
+                if (!empty($discountRequest['id'])) {
+                    $this->discountEdit($discountRequest, $discountRequest['id']);
+                } else {
+                    $this->discountEdit($discountRequest);
+                }
+            } else {
+                $discount = Discount::where('event_detail_id', $eventDetail->id)->firstOrFail();
+                if ($discount) {
+                    $discount->delete();
+                }
             }
         }
 
@@ -441,7 +454,7 @@ class EventController extends Controller
         return $eventDetail;
     }
 
-    public function discountEdit($request)
+    public function discountEdit($request, $id = null)
     {
         $discountRules = [
             'end_date' =>  ['required', 'date_format:Y-m-d H:i:s'],
@@ -458,8 +471,11 @@ class EventController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
-        $discount = Discount::find($request['id']);
-        $discount->update($validator->validated());
+
+        $discount = Discount::updateOrCreate(['id' => $id], $validator->validated());
+
+        // $discount = Discount::find($request['id']);
+        // $discount->update($validator->validated());
         return $discount;
     }
 
@@ -502,5 +518,4 @@ class EventController extends Controller
 
         return response()->json($events);
     }
-   
 }

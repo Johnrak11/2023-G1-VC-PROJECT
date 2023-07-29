@@ -108,6 +108,9 @@ function submitUpdateEvent() {
     .then((result) => {
       if (result) {
         eventEdit.editEvent();
+        tab.value = "one";
+        isNext.value = true;
+        nextValue.value = "one";
         dialog.value = false;
       } else {
         isAlert.value = true;

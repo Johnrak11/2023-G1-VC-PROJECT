@@ -100,7 +100,10 @@ function submitEvent() {
         .then(result => {
             if (result) {
                 eventCreate.createEvent()
-                dialog.value = false
+                tab.value = "one";
+                isNext.value = true;
+                nextValue.value = "one";
+                dialog.value = false;
             } else {
                 isAlert.value = true
                 delayedFunction(2000)

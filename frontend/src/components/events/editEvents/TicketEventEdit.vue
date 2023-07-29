@@ -115,7 +115,7 @@
                 </VDatePicker>
 
                 <v-textarea class="mt-5" v-model="agendaDescription.value.value" :counter="200"
-                    :error-messages="agendaDescription.errorMessage.value" name="input-7-1" variant="filled" label="Label"
+                    :error-messages="agendaDescription.errorMessage.value" name="input-7-1" variant="filled" label="Description"
                     auto-grow style="width: 100%"></v-textarea>
                 <div class="btn-agenda">
                     <v-btn color="red" type="button" @click="submitAgendaContain" style="width: 30%"> {{ updateMessage }}
@@ -208,8 +208,16 @@ async function ticketSubmit() {
     if (modelDiscount.value) {
         eventEdit.eventEditInfor.discounts[0].discounts = {};
     } else {
-        eventEdit.eventEditInfor.discounts[0].discounts.percent = discount.value
-        eventEdit.eventEditInfor.discounts[0].discounts.end_date = eventCreate.datebaseFormatDate(dateDiscount.value)
+        let newDiscount = {
+            percent: discount.value,
+            end_date: eventCreate.datebaseFormatDate(dateDiscount.value)
+        }
+        if (eventEdit.eventEditInfor.discounts[0].discounts) {
+            newDiscount['id'] = eventEdit.eventEditInfor.discounts[0].discounts.id
+            eventEdit.eventEditInfor.discounts[0].discounts = newDiscount
+        } else {
+            eventEdit.eventEditInfor.discounts[0].discounts = newDiscount
+        }
     }
     // ---- agenda---
     if (agendas.value.length !== 0) {
@@ -277,10 +285,10 @@ const agendaDescription = useField("agendaDescription");
 const agendaDate = ref(new Date());
 agendaDate.value.setDate(agendaDate.value.getDate() + 6);
 
-const minDate = ref(new Date());
-minDate.value.setDate(agendaDate.value.getDate() + 6);
-const maxDate = ref(new Date());
-maxDate.value.setMonth(maxDate.value.getMonth() + 1);
+const minDate = ref(new Date())
+minDate.value.setDate(minDate.value.getDate() + 6)
+const maxDate = new Date()
+maxDate.setMonth(maxDate.getMonth() + 1)
 
 
 function editAgenda(index) {

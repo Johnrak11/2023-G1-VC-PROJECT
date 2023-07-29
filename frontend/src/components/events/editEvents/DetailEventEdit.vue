@@ -123,13 +123,16 @@ const formattedDate = computed(() => {
     }
     return dayjs(selectDate.value).format('dddd D MMMM YYYY');
 });
-
+    
 const minDate = ref(new Date());
 minDate.value.setDate(minDate.value.getDate() + 6);
+
 const selectDate = ref(new Date());
-selectDate.value.setDate(minDate.value.getDate() + 6);
+selectDate.value.setDate(selectDate.value.getDate() + 6);
+
 const maxDate = new Date();
 maxDate.setMonth(maxDate.getMonth() + 1);
+
 const isOpenMap = ref(false);
 
 const image = ref();
