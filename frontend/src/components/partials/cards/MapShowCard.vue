@@ -10,7 +10,7 @@
                     <a class="direction" :href="getGoogleMapsLink(eventinfor.latitude, eventinfor.longitude)"
                         target="_blank">
                         <v-btn class="ms-2" variant="outlined" size="small">
-                            Direction
+                            {{ t('showMapCard.direction') }}
                         </v-btn>
                     </a>
                 </v-card-actions>
@@ -24,7 +24,8 @@
 
 <script setup>
 import { ref, defineProps } from "vue";
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const props = defineProps({
     event: Object
 })

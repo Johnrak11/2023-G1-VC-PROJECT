@@ -4,22 +4,23 @@
       <button-component-form @click="dialog = !dialog">Payment</button-component-form>
       <v-dialog v-model="dialog" width="40%">
         <v-card>
-          <v-card-title>
+          <v-card-title class="text-red mt-5">
             Payment
           </v-card-title>
-          <form action="" class="ml-12">
-            <v-text-field type="number" class="text-start" v-model="cardNumber" label="Number of credit card"
+          <form action="" class="ml-5 mb-5">
+            <v-text-field type="number" class="text-start mr-5" v-model="cardNumber" label="Number of credit card" variant="outlined"
               :rules="[requiredRule, cardNumberRule]" maxlength="19"><img v-if="creditCardType"
                 :src="creditCardType.message"></v-text-field>
-            <v-text-field v-model="expirationCard" type="date" label="Expiration" :rules="[requiredRule, expirationRule]"
+            <v-text-field v-model="expirationCard" type="date" class="text-start mr-5" label="Expiration" variant="outlined" :rules="[requiredRule, expirationRule]"
               maxlength="10"></v-text-field>
-            <v-text-field v-model="cvvCard" type="number" label="CVV" :rules="[requiredRule, cvvRule]"
+            <v-text-field v-model="cvvCard" type="number" class="text-start mr-5" label="CVV" variant="outlined" :rules="[requiredRule, cvvRule]"
               maxlength="4"></v-text-field>
-            <v-text-field v-model="nameCard" label="Name on Card" :rules="[requiredRule]" maxlength="50"></v-text-field>
+            <v-text-field v-model="nameCard" label="Name on Card" variant="outlined" class="text-start mr-5" :rules="[requiredRule]" maxlength="50"></v-text-field>
             <v-card-actions>
-              <button-component-form @click.prevent="saveData">Pay</button-component-form>
+              <!-- <button-component-form @click.prevent="saveData" class="ml-15">Pay</button-component-form> -->
+              <v-btn @click.prevent="saveData" class="btn bg-red">PAY</v-btn>
             </v-card-actions>
-          </form>
+          </form >
         </v-card>
       </v-dialog>
     </v-row>
@@ -142,12 +143,13 @@ async function saveData() {
   createTicket(props.eventId);
 
 }
-
-
 </script>
 <style scoped>
 img {
-  width: 10%;
+  width: 12%;
   margin-top: 0;
+}
+.btn{
+  margin-left: 85%;
 }
 </style>

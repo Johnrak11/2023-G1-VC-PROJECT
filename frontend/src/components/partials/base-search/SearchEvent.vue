@@ -26,7 +26,7 @@
         style="height: 9vh; width: 10%;">{{ t('search')
         }}</v-btn>
     </v-row>
-  </v-form >
+  </v-form>
 </template>
 <script setup>
 import dayjs from 'dayjs';

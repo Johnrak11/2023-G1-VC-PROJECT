@@ -42,10 +42,11 @@
             actions
           </th>
         </tr>
-      </thead> 
-      <!-- <div class="ml-8 mb-5" v-if="eventPreviewStorage.eventPosteds"> -->
-        <CardEventPreview  v-for="eventPreview of eventPreviewStorage.eventPosteds" :key="eventPreview" :eventPreview="eventPreview"/>
-      <!-- </div> -->
+      </thead>
+      <tbody>
+        <CardEventPreview v-for="eventPosted of eventPreviewStorage.eventPosteds" :key="eventPosted.id"
+          :eventData="eventPosted" />
+      </tbody>
     </v-table>
   </v-card>
 </template>

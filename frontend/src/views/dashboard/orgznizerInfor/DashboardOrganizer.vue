@@ -2,7 +2,7 @@
   <v-card>
     <v-layout>
       <v-main class="bg-grey-lighten-2">
-        <CardDashboard />
+        <CardDashboard class="animate__animated animate__fadeInUp"/>
         <ContainLeftDashboard />
       </v-main>
     </v-layout>

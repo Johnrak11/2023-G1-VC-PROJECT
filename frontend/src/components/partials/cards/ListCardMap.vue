@@ -6,12 +6,14 @@
             <div v-if="events.recommendEvent.length === 0" class="not-found d-flex flex-column align-center"
                 style="margin-top: 38%;">
                 <img :src="searchGif" style="width: 90px">
-                <h2>There are no upcoming Events in your area..</h2>
+                <h2>{{ t('search distanation message') }}</h2>
             </div>
         </div>
     </div>
 </template>
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import CardMapTemplate from './CardMapTemplate.vue'
 import { ref, onMounted } from 'vue'
 import searchGif from '@/assets/iconSearch.gif'

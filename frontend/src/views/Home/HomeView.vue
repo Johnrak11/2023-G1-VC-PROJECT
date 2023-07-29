@@ -2,15 +2,15 @@
   <banner-view></banner-view>
   <search-view></search-view>
   <category-view></category-view>
-  <list-card class="mb-7">
+  <list-card class="mb-10">
     <div class="ml-16" data-aos="fade-right" data-aos-duration="3000">
       <h1>{{ t('upcomingEvents.main') }}</h1>
       <p>{{ t('upcomingEvents.subtext') }}</p>
     </div>
   </list-card>
-  <div class="bnt-container d-flex justify-center mb-10">
-    <router-link to="explore" style="width: 12%;">
-      <v-btn color="red">Explore more</v-btn>
+  <div class="bnt-container d-flex justify-center align-center mb-10">
+    <router-link to="explore" style="width: 10%;">
+      <v-btn color="red"> {{ t('explore more') }}</v-btn>
     </router-link>
   </div>
   <popular-event class="mb-7">

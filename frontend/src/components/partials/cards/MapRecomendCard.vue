@@ -7,17 +7,17 @@
         </v-card-title>
 
         <v-card-subtitle>
-            Distanation: {{ distanationToKm }}
+            {{ t('listShowMapCard.distanation') + ': ' + distanationToKm }}
         </v-card-subtitle>
 
         <v-card-subtitle>
-            Start at: {{ eventinfor.date }}
+            {{ t('listShowMapCard.start date') + ': ' + eventinfor.date }}
         </v-card-subtitle>
 
         <v-card-actions>
             <router-link :to="`detail/${eventinfor.id}`">
                 <v-btn color="red" variant="text">
-                    More detail
+                    {{ t('listShowMapCard.more detail') }}
                 </v-btn>
             </router-link>
         </v-card-actions>
@@ -26,7 +26,8 @@
 
 <script setup>
 import { ref, defineProps } from "vue";
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const props = defineProps({
     event: Object
 })

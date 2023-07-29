@@ -1,9 +1,8 @@
 <template>
-  <div class="w-90 ml-5 d-flex justify-center">
+  <div class="w-90 d-flex justify-center">
     <v-text-field density="compact" placeholder="Your address" variant="outlined" :rules="addressRule"
-      v-model="address.address" class="w-90"></v-text-field>
-    <v-btn size="small" color="indigo" class="bg-red" icon="mdi-map-marker" :loading="address.loading"
-      style="margin-right: 30px;" @click="address.locaterButtonPressed()"></v-btn>
+      v-model="address.address" class="w-90" append-inner-icon="mdi-map-marker"
+      @click:append-inner="address.locaterButtonPressed()" :loading="address.loading"></v-text-field>
   </div>
 </template>
 

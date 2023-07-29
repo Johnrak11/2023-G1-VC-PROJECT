@@ -48,6 +48,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html::-webkit-scrollbar {
+    display: none;
+}
+
 #app {
   font-family: 'Konkhmer Sleokchher', cursive;
   font-family: 'Noto Serif Khmer', serif;

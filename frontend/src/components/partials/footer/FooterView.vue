@@ -13,12 +13,12 @@
         <div class="col-md-4">
           <h3>Contact Us</h3>
           <ul>
-            <li><v-icon class="li"> mdi-calendar</v-icon>Phnom Penh, Combodia</li>
+            <li><v-icon size="26" class="li"> mdi-map-marker-radius</v-icon>Phnom Penh, Combodia</li>
             <li>
               <v-icon size="large" icon="mdi-email"></v-icon>
               contact@domain.com
             </li>
-            <li><v-icon>mdi-account</v-icon> (+855) 882771621</li>
+            <li><v-icon>mdi-phone-classic</v-icon> (+855) 882771621</li>
           </ul>
         </div>
         <div class="col-md-4">

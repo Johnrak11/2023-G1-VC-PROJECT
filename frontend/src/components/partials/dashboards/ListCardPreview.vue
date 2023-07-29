@@ -6,8 +6,8 @@
       </li>
     </ul> -->
     <div class="mr-10 rounded ml-8" style="margin-top: 6%;">
-    <h3 v-if="eventPreviewStorage.eventPreviews">Event({{eventPreviewStorage.eventPreviews?.length}})</h3>
-    <h3 v-else>Please Create An Event</h3>
+      <h3 v-if="eventPreviewStorage.eventPreviews">Event({{ eventPreviewStorage.eventPreviews?.length }})</h3>
+      <h3 v-else>Please Create An Event</h3>
       <div class="d-flex justify-md-end">
         <!-- <div class="w-50">
       vscode-file://vscode-app/c:/Users/U-ser/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html    <v-text-field variant="solo" label="Search templates" append-inner-icon="mdi-magnify" single-line hide-details
@@ -42,8 +42,11 @@
             actions
           </th>
         </tr>
-      </thead> 
-      <CardEventPreview  v-for="eventPreview of eventPreviewStorage.eventPreviews" :key="eventPreview" :eventPreview="eventPreview"/>
+      </thead>
+      <tbody>
+        <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventPreviews" :key="eventPreview.id"
+          :eventData="eventPreview" />
+      </tbody>
     </v-table>
     <!-- <div class="ml-8 mb-5">
     </div> -->

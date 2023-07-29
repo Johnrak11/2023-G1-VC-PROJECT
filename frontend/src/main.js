@@ -10,13 +10,13 @@ import vue3GoogleLogin from "vue3-google-login";
 import VueSocialSharing from "vue-social-sharing";
 import { createPinia } from "pinia";
 // ----- date---
-import VueDatePicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
+// import VueDatePicker from "@vuepic/vue-datepicker";
+// import "@vuepic/vue-datepicker/dist/main.css";
 import JsonExcel from "vue-json-excel";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 
-import { setupCalendar, Calendar, DatePicker } from 'v-calendar';
-import 'v-calendar/style.css';
+import { setupCalendar, Calendar, DatePicker } from "v-calendar";
+import "v-calendar/style.css";
 // ----- scroll animation -----
 
 // reference https://egghead.io/blog/how-to-use-the-animate-on-scroll-aos-library-in-vue
@@ -52,7 +52,7 @@ app.use(VueSocialSharing);
 app.use(pinia);
 app.use(AOS);
 app.use(i18n);
-app.use(setupCalendar, {})
+app.use(setupCalendar, {});
 
 
 app.component("navigation-bar", NavigationBar);
@@ -64,12 +64,12 @@ app.component("card-rate", CardRate);
 app.component("footer-view", FooterView);
 app.component("pagination-view", PaginationView);
 app.component("banner-view", BannerView);
-app.component("VueDatePicker", VueDatePicker);
+// app.component("VueDatePicker", VueDatePicker);
 app.component("downloadExcel", JsonExcel);
 app.component(VueQrcode.name, VueQrcode);
 
-app.component('VCalendar', Calendar)
-app.component('VDatePicker', DatePicker)
+app.component("VCalendar", Calendar);
+app.component("VDatePicker", DatePicker);
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init();
 });

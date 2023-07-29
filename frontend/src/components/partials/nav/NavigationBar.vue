@@ -1,10 +1,11 @@
 <template>
-  <v-layout :style="{ top: navbarTop }" class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
+  <v-layout :style="{ top: navbarTop, backgroundColor: bgColor }"
+    class="nav-bar d-flex justify-space-between w-100 bg-color" :elevation="7">
     <v-nav-bar-left class="d-flex left">
       <v-img src="../../../assets/logo.png" alt="" style="margin-left: -20%; height: 50px; object-fit: cover" />
     </v-nav-bar-left>
-    <v-nav-bar-right class="d-flex right justify-space-between" style="margin-right: 4%">
-      <v-left-content class="ml-16">
+    <v-nav-bar-right class="d-flex right justify-space-between " style="margin-right: 4%">
+      <v-left-content class="ml-16 ">
         <ul class="d-flex justify-space-evenly mt-2">
           <router-link to="/" class="link">
             <v-btn id="li-nav" :class="{ active: isActive('/') }" class="rounded" variant="text">{{ t("home") }}</v-btn>
@@ -20,19 +21,11 @@
         </ul>
       </v-left-content>
       <v-right-content class="d-flex profile align-center">
-        <select v-model="language" @change="changeLanguage" class="mr-3">
+        <select v-model="language" @change="changeLanguage">
           <option value="en">English</option>
           <option value="kh">ខ្មែរ</option>
         </select>
-        <v-menu v-model="state.menu" :close-on-content-click="false" location="end">
-          <template v-slot:activator="{ props }">
-            <v-badge content="0" color="error" class="mr-5 notification" v-bind="props">
-              <v-icon>mdi-bell-outline</v-icon>
-            </v-badge>
-          </template>
-          <NotificationComponent />
-        </v-menu>
-        <router-link v-if="!user.token" to="/login"><v-btn color="red" width="5">Login</v-btn></router-link>
+        <router-link v-if="!user.token" to="/login"><v-btn color="red">{{ t('login') }}</v-btn></router-link>
         <v-menu v-else>
           <template v-slot:activator="{ props }">
             <v-avatar v-if="user.user.profile_picture" v-bind="props" value="Avatar">
@@ -45,7 +38,7 @@
           <v-list>
             <v-list-item v-if="getSession('role')" value="ticket">
               <router-link to="/profile">
-                <v-list-item-title>Profile</v-list-item-title>
+                <v-list-item-title>{{ t('profile') }}</v-list-item-title>
               </router-link>
             </v-list-item>
             <v-list-item v-if="getSession('role')" value="ticket">
@@ -75,20 +68,12 @@
 
 <script setup>
 import router from "@/routes/router.js";
-import NotificationComponent from "../../notification/NotificationComponent.vue";
 import { onMounted, ref } from "vue";
 import { userStore } from "@/stores/user.js";
 import { sessionStore } from "@/stores/session.js";
 const { getSession } = sessionStore();
 const user = userStore();
-import { reactive } from "vue";
 
-const state = reactive({
-  fav: true,
-  menu: false,
-  message: false,
-  hints: true,
-});
 const listRole = ref(["organizer", "admin"]);
 const isActive = (route) => {
   return router.currentRoute.value.path === route;
@@ -96,9 +81,14 @@ const isActive = (route) => {
 
 // ---- navbar scroll----
 const prevScrollpos = ref(window.pageYOffset);
-
 window.addEventListener("scroll", () => {
   const currentScrollPos = window.pageYOffset;
+  console.log(router.currentRoute.value.path)
+  if (currentScrollPos < 20 && router.currentRoute.value.path == '/') {
+    bgColor.value = "rgba(255, 255, 255, 0.495)"
+  } else {
+    bgColor.value = "white"
+  }
   if (prevScrollpos.value > currentScrollPos) {
     navbarTop.value = "0";
   } else {
@@ -108,6 +98,7 @@ window.addEventListener("scroll", () => {
 });
 
 const navbarTop = ref("0");
+const bgColor = ref("");
 
 import { cookieStore } from '@/stores/cookies.js'
 const { getCookie, setCookie } = cookieStore()
@@ -135,7 +126,8 @@ onMounted(() => {
 <style scoped>
 .nav-bar {
   overflow: hidden;
-  background: white;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: white;
   position: fixed;
   top: 0;
   width: 100%;

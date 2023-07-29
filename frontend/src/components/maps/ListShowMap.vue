@@ -1,9 +1,11 @@
 <template>
     <div style="height: auto; width: 50%" class="rounded ml-5 mr-15 mt-16">
         <v-card-text class="search">
+            <v-form @submit.prevent="onClick">
             <v-text-field v-model="kilomate" :loading="loading" density="compact" type="number" variant="solo"
-                label="Search distanation" append-inner-icon="mdi-magnify" single-line hide-details
+                 :label="t('search distanation')" append-inner-icon="mdi-magnify" single-line hide-details
                 @click:append-inner="onClick"></v-text-field>
+            </v-form>
         </v-card-text>
         <l-map class="rounded" ref="map" v-model:zoom="zoom" :center="center">
             <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" layer-type="base"
@@ -26,6 +28,9 @@
 </template>
   
 <script setup>
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "@vue-leaflet/vue-leaflet";
 import { ref, computed } from "vue";

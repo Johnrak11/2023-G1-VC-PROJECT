@@ -11,8 +11,8 @@
             <v-col cols="auto">
               <v-dialog transition="dialog-bottom-transition bg-blue" width="30%">
                 <template v-slot:activator="{ props }">
-                  <div class="d-flex justify-end align-center share-btn" style="margin-top: -45%;">
-                    <p class="mt-1">Share</p>
+                  <div class="d-flex justify-end align-center share-btn" style="margin-top: -40%;">
+                    <p class="mt-1">{{ t('cardTemplate.share') }}</p>
                     <v-icon icon="mdi-share-variant" size="23" v-bind="props" @click="ClickShare(eventInfor.id)"></v-icon>
                   </div>
                 </template>
@@ -24,7 +24,8 @@
                         :title="eventInfor.name" :description="eventInfor.description"
                         quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                         class="social-share">
-                        <v-icon left class="ml-2 mt-3 color-icon" color="blue" size="50" style="height: 5vh">mdi-facebook</v-icon>
+                        <v-icon left class="ml-2 mt-3 color-icon" color="blue" size="50"
+                          style="height: 5vh">mdi-facebook</v-icon>
                         <p class="text-black mt-5">Facebook</p>
                       </ShareNetwork>
                       <ShareNetwork network="telegram" :url="events.localHttp + '/detail/' + eventInfor.id"
@@ -33,11 +34,13 @@
                         class="social-share" id="my-iframe" allow-same-origin>
                         <img :src="eventInfor.img" alt="">
                         <!-- <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-telegram</v-icon> -->
-                        <img src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png" alt="" width="67">
+                        <img
+                          src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png"
+                          alt="" width="67">
                         <p class="text-black" style="margin-top: -20%;">Telegram</p>
                       </ShareNetwork>
                       <ShareNetwork network="linkedin" :url="events.localHttp + '/detail/' + eventInfor.id"
-                        :title="eventInfor.name" :description="eventInfor.description" 
+                        :title="eventInfor.name" :description="eventInfor.description"
                         quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
                         class="social-share">
                         <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-linkedin</v-icon>
@@ -70,13 +73,13 @@
                     <v-card-title class="text-black" style="margin-left: -5%;">{{ eventInfor.name }}</v-card-title>
                   </div>
                   <div class="d-flex mt-2">
-                    <p class="ml-1 mt-2 mb-2" style="font-size: 15px">Date:
-                      {{ eventInfor.date }}
+                    <p class="ml-1 mt-2 mb-2" style="font-size: 15px">
+                      {{ t('cardTemplate.startDate') + ': ' + eventInfor.date }}
                     </p>
                   </div>
                   <div class="d-flex" style="margin-top: -5%;">
-                    <p style="font-size: 15px" class="ml-1 mt-1">Venue:
-                      {{ eventCreate.truncateDescription(eventInfor.venue, 20) }}
+                    <p style="font-size: 15px" class="ml-1 mt-1">
+                      {{ t('cardTemplate.venue') + ': ' + eventCreate.truncateDescription(eventInfor.venue, 20) }}
                     </p>
                   </div>
                 </div>
@@ -86,7 +89,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn color="white" class="bg-red mb-3" @click.prevent="booking" style="width: 100%;">
-            Booking
+            {{ t('cardTemplate.booking')  }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -95,6 +98,8 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import router from "@/routes/router";
 import { eventStores } from "@/stores/eventsStore";
 import { defineProps, ref } from "vue";
@@ -183,7 +188,8 @@ a {
 .social-share {
   text-decoration: none;
 }
-.share-btn{
+
+.share-btn {
   gap: 5px;
   width: 100%;
   margin-left: -40%;

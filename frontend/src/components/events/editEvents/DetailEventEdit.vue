@@ -9,14 +9,13 @@
             <h3>Give your event a name.*</h3>
             <v-label>See how your name appears on the event page and a list of all places
                 where your event name will be used.</v-label>
-            <v-text-field v-model="eventName" :counter="10" :rules="eventNameRules" label="Event name" style="width: 100%"
+            <v-text-field v-model="eventName" :rules="eventNameRules" label="Event name" style="width: 100%"
                 variant="outlined"></v-text-field>
         </div>
         <div class="input-container">
             <h3>Choose a category for your event.*</h3>
-            <v-label>Choosing relevant categories helps to improve the discoverability of
-                your event.</v-label>
-            <select class="category-container" v-model="category" style="width: 100%">
+            <v-label>Choosing relevant categories helps to improve the discoverability of your event.</v-label>
+            <select class="category-container" v-model="category" style="width:100%;">
                 <option value="">Select category</option>
                 <option v-for="category of categorySote.categories" :key="category.id" selected :value="category.id">
                     {{ category.name }}
@@ -25,14 +24,19 @@
         </div>
         <div class="input-container mt-5">
             <h3>When is your event?*</h3>
-            <VueDatePicker class="custom-datepicke" v-model="minDate" :max-date="maxDate" :min-date="minDate"
-                ignore-time-validation placeholder="Select Date">
-            </VueDatePicker>
+
+            <VDatePicker v-model="selectDate" color="red" :events="events" :min-date="minDate" :max-date="maxDate"
+                mode="dateTime">
+                <template #default="{ togglePopover }">
+                    <v-text-field v-model="formattedDate" density="compact" variant="outlined" :label="t('select date')"
+                        @click="togglePopover" prepend-inner-icon="mdi-calendar" single-line hide-details
+                        style="height: 15vh;padding-top: 18px;"></v-text-field>
+                </template>
+            </VDatePicker>
         </div>
         <div class="input-container mt-5">
             <h3>Add an image to your event banner.</h3>
-            <v-label>Upload colorful and vibrant images as the banner for your event! See
-                how beautiful images help your event details page</v-label>
+            <v-label>Upload colorful and vibrant images as the banner for your event!</v-label>
             <div class="image-container">
                 <div class="image-wrapper">
                     <img :src="eventCreate.imagePreview" :alt="image ? 'Selected Image' : 'Default Image'"
@@ -40,9 +44,9 @@
                 </div>
             </div>
 
-            <v-file-input v-model="image" :rules="imageRules" class="mt-15" accept="image/png, image/jpeg, image/bmp"
-                placeholder="Pick an image" prepend-icon="mdi-camera" @change="selectImage"
-                @click:clear="eventCreate.fireDeleteImage()" label="Image"></v-file-input>
+            <v-file-input v-model="image" variant="outlined" :rules="imageRules" class="mt-15"
+                accept="image/png, image/jpeg, image/bmp" placeholder="Pick an image" prepend-inner-icon="mdi-camera"
+                @change="selectImage" @click:clear="eventCreate.fireDeleteImage()" label="Image"></v-file-input>
         </div>
         <div class="input-container">
             <h3>Please describe your event.</h3>
@@ -56,19 +60,17 @@
         </div>
         <div class="input-container">
             <h3>Where is your event taking place? *</h3>
-            <v-label>Add a venue to your event to tell your attendees where to join the
-                event.</v-label>
+            <v-label>Add a venue to your event to tell your attendees where to join the event.</v-label>
             <div class="d-flex mb-0">
-                <v-text-field v-model="addressStorage.address" :counter="10" :rules="addressRules" label="Address"
-                    variant="outlined" style="width: 100%"></v-text-field>
-                <v-btn size="small" class="bg-red mt-2 ml-5" icon="mdi-map-marker" :loading="addressStorage.loading"
-                    @click="addressStorage.locaterButtonPressed()"></v-btn>
+                <v-text-field v-model="addressStorage.address" :rules="addressRules" label="Address" variant="outlined"
+                    append-inner-icon="mdi-map-marker" @click:append-inner="addressStorage.locaterButtonPressed()"
+                    :loading="addressStorage.loading" style="width:100%;"></v-text-field>
             </div>
-            <v-btn v-if="addressStorage.latitude" variant="outlined" :loading="false" prepend-icon="mdi-map"
-                @click="isOpenMap = !isOpenMap" class="w-100 mb-5" style="margin-top: -5px">
+            <v-btn v-if="addressStorage.latitude" variant="solo" :loading="false" prepend-icon="mdi-map"
+                @click="isOpenMap = !isOpenMap" class="w-100 mb-5" style="margin-top: -5px;">
                 Select map</v-btn>
-            <v-text-field v-model="venue" :counter="10" :rules="venueRules" label="Venue" variant="outlined"
-                style="width: 100%"></v-text-field>
+            <v-text-field v-model="venue" :rules="venueRules" label="Venue" variant="outlined"
+                style="width:100%;"></v-text-field>
         </div>
     </form>
     <v-dialog v-model="eventCreate.isLoadingDialog" :scrim="false" persistent width="auto">
@@ -97,7 +99,9 @@
     </v-dialog>
 </template>
 <script setup>
-import { ref, defineExpose, defineProps, onMounted, watch } from "vue";
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+import { ref, defineExpose, defineProps, onMounted, watch, computed } from "vue";
 import OpenStreetMap from "@/components/maps/SelectMap.vue";
 
 import { addressStore } from "@/stores/address.js";
@@ -112,10 +116,23 @@ const eventCreate = eventCreateStores();
 import { categoryStore } from "@/stores/categoryStore.js";
 const categorySote = categoryStore();
 
+import dayjs from 'dayjs';
+const formattedDate = computed(() => {
+    if (!selectDate.value) {
+        return null
+    }
+    return dayjs(selectDate.value).format('dddd D MMMM YYYY');
+});
+    
 const minDate = ref(new Date());
 minDate.value.setDate(minDate.value.getDate() + 6);
+
+const selectDate = ref(new Date());
+selectDate.value.setDate(selectDate.value.getDate() + 6);
+
 const maxDate = new Date();
 maxDate.setMonth(maxDate.getMonth() + 1);
+
 const isOpenMap = ref(false);
 
 const image = ref();
@@ -160,12 +177,14 @@ async function submitHandler() {
         console.log('befor', eventEdit.eventEditInfor)
         eventEdit.eventEditInfor['name'] = eventName.value;
         eventEdit.eventEditInfor['description'] = description.value;
+        eventEdit.eventEditInfor['date'] = dayjs(selectDate.value).format('YYYY-MM-DD HH:MM')
+        eventEdit.eventEditInfor['time'] = dayjs(selectDate.value).format('HH:MM') + ':00'
         eventEdit.eventEditInfor['category_id'] = category.value;
         eventEdit.eventEditInfor['venue'] = venue.value;
         eventEdit.eventEditInfor['image'] = eventCreate.imagePreview;
         eventEdit.eventEditInfor['location'] = addressStorage.address;
-        eventEdit.eventEditInfor['latitude'] = addressStorage.latitude ;
-        eventEdit.eventEditInfor['longitude'] =  addressStorage.longitude;
+        eventEdit.eventEditInfor['latitude'] = addressStorage.latitude;
+        eventEdit.eventEditInfor['longitude'] = addressStorage.longitude;
         console.log('after', eventEdit.eventEditInfor)
         return true;
     }
@@ -210,6 +229,7 @@ onMounted(() => {
             eventName.value = newValue.name;
             category.value = newValue.category_id
             description.value = newValue.description
+            selectDate.value = newValue.date
             venue.value = newValue.venue
             eventCreate.imagePreview = newValue.image
             addressStorage.address = newValue.location
@@ -249,7 +269,7 @@ form {
 }
 
 .image-wrapper {
-    width: 90%;
+    width: 100%;
     height: 0;
     padding-bottom: 60%;
     position: relative;
@@ -268,7 +288,7 @@ form {
 .category-container {
     width: 100%;
     color: rgb(91, 91, 91);
-    padding: 14px;
+    padding: 19px;
     border: 1px solid rgb(116, 116, 116);
     border-radius: 5px;
 }

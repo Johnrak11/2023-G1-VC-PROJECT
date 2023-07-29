@@ -13,11 +13,6 @@
           </v-btn>
           <v-toolbar-title>Edit Event</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn v-if="!isNext" @click="submitUpdateEvent()" variant="text" :loading="eventCreate.isCreate">
-              Update
-            </v-btn>
-          </v-toolbar-items>
         </v-toolbar>
         <v-list subheader>
           <v-card class="d-flex flex-column justify-center aling-center w-100">
@@ -32,12 +27,15 @@
               </v-window>
             </v-card-text>
             <div class="tab-container mb-5">
-              <v-tabs v-model="tab" class="d-flex justify-center">
+              <v-tabs v-model="tab" class="d-flex justify-space-between rounded" style="width: 60%;">
                 <v-tab v-show="!isNext" @click="isNext = !isNext" value="one" width="10%">
-                  <v-btn class="bg-red">Preview</v-btn>
+                  <v-btn color="red ml-5">Preview</v-btn>
                 </v-tab>
-                <v-tab class="btn-tab" v-show="isNext" @click="checkDetail" :value="nextValue" width="10%">
+                <v-tab v-show="isNext" @click="checkDetail" style="margin-left: 89%;" :value="nextValue" width="10%">
                   <v-btn color="red">Next</v-btn>
+                </v-tab>
+                <v-tab value="two" v-show="!isNext" @click="submitUpdateEvent()" width="10%" style="margin-left: 76%;">
+                  <v-btn color="red" :loading="eventCreate.isCreate">Update</v-btn>
                 </v-tab>
               </v-tabs>
             </div>
@@ -64,9 +62,8 @@ import detailEdit from "./DetailEventEdit.vue";
 import ticketEdit from "./TicketEventEdit.vue";
 import { ref, defineProps } from "vue";
 import { eventCreateStores } from "@/stores/eventCreate.js";
-// import { sweetAlert} from '@/stores/sweetAlert.js';
+
 const eventCreate = eventCreateStores();
-// const updateMessage = sweetAlert();
 
 import { eventEditStores } from "@/stores/eventEdit.js";
 const eventEdit = eventEditStores();
@@ -110,8 +107,10 @@ function submitUpdateEvent() {
     .ticketSubmit()
     .then((result) => {
       if (result) {
-        console.log('submit')
         eventEdit.editEvent();
+        tab.value = "one";
+        isNext.value = true;
+        nextValue.value = "one";
         dialog.value = false;
       } else {
         isAlert.value = true;
