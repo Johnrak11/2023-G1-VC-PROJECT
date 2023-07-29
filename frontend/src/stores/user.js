@@ -5,7 +5,9 @@ import { sessionStore } from "./session.js";
 
 export const userStore = defineStore("user", {
   state: () => ({
+    userId: "",
     user: {},
+    users: [],
     token: "",
   }),
   actions: {
@@ -39,6 +41,25 @@ export const userStore = defineStore("user", {
           }
         })
         .catch((error) => console.log(error.response.data.message));
+    },
+    async getAllUsers() {
+      await baseAPI
+        .get("/users")
+        .then((response) => {
+          this.users = response.data.data;
+        })
+        .catch((error) => console.log(error));
+    },
+
+    async searchUsers(search) {
+      await baseAPI.get("/admin/search/users", {
+          params: {
+            email: search,
+          },
+        }).then((response) => {
+          this.users = response.data.data.data
+          console.log(response.data.data.data) ;
+        }).catch((error) => console.log(error));
     },
   },
 });

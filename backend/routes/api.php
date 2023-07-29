@@ -83,7 +83,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/creditCard', [CreditCardController::class, 'store']);
     });
     
+    Route::get('/admin/search/users', [UserController::class, 'searchUsers']);
     Route::get('/users', [UserController::class, 'getUsers']);
+    Route::put('/users/update/{userId}', [UserController::class, 'updateRole']);
+    Route::get('/userRole/{userId}', [UserController::class, 'getUsersById']);
 });
 
 
@@ -127,3 +130,4 @@ Route::prefix('/eventDetail')->group(function () {
 });
 
 Route::get('/categories', [CategoryController::class, 'getAllCategory']);
+Route::get('/users',[UserController::class, 'getAllUsers']);

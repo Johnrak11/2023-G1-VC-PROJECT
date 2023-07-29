@@ -12,18 +12,20 @@
       <router-link to="/dashboard" class="nav">
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
       </router-link>
-      <router-link to="management/event/delete" class="nav">
+      <router-link to="/management/event/delete" class="nav">
         <v-list-item prepend-icon="mdi-delete" title="Event" value="event"></v-list-item>
       </router-link>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+      <router-link to="/listusers" class="nav">
+        <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+      </router-link>
       <v-list-item prepend-icon="mdi-information" title="About" value="about"></v-list-item>
     </v-list>
   </v-navigation-drawer>
-  <NavbarDashboard></NavbarDashboard>
+  <!-- <NavbarDashboard></NavbarDashboard> -->
   <router-view></router-view>
 </template>
 <script>
-import NavbarDashboard from "../../components/partials/nav/NavbarDashboard.vue";
+// import NavbarDashboard from "../../components/partials/nav/NavbarDashboard.vue";
 export default {
   data() {
     return {
@@ -31,9 +33,9 @@ export default {
       rail: true,
     };
   },
-  components: {
-    NavbarDashboard
-  }
+  // components: {
+  //   NavbarDashboard
+  // }
 };
 </script>
 <style scoped>

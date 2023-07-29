@@ -54,6 +54,7 @@ app.use(AOS);
 app.use(i18n);
 app.use(setupCalendar, {});
 
+
 app.component("navigation-bar", NavigationBar);
 app.component("search-view", SearchEvent);
 app.component("category-view", CategoryButton);

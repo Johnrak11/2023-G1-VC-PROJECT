@@ -15,10 +15,9 @@
         </div>
         <slot></slot>
       </div>
-    </v-card>
+    </v-card><br>
     <div class="ml-8 mb-5">
-      <CardEventPreview v-for="eventPreview of eventPreviewStorage.eventPreviews" :key="eventPreview.id"
-        :eventPreview="eventPreview" />
+      <CardEventPreview  />
     </div>
   </v-card>
 </template>
