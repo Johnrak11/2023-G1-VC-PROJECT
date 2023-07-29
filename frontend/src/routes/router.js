@@ -194,7 +194,7 @@ const routes = [
     name: "profile",
     component: ProfileView,
     props: true,
-    beforeEnter: [scanAuthenticateBeforeEnter()],
+    // beforeEnter: [scanAuthenticateBeforeEnter()],
   },
 ];
 const router = createRouter({

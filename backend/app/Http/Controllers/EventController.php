@@ -75,7 +75,7 @@ class EventController extends Controller
     {
         $perPage = $request->input('perPage', 16); // Number of items per page
         $todayDate = date('Y-m-d');
-        $eventUnDeadline = Event::where('date', '>=', $todayDate)->where('is_public', 1)->paginate($perPage);
+        $eventUnDeadline = Event::where('date', '>=', $todayDate)->where('is_public', 1)->orderBy('id', 'desc')->paginate($perPage);
 
         if ($eventUnDeadline->isEmpty()) {
             return response()->json([

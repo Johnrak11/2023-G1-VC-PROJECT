@@ -126,6 +126,9 @@ function paymentValidate() {
 async function saveData() {
   const isPayValidate = paymentValidate()
   if (!isPayValidate) {
+    console.log(isPayValidate)
+    dialog.value = false
+    alertMessage('error', 'Unsuccess payment!')
     return false
   }
   let creditCard = {
@@ -137,11 +140,11 @@ async function saveData() {
   }
   await baseAPI.post('/booking/creditCard', creditCard).then((response) => {
     console.log(response.data)
-    alertMessage('success', 'Payment Successfully')
   }).catch((error) => {
     console.log(error.response.data); // log the error message returned by the server
   });
   createTicket(props.eventId);
+  dialog.value = false
 
 }
 </script>

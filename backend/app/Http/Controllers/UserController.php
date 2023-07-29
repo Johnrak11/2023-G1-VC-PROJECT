@@ -71,26 +71,14 @@ class UserController extends Controller
         return response()->json(['success' => true, 'message' => 'User role updated successfully.', 'data' => $user], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
     public function searchUsers(Request $request)
     {
-        // $request->validate([
-        //     'email' => 'sometimes|email',
-        // ]);
-
-        $users = User::when($request->input('email'), function ($query, $email) {
-            return $query->where('email', 'like', '%' . $email . '%');
-        })
-            ->where('role', '!=', 'admin')
-            ->paginate(10);
-
+        $user = Auth::user();
+        if ($user->role !== 'admin') {
+            return response()->json(['message' => 'No permission to search user'], 403);
+        }
+        $email = $request->input('email');
+        $users = User::where('email', 'like', '%' . $email . '%')->paginate(10);
         return response()->json(['success' => true, 'data' => $users]);
     }
 }
