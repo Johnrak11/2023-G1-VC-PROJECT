@@ -4,11 +4,6 @@
       <router-link to="/" class="d-flex justify-center aling-center">
         <v-btn append-icon="mdi-logout" class="bg-red"> Leave </v-btn>
       </router-link>
-      <select class="mr-5">
-        <option value="">ED/KH</option>
-        <option value="">English</option>
-        <option value="">ខ្មែរ</option>
-      </select>
     </div>
   </v-card>
 </template>

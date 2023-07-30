@@ -142,9 +142,6 @@ onMounted(async () => {
     margin-left: 10%;
 }
 
-/* .v-table {
-    box-shadow: 5px 5px 5px rgb(215, 213, 213);
-} */
 
 /* Add the following styles to set a fixed header row */
 .v-table table {

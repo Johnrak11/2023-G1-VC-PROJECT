@@ -37,9 +37,10 @@ import { eventStores } from "@/stores/eventsStore.js";
 import { onMounted } from "vue";
 import { categoryStore } from "@/stores/categoryStore.js";
 
+const labelSelect = ref(t('select category'))
 const searchName = ref("");
 const searchDate = ref("");
-const select = ref({ id: '', name: t('select category') });
+const select = ref({ id: '', name: labelSelect.value });
 const events = eventStores();
 function eventSearch() {
   let newDate = ''

@@ -1,12 +1,12 @@
 <template>
-    <div style="margin-top: -45%;" class="animate__animated animate__fadeInLeft">
-        <div v-for="profile of profiles.profiles" :key="profile.id">
+    <div class="animate__animated animate__fadeInLeft">
+        <div>
             <img src="https://t4.ftcdn.net/jpg/04/95/28/65/360_F_495286577_rpsT2Shmr6g81hOhGXALhxWOfx1vOQBa.jpg" alt=""
-                style="width: 100%; height: 55vh;">
+                style="width: 100%; height: 53vh;">
             <div class="d-flex justify-space-between">
                 <div style="margin-top: -10%; margin-left: 10%;">
-                    <div v-if="profile.profile_picture != null">
-                        <img :src="profile.profile_picture" alt="" width="250"
+                    <div v-if="profiles.profiles.profile_picture != null">
+                        <img :src="profiles.profiles.profile_picture" alt="" width="250"
                             style="border-radius: 50%; border:5px solid white">
                     </div>
                     <div v-else>
@@ -21,23 +21,24 @@
             </div>
             <div class="d-flex justify-space-around">
                 <div class="left">
-                    <h1>{{ profile.lastname }} {{ profile.firstname }}</h1>
-                    <h2>I'm a {{ profile.role }}.</h2>
-                    <p>{{ profile.address }}</p>
+                    <h1>{{ profiles.profiles.lastname }} {{ profiles.profiles.firstname }}</h1>
+                    <h2>I'm a {{ profiles.profiles.role }}.</h2>
+                    <p>{{ profiles.profiles.address }}</p>
                 </div>
                 <div class="right">
-                    <h2>About</h2>
+                    <h2>{{ t('account.about') }}</h2>
                     <div class="d-flex">
                         <v-icon>mdi-account</v-icon>
-                        <p class="ml-5">See connection</p>
+                        <p class="ml-5">{{ t('account.connections') }}</p>
                     </div>
                     <div class="d-flex mt-3">
                         <v-icon>mdi-account-supervisor-circle</v-icon>
-                        <p class="ml-5">See contact info: {{ profile.phone_number }}</p>
+                        <p v-if="profiles.profiles.phone_number != null" class="ml-5">See contact info: {{ profiles.profiles.phone_number }}</p>
+                        <p v-else class="ml-5">{{ t('account.contact') }}: N/A</p>
                     </div>
                     <div class="d-flex mt-3">
                         <v-icon>mdi-email</v-icon>
-                        <p class="ml-5">{{ profile.email }}</p>
+                        <p class="ml-5">{{ profiles.profiles.email }}</p>
                     </div>
                 </div>
             </div>
@@ -48,7 +49,10 @@
 <script setup>
 import { profileStore } from "@/stores/profileStore.js"
 import { onMounted } from "vue";
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const profiles = profileStore();
+console.log(profiles);
 onMounted(() => {
     profiles.getDataUser();
 

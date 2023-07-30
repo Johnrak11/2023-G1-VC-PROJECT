@@ -17,7 +17,7 @@
         <v-list-item prepend-icon="mdi-calendar-plus" title="Preview" value="preview"></v-list-item>
       </router-link>
       <router-link v-if="listRole.includes(user.user.role)" to="/dashboard/event/delete" class="nav">
-        <v-list-item prepend-icon="mdi-delete" title="Event" value="event"></v-list-item>
+        <v-list-item prepend-icon="mdi-delete" title="Delete events" value="delete"></v-list-item>
       </router-link>
       <router-link v-if="listRole.includes(user.user.role)" to="/dashboard/listUsers" class="nav">
         <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>

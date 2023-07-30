@@ -49,8 +49,8 @@
 import EditEventDialog from "@/components/events/editEvents/EditEventDialog.vue";
 import { ref } from 'vue';
 import { defineProps } from "vue";
-import { eventCreateStores } from '@/stores/eventCreate.js';
 import { sweetAlert } from '@/stores/sweetAlert.js';
+import { eventCreateStores } from '@/stores/eventCreate.js';
 
 const { truncateDescription } = eventCreateStores()
 const props = defineProps({

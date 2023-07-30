@@ -8,9 +8,9 @@ export const profileStore = defineStore("profile", {
   actions: {
     async getDataUser() {
       await baseAPI
-        .get(`/users`)
+        .get(`/profile/users`)
         .then((response) => {
-          this.profiles = response.data;
+          this.profiles = response.data.data;
           console.log(this.profiles);
         })
         .catch((error) => console.log(error));

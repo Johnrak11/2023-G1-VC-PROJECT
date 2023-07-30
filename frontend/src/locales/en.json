@@ -76,7 +76,25 @@
     "name": "Name",
     "phone": "Phone"
   },
-
+  "tickets": {
+    "alltickets": "All tickets",
+    "image": "Image",
+    "title": "Title",
+    "date": "Date",
+    "time": "Time",
+    "location": "Location",
+    "venue": "Venue",
+    "bookingdate": "Booking date",
+    "ticketcode": "Ticket code",
+    "checkin": "CheckIn",
+    "searchticket": "Search ticket",
+    "error": "You don't have a ticket, please purchase a ticket to join"
+  },
+  "account": {
+    "about": "About",
+    "connections": "See connection",
+    "contact": "See contacts information"
+  },
   "footer": {
     "aboutUs": {
       "title": "About Us",
@@ -98,6 +116,3 @@
     }
   }
 }
-
-  
-

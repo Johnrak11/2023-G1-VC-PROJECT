@@ -1,7 +1,7 @@
 <template>
-  <v-card class="d-flex bg-red" style="height: 8vh;">
+  <v-card class="d-flex bg-red" style="height: 10vh;">
     <v-card-title class="d-flex">
-      <h4 class=" mr-5">Attendees </h4>
+      <h4 class=" mr-5 mt-3">Attendees </h4>
       <v-spacer></v-spacer>
     </v-card-title>
     <div class="btn w-75 mb-5">

@@ -7,13 +7,6 @@
     </ul>
     <div class="mr-10 ml-8">
       <p v-if="eventPreviewStorage.eventPosteds">Number of events: {{ eventPreviewStorage.eventPosteds?.length }}</p>
-      <!-- <div class="d-flex justify-md-end">
-        <div class="w-50">
-          <v-text-field variant="solo" label="Search templates" append-inner-icon="mdi-magnify" single-line hide-details
-            class="w-50"></v-text-field>
-        </div>
-        <slot></slot>
-      </div> -->
     </div>
     <v-table fixed-header height="80vh" style=" border-radius: 5px; width: 95%; overflow-y: hidden; margin-left: 2%;"
       class="list-user">
