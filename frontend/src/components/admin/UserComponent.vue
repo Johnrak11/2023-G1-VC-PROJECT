@@ -2,7 +2,10 @@
     <v-card>
       <v-layout>
         <v-main style="height: 100vh;">
-          <TableUser></TableUser>
+          <NavbarDashboard/>
+          <div class="animate__animated animate__bounceInDown">
+            <TableUser></TableUser>
+          </div>
           <ContainLeftDashboard />
         </v-main>
       </v-layout>

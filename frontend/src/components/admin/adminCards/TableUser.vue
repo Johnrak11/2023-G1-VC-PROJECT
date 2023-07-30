@@ -1,5 +1,5 @@
 <template>
-    <NavbarDashboard />
+    <!-- <NavbarDashboard /> -->
     <div class="d-flex" style="width: 100%;">
         <div class="list " style=" width: 100%; margin-top: 5%; ">
             <div class="bg-white">

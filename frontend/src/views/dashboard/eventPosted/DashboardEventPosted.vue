@@ -2,7 +2,7 @@
   <v-card>
     <v-layout>
       <v-main class="bg-grey-lighten-2">
-        <ListCardPosted class="animate__animated animate__fadeInUp">
+        <ListCardPosted class="animate__animated animate__bounceInDown">
           <div class="w-50 d-flex justify-md-end mt-3">
             <v-btn class="mr-5 rounded" style="width: 30%">All Events</v-btn>
             <v-btn class="mr-5 rounded" style="width: 30%">Online Events</v-btn>

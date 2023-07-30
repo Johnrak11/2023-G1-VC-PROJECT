@@ -13,55 +13,64 @@ class OrganizerSeeder extends Seeder
      */
     public function run(): void
     {
-       $organizers=[
+        $organizers = [
             [
-                'firstname'=>'Chamreth',
-                'lastname'=>'Kosal',
-                'address'=>'Oder Meanchey',
-                'phone_number'=>'0882771621',
-                'email'=>'chamreth.kosal@gmail.com',
-                'password'=>'1111',
-                'role'=>'admin',
+                'firstname' => 'Chamreth',
+                'lastname' => 'Kosal',
+                'address' => 'Oder Meanchey',
+                'phone_number' => '0882771621',
+                'email' => 'chamreth.kosal@gmail.com',
+                'password' => '@123456789',
+                'role' => 'admin',
             ],
             [
-                'firstname'=>'Vanda',
-                'lastname'=>'Sophol',
-                'address'=>'Prey Veng',
-                'phone_number'=>'0972875612',
-                'email'=>'vanda.sophol@gmail.com',
-                'password'=>'2222',
-                'role'=>'admin',
+                'firstname' => 'Vanda',
+                'lastname' => 'Sophol',
+                'address' => 'Prey Veng',
+                'phone_number' => '0972875612',
+                'email' => 'vanda.sophol@gmail.com',
+                'password' => '@123456789',
+                'role' => 'admin',
             ],
             [
-                'firstname'=>'Seingdav',
-                'lastname'=>'Theoun',
-                'address'=>'Bontey Meanchey',
-                'phone_number'=>'0713075462',
-                'email'=>'seingdav.theoun@gmail.com',
-                'password'=>'3333',
-                'role'=>'admin',
+                'firstname' => 'Seingdav',
+                'lastname' => 'Theoun',
+                'address' => 'Bontey Meanchey',
+                'phone_number' => '0713075462',
+                'email' => 'seingdav.theoun@gmail.com',
+                'password' => '@123456789',
+                'role' => 'admin',
             ],
             [
-                'firstname'=>'Vorek',
-                'lastname'=>'Yun',
-                'address'=>'Kep',
-                'phone_number'=>'0882617724',
-                'email'=>'vorek.yun@gmail.com',
-                'password'=>'3333',
-                'role'=>'admin',
+                'firstname' => 'Vorek',
+                'lastname' => 'Yun',
+                'address' => 'Kep',
+                'phone_number' => '0882617724',
+                'email' => 'vorek.yun@gmail.com',
+                'password' => '@123456789',
+                'role' => 'admin',
             ],
             [
-                'firstname'=>'Nit',
-                'lastname'=>'Niem',
-                'address'=>'Bontey Meanchey',
-                'phone_number'=>'0977465211',
-                'email'=>'nit.niem@gmail.com',
-                'password'=>'4444',
-                'role'=>'admin'
+                'firstname' => 'Nit',
+                'lastname' => 'Niem',
+                'address' => 'Bontey Meanchey',
+                'phone_number' => '0977465211',
+                'email' => 'nit.niem@gmail.com',
+                'password' => '@123456789',
+                'role' => 'admin'
+            ],
+            [
+                'firstname' => 'Admin',
+                'lastname' => 'Eventpeak',
+                'address' => 'Bontey Meanchey',
+                'phone_number' => '0977465211',
+                'email' => 'admin@gmail.com',
+                'password' => '@123456789',
+                'role' => 'admin'
             ]
         ];
-       foreach ($organizers as $organizer){
-        User::create($organizer);
-    }
+        foreach ($organizers as $organizer) {
+            User::create($organizer);
+        }
     }
 }

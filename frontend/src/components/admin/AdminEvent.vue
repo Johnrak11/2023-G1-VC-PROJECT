@@ -3,7 +3,9 @@
     <v-layout>
       <v-main class="bg-grey-lighten-2">
         <NavbarDashboard/>
-        <AdminListCard></AdminListCard>
+        <div class="animate__animated animate__bounceInDown">
+          <AdminListCard ></AdminListCard>
+        </div>
         <ContainLeftDashboard />
       </v-main>
     </v-layout>
