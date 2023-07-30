@@ -48,7 +48,8 @@
     "booking": "កក់សំបុត្រ",
     "startDate": "ថ្ងៃចាប់ផ្តើម",
     "venue": "ទីកន្លែង",
-    "share": "ចែករំលែក"
+    "share": "ចែករំលែក",
+    "free": "ឥតគិតថ្លៃ"
   },
   "explore more": "រុករកបន្ថែម",
 
@@ -62,6 +63,40 @@
     "more detail": "ព័ត៌មានលម្អិតបន្ថែម"
   },
 
-  "search distanation" : "បញ្ចូលចំនួនគីឡូម៉ែត្រ",
-  "search distanation message": "មិនមានព្រឹត្តិការណ៍ណាមួយនៅតំបន់របស់អ្នកទេ"
+  "search distanation": "បញ្ចូលចំនួនគីឡូម៉ែត្រ",
+  "search distanation message": "មិនមានព្រឹត្តិការណ៍ណាមួយនៅតំបន់របស់អ្នកទេ",
+
+  "agenda": {
+    "agenda": "របៀបវារៈ",
+    "today": "ថ្ងៃនេះ"
+  },
+
+  "organizer": {
+    "organizer": "អ្នកគ្រប់គ្រង",
+    "email": "អ៊ីមែល",
+    "name": "ឈ្មោះ",
+    "phone": "លេខទូរស័ព្ទ"
+  },
+
+  "footer": {
+    "aboutUs": {
+      "title": "អំពីយើង",
+      "submitEvent": "បង្កើតព្រឹត្តិការ",
+      "allLocations": "ទីកន្លែងទាំងអស់"
+    },
+    "contactUs": {
+      "title": "ទាក់ទង​មកយើង",
+      "address": "ភ្នំពេញ, កម្ពុជា"
+    },
+    "usefulLinks": {
+      "title": "តំណ​លីង",
+      "map": "រុករកដោយទីតាំង",
+      "sellTickets": "លក់សំបុត្រតាមអ៊ីនធឺណិត"
+    },
+
+    "follow": {
+      "main": "តាមដានយើង",
+      "download": "ទាញយក"
+    }
+  }
 }

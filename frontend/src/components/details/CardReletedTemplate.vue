@@ -1,145 +1,68 @@
 <template>
   <v-sheet class="bg-grey-lighten-2" elevation="8" width="100%">
     <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
-      <v-slide-group-item
-        class="group-card ml-5"
-        v-for="(event, index) in eventStore.reletedEvent"
-        :key="index"
-        v-slot="{ isSelected, toggle }"
-      >
+      <v-slide-group-item class="group-card ml-5" v-for="(event, index) in eventStore.reletedEvent" :key="index"
+        v-slot="{ isSelected, toggle }">
         <v-hover v-slot="{ isHovering, props }" class="card">
-          <v-card
-            :elevation="isHovering ? 24 : 2"
-            :class="{ 'on-hover': isHovering }"
-            v-bind="props"
-            class="card ml-5 hover"
-            :color="isSelected ? 'red' : 'grey-lighten-1'"
-            @click="toggle"
-          >
+          <v-card :elevation="isHovering ? 24 : 2" :class="{ 'on-hover': isHovering }" v-bind="props"
+            class="card ml-5 hover" :color="isSelected ? 'red' : 'grey-lighten-1'" @click="toggle">
             <router-link :to="`/eventRaleted/${event.id}`">
-              <v-img
-                class="align-end text-white"
-                height="50%"
-                max-width="100vh"
-                :src="event.image"
-                cover
-              ></v-img>
+              <v-img class="align-end text-white" height="50%" max-width="100vh" :src="event.image" cover></v-img>
             </router-link>
             <div class="d-flex">
               <div class="d-flex pt-6">
                 <v-col cols="auto">
                   <v-dialog transition="dialog-bottom-transition" width="30%">
                     <template v-slot:activator="{ props }">
-                      <div
-                        class="d-flex justify-end align-center share-btn"
-                        style="margin-top: -45%"
-                      >
-                        <p class="mt-1">Share</p>
-                        <v-icon
-                          icon="mdi-share-variant"
-                          size="23"
-                          v-bind="props"
-                          @click="ClickShare(eventInfor.id)"
-                        ></v-icon>
+                      <div class="d-flex justify-end align-center share-btn" style="margin-top: -45%">
+                        <p class="mt-2">{{t('cardTemplate.share')}}</p>
+                        <v-icon icon="mdi-share-variant" class="mt-2" size="23" v-bind="props"
+                          @click="ClickShare(eventInfor.id)"></v-icon>
                       </div>
                     </template>
                     <template v-slot:default="{ isActive }">
-                      <v-card
-                        class="dialog d-flex w-100"
-                        style="overflow-y: hidden"
-                      >
+                      <v-card class="dialog d-flex w-100" style="overflow-y: hidden">
                         <v-toolbar color="red" title="Share"></v-toolbar><br />
-                        <div
-                          class="d-flex justify-space-evenly"
-                          style="height: 10vh"
-                          v-if="event"
-                        >
-                          <ShareNetwork
-                            network="facebook"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name"
-                            :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                          >
-                            <v-icon
-                              left
-                              class="ml-2 mt-3 color-icon"
-                              color="blue"
-                              size="50"
-                              style="height: 5vh"
-                              >mdi-facebook</v-icon
-                            >
+                        <div class="d-flex justify-space-evenly" style="height: 10vh" v-if="event">
+                          <ShareNetwork network="facebook" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name" :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share">
+                            <v-icon left class="ml-2 mt-3 color-icon" color="blue" size="50"
+                              style="height: 5vh">mdi-facebook</v-icon>
                             <p class="text-black mt-5">Facebook</p>
                           </ShareNetwork>
-                          <ShareNetwork
-                            network="telegram"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name"
-                            :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                            id="my-iframe"
-                            allow-same-origin
-                          >
+                          <ShareNetwork network="telegram" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name" :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share" id="my-iframe" allow-same-origin>
                             <img :src="event.img" alt="" />
                             <!-- <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-telegram</v-icon> -->
                             <img
                               src="https://static.vecteezy.com/system/resources/previews/018/930/479/original/telegram-logo-telegram-icon-transparent-free-png.png"
-                              alt=""
-                              width="67"
-                            />
+                              alt="" width="67" />
                             <p class="text-black" style="margin-top: -20%">
                               Telegram
                             </p>
                           </ShareNetwork>
-                          <ShareNetwork
-                            network="linkedin"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name"
-                            :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                          >
-                            <v-icon
-                              left
-                              class="ml-2 color-icon"
-                              color="blue"
-                              size="50"
-                              >mdi-linkedin</v-icon
-                            >
+                          <ShareNetwork network="linkedin" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name" :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share">
+                            <v-icon left class="ml-2 color-icon" color="blue" size="50">mdi-linkedin</v-icon>
                             <p class="text-black mt-2">Linkedin</p>
                           </ShareNetwork>
-                          <ShareNetwork
-                            network="whatsapp"
-                            :url="eventStore.localHttp + '/detail/' + event.id"
-                            :title="eventInfor.name"
-                            :description="eventInfor.description"
-                            quote="The hot reload is so fast it\'s near instant. - Evan You"
-                            hashtags="vuejs,vite"
-                            class="social-share"
-                          >
-                            <v-icon
-                              left
-                              class="ml-2 color-icon"
-                              color="green"
-                              size="50"
-                              >mdi-whatsapp</v-icon
-                            >
+                          <ShareNetwork network="whatsapp" :url="eventStore.localHttp + '/detail/' + event.id"
+                            :title="eventInfor.name" :description="eventInfor.description"
+                            quote="The hot reload is so fast it\'s near instant. - Evan You" hashtags="vuejs,vite"
+                            class="social-share">
+                            <v-icon left class="ml-2 color-icon" color="green" size="50">mdi-whatsapp</v-icon>
                             <p class="text-black mt-2">Whatsapp</p>
                           </ShareNetwork>
                         </div>
                         <br />
                         <v-card-actions class="justify-center">
-                          <v-btn
-                            variant="text"
-                            @click="isActive.value = false"
-                            style="width: 100%"
-                            >Close</v-btn
-                          >
+                          <v-btn variant="text" @click="isActive.value = false" style="width: 100%">Close</v-btn>
                         </v-card-actions>
                       </v-card>
                     </template>
@@ -153,28 +76,20 @@
                   <router-link :to="`/eventRaleted/${event.id}`">
                     <div>
                       <div>
-                        <v-card-title
-                          class="text-black"
-                          style="margin-left: -8%"
-                          >{{ eventInfor.name }}</v-card-title
-                        >
+                        <v-card-title class="text-black" style="margin-left: -8%">{{ eventInfor.name }}</v-card-title>
                       </div>
-                      <!-- <p>{{ eventInfor.description }}</p> -->
                       <div class="d-flex" style="margin-left: -2%">
-                        <!-- <v-icon size="17"> mdi-calendar</v-icon> -->
-                        <p class="ml-1" style="font-size: 15px" mt-2>
-                          Date:
+                        
+                        <p class="ml-1" style="font-size: 15px">
+                          {{t('cardTemplate.startDate')}}:
                           {{ event.date }}
                         </p>
                       </div>
 
-                      <div
-                        class="d-flex"
-                        style="margin-top: -5%; margin-left: -2%"
-                      >
+                      <div class="d-flex" style="margin-top: -5%; margin-left: -2%">
                         <!-- <v-icon size="17">mdi-map-marker</v-icon> -->
-                        <p style="font-size: 15px" class="ml-1 mt-2">
-                          Venue:
+                        <p style="font-size: 15px" class="ml-1 mt-4">
+                          {{t('cardTemplate.venue')}}:
                           {{ eventCreate.truncateDescription(event.venue, 10) }}
                         </p>
                       </div>
@@ -184,12 +99,7 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn
-                color="white"
-                class="bg-red mb-3 mt-3"
-                @click.prevent="booking(event.id)"
-                style="width: 100%"
-              >
+              <v-btn color="white" class="bg-red mb-3" @click.prevent="booking(event.id)" style="width: 100%">
                 Booking
               </v-btn>
             </v-card-actions>
@@ -201,6 +111,8 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import { ref, onMounted } from "vue";
 import router from "@/routes/router";
 import { eventStores } from "@/stores/eventsStore.js";

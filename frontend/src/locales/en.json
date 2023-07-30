@@ -48,22 +48,56 @@
     "booking": "Booking",
     "startDate": "Start Date",
     "venue": "Venue",
-    "share": "Share"
-  },
-  
-  "explore more" : "explore more",
-
-  "showMapCard" : {
-    "direction" : "direction"
+    "share": "Share",
+    "free": "free"
   },
 
-  "listShowMapCard" : {
-    "distanation" : "Distanation",
+  "explore more": "explore more",
+
+  "showMapCard": {
+    "direction": "direction"
+  },
+
+  "listShowMapCard": {
+    "distanation": "Distanation",
     "start date": "Start Date",
-    "more detail" : "MORE DETAIL"
+    "more detail": "MORE DETAIL"
   },
 
-  "search distanation" : "Enter kilometer",
-  "search distanation message" : "There are no upcoming Events in your area.."
+  "search distanation": "Enter kilometer",
+  "search distanation message": "There are no upcoming Events in your area..",
+  "agenda": {
+    "agenda": "Agenda",
+    "today": "Today"
+  },
+  "organizer": {
+    "organizer": "Organizer",
+    "email": "Email",
+    "name": "Name",
+    "phone": "Phone"
+  },
 
+  "footer": {
+    "aboutUs": {
+      "title": "About Us",
+      "submitEvent": "Submit Event",
+      "allLocations": "All Locations"
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "address": "Phnom Penh, Cambodia"
+    },
+    "usefulLinks": {
+      "title": "Useful Links",
+      "map": "Listing map",
+      "sellTickets": "Sell Tickets Online"
+    },
+    "follow": {
+      "main": "Follow Us",
+      "download": "Download Us"
+    }
+  }
 }
+
+  
+

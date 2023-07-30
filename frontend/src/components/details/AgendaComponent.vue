@@ -2,8 +2,8 @@
   <div class="col-md-6 d-flex mt-8">
     <div class="agenda-page d-flex flex-column">
       <div class="agenda d-flex bg-red justify-space-between pa-1">
-        <h2 class="mt-1 ml-3">{{ "AGENDA" }}</h2>
-        <p class="mt-2 mr-3">Today</p>
+        <h2 class="mt-1 ml-3">{{ t('agenda.agenda') }}</h2>
+        <p class="mt-2 mr-3">{{ t('agenda.today') }}</p>
       </div>
 
       <div style="display: flex; height: 139px">
@@ -40,10 +40,10 @@
     </div>
     <div class="organizer bg-grey-lighten-2 pa-3 ml-10">
       <div class="ml-5">
-        <h2 class="mb-9">Organizer</h2>
-        <p>Name: {{ organizer.firstname + " " + organizer.firstname }}</p>
-        <p class="email">Email: {{ organizer.email }}</p>
-        <p class="phone">Phone: {{ organizer.phone_number }}</p>
+        <h2 class="mb-9">{{ t('organizer.organizer') }}</h2>
+        <p>{{ t('organizer.name') }}: {{ organizer.firstname + " " + organizer.firstname }}</p>
+        <p class="email">{{ t('organizer.email') }}: {{ organizer.email }}</p>
+        <p class="phone">{{ t('organizer.phone') }}: {{ organizer.phone_number }}</p>
       </div>
     </div>
     <div></div>
@@ -53,7 +53,8 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { ref, computed, onMounted } from "vue";
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import baseAPI from "@/stores/axiosHandle.js";
 
 const items = ref([]);

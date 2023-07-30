@@ -121,10 +121,10 @@
           <div class="d-flex justify-end button mt-6">
             <button class="free bg-red pa-1 rounded" v-if="!eventDetail || eventDetail.price === 'free'"
               @click.prevent="booking(event.id)">
-              Register
+              {{ t('cardTemplate.free') }}
             </button>
             <button class="free bg-red pa-1 rounded" v-else @click.prevent="booking(event.id)">
-              Booking
+              {{ t('cardTemplate.booking') }}
             </button>
           </div>
         </div>
@@ -135,6 +135,8 @@
   </div>
 </template>
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 import router from "@/routes/router";
 import { ref, onMounted } from "vue";
 import agendaComponent from "./AgendaComponent.vue";

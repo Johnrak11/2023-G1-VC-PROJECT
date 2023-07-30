@@ -79,7 +79,7 @@
                   </div>
                   <div class="d-flex" style="margin-top: -5%;">
                     <p style="font-size: 15px" class="ml-1 mt-1">
-                      {{ t('cardTemplate.venue') + ': ' + eventCreate.truncateDescription(eventInfor.venue, 20) }}
+                      {{ t('cardTemplate.venue') + ': ' + eventCreate.truncateDescription(eventInfor.venue, 15) }}
                     </p>
                   </div>
                 </div>

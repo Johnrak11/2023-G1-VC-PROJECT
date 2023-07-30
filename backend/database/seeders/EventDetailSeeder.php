@@ -177,12 +177,96 @@ class EventDetailSeeder extends Seeder
                 'event_id' => 27,
             ],
             [
-                'available_ticket' => 10,
+                'available_ticket' => 100,
                 'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
                 'price' => '5$',
                 'event_id' => 28,
             ],
-            
+            [
+                'available_ticket' => 600,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '5$',
+                'event_id' => 29,
+            ],
+            [
+                'available_ticket' => 700,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '5$',
+                'event_id' => 30,
+            ],
+            [
+                'available_ticket' => 800,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '5$',
+                'event_id' => 31,
+            ],
+            [
+                'available_ticket' => 10,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '5$',
+                'event_id' => 32,
+            ],
+            [
+                'available_ticket' => 500,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '4$',
+                'event_id' => 33,
+            ],
+            [
+                'available_ticket' => 500,
+                'description' => 'World-renowned film festival featuring premieres of international cinema',
+                'price' => 'free',
+                'event_id' => 34,
+            ],
+            [
+                'available_ticket' => 500,
+                'description' => 'Celebration of music, film, and interactive media featuring thousands of artists and performers',
+                'price' => '10$',
+                'event_id' => 35,
+            ],
+            [
+                'available_ticket' => 500,
+                'description' => 'Annual beer festival featuring traditional Bavarian food and live music',
+                'price' => '10$',
+                'event_id' => 36,
+            ],
+            [
+                'available_ticket' => 500,
+                'description' => 'Annual convention celebrating comic books, science fiction, and pop culture',
+                'price' => 'free',
+                'event_id' => 37,
+            ],
+            [
+                'available_ticket' => 200,
+                'description' => 'Annual beer festival featuring traditional Bavarian food and live music',
+                'price' => '10$',
+                'event_id' => 38,
+            ],
+            [
+                'available_ticket' => 100,
+                'description' => 'Annual convention celebrating comic books, science fiction, and pop culture',
+                'price' => 'free',
+                'event_id' => 39,
+            ],
+            [
+                'available_ticket' => 200,
+                'description' => 'Annual beer festival featuring traditional Bavarian food and live music',
+                'price' => '5$',
+                'event_id' => 40,
+            ],
+            [
+                'available_ticket' => 100,
+                'description' => 'Annual convention celebrating comic books, science fiction, and pop culture',
+                'price' => 'free',
+                'event_id' => 41,
+            ],
+            [
+                'available_ticket' => 200,
+                'description' => 'Annual beer festival featuring traditional Bavarian food and live music',
+                'price' => '5$',
+                'event_id' => 42,
+            ],
+
         ];
 
         foreach ($eventDetails as $eventDetail) {
