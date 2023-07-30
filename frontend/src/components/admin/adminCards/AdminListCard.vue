@@ -1,8 +1,8 @@
 <template>
-    <v-card class="bg-grey-lighten-2 card-event" style="height: 100vh;">
+    <v-card class="bg-grey-lighten-2 card-event" style="height: 100vh; margin-top: 4%;">
         <ul class=" ml-8">
             <li class="d-flex icon mt-2">
-                <v-list-item prepend-icon="mdi-calendar" title="Event" value="event"></v-list-item>
+                <v-list-item prepend-icon="mdi-calendar" title="Delete events" value="event"></v-list-item>
             </li>
         </ul>
         <!-- <v-card class="bg-white pa-5 mr-10 rounded ml-8" :elevation="5"> -->

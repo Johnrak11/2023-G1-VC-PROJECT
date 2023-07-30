@@ -63,6 +63,26 @@
     "more detail" : "MORE DETAIL"
   },
 
+  "tickets" : {
+    "alltickets" : "All tickets",
+    "image" : "Image",
+    "title" : "Title",
+    "date" : "Date",
+    "time" : "Time",
+    "location" : "Location",
+    "venue" : "Venue",
+    "bookingdate" : "Booking date",
+    "ticketcode" : "Ticket code",
+    "checkin" : "CheckIn",
+    "searchticket" : "Search ticket",
+    "error" : "You don't have a ticket, please purchase a ticket to join"
+  },
+  "account" : {
+    "about" : "About",
+    "connections" : "See connection",
+    "contact": "See contacts information"
+  },
+
   "search distanation" : "Enter kilometer",
   "search distanation message" : "There are no upcoming Events in your area.."
 
