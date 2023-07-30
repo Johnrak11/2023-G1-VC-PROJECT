@@ -1,5 +1,4 @@
 <template>
-    <!-- <NavbarDashboard /> -->
     <div class="d-flex" style="width: 100%;">
         <div class="list " style=" width: 100%; margin-top: 5%; ">
             <div class="bg-white">
@@ -88,8 +87,6 @@
     </v-dialog>
 </template>
 <script setup>
-
-import NavbarDashboard from '@/components/partials/nav/NavbarDashboard.vue';
 import { userStore } from '@/stores/user.js';
 import { userRoleStore } from '@/stores/editRoleUser'
 import { onMounted } from 'vue';
