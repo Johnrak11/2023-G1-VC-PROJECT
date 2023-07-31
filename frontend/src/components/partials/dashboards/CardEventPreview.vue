@@ -6,7 +6,7 @@
         <td>{{ props.eventData.date }}</td>
         <td>{{ props.eventData.time }}</td>
         <td>{{ truncateDescription(props.eventData.location, 20) }}</td>
-        <td>{{ props.eventData.venue }}</td>
+        <td>{{ truncateDescription(props.eventData.venue,7) }}</td>
         <td>
             <div class="mt-3">
                 <v-menu>

@@ -84,7 +84,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::post('/creditCard', [CreditCardController::class, 'store']);
     });
-    
+
     Route::get('/profile/users', [UserController::class, 'getUser']);
     Route::get('/admin/search/users', [UserController::class, 'searchUsers']);
     Route::put('/users/update/{userId}', [UserController::class, 'updateRole']);

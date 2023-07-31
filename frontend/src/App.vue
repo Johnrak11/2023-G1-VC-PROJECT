@@ -17,9 +17,9 @@ const userToken = getCookie("token");
 import { addressStore } from "@/stores/address.js";
 const { getUserCurrentLatLng } = addressStore();
 user.token = userToken;
+getUserCurrentLatLng();
 if (userToken) {
   user.getUserInfor();
-  getUserCurrentLatLng();
 }
 
 const shouldShowNavBar = computed(() => {

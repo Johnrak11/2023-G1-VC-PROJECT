@@ -109,6 +109,7 @@ export const eventEditStores = defineStore("eventEdit", {
           this.isEdit = false;
         })
         .catch((error) => {
+          console.log(error)
           alertMessage("error", error.response.data.message);
         });
     },

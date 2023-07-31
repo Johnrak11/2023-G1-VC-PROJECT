@@ -16,7 +16,6 @@ use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Expr\FuncCall;
 
 class EventController extends Controller
 {
@@ -251,7 +250,7 @@ class EventController extends Controller
     public function deleteEventById($eventId)
     {
         $admin = Auth::user();
-        if ($admin->role !== 'admin') {
+        if ($admin->role === 'customer') {
             return response()->json(['message' => 'No permission to delete this event'], 403);
         }
 
@@ -362,7 +361,7 @@ class EventController extends Controller
         ];
         $admin = Auth::user();
         if ($admin->role === 'customer') {
-            return response()->json(['message' => 'No permission to delete this event'], 403);
+            return response()->json(['message' => 'No permission to edit this event'], 403);
         }
         $validator = Validator::make($eventRequest, $eventRules);
         if ($validator->fails()) {
@@ -380,7 +379,6 @@ class EventController extends Controller
             $eventDetailRequest[0]['event_id'] = $event->id;
             $eventDetail = $this->eventDetailEdit($eventDetailRequest[0]);
 
-
             if ($request->input('discounts')[0]['discounts']) {
                 $discountRequest = $request->input('discounts')[0]['discounts'];
                 $discountRequest['event_detail_id'] = $eventDetail->id;
@@ -390,8 +388,8 @@ class EventController extends Controller
                     $this->discountEdit($discountRequest);
                 }
             } else {
-                $discount = Discount::where('event_detail_id', $eventDetail->id)->firstOrFail();
-                if ($discount) {
+                $discount = Discount::where('event_detail_id', $eventDetail["id"])->first();
+                if ($discount != null) {
                     $discount->delete();
                 }
             }

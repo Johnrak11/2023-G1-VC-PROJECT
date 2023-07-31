@@ -13,7 +13,7 @@
                 <v-card-text>
                     <div class="text-p text-center">Scan to get attendent</div>
                     <figure class="qrcode">
-                        <vue-qrcode :value="`${events.localHttp}/tickets/scan/${eventInfor.id}`" tag="svg" :options="{
+                        <vue-qrcode :value="`${events.localHttpScan}/tickets/scan/${eventInfor.id}`" tag="svg" :options="{
                             errorCorrectionLevel: 'Q',
                             width: 300,
                         }"></vue-qrcode>

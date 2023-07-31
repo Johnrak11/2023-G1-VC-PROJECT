@@ -76,7 +76,7 @@
                   <router-link :to="`/eventRaleted/${event.id}`">
                     <div>
                       <div>
-                        <v-card-title class="text-black" style="margin-left: -8%">{{ eventInfor.name }}</v-card-title>
+                        <v-card-title class="text-black" style="margin-left: -8%">{{ event.name }}</v-card-title>
                       </div>
                       <div class="d-flex" style="margin-left: -2%">
                         
